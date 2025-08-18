@@ -1,0 +1,337 @@
+/* Matrix Hacker Theme CSS */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+:root {
+    --matrix-green: #00ff41;
+    --matrix-dark-green: #00cc33;
+    --matrix-bg: #000000;
+    --matrix-card-bg: rgba(0, 0, 0, 0.9);
+    --matrix-border: #00ff41;
+    --matrix-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+    --matrix-text: #00ff41;
+    --matrix-error: #ff0040;
+    --matrix-success: #00ff41;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--matrix-bg);
+    font-family: 'Orbitron', monospace;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Matrix Rain Background */
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(180deg, #000 0%, #001a00 50%, #000 100%);
+}
+
+.matrix-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.matrix-column {
+    position: absolute;
+    top: -100%;
+    color: var(--matrix-green);
+    font-size: 1.2em;
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--matrix-green);
+    animation: matrix-fall linear infinite;
+}
+
+@keyframes matrix-fall {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Login Container */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.login-card {
+    background: var(--matrix-card-bg);
+    border: 2px solid var(--matrix-border);
+    border-radius: 15px;
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: var(--matrix-shadow);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+    animation: matrix-scan 3s ease-in-out infinite;
+}
+
+@keyframes matrix-scan {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+/* Header */
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.login-header h1 {
+    color: var(--matrix-text);
+    font-size: 2.5em;
+    font-weight: 900;
+    margin: 0 0 10px 0;
+    text-shadow: 0 0 20px var(--matrix-green);
+    letter-spacing: 3px;
+}
+
+.login-header p {
+    color: var(--matrix-dark-green);
+    font-size: 1.1em;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.form-group label {
+    display: block;
+    color: var(--matrix-text);
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--matrix-border);
+    border-radius: 8px;
+    color: var(--matrix-text);
+    font-family: 'Orbitron', monospace;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--matrix-green);
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+    background: rgba(0, 255, 65, 0.1);
+}
+
+.form-group input::placeholder {
+    color: rgba(0, 255, 65, 0.5);
+}
+
+/* Checkbox */
+.form-group input[type="checkbox"] {
+    accent-color: var(--matrix-green);
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+
+.form-group label[for] {
+    display: inline;
+    cursor: pointer;
+}
+
+/* Submit Button */
+.btn {
+    background: linear-gradient(45deg, var(--matrix-green), var(--matrix-dark-green));
+    color: var(--matrix-bg);
+    border: none;
+    padding: 15px 30px;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 255, 65, 0.4);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Flash Messages */
+.flash-messages {
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.flash-message {
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: 500;
+    text-align: center;
+    border: 1px solid;
+}
+
+.flash-message.error {
+    background: rgba(255, 0, 64, 0.1);
+    border-color: var(--matrix-error);
+    color: var(--matrix-error);
+}
+
+.flash-message.success {
+    background: rgba(0, 255, 65, 0.1);
+    border-color: var(--matrix-success);
+    color: var(--matrix-success);
+}
+
+.flash-message.warning {
+    background: rgba(255, 165, 0, 0.1);
+    border-color: #ffa500;
+    color: #ffa500;
+}
+
+/* Footer */
+.login-footer {
+    text-align: center;
+    margin-top: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.login-footer p {
+    color: var(--matrix-dark-green);
+    font-size: 0.9em;
+    margin: 8px 0;
+}
+
+.login-footer a {
+    color: var(--matrix-text);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px var(--matrix-green);
+}
+
+.login-footer a:hover {
+    color: var(--matrix-green);
+    text-shadow: 0 0 10px var(--matrix-green);
+}
+
+/* Error Messages */
+.error-message {
+    color: var(--matrix-error);
+    font-size: 0.8em;
+    margin-top: 5px;
+    text-shadow: 0 0 5px var(--matrix-error);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-card {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .login-header h1 {
+        font-size: 2em;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+}
+
+/* Glitch Effect */
+.glitch {
+    animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+}
+
+/* Terminal Cursor Effect */
+.terminal-cursor {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}

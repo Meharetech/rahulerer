@@ -1,65 +1,188 @@
-{% extends "base.html" %}
-
-{% block title %}User Login - WhatsApp UI{% endblock %}
-
-{% block content %}
-<div class="login-container">
-    <div class="login-card">
-        <div class="login-header">
-            <h1><i class="fab fa-whatsapp"></i> WhatsApp Analytics</h1>
-            <p>User Login</p>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Analysis Server - User Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/matrix_login.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .password-field {
+            position: relative;
+        }
         
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for category, message in messages %}
-                        <div class="flash-message {{ category }}">{{ message }}</div>
-                    {% endfor %}
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--matrix-green);
+            cursor: pointer;
+            font-size: 1.2em;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .password-toggle:hover {
+            color: var(--matrix-dark-green);
+            text-shadow: 0 0 10px var(--matrix-green);
+        }
+        
+        .password-field input[type="password"],
+        .password-field input[type="text"] {
+            padding-right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Rain Background -->
+    <div class="matrix-bg"></div>
+    
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+           
+                <h1 class="matrix-subtitle">WHATSAPP ANALYSIS SERVER - USER LOGIN</h1>
+                <p class="matrix-subtitle">USER AUTHENTICATION </p>
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">
+                                <strong>WhatsApp Analysis:</strong> {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" action="{{ url_for('auth.user_login') }}" class="matrix-form">
+                {{ form.hidden_tag() }}
+                
+                <div class="form-group">
+                    <label for="{{ form.username.id }}">USERNAME</label>
+                    {{ form.username(placeholder="ENTER CREDENTIALS") }}
+                    {% if form.username.errors %}
+                        <div class="error-message">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
-            {% endif %}
-        {% endwith %}
-        
-        <form method="POST" action="{{ url_for('auth.user_login') }}">
-            {{ form.hidden_tag() }}
+                
+                <div class="form-group password-field">
+                    <label for="{{ form.password.id }}">PASSWORD</label>
+                    {{ form.password(placeholder="ENTER SECURITY CODE", id="password-field") }}
+                    <button type="button" class="password-toggle" onclick="togglePassword('password-field')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    {% if form.password.errors %}
+                        <div class="error-message">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        {{ form.remember() }} <span>REMEMBER ACCESS</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn matrix-btn">
+                    <span class="btn-text">INITIATE LOGIN</span>
+                    <span class="btn-loading" style="display: none;">ACCESSING SYSTEM...</span>
+                </button>
+            </form>
             
-            <div class="form-group">
-                {{ form.username.label }}
-                {{ form.username() }}
-                {% if form.username.errors %}
-                    <div class="error-message">
-                        {% for error in form.username.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+            <div class="login-footer">
+                <p>NEW USER? <a href="{{ url_for('auth.register') }}">REQUEST ACCESS</a></p>
+                <p>ADMIN? <a href="{{ url_for('auth.admin_login') }}">ADMIN PORTAL</a></p>
             </div>
-            
-            <div class="form-group">
-                {{ form.password.label }}
-                {{ form.password() }}
-                {% if form.password.errors %}
-                    <div class="error-message">
-                        {% for error in form.password.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            
-            <div class="form-group">
-                <label>
-                    {{ form.remember() }} {{ form.remember.label }}
-                </label>
-            </div>
-            
-            {{ form.submit(class="btn btn-primary btn-block") }}
-        </form>
-        
-        <div class="login-footer">
-            <p>Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a></p>
-            <p>Admin? <a href="{{ url_for('auth.admin_login') }}">Login here</a></p>
         </div>
     </div>
-</div>
-{% endblock %}
+
+    <!-- Matrix Effects Script -->
+    <script src="{{ url_for('static', filename='js/matrix_rain.js') }}"></script>
+    
+    <!-- Form Enhancement Script -->
+    <script>
+        // Password toggle functionality
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const toggleBtn = passwordField.nextElementSibling;
+            const icon = toggleBtn.querySelector('i');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+                toggleBtn.style.color = '#ff0040';
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+                toggleBtn.style.color = 'var(--matrix-green)';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.matrix-form');
+            const submitBtn = form.querySelector('.btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            
+            form.addEventListener('submit', function(e) {
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline';
+                submitBtn.style.background = 'linear-gradient(45deg, #ff0040, #ff0066)';
+                submitBtn.style.boxShadow = '0 0 25px rgba(255, 0, 64, 0.6)';
+                
+                // Add matrix scan effect
+                submitBtn.style.position = 'relative';
+                submitBtn.style.overflow = 'hidden';
+                
+                const scanLine = document.createElement('div');
+                scanLine.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+                    animation: matrix-scan 0.5s ease-in-out;
+                `;
+                submitBtn.appendChild(scanLine);
+                
+                setTimeout(() => {
+                    scanLine.remove();
+                }, 500);
+            });
+            
+            // Add matrix-style input effects
+            const inputs = form.querySelectorAll('input[type="text"], input[type="password"]');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.boxShadow = '0 0 20px rgba(0, 255, 65, 0.8)';
+                    this.style.borderColor = '#00ff41';
+                    this.style.background = 'rgba(0, 255, 65, 0.1)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.style.boxShadow = '0 0 15px rgba(0, 255, 65, 0.5)';
+                    this.style.borderColor = '#00ff41';
+                    this.style.background = 'rgba(0, 0, 0, 0.8)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

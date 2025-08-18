@@ -1,65 +1,224 @@
-{% extends "base.html" %}
-
-{% block title %}Admin Login - WhatsApp UI{% endblock %}
-
-{% block content %}
-<div class="login-container">
-    <div class="login-card">
-        <div class="login-header">
-            <h1><i class="fas fa-shield-alt"></i> Admin Panel</h1>
-            <p>Administrator Login</p>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Analysis Server - Admin Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/matrix_login.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Admin-specific Matrix styling */
+        .admin-header h1 {
+            color: #ff0040 !important;
+            text-shadow: 0 0 20px #ff0040 !important;
+        }
         
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="flash-messages">
-                    {% for category, message in messages %}
-                        <div class="flash-message {{ category }}">{{ message }}</div>
-                    {% endfor %}
+        .admin-header p {
+            color: #ff0066 !important;
+        }
+        
+        .admin-btn {
+            background: linear-gradient(45deg, #ff0040, #ff0066) !important;
+            border: 2px solid #ff0040 !important;
+        }
+        
+        .admin-btn:hover {
+            box-shadow: 0 10px 25px rgba(255, 0, 64, 0.4) !important;
+        }
+        
+        .admin-card {
+            border-color: #ff0040 !important;
+            box-shadow: 0 0 20px rgba(255, 0, 64, 0.5) !important;
+        }
+        
+        .admin-card::before {
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.1), transparent) !important;
+        }
+        
+        .password-field {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #ff0040;
+            cursor: pointer;
+            font-size: 1.2em;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .password-toggle:hover {
+            color: #ff0066;
+            text-shadow: 0 0 10px #ff0040;
+        }
+        
+        .password-field input[type="password"],
+        .password-field input[type="text"] {
+            padding-right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Rain Background -->
+    <div class="matrix-bg"></div>
+    
+    <div class="login-container">
+        <div class="login-card admin-card">
+            <div class="login-header admin-header">
+                <h1 class="matrix-title">WHATSAPP ANALYSIS SERVER</h1>
+                <p class="matrix-subtitle">ADMINISTRATOR ACCESS</p>
+            </div>
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">
+                                <strong>WhatsApp Analysis:</strong> {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" action="{{ url_for('auth.admin_login') }}" class="matrix-form admin-form">
+                {{ form.hidden_tag() }}
+                
+                <div class="form-group">
+                    <label for="{{ form.username.id }}">ADMIN ID</label>
+                    {{ form.username(placeholder="ENTER ADMIN CREDENTIALS") }}
+                    {% if form.username.errors %}
+                        <div class="error-message">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
-            {% endif %}
-        {% endwith %}
-        
-        <form method="POST" action="{{ url_for('auth.admin_login') }}">
-            {{ form.hidden_tag() }}
+                
+                <div class="form-group password-field">
+                    <label for="{{ form.password.id }}">ADMIN KEY</label>
+                    {{ form.password(placeholder="ENTER SECURITY KEY", id="admin-password-field") }}
+                    <button type="button" class="password-toggle" onclick="togglePassword('admin-password-field')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    {% if form.password.errors %}
+                        <div class="error-message">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        {{ form.remember() }} <span>MAINTAIN SESSION</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn matrix-btn admin-btn">
+                    <span class="btn-text">ACCESS ADMIN PANEL</span>
+                    <span class="btn-loading" style="display: none;">VERIFYING ADMIN...</span>
+                </button>
+            </form>
             
-            <div class="form-group">
-                {{ form.username.label }}
-                {{ form.username(class="form-control") }}
-                {% if form.username.errors %}
-                    <div class="error-message">
-                        {% for error in form.username.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+            <div class="login-footer">
+                <p>USER? <a href="{{ url_for('auth.user_login') }}">USER PORTAL</a></p>
+                <p>NEW ADMIN? <a href="{{ url_for('auth.register') }}">REQUEST ADMIN ACCESS</a></p>
             </div>
-            
-            <div class="form-group">
-                {{ form.password.label }}
-                {{ form.password(class="form-control") }}
-                {% if form.password.errors %}
-                    <div class="error-message">
-                        {% for error in form.password.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            </div>
-            
-            <div class="form-group">
-                <label>
-                    {{ form.remember() }} {{ form.remember.label }}
-                </label>
-            </div>
-            
-            {{ form.submit(class="btn btn-primary btn-block") }}
-        </form>
-        
-        <div class="login-footer">
-            <p>User? <a href="{{ url_for('auth.user_login') }}">Login here</a></p>
-            <p>Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a></p>
         </div>
     </div>
-</div>
-{% endblock %}
+
+    <!-- Matrix Effects Script -->
+    <script src="{{ url_for('static', filename='js/matrix_rain.js') }}"></script>
+    
+    <!-- Admin Form Enhancement Script -->
+    <script>
+        // Password toggle functionality
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const toggleBtn = passwordField.nextElementSibling;
+            const icon = toggleBtn.querySelector('i');
+            
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+                toggleBtn.style.color = '#00ff41';
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+                toggleBtn.style.color = '#ff0040';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.admin-form');
+            const submitBtn = form.querySelector('.admin-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            
+            form.addEventListener('submit', function(e) {
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline';
+                submitBtn.style.background = 'linear-gradient(45deg, #ff0040, #ff0066)';
+                submitBtn.style.boxShadow = '0 0 25px rgba(255, 0, 64, 0.8)';
+                
+                // Add admin matrix scan effect
+                submitBtn.style.position = 'relative';
+                submitBtn.style.overflow = 'hidden';
+                
+                const scanLine = document.createElement('div');
+                scanLine.style.cssText = `
+                    position: absolute;
+                    top: 0;
+                    left: -100%;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                    animation: matrix-scan 0.3s ease-in-out;
+                `;
+                submitBtn.appendChild(scanLine);
+                
+                setTimeout(() => {
+                    scanLine.remove();
+                }, 300);
+            });
+            
+            // Add admin matrix-style input effects
+            const inputs = form.querySelectorAll('input[type="text"], input[type="password"]');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.boxShadow = '0 0 20px rgba(255, 0, 64, 0.8)';
+                    this.style.borderColor = '#ff0040';
+                    this.style.background = 'rgba(255, 0, 64, 0.1)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.style.boxShadow = '0 0 15px rgba(255, 0, 64, 0.5)';
+                    this.style.borderColor = '#ff0040';
+                    this.style.background = 'rgba(0, 0, 0, 0.8)';
+                });
+            });
+            
+            // Add admin-specific keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Ctrl + Alt + A for Admin mode
+                if (e.ctrlKey && e.altKey && e.key === 'A') {
+                    document.body.classList.toggle('admin-matrix-mode');
+                    console.log('🔴 Admin Matrix mode activated');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

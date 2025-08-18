@@ -12,9 +12,9 @@ def create_default_users():
         # Create default user
         if not User.query.filter_by(username='user').first():
             user = User(
-                username='user',
+                username='Admin',
                 email='user@whatsapp-ui.com',
-                password='1234567890',
+                password='Admin@meta123',
                 role='user',
                 first_name='Default',
                 last_name='User',
