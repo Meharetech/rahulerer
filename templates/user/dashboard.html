@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}User Dashboard - WhatsApp UI{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    <!-- Include Left Sidebar from Layout File -->
+    {% include 'user_slidebar.html' %}
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="main-header">
+            <h1><i class="fas fa-comments"></i> WhatsApp Analytics</h1>
+            <button class="refresh-btn" onclick="location.reload()">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+        
+        <div class="dashboard-content">
+            <!-- Dashboard Overview Section -->
+            <div class="section-header">
+                <h3><i class="fas fa-chart-bar"></i> Dashboard Overview</h3>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card blue">
+                    <div class="stat-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">TOTAL GROUPS</div>
+                </div>
+                <div class="stat-card cyan">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">TOTAL CONTACTS</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="stat-number">127</div>
+                    <div class="stat-label">TOTAL MESSAGES</div>
+                </div>
+                <div class="stat-card orange">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">UNREAD MESSAGES</div>
+                </div>
+            </div>
+            
+            <!-- Search and Filter Section -->
+            <div class="search-filter-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-search"></i> Search and Filter</h3>
+                </div>
+                
+                <div class="filter-grid">
+                    <div class="filter-item">
+                        <label for="date-filter"><i class="fas fa-calendar"></i> Date</label>
+                        <input type="date" id="date-filter" value="2025-08-16">
+                        <div class="help-text">Select a date to filter messages</div>
+                    </div>
+                    
+                    <div class="filter-item">
+                        <label for="sentiment-filter"><i class="fas fa-smile"></i> Sentiment</label>
+                        <select id="sentiment-filter">
+                            <option>All Sentiments</option>
+                            <option>Positive</option>
+                            <option>Neutral</option>
+                            <option>Negative</option>
+                        </select>
+                        <div class="help-text">Filter by message sentiment</div>
+                    </div>
+                    
+                    <div class="filter-item">
+                        <label for="group-filter"><i class="fas fa-folder"></i> Group</label>
+                        <select id="group-filter">
+                            <option>All Groups</option>
+                            <option>Work Group</option>
+                            <option>Family Group</option>
+                            <option>Friends Group</option>
+                        </select>
+                        <div class="help-text">Filter by WhatsApp group</div>
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button class="filter-btn reset">
+                        <i class="fas fa-undo"></i> Reset Filters
+                    </button>
+                    <button class="filter-btn apply">
+                        <i class="fas fa-filter"></i> Apply Filter
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="section-header">
+                <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="action-btn primary">
+                    <i class="fas fa-plus"></i> New Group
+                </button>
+                <button class="action-btn secondary">
+                    <i class="fas fa-search"></i> Search Messages
+                </button>
+                <button class="action-btn secondary">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+                <button class="action-btn secondary">
+                    <i class="fas fa-chart-pie"></i> View Analytics
+                </button>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="section-header">
+                <h3><i class="fas fa-history"></i> Recent Activity</h3>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; margin-bottom: 15px; padding: 15px; background: white; border-radius: 10px;">
+                    <div style="width: 40px; height: 40px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 15px;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight: 500; color: #333;">John Doe</div>
+                        <div style="color: #666; font-size: 14px;">Sent you a message 2 minutes ago</div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; margin-bottom: 15px; padding: 15px; background: white; border-radius: 10px;">
+                    <div style="width: 40px; height: 40px; background: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 15px;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight: 500; color: #333;">Jane Smith</div>
+                        <div style="color: #666; font-size: 14px;">You sent a message 5 minutes ago</div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; align-items: center; padding: 15px; background: white; border-radius: 10px;">
+                    <div style="width: 40px; height: 40px; background: #ff6b6b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 15px;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <div style="font-weight: 500; color: #333;">Work Group</div>
+                        <div style="color: #666; font-size: 14px;">New message in group 10 minutes ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

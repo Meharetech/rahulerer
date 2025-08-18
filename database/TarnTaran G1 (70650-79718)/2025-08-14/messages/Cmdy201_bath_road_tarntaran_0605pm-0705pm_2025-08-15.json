@@ -1,0 +1,857 @@
+[
+    {
+        "sender": {
+            "name": "Unknown",
+            "phoneNumber": "919815582283"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/miq-uaks-yow \n \nOr open Meet and enter this code: miq-uaks-yow",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/784202ff-b862-4ce7-ab65-d27aa185fe91",
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "Balvir Singh",
+            "phoneNumber": "918872570503"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/miq-uaks-yow \n \nOr open Meet and enter this code: miq-uaks-yow",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "Balvir Singh",
+            "phoneNumber": "917710321473"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/miq-uaks-yow \n \nOr open Meet and enter this code: miq-uaks-yow",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/873ec947-4c83-4724-8116-805d4d581199",
+        "timestamp": "2025-08-15T04:01:02.619Z"
+    },
+    {
+        "sender": {
+            "name": "Balvir Singh",
+            "phoneNumber": "918872570503"
+        },
+        "messageContent": "ਕਲਾਸ ਲਗਾਉਣ ਲਈ ਆਓ ਜੀ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.484792",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Balvir Singh",
+            "phoneNumber": "918872570503"
+        },
+        "messageContent": "ਅੱਜ ਕਲਾਸ ਵਿੱਚ ਸਾਰੇ ਮੈਂਬਰਾਂ ਦਾ ਪਹੁੰਚਣਾ ਜਰੂਰੀ ਹੈ ਨਹੀਂ ਇਸ ਕਲਾਸ ਨੂੰ ਬੰਦ ਕੀਤਾ ਜਾਵੇਗਾ ਧੰਨਵਾਦ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.553922",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "Balvir Singh",
+            "phoneNumber": "919780212974"
+        },
+        "messageContent": "https://sharechat.com/post/aR93Qvb?d=n&ui=b9Oeg91&e1=c",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:02.622Z"
+    },
+    {
+        "sender": {
+            "name": "sandeepkaur0249",
+            "phoneNumber": "919803050777"
+        },
+        "messageContent": "ਰੱਖੜੀ ਦੇ ਤਿਉਹਾਰ ਨੂੰ ਮੁੱਖ ਰੱਖਦੇ ਹੋਏ ਮਿਤੀ 07-08-09/08/2025 ਨੂੰ ਕਲਾਸ ਮੈਂਬਰਾਂ ਵੱਲੋਂ ਛੁੱਟੀ ਕੀਤੀ ਜਾਂਦੀ ਹੈ ਧੰਨਵਾਦ ਜੀ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.607412",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "sandeepkaur0249",
+            "phoneNumber": "919803050777"
+        },
+        "messageContent": "ਦੋ ਦਿਨ ਇਸ ਸਥਾਨ ਦੇ ਉੱਪਰ ਤੀਆਂ ਦਾ ਤਿਉਹਾਰ ਮਨਾਇਆ ਜਾ ਰਿਹਾ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:02.625Z",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.637993",
+        "predicted_label": "sports_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "sandeepkaur0249",
+            "phoneNumber": "919803050777"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/miq-uaks-yow \n \nOr open Meet and enter this code: miq-uaks-yow",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "sandeepkaur0249",
+            "phoneNumber": "919803050777"
+        },
+        "messageContent": "ਸਤਿ ਸ੍ਰੀ ਆਕਾਲ ਜੀ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.653780",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "sandeepkaur0249",
+            "phoneNumber": "919803050777"
+        },
+        "messageContent": "ਸਰ ਅੱਜ ਕਲਾਸ ਲਗਾਉਣ ਨਾ ਆਯੋ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.701596",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "sandeepkaur0249",
+            "phoneNumber": "919803050777"
+        },
+        "messageContent": "ਮਰਗ ਹੋਣ ਕਾਰਨ ਜੰਜ ਘਰ ਵੇਹਲਾ ਨਹੀਂ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.733346",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "Balvir Singh",
+            "phoneNumber": "918872570503"
+        },
+        "messageContent": "Ok ji",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.749405",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "gurjitsingh5067657",
+            "phoneNumber": "919569960275"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/miq-uaks-yow \n \nOr open Meet and enter this code: miq-uaks-yow",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "Balvir Singh",
+            "phoneNumber": "918872570503"
+        },
+        "messageContent": "ਕਲਾਸ ਲਗਾਉਣ ਲਈ ਆਓ ਜੀ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.780983",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Balvir Singh",
+            "phoneNumber": "918872570503"
+        },
+        "messageContent": "ਕਲਾਸ ਲਗਾਉਣ ਲਈ ਆਓ ਜੀ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.861963",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "sandeepkaur0249",
+            "phoneNumber": "919803050777"
+        },
+        "messageContent": "ਅੱਜ ਗੁਰੂ ਘਰ ਮਰਗ ਦੇ ਪ੍ਰੋਗਰਾਮ ਕਾਰਨ ਛੁੱਟੀ ਹੈ।",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.927009",
+        "predicted_label": "sports_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Dr.Tarsem Singh Dhillon",
+            "phoneNumber": "918196939501"
+        },
+        "messageContent": "ਸਰਕਾਰ ਵੱਲੋਂ ਜੋ ਵੀ ਸਹੂਲਤਾਂ ਆ ਰਹੀਆ ਹਨ ਉਹਨਾਂ ਬਾਰੇ ਜਾਣਕਾਰੀ ਇਸ ਗਰੁੱਪ ਚ ਦਿੱਤੀ ਜਾਵੇਗੀ ਕਿਰਪਾ ਕਰਕੇ ਕੋਈ ਵੀ ਗਰੁੱਪ ਲੈਫਟ ਨਾ ਕਰੇ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:07.978358",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Dr.Tarsem Singh Dhillon",
+            "phoneNumber": "918196939501"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:25.837Z"
+    },
+    {
+        "sender": {
+            "name": "~ Dr.Tarsem Singh Dhillon",
+            "phoneNumber": "918196939501"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:25.839Z"
+    },
+    {
+        "sender": {
+            "name": "Dr.Tarsem Singh Dhillon",
+            "phoneNumber": "918196939501"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:25.840Z"
+    },
+    {
+        "sender": {
+            "name": "Dr.Tarsem Singh Dhillon",
+            "phoneNumber": "918196939501"
+        },
+        "messageContent": "https://www.youtube.com/live/NWYlIvsxZOI?si=B_xYtKPZP0nrULzq",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:25.841Z"
+    },
+    {
+        "sender": {
+            "name": "Dr.Tarsem Singh Dhillon",
+            "phoneNumber": "918196939501"
+        },
+        "messageContent": "https://www.facebook.com/share/1JrosSgfcf/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:25.842Z"
+    },
+    {
+        "sender": {
+            "name": "Dhillon",
+            "phoneNumber": "919855088797"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1DxNHT1E7y/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/59b5c9f9-977d-405f-bb9d-508359902650",
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "Pargat Singh sarpanch",
+            "phoneNumber": "919914971531"
+        },
+        "messageContent": "ਸਾਰੇ ਕਿਸਾਨ ਵੀਰਾਂ ਨੂੰ ਬੇਨਤੀ ਹੈ ਕੀਤੀ ਜਾਂਦੀ ਹੈ ਕਿ ਮਿਤੀ 13/08/25 ਦਿਨ ਬੁੱਧਵਾਰ ਨੂੰ ਆਪ ਜੀ ਦੇਪਿੰਡ ਹਰਬੰਸਪੁਰਾ  ਦੇ  ਗੁਰੂਦੁਆਰਾ ਸਾਹਿਬ ਵਿੱਚ ਸਾਉਣੀ ਦੀਆ ਫਸਲਾਂ ਸੰਬੰਧੀ ਕਿਸਾਨ ਸਿਖਲਾਈ ਕੈਂਪ ਲਗਾਇਆ ਜਾ ਰਿਹਾ ਹੈ   ਜਿਸ ਵਿੱਚ ਝੋਨੇ ਅਤੇ ਬਾਸਮਤੀ ਦੇ ਕੀੜੇ-ਮਕੌੜੇ ਅਤੇ ਬਿਮਾਰੀਆਂ ਬਾਰੇ ਜਾਣਕਾਰੀ ਦਿੱਤੀ ਜਾਵੇਗੀ । ਸਮੂਹ ਕਿਸਾਨ ਵੀਰ    ਕੈਂਪ ਵਿੱਚ ਜਰੂਰ ਪਹੁੰਚਣ  ।  ਵੱਲੋ  ਖੇਤੀਬਾੜੀ ਅਤੇ ਕਿਸਾਨ ਭਲਾਈ  ਵਿਭਾਗ ।  ਬਲਾਕ  ਗੰਡੀਵਿੰਡ  ।",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:36.325Z",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.061896",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "Pargat Singh sarpanch",
+            "phoneNumber": "919914971531"
+        },
+        "messageContent": "ਸਮਾ ਸਵੇਰੇ 11:00 ਵਜੇ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:36.326Z",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.092790",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Dhillon",
+            "phoneNumber": "919855088797"
+        },
+        "messageContent": "https://www.facebook.com/share/v/19vMbvbLdK/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:36.328Z"
+    },
+    {
+        "sender": {
+            "name": "Dhillon",
+            "phoneNumber": "919855088797"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1Ez9pqtye3/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "Azadwinder",
+            "phoneNumber": "919876162423"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1DxNHT1E7y/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "Azadwinder",
+            "phoneNumber": "919876162423"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1DxNHT1E7y/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "Azadwinder",
+            "phoneNumber": "919876162423"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1DxNHT1E7y/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/2ce0839c-950c-4b54-a4b7-f89c7cd84c9c",
+        "timestamp": "2025-08-15T04:01:36.342Z"
+    },
+    {
+        "sender": {
+            "name": "Azadwinder",
+            "phoneNumber": "919682629537"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/f0fc6a7d-4e80-4af5-8bd5-63bb7188eaa8",
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "Azadwinder",
+            "phoneNumber": "919501867303"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "Azadwinder",
+            "phoneNumber": "919682629537"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/72e9d2b4-52ec-4e1b-8491-b3ec8ca6b2d3",
+        "timestamp": "2025-08-15T04:01:47.779Z"
+    },
+    {
+        "sender": {
+            "name": "Azadwinder",
+            "phoneNumber": "919501867303"
+        },
+        "messageContent": "https://www.facebook.com/share/r/15qdvDmEGb/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:47.783Z"
+    },
+    {
+        "sender": {
+            "name": "Azadwinder",
+            "phoneNumber": "919501867303"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1AsUKAsnMb/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "Azadwinder",
+            "phoneNumber": "917710785126"
+        },
+        "messageContent": "https://www.instagram.com/reel/DMoyR8excXx/?igsh=dHQzdWdtdjRlaGdw",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:47.794Z"
+    },
+    {
+        "sender": {
+            "name": "Azadwinder",
+            "phoneNumber": "919501867303"
+        },
+        "messageContent": "Search on web",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/96f4fa08-467d-4dc1-a42c-c9932d6b0a7f",
+        "timestamp": "2025-08-15T04:01:47.797Z",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.109753",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Azadwinder",
+            "phoneNumber": "919501867303"
+        },
+        "messageContent": "Search on web",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:47.799Z",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.142765",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "sangamsingh65205",
+            "phoneNumber": "918725965205"
+        },
+        "messageContent": "Hi",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:47.800Z",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.174572",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "~ Pr Ranjit Ji",
+            "phoneNumber": "918725965205"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "~ Pr Ranjit Ji",
+            "phoneNumber": "918725965205"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:47.803Z"
+    },
+    {
+        "sender": {
+            "name": "~ Pr Ranjit Ji",
+            "phoneNumber": "918725965205"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:47.804Z"
+    },
+    {
+        "sender": {
+            "name": "~ Pr Ranjit Ji",
+            "phoneNumber": "918725965205"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:47.805Z"
+    },
+    {
+        "sender": {
+            "name": "~ Pr Ranjit Ji",
+            "phoneNumber": "918725965205"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "~ Pr Ranjit Ji",
+            "phoneNumber": "918725965205"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "~ Pr Ranjit Ji",
+            "phoneNumber": "918725965205"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "~ Pr Ranjit Ji",
+            "phoneNumber": "918725965205"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "~ Pr Ranjit Ji",
+            "phoneNumber": "918725965205"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:01:47.810Z"
+    },
+    {
+        "sender": {
+            "name": "~ Pr Ranjit Ji",
+            "phoneNumber": "918725965205"
+        },
+        "messageContent": "https://www.facebook.com/100077606424613/posts/781595734437300/?mibextid=rS40aB7S9Ucbxw6v",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:31"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਨੇੜੇ ਸਾਹਿਬ ਮੈਡੀਕਲ ਹਾਊਸ \nਜੰਡਿਆਲਾ ਬਾਈਪਾਸ \nਤਰਨਤਾਰਨ  \n                                                           C.M. Di Yogshala \nNear Sahib medical house \n jandiala bypass \nTarn taran\nClass timing:-\n5.00pm - 6.00pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/4d58968f-5135-401b-9b33-b5c7ebcd7946",
+        "timestamp": "09:32",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.252901",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਨੇੜੇ ਸਾਹਿਬ ਮੈਡੀਕਲ ਹਾਊਸ \nਜੰਡਿਆਲਾ ਬਾਈਪਾਸ \nਤਰਨਤਾਰਨ  \n                                                           C.M. Di Yogshala \nNear Sahib medical house \n jandiala bypass \nTarn taran\nClass timing:-\n5.00pm - 6.00pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/00c9f3fb-508d-439b-a9d5-38ae2e930e27",
+        "timestamp": "09:32",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.332709",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਨੇੜੇ ਸਾਹਿਬ ਮੈਡੀਕਲ ਹਾਊਸ \nਜੰਡਿਆਲਾ ਬਾਈਪਾਸ \nਤਰਨਤਾਰਨ  \n                                                           C.M. Di Yogshala \nNear Sahib medical house \n jandiala bypass \nTarn taran\nClass timing:-\n5.00pm - 6.00pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/c78ea5a4-df3e-4142-b63b-40369dbb13c2",
+        "timestamp": "09:32",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.396063",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਨੇੜੇ ਸਾਹਿਬ ਮੈਡੀਕਲ ਹਾਊਸ \nਜੰਡਿਆਲਾ ਬਾਈਪਾਸ \nਤਰਨਤਾਰਨ  \n                                                           C.M. Di Yogshala \nNear Sahib medical house \n jandiala bypass \nTarn taran\nClass timing:-\n5.00pm - 6.00pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/c047371c-3f2c-4052-936c-c5ec39f693e7",
+        "timestamp": "09:32",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.460432",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਨੇੜੇ ਸਾਹਿਬ ਮੈਡੀਕਲ ਹਾਊਸ \nਜੰਡਿਆਲਾ ਬਾਈਪਾਸ \nਤਰਨਤਾਰਨ  \n                                                           C.M. Di Yogshala \nNear Sahib medical house \n jandiala bypass \nTarn taran\nClass timing:-\n5.00pm - 6.00pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/c0016f09-affa-45f1-bf52-51c42cd8e5fe",
+        "timestamp": "09:32",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.539863",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Harpreet Kaur",
+            "phoneNumber": "919464852848"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਨੇੜੇ ਸਾਹਿਬ ਮੈਡੀਕਲ ਹਾਊਸ \nਜੰਡਿਆਲਾ ਬਾਈਪਾਸ \nਤਰਨਤਾਰਨ  \n                                                           C.M. Di Yogshala \nNear Sahib medical house \n jandiala bypass \nTarn taran\nClass timing:-\n5.00pm - 6.00pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:32",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.608951",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Harpreet Kaur",
+            "phoneNumber": "919464852848"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:33"
+    },
+    {
+        "sender": {
+            "name": "Harpreet Kaur",
+            "phoneNumber": "919464852848"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:03:22.947Z"
+    },
+    {
+        "sender": {
+            "name": "Harpreet Kaur",
+            "phoneNumber": "919464852848"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:03:22.948Z"
+    },
+    {
+        "sender": {
+            "name": "Harpreet Kaur",
+            "phoneNumber": "919464852848"
+        },
+        "messageContent": "ਲੋਕਾਂ ਤੋਂ ਸੁਣੋ ਕਿ ਕਿਵੇਂ ਪੰਜਾਬ ਦਾ ਬੇੜਾ ਗਰਕ ਪਿਛਲੀਆਂ ਅਕਾਲੀ ਦਲ ਬਾਦਲ ਅਤੇ ਕਾਂਗਰਸ ਦੀਆਂ ਸਰਕਾਰਾਂ ਨੇ ਕੀਤਾ, ਨਸ਼ਾ ਘਰ-ਘਰ ਤੱਕ ਪਹੁੰਚਾਇਆ।",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:03:22.949Z",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.656411",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "Khalsa food Corner",
+            "phoneNumber": "917983805234"
+        },
+        "messageContent": "Today's Independence day special offer on Khalsa Food Corner Tarn Taran",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:33",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.688103",
+        "predicted_label": "entertainment_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Khalsa food Corner",
+            "phoneNumber": "917983805234"
+        },
+        "messageContent": "In 79/- Rupess  KFC Spring Roll With KFC Momos Come on Enjoying your special day",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:03:22.951Z",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.736896",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Khalsa food Corner",
+            "phoneNumber": "917983805234"
+        },
+        "messageContent": "In 89/- Rupess Burger ,  Fries with KFC Momos Enjoy please",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-15T04:03:22.952Z",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.767804",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐੱਮ  ਦੀ ਯੋਗਸ਼ਾਲਾ- ਕੰਗਾਂ ਵਾਲੀ ਗਲੀ, ਬਾਠ ਰੋਡ ਤਰਨਤਾਰਨ, ਪੰਜਾਬ।\nC.M. Di Yogshala - Kanga wali gali Batth Road, Tarn Taran, Punjab                                               \n\nclass Time:-\n 6.05pm - 7.05 pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/ca1f9bd3-1dac-4511-97f6-cd3ceb73c4af",
+        "timestamp": "2025-08-15T04:03:31.410Z",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.846983",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐੱਮ  ਦੀ ਯੋਗਸ਼ਾਲਾ- ਕੰਗਾਂ ਵਾਲੀ ਗਲੀ, ਬਾਠ ਰੋਡ ਤਰਨਤਾਰਨ, ਪੰਜਾਬ।\nC.M. Di Yogshala - Kanga wali gali Batth Road, Tarn Taran, Punjab                                               \n\nclass Time:-\n 6.05pm - 7.05 pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/7b88cb6b-29f9-48be-adbc-8d89fbd6af7c",
+        "timestamp": "09:33",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.910129",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐੱਮ  ਦੀ ਯੋਗਸ਼ਾਲਾ- ਕੰਗਾਂ ਵਾਲੀ ਗਲੀ, ਬਾਠ ਰੋਡ ਤਰਨਤਾਰਨ, ਪੰਜਾਬ।\nC.M. Di Yogshala - Kanga wali gali Batth Road, Tarn Taran, Punjab                                               \n\nclass Time:-\n 6.05pm - 7.05 pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/2a1fbd77-e20a-47ab-8f3a-0fd3a42628de",
+        "timestamp": "2025-08-15T04:03:31.414Z",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:08.976889",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐੱਮ  ਦੀ ਯੋਗਸ਼ਾਲਾ- ਕੰਗਾਂ ਵਾਲੀ ਗਲੀ, ਬਾਠ ਰੋਡ ਤਰਨਤਾਰਨ, ਪੰਜਾਬ।\nC.M. Di Yogshala - Kanga wali gali Batth Road, Tarn Taran, Punjab                                               \n\nclass Time:-\n 6.05pm - 7.05 pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/13b5b53c-63c9-46d5-bfa6-854129155067",
+        "timestamp": "09:33",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:09.044290",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐੱਮ  ਦੀ ਯੋਗਸ਼ਾਲਾ- ਕੰਗਾਂ ਵਾਲੀ ਗਲੀ, ਬਾਠ ਰੋਡ ਤਰਨਤਾਰਨ, ਪੰਜਾਬ।\nC.M. Di Yogshala - Kanga wali gali Batth Road, Tarn Taran, Punjab                                               \n\nclass Time:-\n 6.05pm - 7.05 pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/30b7f7e7-f9d3-43ee-a23d-e6fe7cd57e41",
+        "timestamp": "09:33",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:09.110532",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Mann",
+            "phoneNumber": "919877092940"
+        },
+        "messageContent": "ਸੀ.ਐੱਮ  ਦੀ ਯੋਗਸ਼ਾਲਾ- ਕੰਗਾਂ ਵਾਲੀ ਗਲੀ, ਬਾਠ ਰੋਡ ਤਰਨਤਾਰਨ, ਪੰਜਾਬ।\nC.M. Di Yogshala - Kanga wali gali Batth Road, Tarn Taran, Punjab                                               \n\nclass Time:-\n 6.05pm - 7.05 pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:33",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-15",
+        "date": "G1-14-AUG",
+        "processed_time": "2025-08-18T11:49:09.173169",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    }
+]

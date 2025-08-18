@@ -1,0 +1,341 @@
+{% extends "base.html" %}
+
+{% block title %}Common Members Analysis - WhatsApp UI{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    <!-- Include User Left Sidebar from Layout File -->
+    {% include 'user_slidebar.html' %}
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="main-header">
+            <h1><i class="fas fa-link"></i> Common Members Analysis</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> Back to Analysis
+                </button>
+                <button class="refresh-btn" onclick="location.reload()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="dashboard-content">
+            <!-- Analysis Form Section -->
+            <div class="section-header">
+                <h3><i class="fas fa-filter"></i> Analysis Filters</h3>
+                <p>Select assemblies and date range to analyze common members across groups</p>
+            </div>
+            
+            <!-- Analysis Form -->
+            <div class="analysis-form" id="analysisForm">
+                <!-- Filter Form Header with Collapse/Expand -->
+                <div class="filter-form-header">
+                    <div class="filter-form-title">
+                        <i class="fas fa-filter"></i>
+                        <span>Current Filter Settings</span>
+                    </div>
+                    <div class="filter-form-actions">
+                        <button type="button" class="btn btn-outline btn-sm" id="toggleFilterBtn" onclick="toggleFilterForm()">
+                            <i class="fas fa-chevron-up"></i> Hide Filters
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Filter Form Content -->
+                <div class="filter-form-content" id="filterFormContent">
+                <div class="form-row">
+                    <!-- Assembly Selection -->
+                    <div class="form-group">
+                        <label for="assemblySelection">
+                            <i class="fas fa-building"></i> Select Assemblies
+                        </label>
+                        <div class="assemblies-grid" id="assembliesGrid">
+                            <div class="loading-spinner">
+                                <i class="fas fa-spinner fa-spin"></i> Loading assemblies...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <!-- Quick Date Filters -->
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-clock"></i> Quick Date Filters
+                        </label>
+                        <div class="quick-date-filters">
+                            <label class="quick-filter-checkbox">
+                                <input type="radio" name="quickFilter" value="1week" onchange="setQuickDateRange('1week')">
+                                <span class="filter-label">1 Week</span>
+                            </label>
+                            <label class="quick-filter-checkbox">
+                                <input type="radio" name="quickFilter" value="1month" onchange="setQuickDateRange('1month')">
+                                <span class="filter-label">1 Month</span>
+                            </label>
+                            <label class="quick-filter-checkbox">
+                                <input type="radio" name="quickFilter" value="3months" onchange="setQuickDateRange('3months')">
+                                <span class="filter-label">3 Months</span>
+                            </label>
+                            <label class="quick-filter-checkbox">
+                                <input type="radio" name="quickFilter" value="6months" onchange="setQuickDateRange('6months')">
+                                <span class="filter-label">6 Months</span>
+                            </label>
+                            <label class="quick-filter-checkbox">
+                                <input type="radio" name="quickFilter" value="1year" onchange="setQuickDateRange('1year')">
+                                <span class="filter-label">1 Year</span>
+                            </label>
+                            <label class="quick-filter-checkbox">
+                                <input type="radio" name="quickFilter" value="custom" onchange="setQuickDateRange('custom')" checked>
+                                <span class="filter-label">Custom Range</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <!-- Date Range Selection -->
+                    <div class="form-group">
+                        <label for="startDate">
+                            <i class="fas fa-calendar"></i> Start Date <span class="required">*</span>
+                        </label>
+                        <input type="date" id="startDate" name="startDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="endDate">
+                            <i class="fas fa-calendar"></i> End Date <span class="optional">(Optional)</span>
+                        </label>
+                        <input type="date" id="endDate" name="endDate">
+                    </div>
+                </div>
+                
+                <!-- Sentiment Filter -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sentiment">
+                            <i class="fas fa-heart"></i> Sentiment Filter
+                        </label>
+                        <select id="sentiment" class="form-control">
+                            <option value="all">All Sentiments</option>
+                            <option value="positive">Positive</option>
+                            <option value="negative">Negative</option>
+                            <option value="neutral">Neutral</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary" onclick="analyzeCommonMembers()">
+                        <i class="fas fa-chart-bar"></i> Analyze Common Members
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="clearAnalysis()">
+                        <i class="fas fa-times"></i> Clear
+                    </button>
+                </div>
+                </div> <!-- End of filter-form-content -->
+                
+                <!-- Show Filters Button (hidden by default) -->
+                <div class="show-filters-section" id="showFiltersSection" style="display: none;">
+                    <button type="button" class="btn btn-primary btn-show-filters" onclick="showFilterForm()">
+                        <i class="fas fa-filter"></i> Show Filters for New Analysis
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Common Members Analysis Results -->
+            <div class="common-members-results" id="commonMembersResults" style="display: none;">
+                <div class="section-header">
+                    <h3><i class="fas fa-link"></i> Common Members Analysis Results</h3>
+                </div>
+                
+                <div class="common-summary">
+                    <div class="summary-card total-common-members">
+                        <div class="summary-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="summary-content">
+                            <h4>Total Common Members</h4>
+                            <span class="summary-value" id="totalCommonMembersCount">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card max-groups">
+                        <div class="summary-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="summary-content">
+                            <h4>Max Groups Per Member</h4>
+                            <span class="summary-value" id="maxGroupsPerMember">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card total-crossings">
+                        <div class="summary-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="summary-content">
+                            <h4>Total Crossings</h4>
+                            <span class="summary-value" id="totalCrossings">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search and Filter Section -->
+                <div class="search-filter-section" id="searchFilterSection" style="display: none;">
+                    <div class="section-header">
+                        <h4><i class="fas fa-search"></i> Search Across All Messages</h4>
+                        <p>Search through messages from all common members across all groups</p>
+                        
+                        <!-- Permanent Download Button -->
+                        <div class="permanent-download-section">
+                            <button class="btn btn-success" onclick="downloadAllMessages()">
+                                <i class="fas fa-download"></i> Download All Messages (Excel)
+                            </button>
+                            <p class="download-info">Download all messages from common members across all groups</p>
+                        </div>
+                    </div>
+                    
+                    <div class="search-controls">
+                        <!-- Search Field Selector -->
+                        <div class="search-field-control">
+                            <label for="searchField">
+                                <i class="fas fa-filter"></i> Search In
+                            </label>
+                            <select id="searchField" onchange="updateSearchPlaceholder()">
+                                <option value="messageContent">Message Content</option>
+                                <option value="senderName">Sender Name</option>
+                                <option value="senderPhone">Sender Phone</option>
+                                <option value="groupName">Group Name</option>
+                                <option value="assembly">Assembly</option>
+                                <option value="all">All Fields</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Search Input -->
+                        <div class="search-control">
+                            <label for="messageSearch">
+                                <i class="fas fa-search"></i> Search Messages
+                            </label>
+                            <input 
+                                type="text" 
+                                id="messageSearch" 
+                                placeholder="Search in message content... (Press Enter or Click Search)"
+                                onkeypress="handleSearchKeypress(event)"
+                            >
+                        </div>
+                        
+                        <!-- Search Submit Button -->
+                        <div class="search-submit-control">
+                            <button type="button" class="btn btn-primary" onclick="submitSearch()">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                        
+                        <!-- Label Filter -->
+                        <div class="label-filter-control">
+                            <label for="labelFilter">
+                                <i class="fas fa-tags"></i> Filter by Label
+                            </label>
+                            <select id="labelFilter" onchange="filterByLabel()">
+                                <option value="all">All Labels</option>
+                                <!-- Labels will be populated dynamically -->
+                            </select>
+                        </div>
+                        
+                        <!-- Sentiment Filter -->
+                        <div class="sentiment-filter-control">
+                            <label for="sentimentFilter">
+                                <i class="fas fa-smile"></i> Filter by Sentiment
+                            </label>
+                            <select id="sentimentFilter" onchange="filterBySentiment()">
+                                <option value="all">All Sentiments</option>
+                                <option value="positive">Positive Only</option>
+                                <option value="negative">Negative Only</option>
+                                <option value="neutral">Neutral Only</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Clear Filters Button -->
+                        <div class="clear-filters-control">
+                            <button class="btn btn-outline" onclick="clearAllFilters()">
+                                <i class="fas fa-times"></i> Clear All Filters
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Search Results Summary -->
+                    <div class="search-results-summary" id="searchResultsSummary" style="display: none;">
+                        <div class="summary-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-search"></i>
+                                <span id="searchResultsCount">0</span> messages found
+                            </span>
+                            <span class="stat-item">
+                                <i class="fas fa-users"></i>
+                                <span id="searchResultsMembers">0</span> members
+                            </span>
+                            <span class="stat-item">
+                                <i class="fas fa-layer-group"></i>
+                                <span id="searchResultsGroups">0</span> groups
+                            </span>
+                        </div>
+                        
+                        <!-- Download Button -->
+                        <div class="download-section">
+                            <button id="downloadSearchResultsBtn" class="btn btn-success" onclick="downloadSearchResults()" style="display: none;">
+                                <i class="fas fa-download"></i> Download Results (Excel)
+                            </button>
+                            
+                            <!-- Test Download Button (temporary) -->
+                            <button class="btn btn-warning" onclick="testDownload()" style="margin-left: 10px;">
+                                <i class="fas fa-bug"></i> Test Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Common Members Table -->
+                <div class="common-members-section">
+                    <h4><i class="fas fa-table"></i> Common Members Across Groups</h4>
+                    <div class="common-members-container">
+                        <table class="common-members-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Member Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Groups Count</th>
+                                    <th>Group Names</th>
+                                    <th>Total Messages</th>
+                                    <th>Sentiment Breakdown</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="commonMembersTableBody">
+                                <!-- Common members will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Loading State -->
+            <div class="loading-state" id="loadingState" style="display: none;">
+                <div class="loading-content">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <h3>Analyzing Common Members...</h3>
+                    <p>Please wait while we process your data</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/common_members_analysis.css') }}">
+
+<!-- Include JavaScript -->
+<script src="{{ url_for('static', filename='js/common_members_analysis.js') }}"></script>
+{% endblock %}

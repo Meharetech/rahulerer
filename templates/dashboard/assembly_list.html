@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+
+{% block title %}Assembly List - Admin Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/assembly_list.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    <!-- Include Admin Left Sidebar from Layout File -->
+    {% include 'admin_slidebar.html' %}
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="main-header">
+            <h1><i class="fas fa-list-ol"></i> Assembly List</h1>
+            <button class="refresh-btn" onclick="location.reload()">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+        
+        <div class="dashboard-content">
+            <!-- Assembly List Content -->
+            <div class="section-header">
+                <h3><i class="fas fa-list"></i> Assembly Management System</h3>
+            </div>
+            
+            <!-- Add Assembly Form -->
+            <div class="search-filter-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-plus-circle"></i> Add New Assembly</h3>
+                </div>
+                
+                <form id="addAssemblyForm" class="assembly-form">
+                    <div class="form-grid">
+                        <div class="form-item">
+                            <label for="assembly_name">
+                                <i class="fas fa-list-ol"></i> Assembly Name *
+                            </label>
+                            <input type="text" id="assembly_name" name="assembly_name" required 
+                                   placeholder="Enter assembly name">
+                        </div>
+                        
+                        <div class="form-item">
+                            <label for="remarks">
+                                <i class="fas fa-comment"></i> Remarks
+                            </label>
+                            <textarea id="remarks" name="remarks" rows="3" 
+                                      placeholder="Enter any additional remarks"></textarea>
+                        </div>
+                    </div>
+                    
+                                               <div class="form-actions">
+                               <button type="submit" class="btn btn-primary">
+                                   <i class="fas fa-plus"></i> Add Assembly
+                               </button>
+                           </div>
+                </form>
+            </div>
+            
+            <!-- Assembly List Display -->
+            <div class="search-filter-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-list"></i> Current Assembly List</h3>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" onclick="refreshAssemblyList()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="assemblyListContainer">
+                    <div class="assembly-loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Loading assemblies...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include JavaScript -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+<!-- Assembly List JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize assembly list functionality
+    initializeAssemblyList();
+    
+    // Handle form submission
+    document.getElementById('addAssemblyForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        addAssembly();
+    });
+});
+
+function initializeAssemblyList() {
+    // Load existing assemblies
+    loadAssemblyList();
+}
+
+function loadAssemblyList() {
+    const container = document.getElementById('assemblyListContainer');
+    
+    // Show loading state
+    container.innerHTML = `
+        <div class="assembly-loading">
+            <i class="fas fa-spinner"></i>
+            <p>Loading assemblies...</p>
+        </div>
+    `;
+    
+    // Fetch assemblies from server
+    fetch('/api/assemblies')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                displayAssemblies(data.assemblies);
+            } else {
+                showError('Failed to load assemblies: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading assemblies:', error);
+            showError('Failed to load assemblies. Please try again.');
+        });
+}
+
+function displayAssemblies(assemblies) {
+    const container = document.getElementById('assemblyListContainer');
+    
+    if (assemblies.length === 0) {
+        container.innerHTML = `
+            <div class="assembly-empty-state">
+                <i class="fas fa-list"></i>
+                <p>No assemblies found. Add your first assembly using the form above.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    container.innerHTML = '';
+    
+    assemblies.forEach(assembly => {
+        const assemblyItem = createAssemblyItem(assembly);
+        container.appendChild(assemblyItem);
+    });
+}
+
+function addAssembly() {
+    const form = document.getElementById('addAssemblyForm');
+    const formData = new FormData(form);
+    
+    // Get form values
+    const assemblyName = formData.get('assembly_name').trim();
+    const remarks = formData.get('remarks').trim();
+    
+    if (!assemblyName) {
+        showNotification('Please enter an assembly name', 'error');
+        return;
+    }
+    
+    // Create assembly data
+    const assemblyData = {
+        name: assemblyName,
+        remarks: remarks
+    };
+    
+    // Send to server
+    fetch('/api/assemblies', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(assemblyData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showNotification('Assembly added successfully!', 'success');
+            form.reset();
+            loadAssemblyList(); // Reload the list
+        } else {
+            showNotification('Failed to add assembly: ' + data.message, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error adding assembly:', error);
+        showNotification('Failed to add assembly. Please try again.', 'error');
+    });
+}
+
+function createAssemblyItem(assembly) {
+    const item = document.createElement('div');
+    item.className = 'assembly-item';
+    item.innerHTML = `
+        <div class="assembly-info">
+            <div class="assembly-name">
+                <i class="fas fa-list-ol"></i>
+                <span>${assembly.name}</span>
+            </div>
+            ${assembly.remarks ? `<div class="assembly-remarks">${assembly.remarks}</div>` : ''}
+            <div class="assembly-date">Created: ${new Date(assembly.created_at).toLocaleDateString()}</div>
+        </div>
+        <div class="assembly-actions">
+            <button class="btn btn-danger btn-sm" onclick="removeAssembly(${assembly.id})">
+                <i class="fas fa-trash"></i> Remove
+            </button>
+        </div>
+    `;
+    
+    return item;
+}
+
+function removeAssembly(assemblyId) {
+    if (confirm('Are you sure you want to remove this assembly?')) {
+        fetch(`/api/assemblies/${assemblyId}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showNotification('Assembly removed successfully!', 'success');
+                loadAssemblyList(); // Reload the list
+            } else {
+                showNotification('Failed to remove assembly: ' + data.message, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error removing assembly:', error);
+            showNotification('Failed to remove assembly. Please try again.', 'error');
+        });
+    }
+}
+
+function refreshAssemblyList() {
+    loadAssemblyList();
+    showNotification('Assembly list refreshed!', 'info');
+}
+
+function showNotification(message, type) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+        <span>${message}</span>
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+function showError(message) {
+    const container = document.getElementById('assemblyListContainer');
+    container.innerHTML = `
+        <div class="assembly-empty-state">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>${message}</p>
+        </div>
+    `;
+}
+</script>
+{% endblock %}

@@ -1,0 +1,327 @@
+[
+    {
+        "sender": {
+            "name": "Satnam Singh",
+            "phoneNumber": "919592457392"
+        },
+        "messageContent": "",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/7e7ed60a-b0c4-400b-8fa4-158a4ac36cea",
+        "timestamp": "2025-08-16T04:12:39.879Z"
+    },
+    {
+        "sender": {
+            "name": "Ishmeet",
+            "phoneNumber": "918054383637"
+        },
+        "messageContent": "",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/e13eda60-fc2f-4549-b8a8-54adc5fd0d13",
+        "timestamp": "2025-08-16T04:12:39.881Z"
+    },
+    {
+        "sender": {
+            "name": "gurpreet singh goldy534",
+            "phoneNumber": "919646069504"
+        },
+        "messageContent": "",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/c759fcf8-0725-4df1-b65c-ff41ab64815e",
+        "timestamp": "2025-08-16T04:12:39.883Z"
+    },
+    {
+        "sender": {
+            "name": "Ishmeet",
+            "phoneNumber": "918054383637"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:39.886Z"
+    },
+    {
+        "sender": {
+            "name": "gurpreet singh goldy534",
+            "phoneNumber": "919646069504"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:39.888Z"
+    },
+    {
+        "sender": {
+            "name": "gurpreet singh goldy534",
+            "phoneNumber": "919646069504"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:39.890Z"
+    },
+    {
+        "sender": {
+            "name": "gursahib bhullar",
+            "phoneNumber": "916283801802"
+        },
+        "messageContent": "very gud speech mc sab",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:39.892Z",
+        "group_name": "Aap_Ward_22_2025-08-16",
+        "date": "G1-15-AUG",
+        "processed_time": "2025-08-17T19:48:55.916251",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Satnam Singh",
+            "phoneNumber": "919592457392"
+        },
+        "messageContent": "nice good job",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:39.894Z",
+        "group_name": "Aap_Ward_22_2025-08-16",
+        "date": "G1-15-AUG",
+        "processed_time": "2025-08-17T19:48:55.967668",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Ishmeet",
+            "phoneNumber": "918054383637"
+        },
+        "messageContent": "Nice good job very good speech MC Sab ji",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:40.883Z",
+        "group_name": "Aap_Ward_22_2025-08-16",
+        "date": "G1-15-AUG",
+        "processed_time": "2025-08-17T19:48:56.031910",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "savitridevi4493",
+            "phoneNumber": "919888105458"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:40.884Z"
+    },
+    {
+        "sender": {
+            "name": "savitridevi4493",
+            "phoneNumber": "919888105458"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:40.885Z"
+    },
+    {
+        "sender": {
+            "name": "savitridevi4493",
+            "phoneNumber": "919888105458"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:40.886Z"
+    },
+    {
+        "sender": {
+            "name": "savitridevi4493",
+            "phoneNumber": "919888105458"
+        },
+        "messageContent": "",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/66c97ca7-b29c-4873-b27b-60d9d4e64367",
+        "timestamp": "09:42"
+    },
+    {
+        "sender": {
+            "name": "Sanjeev Kumar Sharma",
+            "phoneNumber": "919814352909"
+        },
+        "messageContent": "Sticker with: 🌳 🌳",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/58477539-8589-447f-ba3c-de0dbcbe1709",
+        "timestamp": "09:42",
+        "group_name": "Aap_Ward_22_2025-08-16",
+        "date": "G1-15-AUG",
+        "processed_time": "2025-08-17T19:48:56.091400",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Sanjeev Kumar Sharma",
+            "phoneNumber": "919814352909"
+        },
+        "messageContent": "Sticker with: 🌳 🌳",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:42",
+        "group_name": "Aap_Ward_22_2025-08-16",
+        "date": "G1-15-AUG",
+        "processed_time": "2025-08-17T19:48:56.151789",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "ساجن کنڈا",
+            "phoneNumber": "917986876808"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:42"
+    },
+    {
+        "sender": {
+            "name": "ss9089430",
+            "phoneNumber": "918054967230"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:42"
+    },
+    {
+        "sender": {
+            "name": "Sanjeev Kumar Sharma",
+            "phoneNumber": "919814352909"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1756rxfn8M/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:42"
+    },
+    {
+        "sender": {
+            "name": "Harpal",
+            "phoneNumber": "919780115203"
+        },
+        "messageContent": "Good",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:42",
+        "group_name": "Aap_Ward_22_2025-08-16",
+        "date": "G1-15-AUG",
+        "processed_time": "2025-08-17T19:48:56.183815",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "singhdaljit0017",
+            "phoneNumber": "919988728642"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:42"
+    },
+    {
+        "sender": {
+            "name": "Shiv Kumar",
+            "phoneNumber": "919780101662"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:41.999Z"
+    },
+    {
+        "sender": {
+            "name": "Wmk",
+            "phoneNumber": "919217926248"
+        },
+        "messageContent": "https://www.instagram.com/reel/DNQQktMP41C/?igsh=NnMxcjl0eGdkZTd1",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:42.002Z"
+    },
+    {
+        "sender": {
+            "name": "~ gurpreet singh goldy534",
+            "phoneNumber": "919217926248"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:42"
+    },
+    {
+        "sender": {
+            "name": "gursahib bhullar",
+            "phoneNumber": "916283801802"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:42.005Z"
+    },
+    {
+        "sender": {
+            "name": "Kulwant Singh",
+            "phoneNumber": "919464296186"
+        },
+        "messageContent": "ਅੱਜ ਦਾ ਵਿਚਾਰ (16 ਅਗਸਤ ) *\nਮਹਾਨ ਵਿਅਕਤੀ ਉਹ ਹੁੰਦਾ ਹੈ ਜੋ ਨਾ ਕਿਸੇ ਦਾ ਦਬਾਅ ਮੰਨਦਾ ਹੈ ਤੇ ਨਾ ਹੀ ਕਿਸੇ ਨੂੰ ਦਬਾਉਂਦਾ ਹੈ।\n\nਅੱਜ ਦੇ ਦਿਨ : 16-8-1858 ਅਮਰੀਕਾ ਤੇ ਬਰਤਾਨੀਆ ਵਿੱਚ ਪਹਿਲੀ ਵਾਰ ਟੈਲੀਗਰਾਫ਼ ਸਬੰਧ ਕਾਇਮ ਹੋਏ।\n1941ਦੇਸ਼ ਭਗਤ ਬਾਬਾ ਈਸ਼ਰ ਸਿੰਘ ਮਰਹਾਣਾ ਦਾ ਦਿਹਾਂਤ।\n1947 ਲਾਲ ਕਿਲੇ ਤੋਂ ਪੰਡਤ ਜਵਾਹਰ ਲਾਲ ਨਹਿਰੂ ਨੇ ਪਹਿਲੀ ਵਾਰ ਕੌਮੀ ਤਿਰੰਗਾ ਲਹਿਰਾਇਆ।\n1947 ਪੰਜਾਬ ਦੇ ਡਾ ਗੋਪੀ ਚੰਦ ਭਾਰਗਵ ਪਹਿਲੇ ਮੁੱਖ ਮੰਤਰੀ ਬਣੇ।\n1986 ਤਰਕਸ਼ੀਲ ਸੁਸਾਇਟੀ ਪੰਜਾਬ ਦਾ ਰੈਸ਼ਨਲਿਸਟ ਸੁਸਾਇਟੀ ਪੰਜਾਬ ਦੇ ਨਾਂ ਹੇਠ ਪਹਿਲਾ ਦੋ ਦਿਨਾ ਡੈਲੀਗੇਟ ਇਜਲਾਸ ਬਰਨਾਲਾ ਵਿਖੇ ਹੋਇਆ।\n2016 ਉੱਘੇ ਲੇਖਕ ਗੁਰਦਿਆਲ ਸਿੰਘ ਦਾ ਦਿਹਾਂਤ।\n\nਦੇਸ਼ ਭਗਤ ਬਾਬਾ ਈਸ਼ਰ ਸਿੰਘ ਮਰਹਾਣਾ।ਉਨਾਂ ਦੇਸ਼ ਭਗਤਾਂ ਵਿੱਚੋਂ ਇਕ ਸਨ ਜਿੰਨਾਂ ਨੇ ਪ੍ਰਦੇਸ਼ਾਂ ਵਿੱਚ ਜਥੇਬੰਦੀ ਕਾਇਮ ਕਰਕੇ ਦੇਸ਼ ਵਿੱਚ ਆਣ ਕੇ ਅਜ਼ਾਦੀ ਦੇ ਘੋਲ ਨੂੰ ਤਿਖਿਆਂ ਕੀਤਾ।ਬਾਬਾ ਜੀ ਦਾ ਜਨਮ 1 ਜਨਵਰੀ 1878 ਨੂੰ ਮਾਤਾ ਚੰਦ ਕੌਰ ਤੇ ਪਿਤਾ…",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:42.009Z",
+        "group_name": "Aap_Ward_22_2025-08-16",
+        "date": "G1-15-AUG",
+        "processed_time": "2025-08-17T19:48:56.317768",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Jaspal Singh",
+            "phoneNumber": "918847305295"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1756rxfn8M/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/203df3d8-c99c-44a8-a18b-61d3902d34fe",
+        "timestamp": "2025-08-16T04:12:44.619Z"
+    },
+    {
+        "sender": {
+            "name": "sarupsinghsohal786",
+            "phoneNumber": "919463529506"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1756rxfn8M/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:44.621Z"
+    },
+    {
+        "sender": {
+            "name": "sarupsinghsohal786",
+            "phoneNumber": "919463529506"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1756rxfn8M/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:12:44.623Z"
+    },
+    {
+        "sender": {
+            "name": "satnamsinghghai4",
+            "phoneNumber": "919876428918"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1756rxfn8M/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:42"
+    }
+]

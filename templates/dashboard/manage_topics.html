@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Topics - WhatsApp UI{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    <!-- Include User Left Sidebar from Layout File -->
+    {% include 'user_slidebar.html' %}
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="main-header">
+            <h1><i class="fas fa-tags"></i> Manage Topics</h1>
+            <button class="refresh-btn" onclick="location.reload()">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+        
+        <div class="dashboard-content">
+            <!-- Manage Topics Content -->
+            <div class="section-header">
+                <h3><i class="fas fa-tag"></i> Topic Management System</h3>
+            </div>
+            
+            <div class="content-placeholder">
+                <p>Manage Topics features will be implemented here.</p>
+                <p>This page will allow you to create, edit, and manage WhatsApp topics.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include JavaScript -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}User Dashboard - WhatsApp UI{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    <!-- Include Left Sidebar from Layout File -->
+    {% include 'user_slidebar.html' %}
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="main-header">
+            <h1><i class="fas fa-tachometer-alt"></i> User Dashboard</h1>
+            <div class="header-actions">
+                <button class="refresh-btn" onclick="loadDashboardStats()">
+                    <i class="fas fa-sync-alt"></i> Refresh Stats
+                </button>
+                <button class="btn btn-info" onclick="showStatsInfo()">
+                    <i class="fas fa-info-circle"></i> Stats Info
+            </button>
+            </div>
+        </div>
+        
+        <div class="dashboard-content">
+            <!-- Dashboard Statistics -->
+            <div class="section-header">
+                <h3><i class="fas fa-chart-bar"></i> Database Overview</h3>
+                <p>Statistics across all assemblies and groups</p>
+            </div>
+            
+            <!-- Main Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card blue">
+                    <div class="stat-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="stat-number" id="totalAssemblies">0</div>
+                    <div class="stat-label">TOTAL ASSEMBLIES</div>
+                </div>
+                
+                <div class="stat-card cyan">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number" id="totalGroups">0</div>
+                    <div class="stat-label">TOTAL GROUPS</div>
+                </div>
+                
+                <div class="stat-card green">
+                    <div class="stat-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="stat-number" id="totalPhones">0</div>
+                    <div class="stat-label">TOTAL PHONE NUMBERS</div>
+                </div>
+            </div>
+            
+            <!-- Assembly Breakdown -->
+                <div class="section-header">
+                <h3><i class="fas fa-list"></i> Assembly Breakdown</h3>
+                <p>Detailed statistics for each assembly</p>
+                </div>
+                
+            <div class="assembly-breakdown" id="assemblyBreakdown">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i> Loading assembly data...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include CSS -->
+<style>
+.header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.header-actions .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-actions .btn-info {
+    background: #17a2b8;
+    border: 1px solid #17a2b8;
+    color: white;
+}
+
+.header-actions .btn-info:hover {
+    background: #138496;
+    border-color: #138496;
+}
+
+.refresh-btn {
+    background: #28a745;
+    border: 1px solid #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.refresh-btn:hover {
+    background: #218838;
+    border-color: #218838;
+}
+
+.loading-subtitle {
+    font-size: 12px;
+    color: #6c757d;
+    margin-top: 8px;
+}
+</style>
+
+<!-- Include JavaScript -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='js/user_dashboard.js') }}"></script>
+{% endblock %}

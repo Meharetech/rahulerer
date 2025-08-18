@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}Message Management - Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    <!-- Include Admin Left Sidebar from Layout File -->
+    {% include 'admin_slidebar.html' %}
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="main-header">
+            <h1><i class="fas fa-comments"></i> Message Management</h1>
+            <button class="refresh-btn" onclick="location.reload()">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+        
+        <div class="dashboard-content">
+            <!-- Message Management Content -->
+            <div class="section-header">
+                <h3><i class="fas fa-bullhorn"></i> Scheduled Posts Management</h3>
+                <p>Monitor and manage all scheduled posts from all users</p>
+            </div>
+            
+            <!-- Filters Section -->
+            <div class="form-section">
+                <h4><i class="fas fa-filter"></i> Filters</h4>
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label for="statusFilter">Status:</label>
+                        <select id="statusFilter" onchange="filterPosts()">
+                            <option value="">All Statuses</option>
+                            <option value="pending">Pending</option>
+                            <option value="running">Running</option>
+                            <option value="completed">Completed</option>
+                            <option value="failed">Failed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="assemblyFilter">Assembly:</label>
+                        <select id="assemblyFilter" onchange="filterPosts()">
+                            <option value="">All Assemblies</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="dateFilter">Date Range:</label>
+                        <input type="date" id="dateFilter" onchange="filterPosts()">
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn btn-secondary" onclick="clearFilters()">
+                            <i class="fas fa-times"></i> Clear Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistics Cards -->
+            <div class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="pendingCount">0</h3>
+                            <p>Pending Posts</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon running">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="runningCount">0</h3>
+                            <p>Running Posts</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon completed">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="completedCount">0</h3>
+                            <p>Completed Posts</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon failed">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="failedCount">0</h3>
+                            <p>Failed Posts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- All Scheduled Posts Table -->
+            <div class="form-section">
+                <h4><i class="fas fa-list"></i> All Scheduled Posts</h4>
+                <div class="posts-table-container" id="allPostsTable">
+                    <div class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i> Loading all scheduled posts...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Post Details Modal -->
+<div class="modal" id="postDetailsModal">
+    <div class="modal-content large-modal">
+        <div class="modal-header">
+            <h3><i class="fas fa-info-circle"></i> Post Details</h3>
+            <button class="close-btn" onclick="closeModal('postDetailsModal')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body" id="postDetailsContent">
+            <!-- Post details will be populated here -->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="closeModal('postDetailsModal')">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Status Update Modal -->
+<div class="modal" id="statusUpdateModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-edit"></i> Update Post Status</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="newStatus">New Status:</label>
+                <select id="newStatus" class="form-control">
+                    <option value="pending">🟡 Pending</option>
+                    <option value="running">🔵 Running</option>
+                    <option value="completed">🟢 Completed</option>
+                    <option value="failed">🔴 Failed</option>
+                    <option value="cancelled">⚫ Cancelled</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="adminNotes">Admin Notes:</label>
+                <textarea id="adminNotes" class="form-control" rows="3" placeholder="Add any notes about this status change..."></textarea>
+            </div>
+            <div class="form-group" id="completionFileGroup" style="display: none;">
+                <label for="completionFile">Completion File (Optional):</label>
+                <input type="file" id="completionFile" class="form-control" accept=".xlsx,.xls,.csv">
+                <small class="form-text">Upload Excel or CSV file to show completion proof. Only shown when status is "Completed".</small>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('statusUpdateModal')">Cancel</button>
+            <button class="btn btn-primary" onclick="updatePostStatus()">Update Status</button>
+        </div>
+    </div>
+</div>
+
+<!-- Include JavaScript -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='js/admin_message_management.js') }}"></script>
+{% endblock %}

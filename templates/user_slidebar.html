@@ -1,0 +1,126 @@
+<!-- Left Sidebar Menu Layout -->
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h2><i class="fab fa-whatsapp"></i></h2>
+        <p>WhatsApp Analytics</p>
+    </div>
+    
+    <div class="sidebar-menu">
+        <div class="menu-section">
+            <h4>Main Menu</h4>
+            <div class="menu-item active" data-page="dashboard">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard Statistics</span>
+            </div>
+            <div class="menu-item" data-page="whatsapp-analysis">
+                <i class="fas fa-chart-line"></i>
+                <span>WhatsApp Analysis</span>
+            </div>
+            <div class="menu-item" data-page="advanced-search">
+                <i class="fas fa-search"></i>
+                <span>Searching Advanced</span>
+            </div>
+            <div class="menu-item" data-page="post-sending-groups">
+                <i class="fas fa-paper-plane"></i>
+                <span>Post Sending Groups</span>
+            </div>
+            <div class="menu-item" data-page="whatsapp-groups-list">
+                <i class="fas fa-users"></i>
+                <span>WhatsApp Groups List</span>
+            </div>
+            <div class="menu-item" data-page="manage-topics">
+                <i class="fas fa-tags"></i>
+                <span>Manage Topics</span>
+            </div>
+            <div class="menu-item" data-page="group-sender-analysis">
+                <i class="fas fa-users"></i>
+                <span>Detailed Sender Analysis</span>
+            </div>
+            <div class="menu-item" data-page="common-members-analysis">
+                <i class="fas fa-link"></i>
+                <span>Common Members Analysis</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="sidebar-footer">
+        <form method="POST" action="{{ url_for('auth.logout') }}" style="margin: 0;">
+            <button type="submit" class="btn btn-secondary" style="width: 100%;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- JavaScript for Menu Functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all menu items
+    const menuItems = document.querySelectorAll('.menu-item');
+    
+    // Add click event to each menu item
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Remove active class from all items
+            menuItems.forEach(i => i.classList.remove('active'));
+            
+            // Add active class to clicked item
+            this.classList.add('active');
+            
+            // Get the page identifier
+            const page = this.getAttribute('data-page');
+            
+            // Handle navigation (you can customize this)
+            handleMenuNavigation(page);
+        });
+    });
+    
+    // Function to handle menu navigation
+    function handleMenuNavigation(page) {
+        console.log('Navigating to:', page);
+        
+        // Handle navigation for each menu item
+        switch(page) {
+                           case 'dashboard':
+                   window.location.href = "{{ url_for('user.user_dashboard') }}";
+                   break;
+               case 'whatsapp-analysis':
+                   window.location.href = "{{ url_for('user.whatsapp_analysis') }}";
+                   break;
+               case 'advanced-search':
+                   window.location.href = "{{ url_for('user.advanced_search') }}";
+                   break;
+               case 'post-sending-groups':
+                   window.location.href = "{{ url_for('user.post_sending_groups') }}";
+                   break;
+               case 'whatsapp-groups-list':
+                   window.location.href = "{{ url_for('user.whatsapp_groups_list') }}";
+                   break;
+               case 'manage-topics':
+                   window.location.href = "{{ url_for('user.manage_topics') }}";
+                   break;
+               case 'group-sender-analysis':
+                   window.location.href = "{{ url_for('user.group_sender_analysis') }}";
+                   break;
+               case 'common-members-analysis':
+                   window.location.href = "{{ url_for('user.common_members_analysis') }}";
+                   break;
+            default:
+                console.log('Unknown page:', page);
+        }
+    }
+    
+    // Set initial active state based on current page
+    function setInitialActiveState() {
+        // You can set this based on the current route or page
+        const currentPage = 'dashboard'; // Change this based on your logic
+        const activeItem = document.querySelector(`[data-page="${currentPage}"]`);
+        if (activeItem) {
+            activeItem.classList.add('active');
+        }
+    }
+    
+    // Initialize active state
+    setInitialActiveState();
+});
+</script>

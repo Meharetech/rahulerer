@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - WhatsApp UI{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    <!-- Include Admin Left Sidebar from Layout File -->
+    {% include 'admin_slidebar.html' %}
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="main-header">
+            <h1><i class="fas fa-shield-alt"></i> Admin Dashboard</h1>
+            <button class="refresh-btn" onclick="location.reload()">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+        
+        <div class="dashboard-content">
+            <!-- Dashboard Overview Section -->
+            <div class="section-header">
+                <h3><i class="fas fa-chart-bar"></i> Dashboard Overview</h3>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card blue">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number">{{ total_users }}</div>
+                    <div class="stat-label">TOTAL USERS</div>
+                </div>
+                
+                <div class="stat-card cyan">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="stat-number">{{ active_users }}</div>
+                    <div class="stat-label">ACTIVE USERS</div>
+                </div>
+                
+                <div class="stat-card green">
+                    <div class="stat-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="stat-number">{{ total_groups }}</div>
+                    <div class="stat-label">TOTAL GROUPS</div>
+                </div>
+                
+                <div class="stat-card orange">
+                    <div class="stat-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="stat-number">{{ total_messages }}</div>
+                    <div class="stat-label">TOTAL MESSAGES</div>
+                </div>
+            </div>
+            
+            <!-- System Management Section -->
+            <div class="search-filter-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-cogs"></i> System Management</h3>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn primary">
+                        <i class="fas fa-users"></i> Manage Users
+                    </button>
+                    <button class="action-btn secondary">
+                        <i class="fas fa-database"></i> Database Backup
+                    </button>
+                    <button class="action-btn secondary">
+                        <i class="fas fa-chart-line"></i> System Analytics
+                    </button>
+                    <button class="action-btn secondary">
+                        <i class="fas fa-cog"></i> System Settings
+                    </button>
+                </div>
+            </div>
+            
+            <!-- System Information Section -->
+            <div class="search-filter-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-info-circle"></i> System Information</h3>
+                </div>
+                
+                <div class="system-info">
+                    <p><strong>System Uptime:</strong> {{ stats.system.uptime if stats and stats.system else '99.9%' }}</p>
+                    <p><strong>Database Status:</strong> <span style="color: green;">✓ Active</span></p>
+                    <p><strong>Last Backup:</strong> 2025-08-16 13:30</p>
+                </div>
+            </div>
+            
+            <!-- User Activity Overview Section -->
+            <div class="search-filter-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-chart-area"></i> User Activity Overview</h3>
+                </div>
+                
+                <div class="activity-overview">
+                    <p><strong>New Users Today:</strong> {{ stats.users.new_today if stats and stats.users else 0 }}</p>
+                    <p><strong>Messages Today:</strong> {{ stats.messages.today if stats and stats.messages else 0 }}</p>
+                    <p><strong>Active Groups:</strong> {{ stats.groups.active if stats and stats.groups else 0 }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include JavaScript -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

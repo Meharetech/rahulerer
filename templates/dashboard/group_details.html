@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+
+{% block title %}Group Details - WhatsApp UI{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    <!-- Include User Left Sidebar from Layout File -->
+    {% include 'user_slidebar.html' %}
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="main-header">
+            <h1><i class="fas fa-layer-group"></i> Group Details</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i> Back to Analysis
+                </button>
+                <button class="refresh-btn" onclick="location.reload()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="dashboard-content">
+            <!-- Group Information Header -->
+            <div class="group-header" id="groupHeader" style="display: none;">
+                <div class="group-info">
+                    <div class="group-avatar">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="group-details">
+                        <h2 id="groupName">Loading...</h2>
+                        <div class="group-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-building"></i>
+                                <span id="groupAssembly">Assembly</span>
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-calendar"></i>
+                                <span id="groupDate">Date</span>
+                            </span>
+                        </div>
+                        <div class="group-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-comments"></i>
+                                <span id="totalMessages">0</span> Total Messages
+                            </span>
+                            <span class="stat-item">
+                                <i class="fas fa-user-friends"></i>
+                                <span id="uniqueSenders">0</span> Unique Senders
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sentiment Overview -->
+                <div class="sentiment-overview">
+                    <div class="sentiment-card positive">
+                        <div class="sentiment-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="sentiment-content">
+                            <h4>Positive</h4>
+                            <span class="sentiment-count" id="positiveCount">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sentiment-card negative">
+                        <div class="sentiment-icon">
+                            <i class="fas fa-frown"></i>
+                        </div>
+                        <div class="sentiment-content">
+                            <h4>Negative</h4>
+                            <span class="sentiment-count" id="negativeCount">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sentiment-card neutral">
+                        <div class="sentiment-icon">
+                            <i class="fas fa-meh"></i>
+                        </div>
+                        <div class="sentiment-content">
+                            <h4>Neutral</h4>
+                            <span class="sentiment-count" id="neutralCount">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Top Sender Section -->
+            <div class="top-sender-section" id="topSenderSection" style="display: none;">
+                <div class="section-header">
+                    <h3><i class="fas fa-crown"></i> Top Sender</h3>
+                    <p>Member with the highest message count in this group</p>
+                </div>
+                <div class="top-sender-card" id="topSenderCard">
+                    <!-- Top sender details will be populated here -->
+                </div>
+            </div>
+            
+            <!-- Unique Senders List Section -->
+            <div class="unique-senders-section" id="uniqueSendersSection" style="display: none;">
+                <div class="section-header">
+                    <h3><i class="fas fa-user-friends"></i> Unique Senders List</h3>
+                    <p>All members who sent messages in this group</p>
+                </div>
+                <div class="senders-table-container">
+                    <table class="senders-table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Sender Name</th>
+                                <th>Phone Number</th>
+                                <th>Message Count</th>
+                                <th>Sentiment Breakdown</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sendersTableBody">
+                            <!-- Senders list will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="scroll-hint" id="scrollHint" style="display: none;">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Scroll down to see more senders</span>
+                </div>
+            </div>
+            
+            <!-- Search and Filter Section -->
+            <div class="search-filter-section" id="searchFilterSection" style="display: none;">
+                <div class="section-header">
+                    <h3><i class="fas fa-search"></i> Search & Filter Messages</h3>
+                    <p>Search across message content and filter by label</p>
+                </div>
+                
+                <div class="search-filter-controls">
+                    <!-- Search Input -->
+                    <div class="search-control">
+                        <label for="messageSearch">
+                            <i class="fas fa-search"></i> Search Messages
+                        </label>
+                        <input 
+                            type="text" 
+                            id="messageSearch" 
+                            placeholder="Search in message content..."
+                            onkeyup="searchMessages()"
+                        >
+                    </div>
+                    
+                    <!-- Label Filter -->
+                    <div class="label-filter-control">
+                        <label for="labelFilter">
+                            <i class="fas fa-tags"></i> Filter by Label
+                        </label>
+                        <select id="labelFilter" onchange="filterByLabel()">
+                            <option value="all">All Labels</option>
+                            <!-- Labels will be populated dynamically -->
+                        </select>
+                    </div>
+                    
+                    <!-- Clear Filters Button -->
+                    <div class="clear-filters-control">
+                        <button class="btn btn-outline" onclick="clearAllFilters()">
+                            <i class="fas fa-times"></i> Clear All Filters
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Sentiment Filter -->
+                <div class="sentiment-filter-subsection">
+                    <h4><i class="fas fa-smile"></i> Sentiment Filter</h4>
+                    <div class="sentiment-filter-buttons">
+                        <button class="sentiment-filter-btn active" data-sentiment="all" onclick="filterMessages('all')">
+                            <i class="fas fa-list"></i> All Messages
+                        </button>
+                        <button class="sentiment-filter-btn" data-sentiment="positive" onclick="filterMessages('positive')">
+                            <i class="fas fa-smile"></i> Positive Only
+                        </button>
+                        <button class="sentiment-filter-btn" data-sentiment="negative" onclick="filterMessages('negative')">
+                            <i class="fas fa-frown"></i> Negative Only
+                        </button>
+                        <button class="sentiment-filter-btn" data-sentiment="neutral" onclick="filterMessages('neutral')">
+                            <i class="fas fa-meh"></i> Neutral Only
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Messages by Sentiment -->
+            <div class="messages-section" id="messagesSection" style="display: none;">
+                <!-- Positive Messages -->
+                <div class="sentiment-messages positive-messages" id="positiveMessages">
+                    <div class="sentiment-header">
+                        <h3><i class="fas fa-smile"></i> Positive Messages</h3>
+                        <span class="message-count" id="positiveMessageCount">0</span>
+                    </div>
+                    <div class="messages-container" id="positiveMessagesContainer">
+                        <!-- Positive messages will be populated here -->
+                    </div>
+                </div>
+                
+                <!-- Negative Messages -->
+                <div class="sentiment-messages negative-messages" id="negativeMessages">
+                    <div class="sentiment-header">
+                        <h3><i class="fas fa-frown"></i> Negative Messages</h3>
+                        <span class="message-count" id="negativeMessageCount">0</span>
+                    </div>
+                    <div class="messages-container" id="negativeMessagesContainer">
+                        <!-- Negative messages will be populated here -->
+                    </div>
+                </div>
+                
+                <!-- Neutral Messages -->
+                <div class="sentiment-messages neutral-messages" id="neutralMessages">
+                    <div class="sentiment-header">
+                        <h3><i class="fas fa-meh"></i> Neutral Messages</h3>
+                        <span class="message-count" id="neutralMessageCount">0</span>
+                    </div>
+                    <div class="messages-container" id="neutralMessagesContainer">
+                        <!-- Neutral messages will be populated here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Loading State -->
+            <div class="loading-state" id="loadingState">
+                <div class="loading-content">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <h3>Loading Group Details...</h3>
+                    <p>Please wait while we fetch the group information</p>
+                </div>
+            </div>
+            
+            <!-- No Data State -->
+            <div class="no-data-state" id="noDataState" style="display: none;">
+                <div class="no-data-content">
+                    <i class="fas fa-layer-group"></i>
+                    <h3>No Group Data Found</h3>
+                    <p>No messages found for this group in the selected criteria.</p>
+                    <button class="btn btn-primary" onclick="goBack()">
+                        <i class="fas fa-arrow-left"></i> Go Back
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/group_details.css') }}">
+
+<!-- Include JavaScript -->
+<script src="{{ url_for('static', filename='js/group_details.js') }}"></script>
+{% endblock %}

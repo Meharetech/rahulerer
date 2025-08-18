@@ -1,0 +1,818 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Groups - Admin Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+/* Upload Groups Page Styles */
+.upload-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.upload-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.upload-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.upload-header h1 {
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.upload-header p {
+    color: #7f8c8d;
+    font-size: 16px;
+}
+
+.form-section {
+    margin-bottom: 25px;
+}
+
+.form-section h3 {
+    color: #34495e;
+    font-size: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #3498db;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-control:hover {
+    border-color: #bdc3c7;
+}
+
+.file-upload-area {
+    border: 2px dashed #bdc3c7;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.file-upload-area:hover {
+    border-color: #3498db;
+    background: #ecf0f1;
+}
+
+.file-upload-area.dragover {
+    border-color: #3498db;
+    background: #e3f2fd;
+}
+
+.file-upload-icon {
+    font-size: 48px;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+.file-upload-text {
+    color: #7f8c8d;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.file-upload-hint {
+    color: #95a5a6;
+    font-size: 14px;
+}
+
+.file-input {
+    display: none;
+}
+
+.selected-files {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e8ed;
+}
+
+.selected-files h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #e1e8ed;
+}
+
+.file-name {
+    color: #2c3e50;
+    font-size: 14px;
+    flex: 1;
+    word-break: break-all;
+}
+
+.file-size {
+    color: #7f8c8d;
+    font-size: 12px;
+    margin-right: 15px;
+    white-space: nowrap;
+}
+
+.file-type {
+    color: #95a5a6;
+    font-size: 11px;
+    margin-right: 15px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.remove-file {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s ease;
+    white-space: nowrap;
+}
+
+.remove-file:hover {
+    background: #c0392b;
+}
+
+.upload-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-upload {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(39, 174, 96, 0.3);
+}
+
+.btn-upload:hover {
+    background: #229954;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+}
+
+.btn-upload:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.new-assembly-input {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e8ed;
+}
+
+.new-assembly-input input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.new-assembly-input input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+}
+
+.upload-status {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e8ed;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.status-item:last-child {
+    border-bottom: none;
+}
+
+.status-name {
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.status-icon {
+    font-size: 16px;
+}
+
+.status-success {
+    color: #27ae60;
+}
+
+.status-error {
+    color: #e74c3c;
+}
+
+.status-pending {
+    color: #f39c12;
+}
+
+.file-count {
+    background: #3498db;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.upload-summary {
+    background: #ecf0f1;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    border: 1px solid #bdc3c7;
+}
+
+.upload-summary h5 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #e1e8ed;
+}
+
+.stat-number {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    <!-- Include Admin Left Sidebar from Layout File -->
+    {% include 'admin_slidebar.html' %}
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="main-header">
+            <h1><i class="fas fa-users"></i> Upload Groups</h1>
+            <button class="refresh-btn" onclick="location.reload()">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+        
+        <div class="dashboard-content">
+            <div class="upload-container">
+                <!-- Upload Form Card -->
+                <div class="upload-card">
+                    <div class="upload-header">
+                        <h1><i class="fas fa-upload"></i> Upload Groups</h1>
+                        <p>Upload group files to the selected assembly</p>
+                    </div>
+
+                    <!-- Status Messages -->
+                    <div id="statusContainer"></div>
+
+                    <!-- Upload Form -->
+                    <form id="uploadForm">
+                        <!-- Assembly Selection -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-list-ol"></i> Assembly Selection</h3>
+                            <div class="form-group">
+                                <label for="assemblySelect">Select Assembly:</label>
+                                <select id="assemblySelect" class="form-control" required>
+                                    <option value="">Choose an assembly...</option>
+                                    <option value="new">Create New Assembly</option>
+                                </select>
+                            </div>
+                            
+                            <!-- New Assembly Input (hidden by default) -->
+                            <div id="newAssemblyInput" class="new-assembly-input" style="display: none;">
+                                <label for="newAssemblyName">New Assembly Name:</label>
+                                <input type="text" id="newAssemblyName" placeholder="Enter new assembly name">
+                            </div>
+                        </div>
+
+                        <!-- File Upload -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-file-upload"></i> File Upload</h3>
+                            <div class="form-group">
+                                <div class="file-upload-area" id="fileUploadArea">
+                                    <div class="file-upload-icon">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <div class="file-upload-text">Drop files here or click to browse</div>
+                                    <div class="file-upload-hint">All file types are allowed</div>
+                                    <input type="file" id="fileInput" class="file-input" multiple>
+                                </div>
+                            </div>
+
+                            <!-- Selected Files Preview -->
+                            <div id="selectedFiles" class="selected-files" style="display: none;">
+                                <h4>
+                                    <i class="fas fa-file-alt"></i> Selected Files
+                                    <span id="fileCount" class="file-count">0</span>
+                                </h4>
+                                <ul id="fileList" class="file-list"></ul>
+                            </div>
+
+                            <!-- Upload Summary -->
+                            <div id="uploadSummary" class="upload-summary" style="display: none;">
+                                <h5><i class="fas fa-info-circle"></i> Upload Summary</h5>
+                                <div class="summary-stats">
+                                    <div class="stat-item">
+                                        <div id="totalFiles" class="stat-number">0</div>
+                                        <div class="stat-label">Total Files</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div id="totalSize" class="stat-number">0 KB</div>
+                                        <div class="stat-label">Total Size</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div id="fileTypes" class="stat-number">0</div>
+                                        <div class="stat-label">File Types</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Upload Progress -->
+                        <div id="uploadProgress" class="upload-status" style="display: none;">
+                            <h4><i class="fas fa-spinner"></i> Upload Progress</h4>
+                            <div id="progressItems"></div>
+                        </div>
+
+                        <!-- Upload Actions -->
+                        <div class="upload-actions">
+                            <button type="submit" id="uploadBtn" class="btn-upload">
+                                <i class="fas fa-upload"></i> Upload Groups
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include JavaScript -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+<!-- Upload Groups JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    initializeUploadForm();
+    loadAssemblies();
+    setupFileUpload();
+});
+
+let selectedFiles = [];
+let assemblies = [];
+
+function initializeUploadForm() {
+    // Handle assembly selection change
+    document.getElementById('assemblySelect').addEventListener('change', function() {
+        const newAssemblyInput = document.getElementById('newAssemblyInput');
+        if (this.value === 'new') {
+            newAssemblyInput.style.display = 'block';
+            document.getElementById('newAssemblyName').required = true;
+        } else {
+            newAssemblyInput.style.display = 'none';
+            document.getElementById('newAssemblyName').required = false;
+        }
+    });
+    
+    // Handle form submission
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        handleUpload();
+    });
+}
+
+function loadAssemblies() {
+    fetch('/api/assemblies')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                assemblies = data.assemblies;
+                populateAssemblySelect();
+            } else {
+                showStatus('Failed to load assemblies: ' + data.message, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error loading assemblies:', error);
+            showStatus('Failed to load assemblies. Please try again.', 'error');
+        });
+}
+
+function populateAssemblySelect() {
+    const select = document.getElementById('assemblySelect');
+    const newOption = select.querySelector('option[value="new"]');
+    
+    // Clear existing options except "Create New Assembly"
+    select.innerHTML = '';
+    select.appendChild(newOption);
+    
+    // Add assembly options
+    assemblies.forEach(assembly => {
+        const option = document.createElement('option');
+        option.value = assembly.name;
+        option.textContent = assembly.name;
+        select.appendChild(option);
+    });
+}
+
+function setupFileUpload() {
+    const fileUploadArea = document.getElementById('fileUploadArea');
+    const fileInput = document.getElementById('fileInput');
+    
+    // Click to browse
+    fileUploadArea.addEventListener('click', () => fileInput.click());
+    
+    // File selection
+    fileInput.addEventListener('change', handleFileSelection);
+    
+    // Drag and drop
+    fileUploadArea.addEventListener('dragover', handleDragOver);
+    fileUploadArea.addEventListener('dragleave', handleDragLeave);
+    fileUploadArea.addEventListener('drop', handleDrop);
+}
+
+function handleFileSelection(event) {
+    const files = Array.from(event.target.files);
+    addFiles(files);
+}
+
+function handleDragOver(event) {
+    event.preventDefault();
+    event.currentTarget.classList.add('dragover');
+}
+
+function handleDragLeave(event) {
+    event.preventDefault();
+    event.currentTarget.classList.remove('dragover');
+}
+
+function handleDrop(event) {
+    event.preventDefault();
+    event.currentTarget.classList.remove('dragover');
+    
+    const files = Array.from(event.dataTransfer.files);
+    addFiles(files);
+}
+
+function addFiles(files) {
+    files.forEach(file => {
+        if (file && file.name && !selectedFiles.find(f => f.name === file.name && f.size === file.size)) {
+            selectedFiles.push(file);
+        }
+    });
+    
+    updateFileList();
+    updateUploadSummary();
+}
+
+function updateFileList() {
+    const selectedFilesDiv = document.getElementById('selectedFiles');
+    const fileList = document.getElementById('fileList');
+    const fileCount = document.getElementById('fileCount');
+    
+    if (selectedFiles.length === 0) {
+        selectedFilesDiv.style.display = 'none';
+        return;
+    }
+    
+    selectedFilesDiv.style.display = 'block';
+    fileCount.textContent = selectedFiles.length;
+    fileList.innerHTML = '';
+    
+    selectedFiles.forEach((file, index) => {
+        const li = document.createElement('li');
+        li.className = 'file-item';
+        
+        const fileSize = formatFileSize(file.size);
+        const fileType = getFileType(file.name);
+        
+        li.innerHTML = `
+            <span class="file-name">${file.name}</span>
+            <span class="file-type">${fileType}</span>
+            <span class="file-size">${fileSize}</span>
+            <button type="button" class="remove-file" onclick="removeFile(${index})">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        fileList.appendChild(li);
+    });
+}
+
+function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    updateFileList();
+    updateUploadSummary();
+}
+
+function getFileType(filename) {
+    const extension = filename.split('.').pop().toLowerCase();
+    const typeMap = {
+        'pdf': 'PDF',
+        'doc': 'DOC',
+        'docx': 'DOCX',
+        'xls': 'XLS',
+        'xlsx': 'XLSX',
+        'txt': 'TXT',
+        'csv': 'CSV',
+        'json': 'JSON',
+        'xml': 'XML',
+        'zip': 'ZIP',
+        'rar': 'RAR',
+        'jpg': 'JPG',
+        'jpeg': 'JPEG',
+        'png': 'PNG',
+        'gif': 'GIF'
+    };
+    return typeMap[extension] || extension.toUpperCase();
+}
+
+function updateUploadSummary() {
+    const uploadSummary = document.getElementById('uploadSummary');
+    const totalFiles = document.getElementById('totalFiles');
+    const totalSize = document.getElementById('totalSize');
+    const fileTypes = document.getElementById('fileTypes');
+    
+    if (selectedFiles.length === 0) {
+        uploadSummary.style.display = 'none';
+        return;
+    }
+    
+    uploadSummary.style.display = 'block';
+    
+    // Calculate total size
+    const totalBytes = selectedFiles.reduce((sum, file) => sum + file.size, 0);
+    totalSize.textContent = formatFileSize(totalBytes);
+    
+    // Count unique file types
+    const types = new Set(selectedFiles.map(file => getFileType(file.name)));
+    fileTypes.textContent = types.size;
+    
+    totalFiles.textContent = selectedFiles.length;
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+function handleUpload() {
+    if (selectedFiles.length === 0) {
+        showStatus('Please select at least one file to upload.', 'error');
+        return;
+    }
+    
+    const assemblySelect = document.getElementById('assemblySelect');
+    const assemblyName = assemblySelect.value === 'new' 
+        ? document.getElementById('newAssemblyName').value.trim()
+        : assemblySelect.value;
+    
+    if (!assemblyName) {
+        showStatus('Please select an assembly or enter a new assembly name.', 'error');
+        return;
+    }
+    
+    // Disable upload button and show progress
+    const uploadBtn = document.getElementById('uploadBtn');
+    uploadBtn.disabled = true;
+    uploadBtn.innerHTML = '<span class="loading"></span> Uploading...';
+    
+    showUploadProgress();
+    
+    // Prepare form data
+    const formData = new FormData();
+    formData.append('assembly_name', assemblyName);
+    
+    selectedFiles.forEach(file => {
+        formData.append('files[]', file);
+    });
+    
+    // Upload files
+    uploadFiles(formData, assemblyName);
+}
+
+function uploadFiles(formData, assemblyName) {
+    fetch('/api/upload-groups', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showStatus('Files uploaded successfully!', 'success');
+            resetForm();
+        } else {
+            showStatus('Upload failed: ' + data.message, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Upload error:', error);
+        showStatus('Upload failed. Please try again.', 'error');
+    })
+    .finally(() => {
+        const uploadBtn = document.getElementById('uploadBtn');
+        uploadBtn.disabled = false;
+        uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Groups';
+        hideUploadProgress();
+    });
+}
+
+function showUploadProgress() {
+    const progressDiv = document.getElementById('uploadProgress');
+    const progressItems = document.getElementById('progressItems');
+    
+    progressItems.innerHTML = `
+        <div class="status-item">
+            <span class="status-name">Preparing upload...</span>
+            <span class="status-icon"><i class="fas fa-spinner fa-spin"></span>
+        </div>
+    `;
+    
+    progressDiv.style.display = 'block';
+}
+
+function hideUploadProgress() {
+    document.getElementById('uploadProgress').style.display = 'none';
+}
+
+function resetForm() {
+    selectedFiles = [];
+    updateFileList();
+    updateUploadSummary();
+    document.getElementById('uploadForm').reset();
+    document.getElementById('newAssemblyInput').style.display = 'none';
+    document.getElementById('newAssemblyName').required = false;
+}
+
+function showStatus(message, type) {
+    const container = document.getElementById('statusContainer');
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    
+    const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle';
+    
+    alert.innerHTML = `
+        <i class="fas fa-${icon}"></i>
+        <span>${message}</span>
+    `;
+    
+    container.appendChild(alert);
+    
+    // Remove alert after 5 seconds
+    setTimeout(() => {
+        alert.remove();
+    }, 5000);
+}
+</script>
+{% endblock %}

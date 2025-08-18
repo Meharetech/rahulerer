@@ -1,0 +1,62 @@
+[
+    {
+        "sender": {
+            "name": "ਗੁਰਚਰਨ ਸਿੰਘ ਸਿੱਧੂ",
+            "phoneNumber": "918437480009"
+        },
+        "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/d90a0ff7-8cbe-4d72-859c-cfc3267c87fb",
+        "timestamp": "10:33",
+        "group_name": "Aap_Kot_Sivian_2025-08-18 (1)",
+        "date": "G1-17-AUG",
+        "processed_time": "2025-08-18T10:54:15.346740",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "kk029011983",
+            "phoneNumber": "918283849696"
+        },
+        "messageContent": "ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/d7acf89a-f719-4541-b84f-c7ae8511d5d3",
+        "timestamp": "10:33",
+        "group_name": "Aap_Kot_Sivian_2025-08-18 (1)",
+        "date": "G1-17-AUG",
+        "processed_time": "2025-08-18T10:54:15.425241",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "ਗੁਰਚਰਨ ਸਿੰਘ ਸਿੱਧੂ",
+            "phoneNumber": "918437480009"
+        },
+        "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "10:33",
+        "group_name": "Aap_Kot_Sivian_2025-08-18 (1)",
+        "date": "G1-17-AUG",
+        "processed_time": "2025-08-18T10:54:15.504322",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "ਗੁਰਚਰਨ ਸਿੰਘ ਸਿੱਧੂ",
+            "phoneNumber": "918437480009"
+        },
+        "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/2c851958-2e20-4d5b-b2fa-f05cb00b7184",
+        "timestamp": "2025-08-18T05:03:54.276Z",
+        "group_name": "Aap_Kot_Sivian_2025-08-18 (1)",
+        "date": "G1-17-AUG",
+        "processed_time": "2025-08-18T10:54:15.583926",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    }
+]

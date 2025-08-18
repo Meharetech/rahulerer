@@ -1,0 +1,122 @@
+[
+    {
+        "sender": {
+            "name": "Satnam Waheguru",
+            "phoneNumber": "919417362390"
+        },
+        "messageContent": "WhatsApp✊🏻🇸🇱✊🏻🇸🇱✊🏻🇸🇱",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/aee377ee-db81-4abc-b30e-519bd539e079",
+        "timestamp": "09:38",
+        "group_name": "__2025-08-16 (1)",
+        "date": "G2-15-AUG",
+        "processed_time": "2025-08-17T19:48:03.054765",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Satbir Singh Dhillon",
+            "phoneNumber": "919229213013"
+        },
+        "messageContent": "WhatsApp✊🏻🇸🇱✊🏻🇸🇱✊🏻🇸🇱",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:38",
+        "group_name": "__2025-08-16 (1)",
+        "date": "G2-15-AUG",
+        "processed_time": "2025-08-17T19:48:03.085120",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Satnam Waheguru",
+            "phoneNumber": "919417362390"
+        },
+        "messageContent": "WhatsApp✊🏻🇸🇱✊🏻🇸🇱✊🏻🇸🇱",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:38",
+        "group_name": "__2025-08-16 (1)",
+        "date": "G2-15-AUG",
+        "processed_time": "2025-08-17T19:48:03.109265",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Satnam Waheguru",
+            "phoneNumber": "919417362390"
+        },
+        "messageContent": "WhatsApp✊🏻🇸🇱✊🏻🇸🇱✊🏻🇸🇱",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:08:02.593Z",
+        "group_name": "__2025-08-16 (1)",
+        "date": "G2-15-AUG",
+        "processed_time": "2025-08-17T19:48:03.171997",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Satnam Waheguru",
+            "phoneNumber": "919417362390"
+        },
+        "messageContent": "WhatsApp✊🏻🇸🇱✊🏻🇸🇱✊🏻🇸🇱",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:38",
+        "group_name": "__2025-08-16 (1)",
+        "date": "G2-15-AUG",
+        "processed_time": "2025-08-17T19:48:03.187715",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Satnam Waheguru",
+            "phoneNumber": "919417362390"
+        },
+        "messageContent": "ਕਿਸਾਨ  ਮਜਦੂਰ ਸੰਘਰਸ਼ ਕਮੇਟੀ ਪੰਜਾਬ ਜੋਨ ਆਗਾੜਾ ਪਿਛਾੜਾ ਇਕਾਈ ਪਿੰਡ ਮੂਸੇ ਦੀ ੧੫ ਦਿਨਾਂ ਵਾਲੀ ਮੀਟਿੰਗ ਲਾਈ ਗਈ ਜਿਸ ਵਿੱਚ ੨੦ਤਰੀਕ ਵਾਲੀ ਰੈਲੀ ਤੇ ਜਾਣ ਲਈ ਵਿਚਾਰ ਵਟਾਦਰਾ ਕੀਤਾ ਗਿਆ ੧੫::੮::੨੫:ਤਰੀਕ",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/b662210b-cbce-4102-8547-90fb439964fc",
+        "timestamp": "2025-08-16T04:08:02.604Z",
+        "group_name": "__2025-08-16 (1)",
+        "date": "G2-15-AUG",
+        "processed_time": "2025-08-17T19:48:03.267984",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Satnam Waheguru",
+            "phoneNumber": "919417362390"
+        },
+        "messageContent": "ਕਿਸਾਨ  ਮਜਦੂਰ ਸੰਘਰਸ਼ ਕਮੇਟੀ ਪੰਜਾਬ ਜੋਨ ਆਗਾੜਾ ਪਿਛਾੜਾ ਇਕਾਈ ਪਿੰਡ ਮੂਸੇ ਦੀ ੧੫ ਦਿਨਾਂ ਵਾਲੀ ਮੀਟਿੰਗ ਲਾਈ ਗਈ ਜਿਸ ਵਿੱਚ ੨੦ਤਰੀਕ ਵਾਲੀ ਰੈਲੀ ਤੇ ਜਾਣ ਲਈ ਵਿਚਾਰ ਵਟਾਦਰਾ ਕੀਤਾ ਗਿਆ ੧੫::੮::੨੫:ਤਰੀਕ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:38",
+        "group_name": "__2025-08-16 (1)",
+        "date": "G2-15-AUG",
+        "processed_time": "2025-08-17T19:48:03.361021",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Dhan Dhan Guru Ramdas Ji",
+            "phoneNumber": "918264111711"
+        },
+        "messageContent": "WhatsApp✊🏻🇸🇱✊🏻🇸🇱✊🏻🇸🇱",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-16T04:08:02.611Z",
+        "group_name": "__2025-08-16 (1)",
+        "date": "G2-15-AUG",
+        "processed_time": "2025-08-17T19:48:03.426575",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    }
+]

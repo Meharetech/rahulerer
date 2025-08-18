@@ -1,0 +1,805 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Reports - Admin Dashboard{% endblock %}
+
+{% block extra_css %}
+<!-- Flatpickr Date Picker CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<style>
+/* Upload Reports Page Styles */
+.upload-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.upload-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.upload-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.upload-header h1 {
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.upload-header p {
+    color: #7f8c8d;
+    font-size: 16px;
+}
+
+.form-section {
+    margin-bottom: 25px;
+}
+
+.form-section h3 {
+    color: #34495e;
+    font-size: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #3498db;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Date picker specific styles */
+#targetDate {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+#targetDate:hover {
+    border-color: #3498db;
+    background-color: #f8f9fa;
+}
+
+.form-control:hover {
+    border-color: #bdc3c7;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.file-upload-area {
+    border: 2px dashed #bdc3c7;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.file-upload-area:hover {
+    border-color: #3498db;
+    background: #ecf0f1;
+}
+
+.file-upload-area.dragover {
+    border-color: #3498db;
+    background: #e3f2fd;
+}
+
+.file-upload-icon {
+    font-size: 48px;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+.file-upload-text {
+    color: #7f8c8d;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.file-upload-hint {
+    color: #95a5a6;
+    font-size: 14px;
+}
+
+.file-input {
+    display: none;
+}
+
+.selected-files {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e8ed;
+}
+
+.selected-files h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border: 1px solid #e1e8ed;
+}
+
+.file-name {
+    color: #2c3e50;
+    font-size: 14px;
+    flex: 1;
+}
+
+.file-size {
+    color: #7f8c8d;
+    font-size: 12px;
+    margin-right: 15px;
+}
+
+.remove-file {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s ease;
+}
+
+.remove-file:hover {
+    background: #c0392b;
+}
+
+.upload-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-upload {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(39, 174, 96, 0.3);
+}
+
+.btn-upload:hover {
+    background: #229954;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+}
+
+.btn-upload:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.new-assembly-input {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e8ed;
+}
+
+.new-assembly-input input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.new-assembly-input input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e1e8ed;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #3498db;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.upload-status {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e8ed;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.status-item:last-child {
+    border-bottom: none;
+}
+
+.status-name {
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.status-icon {
+    font-size: 16px;
+}
+
+.status-success {
+    color: #27ae60;
+}
+
+.status-error {
+    color: #e74c3c;
+}
+
+.status-pending {
+    color: #f39c12;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    <!-- Include Admin Left Sidebar from Layout File -->
+    {% include 'admin_slidebar.html' %}
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <div class="main-header">
+            <h1><i class="fas fa-upload"></i> Upload Reports</h1>
+            <button class="refresh-btn" onclick="location.reload()">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+        
+        <div class="dashboard-content">
+            <div class="upload-container">
+                <!-- Upload Form Card -->
+                <div class="upload-card">
+                    <div class="upload-header">
+                        <h1><i class="fas fa-file-upload"></i> Upload Reports</h1>
+                        <p>Upload JSON reports to the selected assembly and folder</p>
+                    </div>
+
+                    <!-- Status Messages -->
+                    <div id="statusContainer"></div>
+
+                    <!-- Upload Form -->
+                    <form id="uploadForm">
+                        <!-- Assembly Selection -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-list-ol"></i> Assembly Selection</h3>
+                            <div class="form-group">
+                                <label for="assemblySelect">Select Assembly:</label>
+                                <select id="assemblySelect" class="form-control" required>
+                                    <option value="">Choose an assembly...</option>
+                                    <option value="new">Create New Assembly</option>
+                                </select>
+                            </div>
+                            
+                            <!-- New Assembly Input (hidden by default) -->
+                            <div id="newAssemblyInput" class="new-assembly-input" style="display: none;">
+                                <label for="newAssemblyName">New Assembly Name:</label>
+                                <input type="text" id="newAssemblyName" placeholder="Enter new assembly name">
+                            </div>
+                        </div>
+
+                        <!-- Date and Folder Selection -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-calendar-alt"></i> Date & Folder Selection</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="targetDate">Target Date:</label>
+                                    <input type="text" id="targetDate" class="form-control" placeholder="dd/mm/yyyy" required readonly>
+                                    <input type="hidden" id="targetDateHidden" name="target_date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="folderType">Folder Type:</label>
+                                    <select id="folderType" class="form-control" required>
+                                        <option value="">Select folder type...</option>
+                                        <option value="messages">Messages</option>
+                                        <option value="images">Images</option>
+                                        <option value="audio">Audio</option>
+                                        <option value="video">Video</option>
+                                        <option value="urls">URLs</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- File Upload -->
+                        <div class="form-section">
+                            <h3><i class="fas fa-file-code"></i> JSON File Upload</h3>
+                            <div class="form-group">
+                                <div class="file-upload-area" id="fileUploadArea">
+                                    <div class="file-upload-icon">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <div class="file-upload-text">Drop JSON files here or click to browse</div>
+                                    <div class="file-upload-hint">Only .json files are allowed</div>
+                                    <input type="file" id="fileInput" class="file-input" multiple accept=".json">
+                                </div>
+                            </div>
+
+                            <!-- Selected Files Preview -->
+                            <div id="selectedFiles" class="selected-files" style="display: none;">
+                                <h4><i class="fas fa-file-alt"></i> Selected Files</h4>
+                                <ul id="fileList" class="file-list"></ul>
+                            </div>
+                        </div>
+
+                        <!-- Upload Progress -->
+                        <div id="uploadProgress" class="upload-status" style="display: none;">
+                            <h4><i class="fas fa-spinner"></i> Upload Progress</h4>
+                            <div id="progressItems"></div>
+                        </div>
+
+                        <!-- Upload Actions -->
+                        <div class="upload-actions">
+                            <button type="submit" id="uploadBtn" class="btn-upload">
+                                <i class="fas fa-upload"></i> Upload Reports
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include JavaScript -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<!-- Flatpickr Date Picker JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<!-- Upload Reports JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    initializeUploadForm();
+    loadAssemblies();
+    setupFileUpload();
+});
+
+let selectedFiles = [];
+let assemblies = [];
+
+function initializeUploadForm() {
+    // Initialize date picker
+    initializeDatePicker();
+    
+    // Handle assembly selection change
+    document.getElementById('assemblySelect').addEventListener('change', function() {
+        const newAssemblyInput = document.getElementById('newAssemblyInput');
+        if (this.value === 'new') {
+            newAssemblyInput.style.display = 'block';
+            document.getElementById('newAssemblyName').required = true;
+        } else {
+            newAssemblyInput.style.display = 'none';
+            document.getElementById('newAssemblyName').required = false;
+        }
+    });
+    
+    // Handle form submission
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        handleUpload();
+    });
+}
+
+function initializeDatePicker() {
+    // Set default date to today in dd/mm/yyyy format
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+    const todayFormatted = `${day}/${month}/${year}`;
+    
+    document.getElementById('targetDate').value = todayFormatted;
+    document.getElementById('targetDateHidden').value = today.toISOString().split('T')[0];
+    
+    // Initialize Flatpickr date picker
+    flatpickr("#targetDate", {
+        dateFormat: "d/m/Y",
+        allowInput: false,
+        clickOpens: true,
+        onChange: function(selectedDates, dateStr, instance) {
+            if (selectedDates[0]) {
+                // Update hidden input with ISO format for backend
+                const isoDate = selectedDates[0].toISOString().split('T')[0];
+                document.getElementById('targetDateHidden').value = isoDate;
+            }
+        },
+        onOpen: function(selectedDates, dateStr, instance) {
+            // Add calendar icon click functionality
+            instance.input.style.cursor = 'pointer';
+        }
+    });
+}
+
+function loadAssemblies() {
+    fetch('/api/assemblies')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                assemblies = data.assemblies;
+                populateAssemblySelect();
+            } else {
+                showStatus('Failed to load assemblies: ' + data.message, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error loading assemblies:', error);
+            showStatus('Failed to load assemblies. Please try again.', 'error');
+        });
+}
+
+function populateAssemblySelect() {
+    const select = document.getElementById('assemblySelect');
+    const newOption = select.querySelector('option[value="new"]');
+    
+    // Clear existing options except "Create New Assembly"
+    select.innerHTML = '';
+    select.appendChild(newOption);
+    
+    // Add assembly options
+    assemblies.forEach(assembly => {
+        const option = document.createElement('option');
+        option.value = assembly.name;
+        option.textContent = assembly.name;
+        select.appendChild(option);
+    });
+}
+
+function setupFileUpload() {
+    const fileUploadArea = document.getElementById('fileUploadArea');
+    const fileInput = document.getElementById('fileInput');
+    
+    // Click to browse
+    fileUploadArea.addEventListener('click', () => fileInput.click());
+    
+    // File selection
+    fileInput.addEventListener('change', handleFileSelection);
+    
+    // Drag and drop
+    fileUploadArea.addEventListener('dragover', handleDragOver);
+    fileUploadArea.addEventListener('dragleave', handleDragLeave);
+    fileUploadArea.addEventListener('drop', handleDrop);
+}
+
+function handleFileSelection(event) {
+    const files = Array.from(event.target.files);
+    addFiles(files);
+}
+
+function handleDragOver(event) {
+    event.preventDefault();
+    event.currentTarget.classList.add('dragover');
+}
+
+function handleDragLeave(event) {
+    event.preventDefault();
+    event.currentTarget.classList.remove('dragover');
+}
+
+function handleDrop(event) {
+    event.preventDefault();
+    event.currentTarget.classList.remove('dragover');
+    
+    const files = Array.from(event.dataTransfer.files);
+    addFiles(files);
+}
+
+function addFiles(files) {
+    const jsonFiles = files.filter(file => file.type === 'application/json' || file.name.endsWith('.json'));
+    
+    if (jsonFiles.length !== files.length) {
+        showStatus('Some files were skipped. Only JSON files are allowed.', 'info');
+    }
+    
+    jsonFiles.forEach(file => {
+        if (!selectedFiles.find(f => f.name === file.name)) {
+            selectedFiles.push(file);
+        }
+    });
+    
+    updateFileList();
+}
+
+function updateFileList() {
+    const selectedFilesDiv = document.getElementById('selectedFiles');
+    const fileList = document.getElementById('fileList');
+    
+    if (selectedFiles.length === 0) {
+        selectedFilesDiv.style.display = 'none';
+        return;
+    }
+    
+    selectedFilesDiv.style.display = 'block';
+    fileList.innerHTML = '';
+    
+    selectedFiles.forEach((file, index) => {
+        const li = document.createElement('li');
+        li.className = 'file-item';
+        
+        const fileSize = formatFileSize(file.size);
+        
+        li.innerHTML = `
+            <span class="file-name">${file.name}</span>
+            <span class="file-size">${fileSize}</span>
+            <button type="button" class="remove-file" onclick="removeFile(${index})">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        fileList.appendChild(li);
+    });
+}
+
+function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    updateFileList();
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+function handleUpload() {
+    if (selectedFiles.length === 0) {
+        showStatus('Please select at least one file to upload.', 'error');
+        return;
+    }
+    
+    const assemblySelect = document.getElementById('assemblySelect');
+    const assemblyName = assemblySelect.value === 'new' 
+        ? document.getElementById('newAssemblyName').value.trim()
+        : assemblySelect.value;
+    
+    if (!assemblyName) {
+        showStatus('Please select an assembly or enter a new assembly name.', 'error');
+        return;
+    }
+    
+    const targetDate = document.getElementById('targetDateHidden').value;
+    const folderType = document.getElementById('folderType').value;
+    
+    if (!targetDate || !folderType) {
+        showStatus('Please fill in all required fields.', 'error');
+        return;
+    }
+    
+    // Disable upload button and show progress
+    const uploadBtn = document.getElementById('uploadBtn');
+    uploadBtn.disabled = true;
+    uploadBtn.innerHTML = '<span class="loading"></span> Uploading...';
+    
+    showUploadProgress();
+    
+    // Prepare form data
+    const formData = new FormData();
+    formData.append('assembly_name', assemblyName);
+    formData.append('target_date', targetDate);
+    formData.append('folder_type', folderType);
+    
+    selectedFiles.forEach(file => {
+        formData.append('files[]', file);
+    });
+    
+    // Upload files
+    uploadFiles(formData, assemblyName, targetDate, folderType);
+}
+
+function uploadFiles(formData, assemblyName, targetDate, folderType) {
+    fetch('/api/upload-reports', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showStatus('Files uploaded successfully!', 'success');
+            resetForm();
+        } else {
+            showStatus('Upload failed: ' + data.message, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Upload error:', error);
+        showStatus('Upload failed. Please try again.', 'error');
+    })
+    .finally(() => {
+        const uploadBtn = document.getElementById('uploadBtn');
+        uploadBtn.disabled = false;
+        uploadBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Reports';
+        hideUploadProgress();
+    });
+}
+
+function showUploadProgress() {
+    const progressDiv = document.getElementById('uploadProgress');
+    const progressItems = document.getElementById('progressItems');
+    
+    progressItems.innerHTML = `
+        <div class="status-item">
+            <span class="status-name">Preparing upload...</span>
+            <span class="status-icon"><i class="fas fa-spinner fa-spin"></i></span>
+        </div>
+    `;
+    
+    progressDiv.style.display = 'block';
+}
+
+function hideUploadProgress() {
+    document.getElementById('uploadProgress').style.display = 'none';
+}
+
+function resetForm() {
+    selectedFiles = [];
+    updateFileList();
+    document.getElementById('uploadForm').reset();
+    document.getElementById('newAssemblyInput').style.display = 'none';
+    document.getElementById('newAssemblyName').required = false;
+    
+    // Reset date picker to today
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+    const todayFormatted = `${day}/${month}/${year}`;
+    
+    document.getElementById('targetDate').value = todayFormatted;
+    document.getElementById('targetDateHidden').value = today.toISOString().split('T')[0];
+}
+
+function showStatus(message, type) {
+    const container = document.getElementById('statusContainer');
+    const alert = document.createElement('div');
+    alert.className = `alert alert-${type}`;
+    
+    const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle';
+    
+    alert.innerHTML = `
+        <i class="fas fa-${icon}"></i>
+        <span>${message}</span>
+    `;
+    
+    container.appendChild(alert);
+    
+    // Remove alert after 5 seconds
+    setTimeout(() => {
+        alert.remove();
+    }, 5000);
+}
+</script>
+{% endblock %}

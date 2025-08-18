@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembly Analytics - {{ assembly_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Main Container with Sidebar -->
+    <div class="main-container">
+        <!-- Include User Sidebar -->
+        {% include 'user_slidebar.html' %}
+        
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Navigation Header -->
+            <nav class="navbar">
+                <div class="nav-container">
+                    <div class="nav-brand">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Assembly Analytics</span>
+                    </div>
+                    <div class="nav-actions">
+                        <a href="/user/whatsapp-analysis" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-left"></i> Back to Analysis
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <div class="container">
+                <!-- Assembly Header -->
+                <div class="assembly-analytics-header">
+                    <div class="assembly-info">
+                        <h1><i class="fas fa-building"></i> <span id="assemblyName">Loading...</span></h1>
+                        <p class="assembly-description">Detailed analytics and insights for this assembly</p>
+                    </div>
+                    <div class="assembly-stats-overview">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="totalGroups">0</div>
+                                <div class="stat-label">Total Groups</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="totalMessages">0</div>
+                                <div class="stat-label">Total Messages</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="dateRange">-</div>
+                                <div class="stat-label">Date Range</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sentiment Overview Section -->
+                <div class="sentiment-overview-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-smile"></i> Sentiment Overview</h3>
+                        <p>Message sentiment distribution across all groups</p>
+                    </div>
+                    <div class="sentiment-overview-cards" id="sentimentOverviewCards">
+                        <div class="loading-placeholder">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Loading sentiment overview...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Sections -->
+                <div class="analytics-sections">
+                    <!-- Top Groups Section -->
+                    <div class="analytics-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-trophy"></i> Top Performing Groups</h3>
+                            <p>Groups ranked by message count</p>
+                        </div>
+                        <div class="top-groups-grid" id="topGroupsGrid">
+                            <div class="loading-placeholder">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <span>Loading top groups...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Group Distribution Section -->
+                    <div class="analytics-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-chart-pie"></i> Message Distribution</h3>
+                            <p>How messages are distributed across groups</p>
+                        </div>
+                        <div class="distribution-chart" id="distributionChart">
+                            <div class="loading-placeholder">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <span>Loading distribution chart...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Groups List -->
+                    <div class="analytics-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-list"></i> All Groups</h3>
+                            <p>Complete list of groups with message counts</p>
+                        </div>
+                        <div class="groups-table-container">
+                            <div class="table-filters">
+                                <input type="text" id="groupSearch" placeholder="Search groups..." class="search-input">
+                                <select id="sortOrder" class="sort-select">
+                                    <option value="desc">Highest to Lowest</option>
+                                    <option value="asc">Lowest to Highest</option>
+                                    <option value="name">Alphabetical</option>
+                                </select>
+                            </div>
+                            <div class="groups-table" id="groupsTable">
+                                <div class="loading-placeholder">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <span>Loading groups table...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/assembly_analytics.js') }}"></script>
+</body>
+</html>
