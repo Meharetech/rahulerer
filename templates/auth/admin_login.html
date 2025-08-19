@@ -5,13 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhatsApp Analysis Server - Admin Portal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/matrix_login.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Admin-specific Matrix styling */
         .admin-header h1 {
             color: #ff0040 !important;
-            text-shadow: 0 0 20px #ff0040 !important;
+            text-shadow: 0 0 30px #ff0040 !important;
+        }
+        
+        .admin-header h1.holographic {
+            background: linear-gradient(45deg, 
+                #ff0040 0%, 
+                #ff0066 25%, 
+                #ff0080 50%, 
+                #ff0066 75%, 
+                #ff0040 100%) !important;
+            background-size: 400% 400% !important;
+            animation: holographic 3s ease-in-out infinite !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
         }
         
         .admin-header p {
@@ -25,55 +39,128 @@
         
         .admin-btn:hover {
             box-shadow: 0 10px 25px rgba(255, 0, 64, 0.4) !important;
+            background: linear-gradient(45deg, #ff0066, #ff0080) !important;
         }
         
         .admin-card {
             border-color: #ff0040 !important;
-            box-shadow: 0 0 20px rgba(255, 0, 64, 0.5) !important;
+            box-shadow: 0 0 30px rgba(255, 0, 64, 0.6) !important;
         }
         
         .admin-card::before {
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.1), transparent) !important;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.3), transparent) !important;
         }
         
-        .password-field {
-            position: relative;
+        .admin-card::after {
+            background: radial-gradient(circle at 50% 50%, rgba(255, 0, 64, 0.1) 0%, transparent 70%) !important;
         }
         
-        .password-toggle {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #ff0040;
-            cursor: pointer;
-            font-size: 1.2em;
-            z-index: 10;
-            transition: all 0.3s ease;
+        .admin-security-status {
+            background: rgba(255, 0, 64, 0.1) !important;
+            border: 1px solid #ff0040 !important;
+            color: #ff0040 !important;
         }
         
-        .password-toggle:hover {
-            color: #ff0066;
-            text-shadow: 0 0 10px #ff0040;
+        .admin-security-status i {
+            color: #ff0040 !important;
         }
         
-        .password-field input[type="password"],
-        .password-field input[type="text"] {
-            padding-right: 50px;
+        .admin-password-toggle {
+            color: #ff0040 !important;
+        }
+        
+        .admin-password-toggle:hover {
+            color: #ff0066 !important;
+            text-shadow: 0 0 15px #ff0066 !important;
+            background: rgba(255, 0, 64, 0.1) !important;
+        }
+        
+        .admin-input:focus {
+            border-color: #ff0040 !important;
+            box-shadow: 0 0 25px rgba(255, 0, 64, 0.8) !important;
+            background: rgba(255, 0, 64, 0.15) !important;
+        }
+        
+        .admin-input:hover {
+            border-color: #ff0066 !important;
+            box-shadow: 0 0 15px rgba(255, 0, 102, 0.5) !important;
+        }
+        
+        .admin-checkbox {
+            accent-color: #ff0040 !important;
+        }
+        
+        .admin-status-online {
+            color: #ff0040 !important;
+            text-shadow: 0 0 10px #ff0040 !important;
+        }
+        
+        .admin-footer a:hover {
+            color: #ff0066 !important;
+            text-shadow: 0 0 15px #ff0066 !important;
+        }
+        
+        .admin-footer a:hover::before {
+            background: #ff0040 !important;
+        }
+        
+        .admin-glitch {
+            animation: adminGlitch 3s infinite !important;
+        }
+        
+        @keyframes adminGlitch {
+            0%, 100% { 
+                transform: translate(0);
+                text-shadow: 0 0 20px #ff0040;
+            }
+            20% { 
+                transform: translate(-3px, 3px);
+                text-shadow: 0 0 20px #ff0066;
+            }
+            40% { 
+                transform: translate(-3px, -3px);
+                text-shadow: 0 0 20px #ff0080;
+            }
+            60% { 
+                transform: translate(3px, 3px);
+                text-shadow: 0 0 20px #ff0040;
+            }
+            80% { 
+                transform: translate(3px, -3px);
+                text-shadow: 0 0 20px #ff0066;
+            }
+        }
+        
+        .admin-particles .particle:nth-child(odd) {
+            background: #ff0040 !important;
+        }
+        
+        .admin-particles .particle:nth-child(3n) {
+            background: #ff0066 !important;
+        }
+        
+        .admin-particles .particle:nth-child(5n) {
+            background: #ff0080 !important;
         }
     </style>
 </head>
 <body>
     <!-- Matrix Rain Background -->
     <div class="matrix-bg"></div>
+    <div class="matrix-rain" id="matrixRain"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles admin-particles" id="particles"></div>
     
     <div class="login-container">
         <div class="login-card admin-card">
             <div class="login-header admin-header">
-                <h1 class="matrix-title">WHATSAPP ANALYSIS SERVER</h1>
-                <p class="matrix-subtitle">ADMINISTRATOR ACCESS</p>
+                <h3 class="matrix-title holographic">WHATSAPP ANALYSIS SERVER</h3>
+                <p class="matrix-subtitle">ADMINISTRATOR ACCESS PORTAL</p>
+                <div class="security-status admin-security-status">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>ADMIN SECURE CONNECTION ESTABLISHED</span>
+                </div>
             </div>
             
             {% with messages = get_flashed_messages(with_categories=true) %}
@@ -81,21 +168,26 @@
                     <div class="flash-messages">
                         {% for category, message in messages %}
                             <div class="flash-message {{ category }}">
-                                <strong>WhatsApp Analysis:</strong> {{ message }}
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>ADMIN ALERT:</strong> {{ message }}
                             </div>
                         {% endfor %}
                     </div>
                 {% endif %}
             {% endwith %}
             
-            <form method="POST" action="{{ url_for('auth.admin_login') }}" class="matrix-form admin-form">
+            <form method="POST" action="{{ url_for('auth.admin_login') }}" class="matrix-form admin-form" id="adminForm">
                 {{ form.hidden_tag() }}
                 
                 <div class="form-group">
-                    <label for="{{ form.username.id }}">ADMIN ID</label>
-                    {{ form.username(placeholder="ENTER ADMIN CREDENTIALS") }}
+                    <label for="{{ form.username.id }}">
+                        <i class="fas fa-user-shield"></i>
+                        ADMIN ID
+                    </label>
+                    {{ form.username(placeholder="ENTER ADMIN CREDENTIALS", class="matrix-input admin-input") }}
                     {% if form.username.errors %}
                         <div class="error-message">
+                            <i class="fas fa-times-circle"></i>
                             {% for error in form.username.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
@@ -104,13 +196,17 @@
                 </div>
                 
                 <div class="form-group password-field">
-                    <label for="{{ form.password.id }}">ADMIN KEY</label>
-                    {{ form.password(placeholder="ENTER SECURITY KEY", id="admin-password-field") }}
-                    <button type="button" class="password-toggle" onclick="togglePassword('admin-password-field')">
+                    <label for="{{ form.password.id }}">
+                        <i class="fas fa-key"></i>
+                        ADMIN KEY
+                    </label>
+                    {{ form.password(placeholder="ENTER SECURITY KEY", id="admin-password-field", class="matrix-input admin-input") }}
+                    <button type="button" class="password-toggle admin-password-toggle" onclick="togglePassword('admin-password-field')" title="Toggle Password Visibility">
                         <i class="fas fa-eye"></i>
                     </button>
                     {% if form.password.errors %}
                         <div class="error-message">
+                            <i class="fas fa-times-circle"></i>
                             {% for error in form.password.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
@@ -120,19 +216,39 @@
                 
                 <div class="form-group">
                     <label class="checkbox-label">
-                        {{ form.remember() }} <span>MAINTAIN SESSION</span>
+                        {{ form.remember(class="matrix-checkbox admin-checkbox") }}
+                        <span><i class="fas fa-check-circle"></i> MAINTAIN ADMIN SESSION</span>
                     </label>
                 </div>
                 
-                <button type="submit" class="btn matrix-btn admin-btn">
-                    <span class="btn-text">ACCESS ADMIN PANEL</span>
-                    <span class="btn-loading" style="display: none;">VERIFYING ADMIN...</span>
+                <button type="submit" class="btn matrix-btn admin-btn" id="adminBtn">
+                    <span class="btn-text">
+                        <i class="fas fa-user-shield"></i>
+                        ACCESS ADMIN PANEL
+                    </span>
+                    <span class="btn-loading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        VERIFYING ADMIN<span class="loading-dots"></span>
+                    </span>
                 </button>
             </form>
             
-            <div class="login-footer">
-                <p>USER? <a href="{{ url_for('auth.user_login') }}">USER PORTAL</a></p>
-                <p>NEW ADMIN? <a href="{{ url_for('auth.register') }}">REQUEST ADMIN ACCESS</a></p>
+            <div class="login-footer admin-footer">
+                <div class="footer-links">
+                    <p>
+                        <i class="fas fa-user"></i>
+                        USER? <a href="{{ url_for('auth.user_login') }}">USER PORTAL</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-user-plus"></i>
+                        <!-- NEW ADMIN? <a href="{{ url_for('auth.register') }}">REQUEST ADMIN ACCESS</a> -->
+                    </p>
+                </div>
+                <div class="system-info">
+                    <p><i class="fas fa-server"></i> ADMIN SERVER: <span class="status-online admin-status-online">ONLINE</span></p>
+                    <p><i class="fas fa-clock"></i> ADMIN TIME: <span id="adminTime"></span></p>
+                    <p><i class="fas fa-shield-alt"></i> SECURITY LEVEL: <span class="status-online admin-status-online">MAXIMUM</span></p>
+                </div>
             </div>
         </div>
     </div>
@@ -142,7 +258,7 @@
     
     <!-- Admin Form Enhancement Script -->
     <script>
-        // Password toggle functionality
+        // Admin password toggle functionality with enhanced effects
         function togglePassword(fieldId) {
             const passwordField = document.getElementById(fieldId);
             const toggleBtn = passwordField.nextElementSibling;
@@ -152,26 +268,79 @@
                 passwordField.type = 'text';
                 icon.classList.remove('fa-eye');
                 icon.classList.add('fa-eye-slash');
-                toggleBtn.style.color = '#00ff41';
+                toggleBtn.style.color = '#ff0066';
+                toggleBtn.style.textShadow = '0 0 15px #ff0066';
+                passwordField.style.borderColor = '#ff0066';
+                passwordField.style.boxShadow = '0 0 20px rgba(255, 0, 102, 0.5)';
+                
+                // Add reveal animation
+                passwordField.style.animation = 'passwordReveal 0.3s ease-out';
             } else {
                 passwordField.type = 'password';
                 icon.classList.remove('fa-eye-slash');
                 icon.classList.add('fa-eye');
                 toggleBtn.style.color = '#ff0040';
+                toggleBtn.style.textShadow = '0 0 15px #ff0040';
+                passwordField.style.borderColor = '#ff0040';
+                passwordField.style.boxShadow = '0 0 20px rgba(255, 0, 64, 0.5)';
+                
+                // Add hide animation
+                passwordField.style.animation = 'passwordHide 0.3s ease-out';
+            }
+            
+            // Remove animation after completion
+            setTimeout(() => {
+                passwordField.style.animation = '';
+            }, 300);
+        }
+        
+        // Create admin floating particles
+        function createAdminParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 60;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                particlesContainer.appendChild(particle);
             }
         }
         
+        // Update admin time
+        function updateAdminTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('adminTime').textContent = timeString;
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('.admin-form');
-            const submitBtn = form.querySelector('.admin-btn');
+            const form = document.getElementById('adminForm');
+            const submitBtn = document.getElementById('adminBtn');
             const btnText = submitBtn.querySelector('.btn-text');
             const btnLoading = submitBtn.querySelector('.btn-loading');
+            
+            // Create admin particles
+            createAdminParticles();
+            
+            // Update admin time every second
+            updateAdminTime();
+            setInterval(updateAdminTime, 1000);
             
             form.addEventListener('submit', function(e) {
                 btnText.style.display = 'none';
                 btnLoading.style.display = 'inline';
-                submitBtn.style.background = 'linear-gradient(45deg, #ff0040, #ff0066)';
-                submitBtn.style.boxShadow = '0 0 25px rgba(255, 0, 64, 0.8)';
+                submitBtn.style.background = 'linear-gradient(45deg, #ff0066, #ff0080)';
+                submitBtn.style.boxShadow = '0 0 30px rgba(255, 0, 102, 0.8)';
+                submitBtn.disabled = true;
                 
                 // Add admin matrix scan effect
                 submitBtn.style.position = 'relative';
@@ -195,18 +364,30 @@
             });
             
             // Add admin matrix-style input effects
-            const inputs = form.querySelectorAll('input[type="text"], input[type="password"]');
+            const inputs = form.querySelectorAll('.admin-input');
             inputs.forEach(input => {
                 input.addEventListener('focus', function() {
-                    this.style.boxShadow = '0 0 20px rgba(255, 0, 64, 0.8)';
+                    this.style.boxShadow = '0 0 25px rgba(255, 0, 64, 0.8)';
                     this.style.borderColor = '#ff0040';
-                    this.style.background = 'rgba(255, 0, 64, 0.1)';
+                    this.style.background = 'rgba(255, 0, 64, 0.15)';
+                    this.style.transform = 'translateY(-2px)';
                 });
                 
                 input.addEventListener('blur', function() {
                     this.style.boxShadow = '0 0 15px rgba(255, 0, 64, 0.5)';
                     this.style.borderColor = '#ff0040';
                     this.style.background = 'rgba(0, 0, 0, 0.8)';
+                    this.style.transform = 'translateY(0)';
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.value.length > 0) {
+                        this.style.borderColor = '#ff0066';
+                        this.style.boxShadow = '0 0 20px rgba(255, 0, 102, 0.6)';
+                    } else {
+                        this.style.borderColor = '#ff0040';
+                        this.style.boxShadow = '0 0 15px rgba(255, 0, 64, 0.5)';
+                    }
                 });
             });
             
@@ -217,8 +398,64 @@
                     document.body.classList.toggle('admin-matrix-mode');
                     console.log('🔴 Admin Matrix mode activated');
                 }
+                
+                // Ctrl + Enter to submit
+                if (e.ctrlKey && e.key === 'Enter') {
+                    form.submit();
+                }
+                
+                // Ctrl + U to toggle password
+                if (e.ctrlKey && e.key === 'u') {
+                    e.preventDefault();
+                    togglePassword('admin-password-field');
+                }
+                
+                // Ctrl + L to focus username
+                if (e.ctrlKey && e.key === 'l') {
+                    e.preventDefault();
+                    document.getElementById('{{ form.username.id }}').focus();
+                }
+            });
+            
+            // Add admin glitch effect to title on hover
+            const title = document.querySelector('.admin-header .matrix-title');
+            title.addEventListener('mouseenter', function() {
+                this.classList.add('admin-glitch');
+            });
+            
+            title.addEventListener('mouseleave', function() {
+                this.classList.remove('admin-glitch');
             });
         });
+        
+        // Add admin CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes passwordReveal {
+                0% { filter: blur(2px); opacity: 0.7; }
+                100% { filter: blur(0); opacity: 1; }
+            }
+            
+            @keyframes passwordHide {
+                0% { filter: blur(0); opacity: 1; }
+                100% { filter: blur(2px); opacity: 0.7; }
+            }
+            
+            .admin-matrix-mode .matrix-bg {
+                background: linear-gradient(180deg, #000 0%, #1a0000 30%, #330000 70%, #000 100%) !important;
+            }
+            
+            .admin-matrix-mode .matrix-column {
+                color: #ff0040 !important;
+                text-shadow: 0 0 8px #ff0040 !important;
+            }
+            
+            .admin-matrix-mode .login-card {
+                border-color: #ff0040 !important;
+                box-shadow: 0 0 40px rgba(255, 0, 64, 0.8) !important;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

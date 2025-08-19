@@ -31,6 +31,8 @@ def user_login():
         user = User.query.filter_by(username=form.username.data).first()
         
         if user and user.check_password(form.password.data) and user.role == 'user':
+            # Make session permanent for better mobile compatibility
+            session.permanent = True
             login_user(user, remember=form.remember.data)
             user.update_last_login()
             flash('Login successful!', 'success')
@@ -51,6 +53,8 @@ def admin_login():
         user = User.query.filter_by(username=form.username.data).first()
         
         if user and user.check_password(form.password.data) and user.role == 'admin':
+            # Make session permanent for better mobile compatibility
+            session.permanent = True
             login_user(user, remember=form.remember.data)
             user.update_last_login()
             flash('Admin login successful!', 'success')
@@ -102,15 +106,11 @@ def logout():
         # Store the username for the flash message
         username = current_user.username if current_user.is_authenticated else "User"
         
-        print(f"Logging out user: {username}")
-        
         # First, logout the user from Flask-Login
         logout_user()
-        print("Flask-Login logout completed")
         
         # Clear all session data
         session.clear()
-        print("Session cleared")
         
         # Clear any additional session data that might persist
         session.pop('_fresh', None)
@@ -123,7 +123,6 @@ def logout():
         
         # Force session to be cleared
         session.modified = True
-        print("Session marked as modified")
         
         # Clear any cookies that might be set
         from flask import make_response
@@ -142,11 +141,9 @@ def logout():
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'
         
-        print("Logout completed successfully, redirecting to login")
         return response
         
     except Exception as e:
-        print(f"Error during logout: {e}")
         # Even if there's an error, try to clear session and redirect
         session.clear()
         session.modified = True

@@ -1,12 +1,14 @@
-// Post Scheduling JavaScript
+// Post Scheduling JavaScript - Modern UI
 let selectedAssemblies = [];
 let availableExcelFiles = {};
 let selectedExcelFiles = [];
+let currentStep = 1;
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     loadAssemblies();
     loadScheduledPosts();
+    setupEventListeners();
     
     // Set default date to tomorrow
     const tomorrow = new Date();
@@ -18,6 +20,159 @@ document.addEventListener('DOMContentLoaded', function() {
     now.setHours(now.getHours() + 1);
     document.getElementById('scheduled_time').value = now.toTimeString().slice(0, 5);
 });
+
+// Setup event listeners
+function setupEventListeners() {
+    // Character counter for message text
+    const messageTextarea = document.getElementById('message_text');
+    if (messageTextarea) {
+        messageTextarea.addEventListener('input', function() {
+            const charCount = this.value.length;
+            document.getElementById('charCount').textContent = charCount;
+        });
+    }
+}
+
+// Media Preview Functions
+function previewMedia(inputId, previewId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    const file = input.files[0];
+    
+    if (!file) {
+        preview.style.display = 'none';
+        return;
+    }
+    
+    // Validate file size
+    const maxSizes = {
+        'image_file': 5 * 1024 * 1024, // 5MB
+        'audio_file': 10 * 1024 * 1024, // 10MB
+        'video_file': 50 * 1024 * 1024 // 50MB
+    };
+    
+    if (file.size > maxSizes[inputId]) {
+        showError(`File size too large. Maximum size is ${maxSizes[inputId] / (1024 * 1024)}MB.`);
+        input.value = '';
+        preview.style.display = 'none';
+        return;
+    }
+    
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        switch(inputId) {
+            case 'image_file':
+                const img = document.getElementById('imagePreviewImg');
+                img.src = e.target.result;
+                break;
+            case 'audio_file':
+                const audio = document.getElementById('audioPreviewPlayer');
+                audio.src = e.target.result;
+                break;
+            case 'video_file':
+                const video = document.getElementById('videoPreviewPlayer');
+                video.src = e.target.result;
+                break;
+        }
+        preview.style.display = 'block';
+    };
+    
+    reader.readAsDataURL(file);
+}
+
+function removeMedia(inputId, previewId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    
+    input.value = '';
+    preview.style.display = 'none';
+    
+    // Clear the preview source
+    switch(inputId) {
+        case 'image_file':
+            document.getElementById('imagePreviewImg').src = '';
+            break;
+        case 'audio_file':
+            document.getElementById('audioPreviewPlayer').src = '';
+            break;
+        case 'video_file':
+            document.getElementById('videoPreviewPlayer').src = '';
+            break;
+    }
+}
+
+// Step Navigation Functions
+function nextStep() {
+    if (currentStep < 3) {
+        // Validate current step
+        if (currentStep === 1 && selectedAssemblies.length === 0) {
+            showError('Please select at least one assembly to continue.');
+            return;
+        }
+        if (currentStep === 2 && selectedExcelFiles.length === 0) {
+            showError('Please select at least one Excel file to continue.');
+            return;
+        }
+        
+        currentStep++;
+        updateStepDisplay();
+    }
+}
+
+function previousStep() {
+    if (currentStep > 1) {
+        currentStep--;
+        updateStepDisplay();
+    }
+}
+
+function updateStepDisplay() {
+    // Hide all sections
+    document.querySelectorAll('.form-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Show current section
+    const currentSection = document.getElementById(getSectionId(currentStep));
+    if (currentSection) {
+        currentSection.classList.add('active');
+    }
+    
+    // Update progress steps
+    document.querySelectorAll('.step').forEach((step, index) => {
+        step.classList.remove('active', 'completed');
+        if (index + 1 === currentStep) {
+            step.classList.add('active');
+        } else if (index + 1 < currentStep) {
+            step.classList.add('completed');
+        }
+    });
+    
+    // Update next button states
+    updateNextButtonStates();
+}
+
+function getSectionId(step) {
+    switch(step) {
+        case 1: return 'assemblySection';
+        case 2: return 'groupSection';
+        case 3: return 'schedulingSection';
+        default: return 'assemblySection';
+    }
+}
+
+function updateNextButtonStates() {
+    const nextStep1 = document.getElementById('nextStep1');
+    const nextStep2 = document.getElementById('nextStep2');
+    
+    if (nextStep1) {
+        nextStep1.disabled = selectedAssemblies.length === 0;
+    }
+    if (nextStep2) {
+        nextStep2.disabled = selectedExcelFiles.length === 0;
+    }
+}
 
 // Load assemblies with their Excel files
 async function loadAssemblies() {
@@ -52,13 +207,12 @@ function displayAssemblies(assemblies) {
     assemblies.forEach(assembly => {
         const fileCount = assembly.total_files;
         html += `
-            <div class="assembly-card">
+            <div class="assembly-card" onclick="toggleAssemblyCard(${assembly.id})">
                 <label class="assembly-checkbox">
                     <input type="checkbox" value="${assembly.id}" onchange="toggleAssembly(${assembly.id})">
-                    <span class="checkmark"></span>
                     <div class="assembly-info">
                         <h5>${assembly.name}</h5>
-                        <span class="group-count">${fileCount} Total Groups available </span>
+                        <span class="group-count">${fileCount} Total Groups available</span>
                     </div>
                 </label>
             </div>
@@ -69,31 +223,61 @@ function displayAssemblies(assemblies) {
     container.innerHTML = html;
 }
 
+// Toggle assembly card selection
+function toggleAssemblyCard(assemblyId) {
+    const checkbox = document.querySelector(`input[value="${assemblyId}"]`);
+    if (checkbox) {
+        checkbox.checked = !checkbox.checked;
+        toggleAssembly(assemblyId);
+    }
+}
+
 // Toggle assembly selection
 function toggleAssembly(assemblyId) {
     const checkbox = document.querySelector(`input[value="${assemblyId}"]`);
+    const card = checkbox.closest('.assembly-card');
     
     if (checkbox.checked) {
         if (!selectedAssemblies.includes(assemblyId)) {
             selectedAssemblies.push(assemblyId);
         }
+        card.classList.add('selected');
     } else {
         selectedAssemblies = selectedAssemblies.filter(id => id !== assemblyId);
+        card.classList.remove('selected');
     }
     
+    updateNextButtonStates();
     updateExcelFileSelection();
+}
+
+// Select all assemblies
+function selectAllAssemblies() {
+    const checkboxes = document.querySelectorAll('#assemblySelection input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        if (!checkbox.checked) {
+            checkbox.checked = true;
+            toggleAssembly(parseInt(checkbox.value));
+        }
+    });
+}
+
+// Clear all assemblies
+function clearAllAssemblies() {
+    const checkboxes = document.querySelectorAll('#assemblySelection input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            checkbox.checked = false;
+            toggleAssembly(parseInt(checkbox.value));
+        }
+    });
 }
 
 // Update Excel file selection based on selected assemblies
 function updateExcelFileSelection() {
     if (selectedAssemblies.length === 0) {
-        document.getElementById('groupSelectionSection').style.display = 'none';
-        document.getElementById('schedulingSection').style.display = 'none';
         return;
     }
-    
-    // Show Excel file selection
-    document.getElementById('groupSelectionSection').style.display = 'block';
     
     // Get all Excel files from selected assemblies
     const allExcelFiles = [];
@@ -108,27 +292,27 @@ function updateExcelFileSelection() {
     
     // Display Excel files
     displayExcelFiles(allExcelFiles);
-    
-    // Show scheduling section
-    document.getElementById('schedulingSection').style.display = 'block';
 }
 
 // Display Excel files with checkboxes
 function displayExcelFiles(files) {
     const container = document.getElementById('groupsContainer');
+    const totalCount = document.getElementById('totalGroupsCount');
+    const selectedCount = document.getElementById('selectedGroupsCount');
     
     if (files.length === 0) {
         container.innerHTML = '<p class="no-data">No Excel files found in selected assemblies.</p>';
+        totalCount.textContent = '0';
+        selectedCount.textContent = '0';
         return;
     }
     
     let html = '<div class="groups-grid">';
     files.forEach(fileName => {
         html += `
-            <div class="group-card">
+            <div class="group-card" onclick="toggleGroupCard('${fileName}')">
                 <label class="group-checkbox">
                     <input type="checkbox" value="${fileName}" checked onchange="toggleExcelFile('${fileName}')">
-                    <span class="checkmark"></span>
                     <span class="group-name">${fileName}</span>
                 </label>
             </div>
@@ -140,28 +324,48 @@ function displayExcelFiles(files) {
     
     // Initialize selected Excel files
     selectedExcelFiles = [...files];
+    totalCount.textContent = files.length;
+    selectedCount.textContent = files.length;
+    
+    updateNextButtonStates();
+}
+
+// Toggle group card selection
+function toggleGroupCard(fileName) {
+    const checkbox = document.querySelector(`input[value="${fileName}"]`);
+    if (checkbox) {
+        checkbox.checked = !checkbox.checked;
+        toggleExcelFile(fileName);
+    }
 }
 
 // Toggle Excel file selection
 function toggleExcelFile(fileName) {
     const checkbox = document.querySelector(`input[value="${fileName}"]`);
+    const card = checkbox.closest('.group-card');
     
     if (checkbox.checked) {
         if (!selectedExcelFiles.includes(fileName)) {
             selectedExcelFiles.push(fileName);
         }
+        card.classList.add('selected');
     } else {
         selectedExcelFiles = selectedExcelFiles.filter(name => name !== fileName);
+        card.classList.remove('selected');
     }
+    
+    // Update counters
+    document.getElementById('selectedGroupsCount').textContent = selectedExcelFiles.length;
+    updateNextButtonStates();
 }
 
 // Select all Excel files
 function selectAllGroups() {
     const checkboxes = document.querySelectorAll('#groupsContainer input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
-        checkbox.checked = true;
-        if (!selectedExcelFiles.includes(checkbox.value)) {
-            selectedExcelFiles.push(checkbox.value);
+        if (!checkbox.checked) {
+            checkbox.checked = true;
+            toggleExcelFile(checkbox.value);
         }
     });
 }
@@ -170,9 +374,11 @@ function selectAllGroups() {
 function deselectAllGroups() {
     const checkboxes = document.querySelectorAll('#groupsContainer input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
-        checkbox.checked = false;
+        if (checkbox.checked) {
+            checkbox.checked = false;
+            toggleExcelFile(checkbox.value);
+        }
     });
-    selectedExcelFiles = [];
 }
 
 // Form submission
@@ -277,12 +483,12 @@ function displayScheduledPosts(posts) {
         
         html += `
             <div class="post-list-row status-${post.status}">
-                <div class="post-cell title-cell">${post.title}</div>
-                <div class="post-cell date-cell">${formatDateTime(scheduledDateTime)}</div>
-                <div class="post-cell files-cell">${post.target_groups.length}</div>
-                <div class="post-cell message-cell">${post.message_text ? post.message_text.substring(0, 50) + (post.message_text.length > 50 ? '...' : '') : 'No message'}</div>
-                <div class="post-cell content-cell">${contentText}</div>
-                <div class="post-cell status-cell">
+                <div class="post-cell title-cell" data-label="Title">${post.title}</div>
+                <div class="post-cell date-cell" data-label="Scheduled">${formatDateTime(scheduledDateTime)}</div>
+                <div class="post-cell files-cell" data-label="Files">${post.target_groups.length}</div>
+                <div class="post-cell message-cell" data-label="Message">${post.message_text ? post.message_text.substring(0, 50) + (post.message_text.length > 50 ? '...' : '') : 'No message'}</div>
+                <div class="post-cell content-cell" data-label="Content">${contentText}</div>
+                <div class="post-cell status-cell" data-label="Status">
                     <span class="status-badge ${post.status}">${post.status.toUpperCase()}</span>
                     ${post.status === 'completed' && post.completion_file ? 
                         `<br><button class="btn btn-sm btn-outline-success" onclick="downloadCompletionFile(${post.id})" title="Download Completion File">
@@ -310,15 +516,30 @@ function resetForm() {
     // Reset selections
     selectedAssemblies = [];
     selectedExcelFiles = [];
+    currentStep = 1;
     
     // Uncheck all assembly checkboxes
     document.querySelectorAll('#assemblySelection input[type="checkbox"]').forEach(checkbox => {
         checkbox.checked = false;
     });
     
-    // Hide sections
-    document.getElementById('groupSelectionSection').style.display = 'none';
-    document.getElementById('schedulingSection').style.display = 'none';
+    // Remove selected classes
+    document.querySelectorAll('.assembly-card, .group-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+    
+    // Reset step display
+    updateStepDisplay();
+    
+    // Reset counters
+    document.getElementById('selectedGroupsCount').textContent = '0';
+    document.getElementById('totalGroupsCount').textContent = '0';
+    document.getElementById('charCount').textContent = '0';
+    
+    // Clear media previews
+    removeMedia('image_file', 'imagePreview');
+    removeMedia('audio_file', 'audioPreview');
+    removeMedia('video_file', 'videoPreview');
     
     // Set default date and time
     const tomorrow = new Date();
@@ -333,13 +554,13 @@ function resetForm() {
 // Show success modal
 function showSuccess(message) {
     document.getElementById('successMessage').textContent = message;
-    document.getElementById('successModal').style.display = 'block';
+    document.getElementById('successModal').style.display = 'flex';
 }
 
 // Show error modal
 function showError(message) {
     document.getElementById('errorMessage').textContent = message;
-    document.getElementById('errorModal').style.display = 'block';
+    document.getElementById('errorModal').style.display = 'flex';
 }
 
 // Close modal

@@ -101,9 +101,20 @@ function initializeEventListeners() {
     }
 }
 
+// Calculate total messages for the current assembly
+function calculateAssemblyTotalMessages() {
+    if (!assemblyData || !assemblyData.groups) return 0;
+    
+    const groups = Object.values(assemblyData.groups);
+    return groups.reduce((total, group) => total + group.count, 0);
+}
+
 // Display assembly analytics
 function displayAssemblyAnalytics() {
     if (!assemblyData) return;
+    
+    // Calculate the correct total messages for this assembly
+    const assemblyTotalMessages = calculateAssemblyTotalMessages();
     
     // Update assembly name
     const assemblyNameElement = document.getElementById('assemblyName');
@@ -111,17 +122,17 @@ function displayAssemblyAnalytics() {
         assemblyNameElement.textContent = assemblyData.name;
     }
     
-    // Update overview stats
-    updateOverviewStats();
+    // Update overview stats with correct total
+    updateOverviewStats(assemblyTotalMessages);
     
     // Display sentiment overview at the top
     displaySentimentOverview();
     
-    // Display top groups
-    displayTopGroups();
+    // Display top groups with correct total
+    displayTopGroups(assemblyTotalMessages);
     
-    // Display distribution chart
-    displayDistributionChart();
+    // Display distribution chart with correct total
+    displayDistributionChart(assemblyTotalMessages);
     
     // Display groups table
     displayGroupsTable('desc'); // Default to highest to lowest
@@ -164,39 +175,39 @@ function displaySentimentOverview() {
     // Positive card
     const positivePercentage = ((sentimentData.Positive / totalMessages) * 100).toFixed(1);
     html += `
-        <div class="sentiment-overview-card positive">
-            <div class="sentiment-overview-icon">
-                <i class="fas fa-smile"></i>
+        <div class="sentiment-card positive">
+            <div class="sentiment-icon-container">
+                <i class="sentiment-icon fas fa-smile"></i>
             </div>
-            <div class="sentiment-overview-number">${sentimentData.Positive}</div>
-            <div class="sentiment-overview-label">Positive</div>
-            <div class="sentiment-overview-percentage">${positivePercentage}%</div>
+            <div class="sentiment-count">${sentimentData.Positive}</div>
+            <div class="sentiment-label">POSITIVE</div>
+            <div class="sentiment-percentage">${positivePercentage}%</div>
         </div>
     `;
     
     // Negative card
     const negativePercentage = ((sentimentData.Negative / totalMessages) * 100).toFixed(1);
     html += `
-        <div class="sentiment-overview-card negative">
-            <div class="sentiment-overview-icon">
-                <i class="fas fa-frown"></i>
+        <div class="sentiment-card negative">
+            <div class="sentiment-icon-container">
+                <i class="sentiment-icon fas fa-frown"></i>
             </div>
-            <div class="sentiment-overview-number">${sentimentData.Negative}</div>
-            <div class="sentiment-overview-label">Negative</div>
-            <div class="sentiment-overview-percentage">${negativePercentage}%</div>
+            <div class="sentiment-count">${sentimentData.Negative}</div>
+            <div class="sentiment-label">NEGATIVE</div>
+            <div class="sentiment-percentage">${negativePercentage}%</div>
         </div>
     `;
     
     // Neutral card
     const neutralPercentage = ((sentimentData.Neutral / totalMessages) * 100).toFixed(1);
     html += `
-        <div class="sentiment-overview-card neutral">
-            <div class="sentiment-overview-icon">
-                <i class="fas fa-meh"></i>
+        <div class="sentiment-card neutral">
+            <div class="sentiment-icon-container">
+                <i class="sentiment-icon fas fa-meh"></i>
             </div>
-            <div class="sentiment-overview-number">${sentimentData.Neutral}</div>
-            <div class="sentiment-overview-label">Neutral</div>
-            <div class="sentiment-overview-percentage">${neutralPercentage}%</div>
+            <div class="sentiment-count">${sentimentData.Neutral}</div>
+            <div class="sentiment-label">NEUTRAL</div>
+            <div class="sentiment-percentage">${neutralPercentage}%</div>
         </div>
     `;
     
@@ -204,17 +215,17 @@ function displaySentimentOverview() {
 }
 
 // Update overview statistics
-function updateOverviewStats() {
+function updateOverviewStats(assemblyTotalMessages) {
     const totalGroupsElement = document.getElementById('totalGroups');
     const totalMessagesElement = document.getElementById('totalMessages');
     const dateRangeElement = document.getElementById('dateRange');
     
     if (totalGroupsElement) {
-        totalGroupsElement.textContent = assemblyData.totalGroups || 0;
+        totalGroupsElement.textContent = assemblyData.totalGroups || Object.keys(assemblyData.groups || {}).length;
     }
     
     if (totalMessagesElement) {
-        totalMessagesElement.textContent = assemblyData.totalMessages || 0;
+        totalMessagesElement.textContent = assemblyTotalMessages || 0;
     }
     
     if (dateRangeElement) {
@@ -231,7 +242,7 @@ function updateOverviewStats() {
 }
 
 // Display top performing groups
-function displayTopGroups() {
+function displayTopGroups(assemblyTotalMessages) {
     const container = document.getElementById('topGroupsGrid');
     if (!container) return;
     
@@ -243,7 +254,7 @@ function displayTopGroups() {
     topGroups.forEach((group, index) => {
         const rank = index + 1;
         const rankClass = rank <= 3 ? `rank-${rank}` : 'other-ranks';
-        const percentage = ((group.count / assemblyData.totalMessages) * 100).toFixed(1);
+        const percentage = assemblyTotalMessages > 0 ? ((group.count / assemblyTotalMessages) * 100).toFixed(1) : '0.0';
         
         html += `
             <div class="top-group-card ${rankClass}">
@@ -255,9 +266,6 @@ function displayTopGroups() {
                         <span class="percentage">${percentage}%</span>
                     </div>
                 </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: ${percentage}%"></div>
-                </div>
             </div>
         `;
     });
@@ -266,7 +274,7 @@ function displayTopGroups() {
 }
 
 // Display distribution chart
-function displayDistributionChart() {
+function displayDistributionChart(assemblyTotalMessages) {
     const container = document.getElementById('distributionChart');
     if (!container) return;
     
@@ -278,14 +286,18 @@ function displayDistributionChart() {
     
     // Top 10 groups
     top10Groups.forEach((group, index) => {
-        const percentage = ((group.count / assemblyData.totalMessages) * 100).toFixed(1);
+        const percentage = assemblyTotalMessages > 0 ? ((group.count / assemblyTotalMessages) * 100).toFixed(1) : '0.0';
         html += `
             <div class="distribution-item">
-                <div class="item-label">${index + 1}. ${group.name}</div>
-                <div class="item-bar">
-                    <div class="bar-fill" style="width: ${percentage}%"></div>
+                <div class="distribution-rank">${index + 1}</div>
+                <div class="distribution-group-name">${group.name}</div>
+                <div class="distribution-bar-container">
+                    <div class="distribution-bar" style="width: ${percentage}%"></div>
                 </div>
-                <div class="item-value">${group.count} (${percentage}%)</div>
+                <div class="distribution-stats">
+                    <div class="distribution-count">${group.count}</div>
+                    <div class="distribution-percentage">${percentage}%</div>
+                </div>
             </div>
         `;
     });
@@ -293,14 +305,18 @@ function displayDistributionChart() {
     // Other groups combined
     if (otherGroups.length > 0) {
         const otherCount = otherGroups.reduce((sum, group) => sum + group.count, 0);
-        const otherPercentage = ((otherCount / assemblyData.totalMessages) * 100).toFixed(1);
+        const otherPercentage = assemblyTotalMessages > 0 ? ((otherCount / assemblyTotalMessages) * 100).toFixed(1) : '0.0';
         html += `
             <div class="distribution-item other">
-                <div class="item-label">Other ${otherGroups.length} groups</div>
-                <div class="item-bar">
-                    <div class="bar-fill" style="width: ${otherPercentage}%"></div>
+                <div class="distribution-rank">...</div>
+                <div class="distribution-group-name">Other ${otherGroups.length} groups</div>
+                <div class="distribution-bar-container">
+                    <div class="distribution-bar" style="width: ${otherPercentage}%"></div>
                 </div>
-                <div class="item-value">${otherCount} (${otherPercentage}%)</div>
+                <div class="distribution-stats">
+                    <div class="distribution-count">${otherCount}</div>
+                    <div class="distribution-percentage">${otherPercentage}%</div>
+                </div>
             </div>
         `;
     }
@@ -315,6 +331,7 @@ function displayGroupsTable(sortOrder = 'desc') {
     if (!container) return;
     
     const groups = Object.values(assemblyData.groups);
+    const assemblyTotalMessages = calculateAssemblyTotalMessages();
     
     // Sort groups based on the provided sort order
     let sortedGroups;
@@ -345,7 +362,7 @@ function displayGroupsTable(sortOrder = 'desc') {
     
     sortedGroups.forEach((group, index) => {
         const rank = index + 1;
-        const percentage = ((group.count / assemblyData.totalMessages) * 100).toFixed(1);
+        const percentage = assemblyTotalMessages > 0 ? ((group.count / assemblyTotalMessages) * 100).toFixed(1) : '0.0';
         const rankClass = rank <= 3 ? `rank-${rank}` : '';
         
         html += `

@@ -4,44 +4,51 @@ from functools import wraps
 from models.user import User
 from extensions import db
 
+def is_mobile_browser():
+    """Check if the request is from a mobile browser"""
+    user_agent = request.headers.get('User-Agent', '').lower()
+    mobile_keywords = ['mobile', 'android', 'iphone', 'ipad', 'blackberry', 'windows phone']
+    return any(keyword in user_agent for keyword in mobile_keywords)
+
 def auth_middleware():
     """Authentication middleware that runs before each request"""
-    print(f"Middleware: Processing request to {request.endpoint}")
-    
     # Skip middleware for static files and auth routes
     if request.endpoint and (
         request.endpoint.startswith('static') or 
         request.endpoint.startswith('auth.') or
         request.endpoint == 'static'
     ):
-        print(f"Middleware: Skipping auth route: {request.endpoint}")
         return
     
     # Skip middleware for logout route specifically
     if request.endpoint == 'auth.logout':
-        print(f"Middleware: Skipping logout route: {request.endpoint}")
         return
     
     # Skip middleware for test routes
     if request.endpoint == 'auth.test_logout':
-        print(f"Middleware: Skipping test route: {request.endpoint}")
         return
     
     # Check if user is authenticated via Flask-Login
     if current_user.is_authenticated:
         user = current_user
         if user and user.is_active:
-            # Update last activity if needed
-            print(f"Middleware: User {user.username} is authenticated and active")
-            pass  # Flask-Login handles this automatically
+            # Make session permanent for better mobile compatibility
+            session.permanent = True
+            
+            # Enhanced mobile session handling
+            if is_mobile_browser():
+                # Set longer session for mobile devices
+                session['mobile_session'] = True
+                session['last_activity'] = request.environ.get('HTTP_DATE', '')
+            
+            # Update last activity timestamp
+            session['last_activity'] = request.environ.get('HTTP_DATE', '')
         else:
-            # Invalid or inactive user, clear session
-            print(f"Middleware: User {user.username} is not active, clearing session")
-            session.clear()
-            flash('Your account has been deactivated.', 'warning')
-            return redirect(url_for('auth.user_login'))
-    else:
-        print(f"Middleware: No user authenticated")
+            # Only clear session if user is actually inactive
+            if user and not user.is_active:
+                session.clear()
+                flash('Your account has been deactivated.', 'warning')
+                return redirect(url_for('auth.user_login'))
 
 def require_auth(f):
     """Decorator to require authentication"""
@@ -56,6 +63,13 @@ def require_auth(f):
             session.clear()
             flash('Your account has been deactivated.', 'error')
             return redirect(url_for('auth.user_login'))
+        
+        # Make session permanent for authenticated users
+        session.permanent = True
+        
+        # Enhanced mobile session handling
+        if is_mobile_browser():
+            session['mobile_session'] = True
         
         return f(*args, **kwargs)
     return decorated_function
@@ -77,6 +91,13 @@ def require_admin(f):
         if not user.is_admin():
             flash('Access denied. Admin privileges required.', 'error')
             return redirect(url_for('user.user_dashboard'))
+        
+        # Make session permanent for authenticated users
+        session.permanent = True
+        
+        # Enhanced mobile session handling
+        if is_mobile_browser():
+            session['mobile_session'] = True
         
         return f(*args, **kwargs)
     return decorated_function

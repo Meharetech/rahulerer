@@ -5,12 +5,15 @@ from werkzeug.security import generate_password_hash
 def create_default_users():
     """Create default users if they don't exist"""
     try:
-        # Check if default users already exist
-        if User.query.filter_by(username='user').first() and User.query.filter_by(username='admin').first():
+        # Check if default users already exist by both username and email
+        existing_user = User.query.filter_by(username='user').first() or User.query.filter_by(email='user@whatsapp-ui.com').first()
+        existing_admin = User.query.filter_by(username='admin').first() or User.query.filter_by(email='admin@whatsapp-ui.com').first()
+        
+        if existing_user and existing_admin:
             return
         
-        # Create default user
-        if not User.query.filter_by(username='user').first():
+        # Create default user if it doesn't exist
+        if not existing_user:
             user = User(
                 username='Admin',
                 email='user@whatsapp-ui.com',
@@ -21,10 +24,9 @@ def create_default_users():
                 is_verified=True
             )
             db.session.add(user)
-            print("Default user created: user/1234567890")
         
-        # Create default admin
-        if not User.query.filter_by(username='admin').first():
+        # Create default admin if it doesn't exist
+        if not existing_admin:
             admin = User(
                 username='admin',
                 email='admin@whatsapp-ui.com',
@@ -35,13 +37,10 @@ def create_default_users():
                 is_verified=True
             )
             db.session.add(admin)
-            print("Default admin created: admin/1234567890")
         
         db.session.commit()
-        print("Default users initialized successfully!")
         
     except Exception as e:
-        print(f"Error creating default users: {e}")
         db.session.rollback()
 
 def create_user(username, email, password, role='user', **kwargs):
@@ -166,5 +165,4 @@ def get_user_stats(user_id):
         }
         
     except Exception as e:
-        print(f"Error getting user stats: {e}")
         return None

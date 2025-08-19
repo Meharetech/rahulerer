@@ -1,126 +1,464 @@
-<!-- Left Sidebar Menu Layout -->
-<div class="sidebar">
+<!-- Mobile Hamburger Menu Button (Outside sidebar for better visibility) -->
+<div class="mobile-menu-toggle" id="mobileMenuToggle">
+    <button class="hamburger-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
+
+<!-- User Sidebar -->
+<div class="sidebar" id="userSidebar">
+
     <div class="sidebar-header">
         <h2><i class="fab fa-whatsapp"></i></h2>
-        <p>WhatsApp Analytics</p>
+        <h2>WhatsApp Analytics</h2>
+        <p>User Dashboard</p>
     </div>
     
     <div class="sidebar-menu">
         <div class="menu-section">
-            <h4>Main Menu</h4>
-            <div class="menu-item active" data-page="dashboard">
-                <i class="fas fa-tachometer-alt"></i>
+            <h4>MAIN MENU</h4>
+            
+            <a href="{{ url_for('user.user_dashboard') }}" class="menu-item {% if request.endpoint == 'user.user_dashboard' %}active{% endif %}">
+                <i class="fas fa-cog"></i>
                 <span>Dashboard Statistics</span>
-            </div>
-            <div class="menu-item" data-page="whatsapp-analysis">
+            </a>
+            
+            <a href="{{ url_for('user.whatsapp_analysis') }}" class="menu-item {% if request.endpoint == 'user.whatsapp_analysis' %}active{% endif %}">
                 <i class="fas fa-chart-line"></i>
                 <span>WhatsApp Analysis</span>
-            </div>
-            <div class="menu-item" data-page="advanced-search">
+            </a>
+            
+            <a href="{{ url_for('user.advanced_search') }}" class="menu-item {% if request.endpoint == 'user.advanced_search' %}active{% endif %}">
                 <i class="fas fa-search"></i>
                 <span>Searching Advanced</span>
-            </div>
-            <div class="menu-item" data-page="post-sending-groups">
+            </a>
+            
+            <a href="{{ url_for('user.post_sending_groups') }}" class="menu-item {% if request.endpoint == 'user.post_sending_groups' %}active{% endif %}">
                 <i class="fas fa-paper-plane"></i>
                 <span>Post Sending Groups</span>
-            </div>
-            <div class="menu-item" data-page="whatsapp-groups-list">
+            </a>
+            
+            <a href="{{ url_for('user.whatsapp_groups_list') }}" class="menu-item {% if request.endpoint == 'user.whatsapp_groups_list' %}active{% endif %}">
                 <i class="fas fa-users"></i>
                 <span>WhatsApp Groups List</span>
-            </div>
-            <div class="menu-item" data-page="manage-topics">
-                <i class="fas fa-tags"></i>
+            </a>
+            
+            <a href="{{ url_for('user.manage_topics') }}" class="menu-item {% if request.endpoint == 'user.manage_topics' %}active{% endif %}">
+                <i class="fas fa-shield-alt"></i>
                 <span>Manage Topics</span>
-            </div>
-            <div class="menu-item" data-page="group-sender-analysis">
-                <i class="fas fa-users"></i>
+            </a>
+            
+            <a href="{{ url_for('user.group_sender_analysis') }}" class="menu-item {% if request.endpoint == 'user.group_sender_analysis' %}active{% endif %}">
+                <i class="fas fa-user-friends"></i>
                 <span>Detailed Sender Analysis</span>
-            </div>
-            <div class="menu-item" data-page="common-members-analysis">
+            </a>
+            
+            <a href="{{ url_for('user.common_members_analysis') }}" class="menu-item {% if request.endpoint == 'user.common_members_analysis' %}active{% endif %}">
                 <i class="fas fa-link"></i>
                 <span>Common Members Analysis</span>
-            </div>
+            </a>
         </div>
     </div>
     
     <div class="sidebar-footer">
-        <form method="POST" action="{{ url_for('auth.logout') }}" style="margin: 0;">
-            <button type="submit" class="btn btn-secondary" style="width: 100%;">
+        <a href="{{ url_for('auth.logout') }}" class="btn">
                 <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
-        </form>
+        </a>
     </div>
 </div>
 
-<!-- JavaScript for Menu Functionality -->
+<!-- Mobile Overlay -->
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+
+<style>
+/* Sidebar Styles - Desktop */
+.sidebar {
+    width: 280px;
+    background: #f8f9fa;
+    border-right: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+.sidebar-header h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.sidebar-header p {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.sidebar-menu {
+    flex: 1;
+    padding: 20px;
+}
+
+.menu-section {
+    margin-bottom: 25px;
+}
+
+.menu-section h4 {
+    color: #666;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.menu-item:hover {
+    background: #e3f2fd;
+    border-color: #25D366;
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.15);
+}
+
+.menu-item.active {
+    background: #25D366;
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.menu-item i {
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.menu-item span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.menu-item .badge {
+    margin-left: auto;
+    background: #ff6b6b;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+    background: white;
+}
+
+.sidebar-footer .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.sidebar-footer .btn:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+}
+
+.hamburger-btn {
+    background: #25D366;
+    color: white;
+    border: none;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn:hover {
+    background: #128C7E;
+    transform: scale(1.1);
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .mobile-overlay.show {
+        display: block;
+    }
+    
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .sidebar-header {
+        padding-top: 80px;
+    }
+
+    .menu-item {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    .menu-item i {
+        font-size: 18px;
+        width: 24px;
+    }
+
+    .menu-item span {
+        font-size: 16px;
+    }
+
+    .sidebar-footer {
+        padding: 15px;
+    }
+
+    .sidebar-footer .btn {
+        padding: 15px;
+        font-size: 16px;
+    }
+    
+    /* Ensure menu is visible when sidebar is shown */
+    .dashboard-layout {
+        position: relative;
+    }
+    
+    /* Make hamburger button always visible */
+    .mobile-menu-toggle {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1002;
+        display: block;
+    }
+    
+    /* Ensure the hamburger button is visible on top of content */
+    .hamburger-btn {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Fix for menu items in mobile view */
+    .sidebar-menu {
+        padding-bottom: 100px; /* Extra padding to ensure all items are visible */
+        overflow-y: auto;
+    }
+    
+    /* Add close button in header */
+    .sidebar-header:after {
+        content: "×";
+        position: absolute;
+        top: 85px;
+        right: 20px;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.menu-item {
+    animation: slideInLeft 0.4s ease-out;
+}
+
+.menu-item:nth-child(1) { animation-delay: 0.1s; }
+.menu-item:nth-child(2) { animation-delay: 0.2s; }
+.menu-item:nth-child(3) { animation-delay: 0.3s; }
+.menu-item:nth-child(4) { animation-delay: 0.4s; }
+.menu-item:nth-child(5) { animation-delay: 0.5s; }
+.menu-item:nth-child(6) { animation-delay: 0.6s; }
+.menu-item:nth-child(7) { animation-delay: 0.7s; }
+.menu-item:nth-child(8) { animation-delay: 0.8s; }
+
+/* Accessibility */
+.menu-item:focus,
+.sidebar-footer .btn:focus {
+    outline: 2px solid #25D366;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .menu-item {
+        animation: none;
+    }
+    
+    .menu-item:hover,
+    .sidebar-footer .btn:hover {
+        transform: none;
+    }
+}
+</style>
+
 <script>
+// Mobile menu functionality
+function toggleMobileMenu() {
+    const sidebar = document.getElementById('userSidebar');
+    const overlay = document.getElementById('mobileOverlay');
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    
+    if (sidebar.classList.contains('show')) {
+        closeMobileMenu();
+    } else {
+        openMobileMenu();
+    }
+}
+
+function openMobileMenu() {
+    const sidebar = document.getElementById('userSidebar');
+    const overlay = document.getElementById('mobileOverlay');
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    
+    sidebar.classList.add('show');
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    
+    // Change hamburger icon to close icon
+    const icon = menuToggle.querySelector('i');
+    if (icon) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+    }
+}
+
+function closeMobileMenu() {
+    const sidebar = document.getElementById('userSidebar');
+    const overlay = document.getElementById('mobileOverlay');
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    
+    sidebar.classList.remove('show');
+    overlay.classList.remove('show');
+    document.body.style.overflow = 'auto';
+    
+    // Change close icon back to hamburger
+    const icon = menuToggle.querySelector('i');
+    if (icon) {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    }
+}
+
+// Close menu when clicking on a menu item (mobile)
 document.addEventListener('DOMContentLoaded', function() {
-    // Get all menu items
     const menuItems = document.querySelectorAll('.menu-item');
     
-    // Add click event to each menu item
     menuItems.forEach(item => {
         item.addEventListener('click', function() {
-            // Remove active class from all items
-            menuItems.forEach(i => i.classList.remove('active'));
-            
-            // Add active class to clicked item
-            this.classList.add('active');
-            
-            // Get the page identifier
-            const page = this.getAttribute('data-page');
-            
-            // Handle navigation (you can customize this)
-            handleMenuNavigation(page);
+            if (window.innerWidth <= 768) {
+                closeMobileMenu();
+            }
         });
     });
     
-    // Function to handle menu navigation
-    function handleMenuNavigation(page) {
-        console.log('Navigating to:', page);
-        
-        // Handle navigation for each menu item
-        switch(page) {
-                           case 'dashboard':
-                   window.location.href = "{{ url_for('user.user_dashboard') }}";
-                   break;
-               case 'whatsapp-analysis':
-                   window.location.href = "{{ url_for('user.whatsapp_analysis') }}";
-                   break;
-               case 'advanced-search':
-                   window.location.href = "{{ url_for('user.advanced_search') }}";
-                   break;
-               case 'post-sending-groups':
-                   window.location.href = "{{ url_for('user.post_sending_groups') }}";
-                   break;
-               case 'whatsapp-groups-list':
-                   window.location.href = "{{ url_for('user.whatsapp_groups_list') }}";
-                   break;
-               case 'manage-topics':
-                   window.location.href = "{{ url_for('user.manage_topics') }}";
-                   break;
-               case 'group-sender-analysis':
-                   window.location.href = "{{ url_for('user.group_sender_analysis') }}";
-                   break;
-               case 'common-members-analysis':
-                   window.location.href = "{{ url_for('user.common_members_analysis') }}";
-                   break;
-            default:
-                console.log('Unknown page:', page);
-        }
+    // Add click handler for the close button in header
+    const sidebarHeader = document.querySelector('.sidebar-header');
+    if (sidebarHeader) {
+        sidebarHeader.addEventListener('click', function(e) {
+            // Check if click is on the close button area (right side of header)
+            const rect = sidebarHeader.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            if (x > rect.width - 50) {
+                closeMobileMenu();
+            }
+        });
     }
     
-    // Set initial active state based on current page
-    function setInitialActiveState() {
-        // You can set this based on the current route or page
-        const currentPage = 'dashboard'; // Change this based on your logic
-        const activeItem = document.querySelector(`[data-page="${currentPage}"]`);
-        if (activeItem) {
-            activeItem.classList.add('active');
+    // Close menu on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Make sure hamburger is visible on page load for mobile
+    if (window.innerWidth <= 768) {
+        const menuToggle = document.getElementById('mobileMenuToggle');
+        if (menuToggle) {
+            menuToggle.style.display = 'block';
         }
     }
-    
-    // Initialize active state
-    setInitialActiveState();
 });
 </script>

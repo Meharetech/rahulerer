@@ -175,27 +175,4 @@ function cleanGroupName(fileName) {
     return cleanName;
 }
 
-// Show stats information
-function showStatsInfo() {
-    const info = `📊 Dashboard Statistics Information
 
-What these numbers mean:
-• Total Assemblies: Number of assembly folders in database
-• Total Groups: Number of Excel files in all assembly groups folders
-• Total Phone Numbers: Unique phone numbers counted from Excel files
-
-How counting works:
-• System reads Excel files from database/{assembly}/groups/ folders
-• Looks for "Phone" column in each Excel file
-• Counts unique phone numbers (not duplicate rows)
-• Aggregates totals across all assemblies
-
-Data Source:
-• Real-time reading from Excel files
-• Same logic used in WhatsApp Groups List page
-• Accurate counts, not estimates
-
-Last Updated: ${new Date().toLocaleString()}`;
-    
-    alert(info);
-}

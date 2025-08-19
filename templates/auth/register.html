@@ -5,13 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhatsApp Analysis Server - User Registration</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/matrix_login.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Registration-specific Matrix styling */
         .register-header h1 {
             color: #00ccff !important;
-            text-shadow: 0 0 20px #00ccff !important;
+            text-shadow: 0 0 30px #00ccff !important;
+        }
+        
+        .register-header h1.holographic {
+            background: linear-gradient(45deg, 
+                #00ccff 0%, 
+                #0099cc 25%, 
+                #0066ff 50%, 
+                #0099cc 75%, 
+                #00ccff 100%) !important;
+            background-size: 400% 400% !important;
+            animation: holographic 3s ease-in-out infinite !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
         }
         
         .register-header p {
@@ -25,15 +39,108 @@
         
         .register-btn:hover {
             box-shadow: 0 10px 25px rgba(0, 204, 255, 0.4) !important;
+            background: linear-gradient(45deg, #0099cc, #0066ff) !important;
         }
         
         .register-card {
             border-color: #00ccff !important;
-            box-shadow: 0 0 20px rgba(0, 204, 255, 0.5) !important;
+            box-shadow: 0 0 30px rgba(0, 204, 255, 0.6) !important;
         }
         
         .register-card::before {
-            background: linear-gradient(90deg, transparent, rgba(0, 204, 255, 0.1), transparent) !important;
+            background: linear-gradient(90deg, transparent, rgba(0, 204, 255, 0.3), transparent) !important;
+        }
+        
+        .register-card::after {
+            background: radial-gradient(circle at 50% 50%, rgba(0, 204, 255, 0.1) 0%, transparent 70%) !important;
+        }
+        
+        .register-security-status {
+            background: rgba(0, 204, 255, 0.1) !important;
+            border: 1px solid #00ccff !important;
+            color: #00ccff !important;
+        }
+        
+        .register-security-status i {
+            color: #00ccff !important;
+        }
+        
+        .register-password-toggle {
+            color: #00ccff !important;
+        }
+        
+        .register-password-toggle:hover {
+            color: #0099cc !important;
+            text-shadow: 0 0 15px #0099cc !important;
+            background: rgba(0, 204, 255, 0.1) !important;
+        }
+        
+        .register-input:focus {
+            border-color: #00ccff !important;
+            box-shadow: 0 0 25px rgba(0, 204, 255, 0.8) !important;
+            background: rgba(0, 204, 255, 0.15) !important;
+        }
+        
+        .register-input:hover {
+            border-color: #0099cc !important;
+            box-shadow: 0 0 15px rgba(0, 153, 204, 0.5) !important;
+        }
+        
+        .register-checkbox {
+            accent-color: #00ccff !important;
+        }
+        
+        .register-status-online {
+            color: #00ccff !important;
+            text-shadow: 0 0 10px #00ccff !important;
+        }
+        
+        .register-footer a:hover {
+            color: #0099cc !important;
+            text-shadow: 0 0 15px #0099cc !important;
+        }
+        
+        .register-footer a:hover::before {
+            background: #00ccff !important;
+        }
+        
+        .register-glitch {
+            animation: registerGlitch 3s infinite !important;
+        }
+        
+        @keyframes registerGlitch {
+            0%, 100% { 
+                transform: translate(0);
+                text-shadow: 0 0 20px #00ccff;
+            }
+            20% { 
+                transform: translate(-3px, 3px);
+                text-shadow: 0 0 20px #0099cc;
+            }
+            40% { 
+                transform: translate(-3px, -3px);
+                text-shadow: 0 0 20px #0066ff;
+            }
+            60% { 
+                transform: translate(3px, 3px);
+                text-shadow: 0 0 20px #00ccff;
+            }
+            80% { 
+                transform: translate(3px, -3px);
+                text-shadow: 0 0 20px #0099cc;
+            }
+        }
+        
+        .register-particles .particle:nth-child(odd) {
+            background: #00ccff !important;
+        }
+        
+        .register-particles .particle:nth-child(3n) {
+            background: #0099cc !important;
+        }
+        
+        .register-particles .particle:nth-child(5n) {
+            background: #0066ff !important;
         }
         
         .form-row {
@@ -47,32 +154,28 @@
             margin-bottom: 0;
         }
         
-        .password-field {
-            position: relative;
+        .password-strength-container {
+            margin-top: 8px;
         }
         
-        .password-toggle {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #00ccff;
-            cursor: pointer;
-            font-size: 1.2em;
-            z-index: 10;
-            transition: all 0.3s ease;
+        .password-strength-label {
+            font-size: 0.8em;
+            color: #666;
+            margin-bottom: 5px;
         }
         
-        .password-toggle:hover {
-            color: #0099cc;
-            text-shadow: 0 0 10px #00ccff;
+        .password-match {
+            color: #00ff41;
+            font-size: 0.8em;
+            margin-top: 5px;
+            text-shadow: 0 0 5px #00ff41;
         }
         
-        .password-field input[type="password"],
-        .password-field input[type="text"] {
-            padding-right: 50px;
+        .password-mismatch {
+            color: #ff0040;
+            font-size: 0.8em;
+            margin-top: 5px;
+            text-shadow: 0 0 5px #ff0040;
         }
         
         @media (max-width: 768px) {
@@ -86,12 +189,20 @@
 <body>
     <!-- Matrix Rain Background -->
     <div class="matrix-bg"></div>
+    <div class="matrix-rain" id="matrixRain"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles register-particles" id="particles"></div>
     
     <div class="login-container">
         <div class="login-card register-card">
             <div class="login-header register-header">
-                <h1 class="matrix-title">WHATSAPP ANALYSIS SERVER</h1>
+                <h1 class="matrix-title holographic">WHATSAPP ANALYSIS SERVER</h1>
                 <p class="matrix-subtitle">CREATE NEW USER ACCOUNT</p>
+                <div class="security-status register-security-status">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>REGISTRATION SECURE CONNECTION ESTABLISHED</span>
+                </div>
             </div>
             
             {% with messages = get_flashed_messages(with_categories=true) %}
@@ -99,22 +210,27 @@
                     <div class="flash-messages">
                         {% for category, message in messages %}
                             <div class="flash-message {{ category }}">
-                                <strong>WhatsApp Analysis:</strong> {{ message }}
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>REGISTRATION ALERT:</strong> {{ message }}
                             </div>
                         {% endfor %}
                     </div>
                 {% endif %}
             {% endwith %}
             
-            <form method="POST" action="{{ url_for('auth.register') }}" class="matrix-form register-form">
+            <form method="POST" action="{{ url_for('auth.register') }}" class="matrix-form register-form" id="registerForm">
                 {{ form.hidden_tag() }}
                 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="{{ form.first_name.id }}">FIRST NAME</label>
-                        {{ form.first_name(placeholder="ENTER FIRST NAME") }}
+                        <label for="{{ form.first_name.id }}">
+                            <i class="fas fa-user"></i>
+                            FIRST NAME
+                        </label>
+                        {{ form.first_name(placeholder="ENTER FIRST NAME", class="matrix-input register-input") }}
                         {% if form.first_name.errors %}
                             <div class="error-message">
+                                <i class="fas fa-times-circle"></i>
                                 {% for error in form.first_name.errors %}
                                     <span>{{ error }}</span>
                                 {% endfor %}
@@ -123,10 +239,14 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="{{ form.last_name.id }}">LAST NAME</label>
-                        {{ form.last_name(placeholder="ENTER LAST NAME") }}
+                        <label for="{{ form.last_name.id }}">
+                            <i class="fas fa-user"></i>
+                            LAST NAME
+                        </label>
+                        {{ form.last_name(placeholder="ENTER LAST NAME", class="matrix-input register-input") }}
                         {% if form.last_name.errors %}
                             <div class="error-message">
+                                <i class="fas fa-times-circle"></i>
                                 {% for error in form.last_name.errors %}
                                     <span>{{ error }}</span>
                                 {% endfor %}
@@ -136,10 +256,14 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="{{ form.username.id }}">USERNAME</label>
-                    {{ form.username(placeholder="CHOOSE USERNAME") }}
+                    <label for="{{ form.username.id }}">
+                        <i class="fas fa-at"></i>
+                        USERNAME
+                    </label>
+                    {{ form.username(placeholder="CHOOSE USERNAME", class="matrix-input register-input") }}
                     {% if form.username.errors %}
                         <div class="error-message">
+                            <i class="fas fa-times-circle"></i>
                             {% for error in form.username.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
@@ -148,10 +272,14 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="{{ form.email.id }}">EMAIL ADDRESS</label>
-                    {{ form.email(placeholder="ENTER EMAIL") }}
+                    <label for="{{ form.email.id }}">
+                        <i class="fas fa-envelope"></i>
+                        EMAIL ADDRESS
+                    </label>
+                    {{ form.email(placeholder="ENTER EMAIL", class="matrix-input register-input") }}
                     {% if form.email.errors %}
                         <div class="error-message">
+                            <i class="fas fa-times-circle"></i>
                             {% for error in form.email.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
@@ -161,13 +289,23 @@
                 
                 <div class="form-row">
                     <div class="form-group password-field">
-                        <label for="{{ form.password.id }}">PASSWORD</label>
-                        {{ form.password(placeholder="CREATE PASSWORD", id="register-password-field") }}
-                        <button type="button" class="password-toggle" onclick="togglePassword('register-password-field')">
+                        <label for="{{ form.password.id }}">
+                            <i class="fas fa-lock"></i>
+                            PASSWORD
+                        </label>
+                        {{ form.password(placeholder="CREATE PASSWORD", id="register-password-field", class="matrix-input register-input") }}
+                        <button type="button" class="password-toggle register-password-toggle" onclick="togglePassword('register-password-field')" title="Toggle Password Visibility">
                             <i class="fas fa-eye"></i>
                         </button>
+                        <div class="password-strength-container">
+                            <div class="password-strength-label">Password Strength:</div>
+                            <div class="password-strength">
+                                <div class="password-strength-bar" id="passwordStrengthBar"></div>
+                            </div>
+                        </div>
                         {% if form.password.errors %}
                             <div class="error-message">
+                                <i class="fas fa-times-circle"></i>
                                 {% for error in form.password.errors %}
                                     <span>{{ error }}</span>
                                 {% endfor %}
@@ -176,13 +314,18 @@
                     </div>
                     
                     <div class="form-group password-field">
-                        <label for="{{ form.confirm_password.id }}">CONFIRM PASSWORD</label>
-                        {{ form.confirm_password(placeholder="REPEAT PASSWORD", id="register-confirm-password-field") }}
-                        <button type="button" class="password-toggle" onclick="togglePassword('register-confirm-password-field')">
+                        <label for="{{ form.confirm_password.id }}">
+                            <i class="fas fa-lock"></i>
+                            CONFIRM PASSWORD
+                        </label>
+                        {{ form.confirm_password(placeholder="REPEAT PASSWORD", id="register-confirm-password-field", class="matrix-input register-input") }}
+                        <button type="button" class="password-toggle register-password-toggle" onclick="togglePassword('register-confirm-password-field')" title="Toggle Password Visibility">
                             <i class="fas fa-eye"></i>
                         </button>
+                        <div id="passwordMatchStatus"></div>
                         {% if form.confirm_password.errors %}
                             <div class="error-message">
+                                <i class="fas fa-times-circle"></i>
                                 {% for error in form.confirm_password.errors %}
                                     <span>{{ error }}</span>
                                 {% endfor %}
@@ -191,15 +334,34 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="btn matrix-btn register-btn">
-                    <span class="btn-text">CREATE ACCOUNT</span>
-                    <span class="btn-loading" style="display: none;">PROCESSING...</span>
+                <button type="submit" class="btn matrix-btn register-btn" id="registerBtn">
+                    <span class="btn-text">
+                        <i class="fas fa-user-plus"></i>
+                        CREATE ACCOUNT
+                    </span>
+                    <span class="btn-loading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        PROCESSING<span class="loading-dots"></span>
+                    </span>
                 </button>
             </form>
             
-            <div class="login-footer">
-                <p>ALREADY HAVE ACCESS? <a href="{{ url_for('auth.user_login') }}">LOGIN HERE</a></p>
-                <p>ADMIN ACCESS? <a href="{{ url_for('auth.admin_login') }}">ADMIN PORTAL</a></p>
+            <div class="login-footer register-footer">
+                <div class="footer-links">
+                    <p>
+                        <i class="fas fa-sign-in-alt"></i>
+                        ALREADY HAVE ACCESS? <a href="{{ url_for('auth.user_login') }}">LOGIN HERE</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-user-shield"></i>
+                        ADMIN ACCESS? <a href="{{ url_for('auth.admin_login') }}">ADMIN PORTAL</a>
+                    </p>
+                </div>
+                <div class="system-info">
+                    <p><i class="fas fa-server"></i> REGISTRATION SERVER: <span class="status-online register-status-online">ONLINE</span></p>
+                    <p><i class="fas fa-clock"></i> REGISTRATION TIME: <span id="registerTime"></span></p>
+                    <p><i class="fas fa-shield-alt"></i> SECURITY LEVEL: <span class="status-online register-status-online">MAXIMUM</span></p>
+                </div>
             </div>
         </div>
     </div>
@@ -209,7 +371,7 @@
     
     <!-- Registration Form Enhancement Script -->
     <script>
-        // Password toggle functionality
+        // Registration password toggle functionality with enhanced effects
         function togglePassword(fieldId) {
             const passwordField = document.getElementById(fieldId);
             const toggleBtn = passwordField.nextElementSibling;
@@ -219,26 +381,133 @@
                 passwordField.type = 'text';
                 icon.classList.remove('fa-eye');
                 icon.classList.add('fa-eye-slash');
-                toggleBtn.style.color = '#ff0040';
+                toggleBtn.style.color = '#0099cc';
+                toggleBtn.style.textShadow = '0 0 15px #0099cc';
+                passwordField.style.borderColor = '#0099cc';
+                passwordField.style.boxShadow = '0 0 20px rgba(0, 153, 204, 0.5)';
+                
+                // Add reveal animation
+                passwordField.style.animation = 'passwordReveal 0.3s ease-out';
             } else {
                 passwordField.type = 'password';
                 icon.classList.remove('fa-eye-slash');
                 icon.classList.add('fa-eye');
                 toggleBtn.style.color = '#00ccff';
+                toggleBtn.style.textShadow = '0 0 15px #00ccff';
+                passwordField.style.borderColor = '#00ccff';
+                passwordField.style.boxShadow = '0 0 20px rgba(0, 204, 255, 0.5)';
+                
+                // Add hide animation
+                passwordField.style.animation = 'passwordHide 0.3s ease-out';
+            }
+            
+            // Remove animation after completion
+            setTimeout(() => {
+                passwordField.style.animation = '';
+            }, 300);
+        }
+        
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            const strengthBar = document.getElementById('passwordStrengthBar');
+            
+            if (password.length >= 8) strength += 25;
+            if (password.match(/[a-z]/)) strength += 25;
+            if (password.match(/[A-Z]/)) strength += 25;
+            if (password.match(/[0-9]/)) strength += 25;
+            
+            strengthBar.className = 'password-strength-bar';
+            
+            if (strength <= 25) {
+                strengthBar.classList.add('password-strength-weak');
+            } else if (strength <= 50) {
+                strengthBar.classList.add('password-strength-medium');
+            } else if (strength <= 75) {
+                strengthBar.classList.add('password-strength-strong');
+            } else {
+                strengthBar.classList.add('password-strength-very-strong');
             }
         }
         
+        // Password match checker
+        function checkPasswordMatch() {
+            const password = document.getElementById('register-password-field').value;
+            const confirmPassword = document.getElementById('register-confirm-password-field').value;
+            const matchStatus = document.getElementById('passwordMatchStatus');
+            
+            if (confirmPassword.length === 0) {
+                matchStatus.innerHTML = '';
+                return;
+            }
+            
+            if (password === confirmPassword) {
+                matchStatus.innerHTML = '<div class="password-match"><i class="fas fa-check-circle"></i> Passwords match</div>';
+            } else {
+                matchStatus.innerHTML = '<div class="password-mismatch"><i class="fas fa-times-circle"></i> Passwords do not match</div>';
+            }
+        }
+        
+        // Create registration floating particles
+        function createRegisterParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Update registration time
+        function updateRegisterTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('registerTime').textContent = timeString;
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('.register-form');
-            const submitBtn = form.querySelector('.register-btn');
+            const form = document.getElementById('registerForm');
+            const submitBtn = document.getElementById('registerBtn');
             const btnText = submitBtn.querySelector('.btn-text');
             const btnLoading = submitBtn.querySelector('.btn-loading');
+            
+            // Create registration particles
+            createRegisterParticles();
+            
+            // Update registration time every second
+            updateRegisterTime();
+            setInterval(updateRegisterTime, 1000);
+            
+            // Password strength monitoring
+            const passwordField = document.getElementById('register-password-field');
+            const confirmPasswordField = document.getElementById('register-confirm-password-field');
+            
+            passwordField.addEventListener('input', function() {
+                checkPasswordStrength(this.value);
+                checkPasswordMatch();
+            });
+            
+            confirmPasswordField.addEventListener('input', function() {
+                checkPasswordMatch();
+            });
             
             form.addEventListener('submit', function(e) {
                 btnText.style.display = 'none';
                 btnLoading.style.display = 'inline';
-                submitBtn.style.background = 'linear-gradient(45deg, #00ccff, #0099cc)';
-                submitBtn.style.boxShadow = '0 0 25px rgba(0, 204, 255, 0.8)';
+                submitBtn.style.background = 'linear-gradient(45deg, #0099cc, #0066ff)';
+                submitBtn.style.boxShadow = '0 0 30px rgba(0, 153, 204, 0.8)';
+                submitBtn.disabled = true;
                 
                 // Add registration matrix scan effect
                 submitBtn.style.position = 'relative';
@@ -262,18 +531,30 @@
             });
             
             // Add registration matrix-style input effects
-            const inputs = form.querySelectorAll('input[type="text"], input[type="email"], input[type="password"]');
+            const inputs = form.querySelectorAll('.register-input');
             inputs.forEach(input => {
                 input.addEventListener('focus', function() {
-                    this.style.boxShadow = '0 0 20px rgba(0, 204, 255, 0.8)';
+                    this.style.boxShadow = '0 0 25px rgba(0, 204, 255, 0.8)';
                     this.style.borderColor = '#00ccff';
-                    this.style.background = 'rgba(0, 204, 255, 0.1)';
+                    this.style.background = 'rgba(0, 204, 255, 0.15)';
+                    this.style.transform = 'translateY(-2px)';
                 });
                 
                 input.addEventListener('blur', function() {
                     this.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.5)';
                     this.style.borderColor = '#00ccff';
                     this.style.background = 'rgba(0, 0, 0, 0.8)';
+                    this.style.transform = 'translateY(0)';
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.value.length > 0) {
+                        this.style.borderColor = '#0099cc';
+                        this.style.boxShadow = '0 0 20px rgba(0, 153, 204, 0.6)';
+                    } else {
+                        this.style.borderColor = '#00ccff';
+                        this.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.5)';
+                    }
                 });
             });
             
@@ -284,27 +565,64 @@
                     document.body.classList.toggle('register-matrix-mode');
                     console.log('🔵 Registration Matrix mode activated');
                 }
+                
+                // Ctrl + Enter to submit
+                if (e.ctrlKey && e.key === 'Enter') {
+                    form.submit();
+                }
+                
+                // Ctrl + U to toggle password
+                if (e.ctrlKey && e.key === 'u') {
+                    e.preventDefault();
+                    togglePassword('register-password-field');
+                }
+                
+                // Ctrl + C to toggle confirm password
+                if (e.ctrlKey && e.key === 'c') {
+                    e.preventDefault();
+                    togglePassword('register-confirm-password-field');
+                }
             });
             
-            // Password strength indicator
-            const passwordInput = form.querySelector('input[name="password"]');
-            const confirmPasswordInput = form.querySelector('input[name="confirm_password"]');
+            // Add registration glitch effect to title on hover
+            const title = document.querySelector('.register-header .matrix-title');
+            title.addEventListener('mouseenter', function() {
+                this.classList.add('register-glitch');
+            });
             
-            if (passwordInput && confirmPasswordInput) {
-                confirmPasswordInput.addEventListener('input', function() {
-                    if (this.value === passwordInput.value && this.value.length > 0) {
-                        this.style.borderColor = '#00ff41';
-                        this.style.boxShadow = '0 0 15px rgba(0, 255, 65, 0.5)';
-                    } else if (this.value.length > 0) {
-                        this.style.borderColor = '#ff0040';
-                        this.style.boxShadow = '0 0 15px rgba(255, 0, 64, 0.5)';
-                    } else {
-                        this.style.borderColor = '#00ccff';
-                        this.style.boxShadow = '0 0 15px rgba(0, 204, 255, 0.5)';
-                    }
-                });
-            }
+            title.addEventListener('mouseleave', function() {
+                this.classList.remove('register-glitch');
+            });
         });
+        
+        // Add registration CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes passwordReveal {
+                0% { filter: blur(2px); opacity: 0.7; }
+                100% { filter: blur(0); opacity: 1; }
+            }
+            
+            @keyframes passwordHide {
+                0% { filter: blur(0); opacity: 1; }
+                100% { filter: blur(2px); opacity: 0.7; }
+            }
+            
+            .register-matrix-mode .matrix-bg {
+                background: linear-gradient(180deg, #000 0%, #000033 30%, #000066 70%, #000 100%) !important;
+            }
+            
+            .register-matrix-mode .matrix-column {
+                color: #00ccff !important;
+                text-shadow: 0 0 8px #00ccff !important;
+            }
+            
+            .register-matrix-mode .login-card {
+                border-color: #00ccff !important;
+                box-shadow: 0 0 40px rgba(0, 204, 255, 0.8) !important;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>

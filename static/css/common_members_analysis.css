@@ -850,6 +850,132 @@
     overflow-x: auto;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Table Controls */
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e5e9;
+}
+
+.table-info {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.table-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Pagination Container */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e5e9;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.pagination-info {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.page-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    border: 1px solid #e1e5e9;
+    border-radius: 6px;
+    background: white;
+    color: #6c757d;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.page-number:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.page-number.active {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.page-number.disabled {
+    background: #f8f9fa;
+    color: #adb5bd;
+    cursor: not-allowed;
+    border-color: #e1e5e9;
+}
+
+.page-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 8px;
+    color: #6c757d;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.pagination-settings {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pagination-settings label {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.pagination-settings select {
+    padding: 6px 12px;
+    border: 1px solid #e1e5e9;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+    color: #2c3e50;
 }
 
 .common-members-table {
@@ -993,164 +1119,767 @@
 
 @media (max-width: 768px) {
     .main-content {
-        padding: 16px;
+        padding: 12px;
     }
     
     .main-header {
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
         text-align: center;
+        padding: 16px;
+        margin-bottom: 20px;
     }
     
     .main-header h1 {
-        font-size: 24px;
+        font-size: 20px;
+    }
+    
+    .header-actions {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .header-actions .btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .refresh-btn {
+        padding: 8px 12px;
+    }
+    
+    .section-header h3 {
+        font-size: 18px;
+    }
+    
+    .section-header p {
+        font-size: 14px;
     }
     
     .analysis-form {
-        margin: 0 -16px;
+        margin: 0 -12px;
         border-radius: 0;
+        padding: 16px;
+        margin-bottom: 20px;
     }
     
     .filter-form-header {
-        padding: 16px 24px;
+        padding: 12px 16px;
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
         text-align: center;
+        margin-bottom: 16px;
+    }
+    
+    .filter-form-title {
+        font-size: 16px;
     }
     
     .filter-form-content {
-        padding: 24px;
+        padding: 16px;
     }
     
     .show-filters-section {
-        padding: 20px 24px;
+        padding: 16px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .form-group label {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .quick-date-filters {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    .quick-filter-checkbox {
+        padding: 8px 12px;
+    }
+    
+    .filter-label {
+        font-size: 13px;
     }
     
     .form-actions {
         flex-direction: column;
         align-items: stretch;
+        gap: 12px;
+        margin-top: 20px;
     }
     
     .btn {
         justify-content: center;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    /* Common Members Results Mobile Styles */
+    .common-members-results {
+        padding: 16px;
     }
     
     .common-summary {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 12px;
+        margin-bottom: 20px;
     }
     
-    .common-members-container {
-        margin: 0 -16px;
-        border-radius: 0;
+    .summary-card {
+        padding: 16px;
+        text-align: center;
     }
     
-    .common-members-table {
-        font-size: 12px;
+    .summary-icon {
+        font-size: 28px;
+        margin-bottom: 8px;
     }
     
-    .common-members-table th,
-    .common-members-table td {
-        padding: 12px 8px;
+    .summary-content h4 {
+        font-size: 14px;
+        margin-bottom: 6px;
     }
     
-    .sentiment-breakdown {
-        flex-direction: column;
-        gap: 4px;
+    .summary-value {
+        font-size: 20px;
     }
     
-    /* Mobile adjustments for search section */
+    /* Search Filter Section Mobile */
     .search-filter-section {
-        padding: 20px;
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+    
+    .search-filter-section .section-header h4 {
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+    
+    .search-filter-section .section-header p {
+        font-size: 13px;
     }
     
     .permanent-download-section {
-        padding: 16px;
-        margin-top: 16px;
+        padding: 12px;
+        margin-top: 12px;
     }
     
     .permanent-download-section .btn {
-        padding: 14px 24px;
-        font-size: 14px;
+        padding: 10px 16px;
+        font-size: 13px;
         width: 100%;
+        justify-content: center;
+    }
+    
+    .download-info {
+        font-size: 12px;
+        margin-top: 6px;
     }
     
     .search-controls {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 12px;
     }
     
-    .search-field-control {
-        align-self: stretch;
-    }
-    
-    .search-field-control select {
-        width: 100%;
-    }
-    
-    .search-submit-control {
-        align-self: stretch;
-    }
-    
-    .search-submit-control .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
+    .search-field-control,
+    .search-control,
+    .search-submit-control,
+    .label-filter-control,
+    .sentiment-filter-control,
     .clear-filters-control {
         align-self: stretch;
     }
     
+    .search-field-control select,
+    .search-control input,
+    .label-filter-control select,
+    .sentiment-filter-control select {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .search-submit-control .btn,
     .clear-filters-control .btn {
         width: 100%;
         justify-content: center;
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    
+    /* Search Results Summary Mobile */
+    .search-results-summary {
+        padding: 12px;
+        margin-top: 16px;
+    }
+    
+    .summary-stats {
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+    
+    .stat-item {
+        font-size: 13px;
+        padding: 6px 8px;
+    }
+    
+    .download-section {
+        flex-direction: column;
+        gap: 8px;
     }
     
     .download-section .btn {
         width: 100%;
         justify-content: center;
+        padding: 8px 12px;
+        font-size: 12px;
     }
     
-    .summary-stats {
+         /* Common Members Table Mobile */
+     .common-members-section {
+         margin-top: 20px;
+     }
+     
+     .common-members-section h4 {
+         font-size: 16px;
+         margin-bottom: 12px;
+     }
+     
+     /* Table Controls Mobile */
+     .table-controls {
+         flex-direction: column;
+         gap: 12px;
+         align-items: stretch;
+     }
+     
+     .table-info {
+         text-align: center;
+         font-size: 13px;
+     }
+     
+     .table-actions {
+         justify-content: center;
+     }
+     
+     /* Pagination Mobile */
+     .pagination-container {
+         flex-direction: column;
+         gap: 16px;
+         padding: 12px;
+     }
+     
+     .pagination-controls {
+         flex-wrap: wrap;
+         justify-content: center;
+         gap: 6px;
+     }
+     
+     .page-numbers {
+         flex-wrap: wrap;
+         justify-content: center;
+         gap: 3px;
+     }
+     
+     .page-number {
+         min-width: 28px;
+         height: 28px;
+         font-size: 12px;
+         padding: 0 6px;
+     }
+     
+     .page-ellipsis {
+         min-width: 28px;
+         height: 28px;
+         font-size: 12px;
+         padding: 0 6px;
+     }
+     
+     .pagination-settings {
+         justify-content: center;
+     }
+     
+     .pagination-settings label {
+         font-size: 13px;
+     }
+     
+     .pagination-settings select {
+         padding: 4px 8px;
+         font-size: 13px;
+     }
+    
+    .common-members-container {
+        margin: 0 -12px;
+        border-radius: 0;
+        overflow-x: auto;
+        border: 1px solid #e1e5e9;
+    }
+    
+    .common-members-table {
+        min-width: 800px;
+        font-size: 12px;
+    }
+    
+    .common-members-table th,
+    .common-members-table td {
+        padding: 8px 6px;
+        font-size: 11px;
+    }
+    
+    .rank-badge {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+    
+    .sentiment-breakdown {
         flex-direction: column;
-        gap: 12px;
+        gap: 2px;
     }
     
-    /* Mobile adjustments for search results */
+    .sentiment-breakdown .sentiment {
+        padding: 1px 4px;
+        font-size: 9px;
+    }
+    
+    .group-names {
+        max-width: 120px;
+        font-size: 10px;
+    }
+    
+    .btn-sm {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+    
+    /* Search Results Container Mobile */
     .search-results-container {
-        padding: 20px;
+        padding: 16px;
+        margin-top: 16px;
+    }
+    
+    .search-results-container h4 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .search-results-table-container {
+        overflow-x: auto;
+        border-radius: 8px;
+        border: 1px solid #e1e5e9;
+    }
+    
+    .search-results-table {
+        min-width: 700px;
+        font-size: 11px;
     }
     
     .search-results-table th,
     .search-results-table td {
-        padding: 12px 8px;
-        font-size: 12px;
+        padding: 6px 4px;
+        font-size: 10px;
     }
     
     .message-content {
-        max-width: 200px;
+        max-width: 150px;
+    }
+    
+    .message-text {
+        font-size: 10px;
+        line-height: 1.3;
+    }
+    
+    .sender-info {
+        font-size: 10px;
+    }
+    
+    .sender-name {
+        font-size: 10px;
+        margin-bottom: 2px;
+    }
+    
+    .sender-phone {
+        font-size: 9px;
+    }
+    
+    .sentiment-badge {
+        padding: 1px 4px;
+        font-size: 9px;
+    }
+    
+    .label-badge {
+        padding: 1px 4px;
+        font-size: 9px;
     }
 }
 
 @media (max-width: 480px) {
-    .assemblies-grid {
-        grid-template-columns: 1fr;
+    .main-content {
+        padding: 8px;
+    }
+    
+    .main-header {
+        padding: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .main-header h1 {
+        font-size: 18px;
+    }
+    
+    .header-actions .btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .refresh-btn {
+        padding: 6px 10px;
+    }
+    
+    .section-header h3 {
+        font-size: 16px;
+    }
+    
+    .section-header p {
+        font-size: 13px;
+    }
+    
+    .analysis-form {
+        margin: 0 -8px;
+        padding: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .filter-form-header {
+        padding: 8px 12px;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+    
+    .filter-form-title {
+        font-size: 14px;
+    }
+    
+    .filter-form-content {
+        padding: 12px;
+    }
+    
+    .show-filters-section {
+        padding: 12px;
+    }
+    
+    .form-row {
+        gap: 12px;
+    }
+    
+    .form-group label {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 8px 10px;
+        font-size: 13px;
     }
     
     .quick-date-filters {
         grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
     }
     
-    .common-members-table {
-        min-width: 1000px;
+    .quick-filter-checkbox {
+        padding: 6px 8px;
     }
     
+    .filter-label {
+        font-size: 12px;
+    }
+    
+    .form-actions {
+        gap: 8px;
+        margin-top: 16px;
+    }
+    
+    .btn {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+    
+    /* Common Members Results Mobile Styles */
+    .common-members-results {
+        padding: 12px;
+    }
+    
+    .common-summary {
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+    
+    .summary-card {
+        padding: 12px;
+    }
+    
+    .summary-icon {
+        font-size: 24px;
+        margin-bottom: 6px;
+    }
+    
+    .summary-content h4 {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+    
+    .summary-value {
+        font-size: 18px;
+    }
+    
+    /* Search Filter Section Mobile */
     .search-filter-section {
-        padding: 16px;
+        padding: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .search-filter-section .section-header h4 {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+    
+    .search-filter-section .section-header p {
+        font-size: 12px;
+    }
+    
+    .permanent-download-section {
+        padding: 8px;
+        margin-top: 8px;
+    }
+    
+    .permanent-download-section .btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .download-info {
+        font-size: 11px;
+        margin-top: 4px;
     }
     
     .search-controls {
-        gap: 12px;
+        gap: 8px;
+    }
+    
+    .search-field-control select,
+    .search-control input,
+    .label-filter-control select,
+    .sentiment-filter-control select {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    
+    .search-submit-control .btn,
+    .clear-filters-control .btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    /* Search Results Summary Mobile */
+    .search-results-summary {
+        padding: 8px;
+        margin-top: 12px;
+    }
+    
+    .summary-stats {
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+    
+    .stat-item {
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+    
+    .download-section {
+        gap: 6px;
+    }
+    
+    .download-section .btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+         /* Common Members Table Mobile */
+     .common-members-section {
+         margin-top: 16px;
+     }
+     
+     .common-members-section h4 {
+         font-size: 14px;
+         margin-bottom: 8px;
+     }
+     
+     /* Table Controls Mobile */
+     .table-controls {
+         flex-direction: column;
+         gap: 8px;
+         align-items: stretch;
+         padding: 8px 12px;
+     }
+     
+     .table-info {
+         text-align: center;
+         font-size: 12px;
+     }
+     
+     .table-actions {
+         justify-content: center;
+     }
+     
+     /* Pagination Mobile */
+     .pagination-container {
+         flex-direction: column;
+         gap: 12px;
+         padding: 8px;
+     }
+     
+     .pagination-controls {
+         flex-wrap: wrap;
+         justify-content: center;
+         gap: 4px;
+     }
+     
+     .page-numbers {
+         flex-wrap: wrap;
+         justify-content: center;
+         gap: 2px;
+     }
+     
+     .page-number {
+         min-width: 24px;
+         height: 24px;
+         font-size: 11px;
+         padding: 0 4px;
+     }
+     
+     .page-ellipsis {
+         min-width: 24px;
+         height: 24px;
+         font-size: 11px;
+         padding: 0 4px;
+     }
+     
+     .pagination-settings {
+         justify-content: center;
+     }
+     
+     .pagination-settings label {
+         font-size: 12px;
+     }
+     
+     .pagination-settings select {
+         padding: 3px 6px;
+         font-size: 12px;
+     }
+    
+    .common-members-container {
+        margin: 0 -8px;
+    }
+    
+    .common-members-table {
+        min-width: 700px;
+        font-size: 11px;
+    }
+    
+    .common-members-table th,
+    .common-members-table td {
+        padding: 6px 4px;
+        font-size: 10px;
+    }
+    
+    .rank-badge {
+        width: 18px;
+        height: 18px;
+        font-size: 9px;
+    }
+    
+    .sentiment-breakdown .sentiment {
+        padding: 1px 3px;
+        font-size: 8px;
+    }
+    
+    .group-names {
+        max-width: 100px;
+        font-size: 9px;
+    }
+    
+    .btn-sm {
+        padding: 3px 6px;
+        font-size: 9px;
+    }
+    
+    /* Search Results Container Mobile */
+    .search-results-container {
+        padding: 12px;
+        margin-top: 12px;
+    }
+    
+    .search-results-container h4 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .search-results-table {
+        min-width: 600px;
+        font-size: 10px;
+    }
+    
+    .search-results-table th,
+    .search-results-table td {
+        padding: 4px 3px;
+        font-size: 9px;
+    }
+    
+    .message-content {
+        max-width: 120px;
+    }
+    
+    .message-text {
+        font-size: 9px;
+        line-height: 1.2;
+    }
+    
+    .sender-info {
+        font-size: 9px;
+    }
+    
+    .sender-name {
+        font-size: 9px;
+        margin-bottom: 1px;
+    }
+    
+    .sender-phone {
+        font-size: 8px;
+    }
+    
+    .sentiment-badge {
+        padding: 1px 3px;
+        font-size: 8px;
+    }
+    
+    .label-badge {
+        padding: 1px 3px;
+        font-size: 8px;
     }
 }
 
@@ -1176,4 +1905,281 @@
     color: #6c757d;
     font-style: italic;
     padding: 40px;
+}
+
+/* Custom Dropdown Styles */
+.custom-dropdown-container {
+    position: relative;
+    width: 100%;
+}
+
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: white;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.dropdown-header:hover {
+    border-color: #667eea;
+}
+
+.dropdown-header.active {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.dropdown-placeholder {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.dropdown-arrow {
+    color: #6c757d;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-header.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #e1e5e9;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-height: 300px;
+    overflow: hidden;
+    display: none;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-search {
+    position: relative;
+    padding: 12px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.dropdown-search input {
+    width: 100%;
+    padding: 8px 12px 8px 36px;
+    border: 1px solid #e1e5e9;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.dropdown-search input:focus {
+    border-color: #667eea;
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.dropdown-options {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 8px 0;
+}
+
+.dropdown-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+}
+
+.dropdown-option:hover {
+    background: #f8f9fa;
+}
+
+.dropdown-option.selected {
+    background: #667eea;
+    color: white;
+}
+
+.dropdown-option input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.1);
+}
+
+.dropdown-option .assembly-name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.dropdown-actions {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-top: 1px solid #e9ecef;
+    background: #f8f9fa;
+}
+
+.btn-select-all,
+.btn-clear-all {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.btn-select-all {
+    background: #667eea;
+    color: white;
+}
+
+.btn-select-all:hover {
+    background: #5a67d8;
+}
+
+.btn-clear-all {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-clear-all:hover {
+    background: #c0392b;
+}
+
+.selected-assemblies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    min-height: 20px;
+}
+
+.selected-assembly-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    background: #667eea;
+    color: white;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.selected-assembly-tag:hover {
+    background: #5a67d8;
+    transform: translateY(-1px);
+}
+
+.selected-assembly-tag .remove-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.selected-assembly-tag .remove-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive adjustments for custom dropdown */
+@media (max-width: 768px) {
+    .dropdown-actions {
+        flex-direction: row;
+        gap: 8px;
+    }
+    
+    .btn-select-all,
+    .btn-clear-all {
+        flex: 1;
+        padding: 10px 16px;
+        font-size: 13px;
+        min-height: 40px;
+    }
+    
+    .dropdown-option {
+        padding: 10px 12px;
+    }
+    
+    .dropdown-option input[type="checkbox"] {
+        transform: scale(1.2);
+    }
+    
+    .dropdown-option .assembly-name {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dropdown-actions {
+        flex-direction: row;
+        gap: 6px;
+    }
+    
+    .btn-select-all,
+    .btn-clear-all {
+        padding: 8px 12px;
+        font-size: 12px;
+        min-height: 36px;
+    }
+    
+    .dropdown-option {
+        padding: 8px 12px;
+    }
+    
+    .dropdown-option input[type="checkbox"] {
+        transform: scale(1.1);
+    }
+    
+    .dropdown-option .assembly-name {
+        font-size: 13px;
+    }
+    
+    .selected-assembly-tag {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
 }

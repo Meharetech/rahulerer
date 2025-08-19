@@ -1,0 +1,77 @@
+[
+    {
+        "sender": {
+            "name": "kk029011983",
+            "phoneNumber": "918283849696"
+        },
+        "messageContent": "ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/101f7533-9d9f-4273-8f13-c6d03cab6bf1",
+        "timestamp": "2025-08-19T03:54:31.124Z",
+        "group_name": "Aap_Kot_Sivian_2025-08-19",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:21:30.906351",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "ਗੁਰਚਰਨ ਸਿੰਘ ਸਿੱਧੂ",
+            "phoneNumber": "918437480009"
+        },
+        "messageContent": "ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T03:54:31.126Z",
+        "group_name": "Aap_Kot_Sivian_2025-08-19",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:21:31.072848",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "ਗੁਰਚਰਨ ਸਿੰਘ ਸਿੱਧੂ",
+            "phoneNumber": "918437480009"
+        },
+        "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/591f3474-0553-4ff9-82db-86f1a8d62c4e",
+        "timestamp": "2025-08-19T03:54:31.129Z",
+        "group_name": "Aap_Kot_Sivian_2025-08-19",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:21:31.281144",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "ਗੁਰਚਰਨ ਸਿੰਘ ਸਿੱਧੂ",
+            "phoneNumber": "918437480009"
+        },
+        "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/c3ee1d14-2d89-4450-b6fb-27eb1c05f43e",
+        "timestamp": "2025-08-19T03:54:31.132Z",
+        "group_name": "Aap_Kot_Sivian_2025-08-19",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:21:31.468875",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "kk029011983",
+            "phoneNumber": "918283849696"
+        },
+        "messageContent": "ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/59a35af6-734a-46f8-be05-67e1ee96edf4",
+        "timestamp": "2025-08-19T03:54:31.135Z",
+        "group_name": "Aap_Kot_Sivian_2025-08-19",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:21:31.640699",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    }
+]

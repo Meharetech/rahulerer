@@ -2,6 +2,10 @@
 
 {% block title %}Message Management - Admin Dashboard{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/message_management.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="dashboard-layout">
     <!-- Include Admin Left Sidebar from Layout File -->
@@ -151,9 +155,13 @@
                 <textarea id="adminNotes" class="form-control" rows="3" placeholder="Add any notes about this status change..."></textarea>
             </div>
             <div class="form-group" id="completionFileGroup" style="display: none;">
-                <label for="completionFile">Completion File (Optional):</label>
+                <label for="completionFile">
+                    <i class="fas fa-file-upload"></i> Completion File (Optional)
+                </label>
                 <input type="file" id="completionFile" class="form-control" accept=".xlsx,.xls,.csv">
-                <small class="form-text">Upload Excel or CSV file to show completion proof. Only shown when status is "Completed".</small>
+                <small class="form-text">
+                    <i class="fas fa-info-circle"></i> Upload Excel or CSV file to show completion proof. Only shown when status is "Completed".
+                </small>
             </div>
         </div>
         <div class="modal-footer">

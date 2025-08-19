@@ -7,11 +7,14 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///whatsapp_ui.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
-    # Session configuration
-    PERMANENT_SESSION_LIFETIME = timedelta(hours=24)
+    # Session configuration - Improved for mobile compatibility
+    PERMANENT_SESSION_LIFETIME = timedelta(days=7)  # Extended to 7 days
     SESSION_COOKIE_SECURE = False  # Set to True in production with HTTPS
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = 'Lax'  # Better for mobile browsers
+    SESSION_COOKIE_DOMAIN = None  # Allow all domains
+    SESSION_COOKIE_PATH = '/'
+    SESSION_REFRESH_EACH_REQUEST = True  # Refresh session on each request
     
     # Security settings
     WTF_CSRF_ENABLED = True

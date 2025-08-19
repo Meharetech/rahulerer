@@ -831,61 +831,171 @@
 
 @media (max-width: 768px) {
     .main-content {
-        padding: 16px;
+        padding: 12px;
     }
     
     .main-header {
         flex-direction: column;
-        gap: 16px;
+        gap: 12px;
         text-align: center;
+        padding: 16px;
+        margin-bottom: 20px;
     }
     
     .main-header h1 {
-        font-size: 24px;
+        font-size: 20px;
+    }
+    
+    .header-actions {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .header-actions .btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .refresh-btn {
+        padding: 8px 12px;
     }
     
     .group-header {
-        padding: 24px;
+        padding: 20px;
+        margin-bottom: 20px;
     }
     
     .group-info {
         flex-direction: column;
         text-align: center;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
     }
     
     .group-avatar {
         margin-right: 0;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
+        font-size: 48px;
+    }
+    
+    .group-details h2 {
+        font-size: 24px;
+        margin-bottom: 6px;
     }
     
     .group-meta {
         justify-content: center;
         flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .meta-item {
+        font-size: 14px;
     }
     
     .group-stats {
         justify-content: center;
         flex-wrap: wrap;
+        gap: 16px;
+    }
+    
+    .stat-item {
+        font-size: 14px;
     }
     
     .sentiment-overview {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 12px;
+    }
+    
+    .sentiment-card {
+        padding: 16px;
+    }
+    
+    .sentiment-card .sentiment-icon {
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+    
+    .sentiment-card .sentiment-content h4 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+    
+    .sentiment-card .sentiment-count {
+        font-size: 24px;
+    }
+    
+    .top-sender-section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .top-sender-card {
+        padding: 16px;
+    }
+    
+    .top-sender-card .top-sender-avatar {
+        font-size: 36px;
+        margin-bottom: 12px;
+    }
+    
+    .top-sender-card .top-sender-name {
+        font-size: 18px;
+    }
+    
+    .top-sender-card .top-sender-phone {
+        font-size: 14px;
+        margin-bottom: 12px;
     }
     
     .top-sender-card .top-sender-stats {
         flex-direction: column;
-        gap: 16px;
+        gap: 8px;
+    }
+    
+    .unique-senders-section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .senders-table-container {
+        max-height: 400px;
+    }
+    
+    .senders-table {
+        font-size: 12px;
+    }
+    
+    .senders-table th,
+    .senders-table td {
+        padding: 8px 6px;
+    }
+    
+    .rank-badge {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+    }
+    
+    .sentiment-breakdown {
+        gap: 4px;
+    }
+    
+    .sentiment-breakdown .sentiment {
+        padding: 2px 6px;
+        font-size: 10px;
     }
     
     .search-filter-section {
-        padding: 24px;
+        padding: 20px;
+        margin-bottom: 20px;
     }
     
     .search-filter-controls {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 16px;
     }
     
     .clear-filters-control {
@@ -895,90 +1005,72 @@
     .clear-filters-control .btn {
         width: 100%;
         justify-content: center;
+        padding: 10px 16px;
     }
     
     .sentiment-filter-subsection {
-        padding-top: 20px;
+        padding-top: 16px;
+    }
+    
+    .sentiment-filter-subsection h4 {
+        font-size: 16px;
+        margin-bottom: 12px;
     }
     
     .sentiment-filter-buttons {
         flex-direction: column;
-        gap: 12px;
+        gap: 8px;
     }
     
     .sentiment-filter-btn {
         justify-content: center;
+        padding: 10px 16px;
+        font-size: 13px;
     }
     
     .sentiment-messages {
-        padding: 24px;
+        padding: 20px;
     }
     
     .sentiment-header {
         flex-direction: column;
-        gap: 12px;
+        gap: 8px;
         text-align: center;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+    }
+    
+    .sentiment-header h3 {
+        font-size: 18px;
+    }
+    
+    .message-card {
+        padding: 16px;
+    }
+    
+    .message-content {
+        font-size: 14px;
+        margin-bottom: 12px;
     }
     
     .message-meta {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 8px;
     }
     
     .meta-item {
         flex-direction: column;
         align-items: flex-start;
-        gap: 4px;
+        gap: 2px;
     }
     
     .meta-item .label {
         white-space: normal;
-    }
-    
-    .senders-table {
         font-size: 12px;
     }
     
-    .senders-table th,
-    .senders-table td {
-        padding: 12px 8px;
-    }
-    
-    /* Mobile adjustments for senders table */
-    .senders-table-container {
-        max-height: 500px; /* Medium height on tablets */
-    }
-    
-    .scroll-hint {
-        padding: 14px;
+    .meta-item .value {
         font-size: 13px;
-    }
-}
-
-@media (max-width: 480px) {
-    .group-details h2 {
-        font-size: 24px;
-    }
-    
-    .sentiment-card {
-        padding: 20px;
-    }
-    
-    .sentiment-card .sentiment-count {
-        font-size: 28px;
-    }
-    
-    .top-sender-card {
-        padding: 20px;
-    }
-    
-    .top-sender-card .top-sender-name {
-        font-size: 20px;
-    }
-    
-    /* Mobile adjustments for senders table */
-    .senders-table-container {
-        max-height: 400px; /* Smaller height on mobile */
     }
     
     .scroll-hint {
@@ -988,5 +1080,209 @@
     
     .scroll-hint i {
         font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 8px;
+    }
+    
+    .main-header {
+        padding: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .main-header h1 {
+        font-size: 18px;
+    }
+    
+    .header-actions .btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .refresh-btn {
+        padding: 6px 10px;
+    }
+    
+    .group-header {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .group-avatar {
+        font-size: 40px;
+        margin-bottom: 8px;
+    }
+    
+    .group-details h2 {
+        font-size: 20px;
+    }
+    
+    .group-meta {
+        gap: 12px;
+    }
+    
+    .meta-item {
+        font-size: 13px;
+    }
+    
+    .group-stats {
+        gap: 12px;
+    }
+    
+    .stat-item {
+        font-size: 13px;
+    }
+    
+    .sentiment-card {
+        padding: 12px;
+    }
+    
+    .sentiment-card .sentiment-icon {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+    
+    .sentiment-card .sentiment-content h4 {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    
+    .sentiment-card .sentiment-count {
+        font-size: 20px;
+    }
+    
+    .top-sender-section {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .top-sender-card {
+        padding: 12px;
+    }
+    
+    .top-sender-card .top-sender-avatar {
+        font-size: 32px;
+        margin-bottom: 8px;
+    }
+    
+    .top-sender-card .top-sender-name {
+        font-size: 16px;
+    }
+    
+    .top-sender-card .top-sender-phone {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+    
+    .unique-senders-section {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .senders-table-container {
+        max-height: 350px;
+    }
+    
+    .senders-table {
+        font-size: 11px;
+    }
+    
+    .senders-table th,
+    .senders-table td {
+        padding: 6px 4px;
+    }
+    
+    .rank-badge {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+    
+    .sentiment-breakdown .sentiment {
+        padding: 1px 4px;
+        font-size: 9px;
+    }
+    
+    .search-filter-section {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .search-filter-controls {
+        gap: 12px;
+    }
+    
+    .clear-filters-control .btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .sentiment-filter-subsection {
+        padding-top: 12px;
+    }
+    
+    .sentiment-filter-subsection h4 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .sentiment-filter-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+    
+    .sentiment-messages {
+        padding: 16px;
+    }
+    
+    .sentiment-header {
+        gap: 6px;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+    }
+    
+    .sentiment-header h3 {
+        font-size: 16px;
+    }
+    
+    .message-card {
+        padding: 12px;
+    }
+    
+    .message-content {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+    
+    .message-meta {
+        gap: 6px;
+    }
+    
+    .meta-item .label {
+        font-size: 11px;
+    }
+    
+    .meta-item .value {
+        font-size: 12px;
+    }
+    
+    .scroll-hint {
+        padding: 8px;
+        font-size: 11px;
+    }
+    
+    .scroll-hint i {
+        font-size: 11px;
+    }
+    
+    .section-header h3 {
+        font-size: 18px;
+    }
+    
+    .section-header p {
+        font-size: 13px;
     }
 }

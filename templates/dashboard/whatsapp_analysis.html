@@ -1,6 +1,10 @@
-{% extends "base.html" %}
+I{% extends "base.html" %}
 
 {% block title %}WhatsApp Analysis - WhatsApp UI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/whatsapp_analysis.css') }}">
+{% endblock %}
 
 {% block content %}
 <div class="dashboard-layout">
@@ -11,7 +15,7 @@
     <div class="main-content">
         <div class="main-header">
             <h1><i class="fas fa-calculator"></i> JSON File Counter</h1>
-            <button class="refresh-btn" onclick="location.reload()">
+            <button class="refresh-btn" onclick="location.reload()" title="Refresh Analysis">
                 <i class="fas fa-sync-alt"></i>
             </button>
         </div>
@@ -28,12 +32,37 @@
                 <div class="form-row">
                     <!-- Assembly Selection -->
                     <div class="form-group">
-                        <label for="assemblySelection">
+                        <label for="assemblyDropdown">
                             <i class="fas fa-building"></i> Select Assemblies
                         </label>
-                        <div class="assemblies-grid" id="assembliesGrid">
-                            <div class="loading-spinner">
-                                <i class="fas fa-spinner fa-spin"></i> Loading assemblies...
+                        <div class="custom-dropdown-container">
+                            <div class="custom-dropdown" id="assemblyDropdown">
+                                <div class="dropdown-header" onclick="toggleDropdown()">
+                                    <span class="dropdown-placeholder">Select assemblies...</span>
+                                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                </div>
+                                <div class="dropdown-content" id="dropdownContent">
+                                    <div class="dropdown-search">
+                                        <input type="text" id="assemblySearch" placeholder="Search assemblies..." onkeyup="filterAssemblies()">
+                                        <i class="fas fa-search search-icon"></i>
+                                    </div>
+                                    <div class="dropdown-options" id="dropdownOptions">
+                                        <div class="loading-spinner">
+                                            <i class="fas fa-spinner fa-spin"></i> Loading assemblies...
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-actions">
+                                        <button type="button" class="btn-select-all" onclick="selectAllAssemblies()">
+                                            <i class="fas fa-check-double"></i> Select All
+                                        </button>
+                                        <button type="button" class="btn-clear-all" onclick="clearAllAssemblies()">
+                                            <i class="fas fa-times"></i> Clear All
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="selected-assemblies" id="selectedAssemblies">
+                                <!-- Selected assemblies will be displayed here -->
                             </div>
                         </div>
                     </div>
@@ -91,10 +120,8 @@
                     </div>
                 </div>
                 
-
-                 <!-- Sentiment Filter -->
+                <!-- Sentiment Filter -->
                 <div class="form-row">
-                   
                     <div class="form-group">
                         <label for="sentiment">
                             <i class="fas fa-heart"></i> Sentiment Filter
@@ -112,12 +139,8 @@
                     <button type="button" class="btn btn-primary" onclick="analyzeJsonFiles()">
                         <i class="fas fa-calculator"></i> Apply Filter
                     </button>
-                    <button type="button" class="btn btn-info" onclick="analyzeGroupSenders()">
-                        <i class="fas fa-users"></i> Group Sender Analysis
-                    </button>
-                    <button type="button" class="btn btn-secondary" onclick="clearAnalysis()">
-                        <i class="fas fa-times"></i> Clear
-                    </button>
+                  
+                 
                 </div>
             </div>
             
@@ -295,7 +318,4 @@
 
 <!-- Include JavaScript -->
 <script src="{{ url_for('static', filename='js/whatsapp_analysis.js') }}"></script>
-
-<!-- Include CSS for additional styles -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 {% endblock %}

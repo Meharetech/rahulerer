@@ -144,38 +144,96 @@ async function loadAssemblies() {
     }
 }
 
-// Display assemblies as checkboxes
+// Display assemblies in dropdown
 function displayAssemblies() {
-    const container = document.getElementById('assembliesGrid');
+    const container = document.getElementById('dropdownOptions');
     if (!container) {
-        console.error('Assemblies grid container not found');
+        console.error('Dropdown options container not found');
         return;
     }
     
     if (assemblies.length === 0) {
-        container.innerHTML = '<p class="no-data">No assemblies found.</p>';
+        container.innerHTML = '<div class="no-results">No assemblies found.</div>';
         return;
     }
     
-    let html = '<div class="assemblies-checkboxes">';
+    let html = '';
     
     assemblies.forEach(assembly => {
         html += `
-            <div class="assembly-checkbox">
+            <div class="dropdown-option" data-assembly="${assembly.name}">
                 <input type="checkbox" 
                        id="assembly_${assembly.name}" 
                        value="${assembly.name}" 
                        onchange="toggleAssemblySelection('${assembly.name}')">
                 <label for="assembly_${assembly.name}">
-                    <i class="fas fa-building"></i>
+                    <i class="fas fa-building assembly-icon"></i>
                     <span class="assembly-name">${assembly.name}</span>
                 </label>
             </div>
         `;
     });
     
-    html += '</div>';
     container.innerHTML = html;
+}
+
+// Toggle dropdown visibility
+function toggleDropdown() {
+    const dropdown = document.getElementById('assemblyDropdown');
+    const content = document.getElementById('dropdownContent');
+    const header = dropdown.querySelector('.dropdown-header');
+    
+    if (content.classList.contains('show')) {
+        content.classList.remove('show');
+        header.classList.remove('active');
+    } else {
+        content.classList.add('show');
+        header.classList.add('active');
+        // Focus on search input when dropdown opens
+        setTimeout(() => {
+            const searchInput = document.getElementById('assemblySearch');
+            if (searchInput) {
+                searchInput.focus();
+            }
+        }, 100);
+    }
+}
+
+// Filter assemblies based on search input
+function filterAssemblies() {
+    const searchTerm = document.getElementById('assemblySearch').value.toLowerCase();
+    const options = document.querySelectorAll('.dropdown-option');
+    
+    options.forEach(option => {
+        const assemblyName = option.querySelector('.assembly-name').textContent.toLowerCase();
+        if (assemblyName.includes(searchTerm)) {
+            option.style.display = 'flex';
+        } else {
+            option.style.display = 'none';
+        }
+    });
+}
+
+// Select all assemblies
+function selectAllAssemblies() {
+    const checkboxes = document.querySelectorAll('.dropdown-option input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        if (!checkbox.checked) {
+            checkbox.checked = true;
+            toggleAssemblySelection(checkbox.value);
+        }
+    });
+}
+
+// Clear all assemblies
+function clearAllAssemblies() {
+    const checkboxes = document.querySelectorAll('.dropdown-option input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            checkbox.checked = false;
+            toggleAssemblySelection(checkbox.value);
+        }
+    });
 }
 
 // Toggle assembly selection
@@ -193,6 +251,8 @@ function toggleAssemblySelection(assemblyName) {
     }
     
     updateSelectedCount();
+    updateSelectedAssembliesDisplay();
+    updateDropdownPlaceholder();
 }
 
 // Update selected assemblies count
@@ -203,6 +263,79 @@ function updateSelectedCount() {
         countElement.textContent = count;
     }
 }
+
+// Update dropdown placeholder text
+function updateDropdownPlaceholder() {
+    const placeholder = document.querySelector('.dropdown-placeholder');
+    if (selectedAssemblies.size === 0) {
+        placeholder.textContent = 'Select assemblies...';
+        placeholder.classList.remove('has-selection');
+    } else if (selectedAssemblies.size === 1) {
+        placeholder.textContent = Array.from(selectedAssemblies)[0];
+        placeholder.classList.add('has-selection');
+    } else {
+        placeholder.textContent = `${selectedAssemblies.size} assemblies selected`;
+        placeholder.classList.add('has-selection');
+    }
+}
+
+// Update selected assemblies display
+function updateSelectedAssembliesDisplay() {
+    const container = document.getElementById('selectedAssemblies');
+    if (!container) return;
+    
+    if (selectedAssemblies.size === 0) {
+        container.innerHTML = '';
+        return;
+    }
+    
+    let html = `
+        <div class="selected-assemblies-header">
+            <div class="selected-assemblies-title">
+                <i class="fas fa-check-circle"></i>
+                Selected Assemblies
+            </div>
+            <span class="selected-count">${selectedAssemblies.size}</span>
+        </div>
+        <div class="selected-assemblies-list">
+    `;
+    
+    selectedAssemblies.forEach(assemblyName => {
+        html += `
+            <div class="selected-assembly-tag">
+                <i class="fas fa-building"></i>
+                <span>${assemblyName}</span>
+                <button type="button" class="remove-assembly" onclick="removeAssembly('${assemblyName}')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+// Remove assembly from selection
+function removeAssembly(assemblyName) {
+    const checkbox = document.getElementById(`assembly_${assemblyName}`);
+    if (checkbox) {
+        checkbox.checked = false;
+        toggleAssemblySelection(assemblyName);
+    }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('assemblyDropdown');
+    const content = document.getElementById('dropdownContent');
+    const header = dropdown.querySelector('.dropdown-header');
+    
+    if (!dropdown.contains(event.target)) {
+        content.classList.remove('show');
+        header.classList.remove('active');
+    }
+});
 
 // Get selected assemblies from checkboxes
 function getSelectedAssemblies() {
@@ -366,31 +499,17 @@ async function analyzeGroupMessageStats(startDate, endDate, sentiment) {
             const response = await fetch(`/api/get-assembly-messages/${assemblyName}?start_date=${startDate}&end_date=${endDate || ''}&sentiment=${sentiment}`);
             const data = await response.json();
             
-            if (data.success && data.messages) {
+            if (data.success) {
                 assemblyStats[assemblyName] = {
                     name: assemblyName,
-                    groups: {},
-                    totalMessages: 0,
-                    totalGroups: 0
+                    groups: data.groups || {},
+                    totalMessages: data.total_messages || 0,
+                    totalGroups: data.total_groups || 0
                 };
                 
-                data.messages.forEach(message => {
-                    totalMessages++;
-                    assemblyStats[assemblyName].totalMessages++;
-                    
-                    // Extract group name from file path or message data
-                    const groupName = extractGroupName(message, assemblyName);
-                    
-                    if (!assemblyStats[assemblyName].groups[groupName]) {
-                        assemblyStats[assemblyName].groups[groupName] = {
-                            name: groupName,
-                            count: 0
-                        };
-                        totalGroups++;
-                        assemblyStats[assemblyName].totalGroups++;
-                    }
-                    assemblyStats[assemblyName].groups[groupName].count++;
-                });
+                // Add to global totals
+                totalMessages += assemblyStats[assemblyName].totalMessages;
+                totalGroups += assemblyStats[assemblyName].totalGroups;
             }
         }
         
@@ -606,6 +725,22 @@ function openAssemblyAnalytics(assemblyName, assemblyDataEncoded) {
             } else {
                 console.log('No sentiment data available');
             }
+        }
+        
+        // Ensure we have the correct assembly-specific data
+        if (assemblyData.groups) {
+            // Calculate assembly-specific totals
+            const assemblyTotalMessages = Object.values(assemblyData.groups).reduce((total, group) => total + group.count, 0);
+            const assemblyTotalGroups = Object.keys(assemblyData.groups).length;
+            
+            // Update the data with assembly-specific totals
+            assemblyData.totalMessages = assemblyTotalMessages;
+            assemblyData.totalGroups = assemblyTotalGroups;
+            
+            console.log(`Assembly ${assemblyName} specific totals:`, {
+                totalMessages: assemblyTotalMessages,
+                totalGroups: assemblyTotalGroups
+            });
         }
         
         // Store assembly data in sessionStorage for the new page

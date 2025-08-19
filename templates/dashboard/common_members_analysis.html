@@ -48,12 +48,37 @@
                 <div class="form-row">
                     <!-- Assembly Selection -->
                     <div class="form-group">
-                        <label for="assemblySelection">
+                        <label for="assemblyDropdown">
                             <i class="fas fa-building"></i> Select Assemblies
                         </label>
-                        <div class="assemblies-grid" id="assembliesGrid">
-                            <div class="loading-spinner">
-                                <i class="fas fa-spinner fa-spin"></i> Loading assemblies...
+                        <div class="custom-dropdown-container">
+                            <div class="custom-dropdown" id="assemblyDropdown">
+                                <div class="dropdown-header" onclick="toggleDropdown()">
+                                    <span class="dropdown-placeholder">Select assemblies...</span>
+                                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                </div>
+                                <div class="dropdown-content" id="dropdownContent">
+                                    <div class="dropdown-search">
+                                        <input type="text" id="assemblySearch" placeholder="Search assemblies..." onkeyup="filterAssemblies()">
+                                        <i class="fas fa-search search-icon"></i>
+                                    </div>
+                                    <div class="dropdown-options" id="dropdownOptions">
+                                        <div class="loading-spinner">
+                                            <i class="fas fa-spinner fa-spin"></i> Loading assemblies...
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-actions">
+                                        <button type="button" class="btn-select-all" onclick="selectAllAssemblies()">
+                                            <i class="fas fa-check-double"></i> Select All
+                                        </button>
+                                        <button type="button" class="btn-clear-all" onclick="clearAllAssemblies()">
+                                            <i class="fas fa-times"></i> Clear All
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="selected-assemblies" id="selectedAssemblies">
+                                <!-- Selected assemblies will be displayed here -->
                             </div>
                         </div>
                     </div>
@@ -299,6 +324,19 @@
                 <!-- Common Members Table -->
                 <div class="common-members-section">
                     <h4><i class="fas fa-table"></i> Common Members Across Groups</h4>
+                    
+                    <!-- Table Controls -->
+                    <div class="table-controls">
+                        <div class="table-info">
+                            <span id="tableInfo">Showing 0 of 0 members</span>
+                        </div>
+                        <div class="table-actions">
+                            <button type="button" class="btn btn-outline btn-sm" onclick="exportCommonMembers()">
+                                <i class="fas fa-download"></i> Export Table
+                            </button>
+                        </div>
+                    </div>
+                    
                     <div class="common-members-container">
                         <table class="common-members-table">
                             <thead>
@@ -317,6 +355,33 @@
                                 <!-- Common members will be populated here -->
                             </tbody>
                         </table>
+                    </div>
+                    
+                    <!-- Pagination Controls -->
+                    <div class="pagination-container" id="paginationContainer" style="display: none;">
+                        <div class="pagination-info">
+                            <span id="paginationInfo">Page 1 of 1</span>
+                        </div>
+                        <div class="pagination-controls">
+                            <button type="button" class="btn btn-outline btn-sm" id="prevPageBtn" onclick="previousPage()" disabled>
+                                <i class="fas fa-chevron-left"></i> Previous
+                            </button>
+                            <div class="page-numbers" id="pageNumbers">
+                                <!-- Page numbers will be generated here -->
+                            </div>
+                            <button type="button" class="btn btn-outline btn-sm" id="nextPageBtn" onclick="nextPage()" disabled>
+                                Next <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="pagination-settings">
+                            <label for="itemsPerPage">Items per page:</label>
+                            <select id="itemsPerPage" onchange="changeItemsPerPage()">
+                                <option value="12" selected>12</option>
+                                <option value="15">15</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>

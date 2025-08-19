@@ -21,7 +21,10 @@ def create_app(config_class=Config):
     app.config['SESSION_COOKIE_SECURE'] = False  # Set to True in production with HTTPS
     app.config['SESSION_COOKIE_HTTPONLY'] = True
     app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=24)
+    app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
+    app.config['SESSION_REFRESH_EACH_REQUEST'] = True
+    app.config['SESSION_COOKIE_DOMAIN'] = None
+    app.config['SESSION_COOKIE_PATH'] = '/'
     
     # Configure login manager
     login_manager.login_view = 'auth.user_login'
@@ -47,10 +50,12 @@ def create_app(config_class=Config):
     
     # Create database tables and initialize default users
     with app.app_context():
-        db.create_all()
-        # Initialize default users
-        from utils.auth_utils import create_default_users
-        create_default_users()
+        try:
+            db.create_all()
+            from utils.auth_utils import create_default_users
+            create_default_users()
+        except Exception as e:
+            pass  # Silently handle database initialization errors
     
     return app
 

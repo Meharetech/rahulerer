@@ -2,6 +2,10 @@
 
 {% block title %}User Dashboard - WhatsApp UI{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard_statistics.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="dashboard-layout">
     <!-- Include Left Sidebar from Layout File -->
@@ -11,7 +15,7 @@
     <div class="main-content">
         <div class="main-header">
             <h1><i class="fas fa-comments"></i> WhatsApp Analytics</h1>
-            <button class="refresh-btn" onclick="location.reload()">
+            <button class="refresh-btn" onclick="location.reload()" title="Refresh Dashboard">
                 <i class="fas fa-sync-alt"></i>
             </button>
         </div>
@@ -124,38 +128,41 @@
                 <h3><i class="fas fa-history"></i> Recent Activity</h3>
             </div>
             
-            <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin-bottom: 20px;">
-                <div style="display: flex; align-items: center; margin-bottom: 15px; padding: 15px; background: white; border-radius: 10px;">
-                    <div style="width: 40px; height: 40px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 15px;">
+            <div class="recent-activity">
+                <div class="activity-item">
+                    <div class="activity-avatar whatsapp">
                         <i class="fas fa-user"></i>
                     </div>
-                    <div>
-                        <div style="font-weight: 500; color: #333;">John Doe</div>
-                        <div style="color: #666; font-size: 14px;">Sent you a message 2 minutes ago</div>
+                    <div class="activity-content">
+                        <div class="activity-name">John Doe</div>
+                        <div class="activity-time">Sent you a message 2 minutes ago</div>
                     </div>
                 </div>
                 
-                <div style="display: flex; align-items: center; margin-bottom: 15px; padding: 15px; background: white; border-radius: 10px;">
-                    <div style="width: 40px; height: 40px; background: #667eea; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 15px;">
+                <div class="activity-item">
+                    <div class="activity-avatar user">
                         <i class="fas fa-user"></i>
                     </div>
-                    <div>
-                        <div style="font-weight: 500; color: #333;">Jane Smith</div>
-                        <div style="color: #666; font-size: 14px;">You sent a message 5 minutes ago</div>
+                    <div class="activity-content">
+                        <div class="activity-name">Jane Smith</div>
+                        <div class="activity-time">You sent a message 5 minutes ago</div>
                     </div>
                 </div>
                 
-                <div style="display: flex; align-items: center; padding: 15px; background: white; border-radius: 10px;">
-                    <div style="width: 40px; height: 40px; background: #ff6b6b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-right: 15px;">
+                <div class="activity-item">
+                    <div class="activity-avatar group">
                         <i class="fas fa-users"></i>
                     </div>
-                    <div>
-                        <div style="font-weight: 500; color: #333;">Work Group</div>
-                        <div style="color: #666; font-size: 14px;">New message in group 10 minutes ago</div>
+                    <div class="activity-content">
+                        <div class="activity-name">Work Group</div>
+                        <div class="activity-time">New message in group 10 minutes ago</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Include JavaScript -->
+<script src="{{ url_for('static', filename='js/user_dashboard.js') }}"></script>
 {% endblock %}

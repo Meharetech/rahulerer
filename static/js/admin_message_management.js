@@ -347,7 +347,7 @@ function openStatusUpdate(postId) {
         document.getElementById('adminNotes').value = '';
         document.getElementById('completionFile').value = '';
         
-        // Show/hide completion file field based on status
+        // Show/hide completion file field based on current status
         const completionFileGroup = document.getElementById('completionFileGroup');
         if (post.status === 'completed') {
             completionFileGroup.style.display = 'block';
@@ -355,14 +355,43 @@ function openStatusUpdate(postId) {
             completionFileGroup.style.display = 'none';
         }
         
-        // Add event listener to show/hide completion file field
+        // Add event listener to show/hide completion file field when status changes
         document.getElementById('newStatus').onchange = function() {
             if (this.value === 'completed') {
                 completionFileGroup.style.display = 'block';
+                // Add visual feedback
+                completionFileGroup.style.animation = 'fadeIn 0.3s ease-in';
             } else {
                 completionFileGroup.style.display = 'none';
             }
         };
+        
+        // Add event listener for file selection feedback
+        document.getElementById('completionFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                // Show file info
+                const fileInfo = document.createElement('div');
+                fileInfo.className = 'file-info';
+                fileInfo.innerHTML = `
+                    <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                    <span style="margin-left: 0.5rem; font-weight: 500;">${file.name} (${(file.size / 1024).toFixed(1)} KB)</span>
+                `;
+                fileInfo.style.marginTop = '0.5rem';
+                fileInfo.style.padding = '0.5rem';
+                fileInfo.style.background = '#f0fdf4';
+                fileInfo.style.border = '1px solid #bbf7d0';
+                fileInfo.style.borderRadius = 'var(--radius-sm)';
+                
+                // Remove any existing file info
+                const existingInfo = completionFileGroup.querySelector('.file-info');
+                if (existingInfo) {
+                    existingInfo.remove();
+                }
+                
+                completionFileGroup.appendChild(fileInfo);
+            }
+        });
         
         // Show current status info
         const currentStatus = post.status.toUpperCase();

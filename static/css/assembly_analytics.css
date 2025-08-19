@@ -1,0 +1,1164 @@
+/* Assembly Analytics CSS - Compact Design for Desktop and Mobile */
+
+/* ============================================================================
+   GLOBAL STYLES
+   ============================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ============================================================================
+   MAIN CONTAINER LAYOUT
+   ============================================================================ */
+
+.main-container {
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 280px;
+    background: #f8f9fa;
+    border-right: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    margin-left: 280px;
+    background: white;
+    min-height: 100vh;
+    transition: margin-left 0.3s ease;
+    width: calc(100vw - 280px);
+    overflow-x: hidden;
+}
+
+/* ============================================================================
+   NAVIGATION HEADER
+   ============================================================================ */
+
+.navbar {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.nav-brand i {
+    font-size: 1.5rem;
+}
+
+.nav-actions .btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid rgba(255,255,255,0.3);
+    background: transparent;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.nav-actions .btn:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+    transform: translateY(-2px);
+}
+
+/* ============================================================================
+   MAIN CONTAINER
+   ============================================================================ */
+
+.container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 1.25rem;
+    box-sizing: border-box;
+}
+
+/* ============================================================================
+   ASSEMBLY ANALYTICS HEADER
+   ============================================================================ */
+
+.assembly-analytics-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.25rem;
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.assembly-info h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.assembly-info h1 i {
+    font-size: 2rem;
+}
+
+.assembly-description {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+}
+
+.assembly-stats-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.stat-card {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+    opacity: 0.9;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================================================
+   SENTIMENT OVERVIEW SECTION
+   ============================================================================ */
+
+.sentiment-overview-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+}
+
+.section-header {
+    margin-bottom: 1rem;
+}
+
+.section-header h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-header h3 i {
+    color: #25D366;
+    font-size: 1rem;
+}
+
+.section-header p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.sentiment-overview-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.sentiment-card {
+    border-radius: 10px;
+    padding: 1.25rem 0.75rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sentiment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.sentiment-card.positive {
+    background: #e8f5e8;
+}
+
+.sentiment-card.negative {
+    background: #ffeaea;
+}
+
+.sentiment-card.neutral {
+    background: #f5f5f5;
+}
+
+.sentiment-icon-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    position: relative;
+}
+
+.sentiment-card.positive .sentiment-icon-container {
+    background: #28a745;
+}
+
+.sentiment-card.negative .sentiment-icon-container {
+    background: #dc3545;
+}
+
+.sentiment-card.neutral .sentiment-icon-container {
+    background: #6c757d;
+}
+
+.sentiment-icon {
+    font-size: 2rem;
+    color: white;
+}
+
+.sentiment-count {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+    line-height: 1;
+}
+
+.sentiment-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #2c3e50;
+}
+
+.sentiment-percentage {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sentiment-card.positive .sentiment-percentage {
+    background: #d4edda;
+    color: #155724;
+}
+
+.sentiment-card.negative .sentiment-percentage {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.sentiment-card.neutral .sentiment-percentage {
+    background: #6c757d;
+    color: white;
+}
+
+/* ============================================================================
+   ANALYTICS SECTIONS
+   ============================================================================ */
+
+.analytics-sections {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.analytics-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+    margin-bottom: 1.5rem;
+}
+
+/* Top Groups Grid */
+.top-groups-grid {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: #25D366 #f0f0f0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.top-groups-grid::-webkit-scrollbar {
+    height: 6px;
+}
+
+.top-groups-grid::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 3px;
+}
+
+.top-groups-grid::-webkit-scrollbar-thumb {
+    background: #25D366;
+    border-radius: 3px;
+}
+
+.top-groups-grid::-webkit-scrollbar-thumb:hover {
+    background: #128C7E;
+}
+
+.top-group-card {
+    min-width: 220px;
+    max-width: 280px;
+    background: white;
+    border-radius: 10px;
+    padding: 1.25rem;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.top-group-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.top-group-card.rank-1 {
+    background: #fff3cd;
+    border-color: #ffc107;
+}
+
+.top-group-card.rank-2 {
+    background: #f8f9fa;
+    border-color: #6c757d;
+}
+
+.top-group-card.rank-3 {
+    background: #fff5e6;
+    border-color: #fd7e14;
+}
+
+.top-group-card.other-ranks {
+    background: white;
+    border-color: #e9ecef;
+}
+
+.rank-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.top-group-card.rank-1 .rank-badge {
+    background: #ffc107;
+}
+
+.top-group-card.rank-2 .rank-badge {
+    background: #6c757d;
+}
+
+.top-group-card.rank-3 .rank-badge {
+    background: #fd7e14;
+}
+
+.top-group-card.other-ranks .rank-badge {
+    background: #343a40;
+}
+
+.group-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+    word-wrap: break-word;
+}
+
+.group-info {
+    margin-bottom: 1rem;
+}
+
+.group-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.message-count {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.percentage {
+    background: #667eea;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Progress bar removed for cleaner design */
+
+/* Distribution Chart */
+.distribution-chart {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.distribution-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.distribution-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.distribution-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.distribution-item:last-child {
+    border-bottom: none;
+}
+
+.distribution-rank {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.distribution-group-name {
+    flex: 2;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1rem;
+    line-height: 1.4;
+    word-break: break-word;
+    padding: 0 0.5rem;
+}
+
+.distribution-bar-container {
+    flex: 3;
+    height: 12px;
+    background: #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 1rem;
+}
+
+.distribution-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 6px;
+    transition: width 0.3s ease;
+    box-shadow: 0 1px 3px rgba(102, 126, 234, 0.3);
+}
+
+.distribution-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    min-width: 100px;
+    text-align: right;
+    flex: 1;
+}
+
+.distribution-count {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2c3e50;
+    background: #e8f4fd;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #b3d9ff;
+}
+
+.distribution-percentage {
+    font-size: 0.85rem;
+    color: #667eea;
+    font-weight: 600;
+    background: #f0f4ff;
+    padding: 0.2rem 0.4rem;
+    border-radius: 12px;
+    border: 1px solid #d1e7ff;
+}
+
+/* Rank-specific colors for distribution items */
+.distribution-item:nth-child(1) .distribution-rank {
+    background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+}
+
+.distribution-item:nth-child(2) .distribution-rank {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3);
+}
+
+.distribution-item:nth-child(3) .distribution-rank {
+    background: linear-gradient(135deg, #fd7e14 0%, #e55a00 100%);
+    box-shadow: 0 2px 8px rgba(253, 126, 20, 0.3);
+}
+
+.distribution-item:nth-child(1) .distribution-bar {
+    background: linear-gradient(90deg, #ffc107 0%, #ff8f00 100%);
+    box-shadow: 0 1px 3px rgba(255, 193, 7, 0.3);
+}
+
+.distribution-item:nth-child(2) .distribution-bar {
+    background: linear-gradient(90deg, #6c757d 0%, #495057 100%);
+    box-shadow: 0 1px 3px rgba(108, 117, 125, 0.3);
+}
+
+.distribution-item:nth-child(3) .distribution-bar {
+    background: linear-gradient(90deg, #fd7e14 0%, #e55a00 100%);
+    box-shadow: 0 1px 3px rgba(253, 126, 20, 0.3);
+}
+
+/* Other groups item */
+.distribution-item.other-groups {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.distribution-item.other-groups .distribution-rank {
+    background: #6c757d;
+}
+
+/* Groups Table */
+.groups-table-container {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.table-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #25D366;
+    box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+}
+
+.sort-select {
+    padding: 0.75rem 1rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: #25D366;
+    box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+}
+
+.groups-table {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+}
+
+.groups-table-content {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.groups-table-content th {
+    background: #f8f9fa;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.groups-table-content td {
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    color: #666;
+}
+
+.groups-table-content tr:hover {
+    background: #f8f9fa;
+}
+
+.group-name-cell {
+    font-weight: 600;
+    color: #25D366;
+}
+
+.message-count-cell {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Loading Placeholder */
+.loading-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: #666;
+    font-size: 1rem;
+}
+
+.loading-placeholder i {
+    font-size: 2rem;
+    color: #25D366;
+    margin-bottom: 1rem;
+}
+
+/* ============================================================================
+   MOBILE RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    /* Mobile Layout */
+    .main-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100vw;
+        overflow-x: hidden;
+    }
+
+    /* Mobile Navigation */
+    .navbar {
+        padding: 1rem;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .nav-brand {
+        font-size: 1.1rem;
+    }
+
+    .nav-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Mobile Container */
+    .container {
+        padding: 0.5rem;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        overflow-x: hidden;
+    }
+
+    /* Mobile Assembly Header */
+    .assembly-analytics-header {
+        padding: 0.75rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .assembly-info h1 {
+        font-size: 2rem;
+    }
+    
+    .assembly-stats-overview {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .stat-icon {
+        font-size: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    /* Mobile Sections */
+    .sentiment-overview-section,
+    .analytics-section {
+        padding: 0.75rem;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    .section-header h3 {
+        font-size: 1.25rem;
+    }
+
+    .sentiment-overview-cards {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .sentiment-card {
+        padding: 1.5rem;
+    }
+
+    .sentiment-icon-container {
+        width: 60px;
+        height: 60px;
+    }
+
+    .sentiment-icon {
+        font-size: 2rem;
+    }
+
+    .sentiment-count {
+        font-size: 2.5rem;
+    }
+
+    .sentiment-label {
+        font-size: 1rem;
+    }
+
+    /* Mobile Top Groups */
+    .top-groups-grid {
+        gap: 0.5rem;
+        padding: 0.25rem 0;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: #25D366 #f0f0f0;
+    }
+
+    .top-groups-grid::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .top-groups-grid::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 2px;
+    }
+
+    .top-groups-grid::-webkit-scrollbar-thumb {
+        background: #25D366;
+        border-radius: 2px;
+    }
+
+    .top-group-card {
+        min-width: 180px;
+        max-width: 240px;
+        padding: 0.75rem;
+        flex-shrink: 0;
+    }
+
+    .rank-badge {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+
+    .group-name {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+        word-break: break-word;
+        line-height: 1.2;
+    }
+
+    .message-count {
+        font-size: 0.9rem;
+    }
+
+    .percentage {
+        font-size: 0.75rem;
+        padding: 0.15rem 0.5rem;
+    }
+
+    /* Progress bar removed for cleaner design */
+
+    /* Mobile Distribution Chart */
+    .distribution-chart {
+        padding: 0.75rem;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .distribution-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 0.5rem;
+    }
+
+    .distribution-rank {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+    }
+
+    .distribution-group-name {
+        font-size: 0.9rem;
+        width: 100%;
+        word-break: break-word;
+        line-height: 1.3;
+        padding: 0;
+    }
+
+    .distribution-bar-container {
+        width: 100%;
+        height: 10px;
+        margin: 0.5rem 0;
+    }
+
+    .distribution-stats {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        min-width: auto;
+        font-size: 0.8rem;
+        gap: 0.5rem;
+    }
+
+    .distribution-count {
+        font-size: 0.85rem;
+        padding: 0.15rem 0.4rem;
+    }
+
+    .distribution-percentage {
+        font-size: 0.75rem;
+        padding: 0.1rem 0.3rem;
+    }
+
+    /* Mobile Table */
+    .groups-table-container {
+        padding: 0.75rem;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    
+    .table-filters {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    
+    .groups-table-content {
+        font-size: 0.8rem;
+        min-width: 100%;
+    }
+    
+    .groups-table-content th,
+    .groups-table-content td {
+        padding: 0.5rem 0.25rem;
+        white-space: nowrap;
+    }
+    
+    .groups-table-content th:first-child,
+    .groups-table-content td:first-child {
+        position: sticky;
+        left: 0;
+        background: white;
+        z-index: 1;
+    }
+
+    /* Mobile Loading */
+    .loading-placeholder {
+        padding: 2rem;
+        font-size: 0.9rem;
+    }
+
+    .loading-placeholder i {
+        font-size: 1.5rem;
+    }
+}
+
+/* ============================================================================
+   TABLET RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .sidebar {
+        width: 250px;
+    }
+
+    .main-content {
+        margin-left: 250px;
+        width: calc(100vw - 250px);
+    }
+
+    .container {
+        padding: 1.5rem;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
+
+    .assembly-stats-overview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sentiment-overview-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .top-groups-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ============================================================================
+   LARGE DESKTOP ENHANCEMENTS
+   ============================================================================ */
+
+@media (min-width: 1025px) {
+    .sidebar {
+        width: 300px;
+    }
+
+    .main-content {
+        margin-left: 300px;
+        width: calc(100vw - 300px);
+    }
+
+    .container {
+        padding: 3rem;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
+
+    .assembly-stats-overview {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .sentiment-overview-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .top-groups-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ============================================================================
+   ANIMATIONS AND TRANSITIONS
+   ============================================================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.assembly-analytics-header,
+.sentiment-overview-section,
+.analytics-section {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.sentiment-card,
+.group-card {
+    transition: all 0.3s ease;
+}
+
+/* ============================================================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================================================ */
+
+/* Focus states */
+.search-input:focus,
+.sort-select:focus,
+.nav-actions .btn:focus {
+    outline: 2px solid #25D366;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .assembly-analytics-header,
+    .sentiment-overview-section,
+    .analytics-section {
+        border: 2px solid #333;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .assembly-analytics-header,
+    .sentiment-overview-section,
+    .analytics-section,
+    .sentiment-card,
+    .group-card {
+        animation: none;
+        transition: none;
+    }
+}

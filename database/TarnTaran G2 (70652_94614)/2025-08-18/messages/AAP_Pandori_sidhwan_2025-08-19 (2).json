@@ -1,0 +1,882 @@
+[
+    {
+        "sender": {
+            "name": "𝐇όℕέƳ  ♩",
+            "phoneNumber": "919814493912"
+        },
+        "messageContent": "",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/c5cd1f58-6e23-461b-a2c5-44fc609530c9",
+        "timestamp": "2025-08-19T04:28:46.765Z"
+    },
+    {
+        "sender": {
+            "name": "Gurpreet Singh Sidhu",
+            "phoneNumber": "919779548615"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:46.767Z"
+    },
+    {
+        "sender": {
+            "name": "Palwinder Sidhu",
+            "phoneNumber": "918146276713"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Rashpal Singh",
+            "phoneNumber": "916284394003"
+        },
+        "messageContent": "https://www.facebook.com/share/v/1A1SrYjEQD/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:46.771Z"
+    },
+    {
+        "sender": {
+            "name": "Rashpal Singh",
+            "phoneNumber": "916284394003"
+        },
+        "messageContent": "https://www.facebook.com/share/v/1Zgu1yjyoR/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Waheguru",
+            "phoneNumber": "918194919956"
+        },
+        "messageContent": "",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/a8c47a38-634b-422c-946a-4def21ccc43b",
+        "timestamp": "2025-08-19T04:28:46.774Z"
+    },
+    {
+        "sender": {
+            "name": "Rashpal Singh",
+            "phoneNumber": "916284394003"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/1d8a89f4-29ac-436e-a0b0-7bc943b4c5bb",
+        "timestamp": "2025-08-19T04:28:46.775Z",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:46.997810",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Rashpal Singh",
+            "phoneNumber": "916284394003"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:47.184246",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Mohansinghsidhu",
+            "phoneNumber": "919872893853"
+        },
+        "messageContent": "https://youtube.com/shorts/-bduhZRBiEY?si=7XpK6ADFajmeskqu",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:47.662Z"
+    },
+    {
+        "sender": {
+            "name": "Hardeep Chabhal",
+            "phoneNumber": "919915950074"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/8274ac6e-986a-4cf7-94b2-84ded0c895ed",
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:47.357165",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "️Kaka Sidhwan️",
+            "phoneNumber": "919781181858"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1CfHStqXPq/?mibextid=wwXIfr",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "MALKEET SIDHU",
+            "phoneNumber": "918437473619"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:47.555244",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Rashpal Singh",
+            "phoneNumber": "916284394003"
+        },
+        "messageContent": "https://www.facebook.com/share/r/179bAxANxu/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Rashpal Singh",
+            "phoneNumber": "916284394003"
+        },
+        "messageContent": "https://www.facebook.com/share/v/17AnhLDDb2/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:47.740992",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "️Kaka Sidhwan️",
+            "phoneNumber": "919781181858"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:47.944839",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Rashpal Singh",
+            "phoneNumber": "916284394003"
+        },
+        "messageContent": "https://www.facebook.com/share/v/1J1giosP3S/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Rashpal Singh",
+            "phoneNumber": "916284394003"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1BCKZsX7Pq/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:48.106588",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Rashpal Singh",
+            "phoneNumber": "916284394003"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:48.284318",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "️Kaka Sidhwan️",
+            "phoneNumber": "919781181858"
+        },
+        "messageContent": "6\n22\n30 \nਇਹ ਪੁਆਇੰਟ ਕਿਸਾਨਾ ਦੇ ਸਹੀ ਤੇ ਹੈਗੇ ਪਰ ਲਿਖੇ  ਤਿੰਨ ਵਾਰ ਆ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:48.511057",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "️Kaka Sidhwan️",
+            "phoneNumber": "919781181858"
+        },
+        "messageContent": "8.\n\n52.000 ਨੌਕਰੀਆਂ ਕਿੱਥੇ ਦੇ ਦਿਤੀਆ, ਇਹ ਨੀ ਅਜੇ ਤੱਕ ਪਤਾ ਲੱਗਾ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:48.742027",
+        "predicted_label": "sports_news",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "️Kaka Sidhwan️",
+            "phoneNumber": "919781181858"
+        },
+        "messageContent": "6\n22\n30 \nਇਹ ਪੁਆਇੰਟ ਕਿਸਾਨਾ ਦੇ ਸਹੀ ਤੇ ਹੈਗੇ ਪਰ ਲਿਖੇ  ਤਿੰਨ ਵਾਰ ਆ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:48.945166",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "️Kaka Sidhwan️",
+            "phoneNumber": "919781181858"
+        },
+        "messageContent": "6\n22\n30 \nਇਹ ਪੁਆਇੰਟ ਕਿਸਾਨਾ ਦੇ ਸਹੀ ਤੇ ਹੈਗੇ ਪਰ ਲਿਖੇ  ਤਿੰਨ ਵਾਰ ਆ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:50.553Z",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:49.142896",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "️Kaka Sidhwan️",
+            "phoneNumber": "919781181858"
+        },
+        "messageContent": "ਨੰਬਰ ਪੁਆਇੰਟ\n\nਜਿਹੜੇ 881 ਮੁਹੱਲਾ ਕਲੀਨਿਕ ਦੀ ਗੱਲ ਆ ਇਹ NRHM ਨੇ ਪੈਸੇ ਸਿਹਤ ਸੇਵਾਵਾ ਲਈ ਫੰਡ ਦਿੱਤੇ ਤੇ ਸਰਕਾਰ ਨੇ PHC, UCHC, CHC ਹਸਪਤਾਲਾ ਨੂੰ ਰਿਪੇਅਰ ਕਰਾ ਕੇ ਆਮ ਆਦਮੀ ਕਲੀਨਿਕ ਦੇ ਬੋਰਡ ਲਾ ਦਿੱਤੇ. ਜੋ ਕਿ ਹੁਣ ਸ਼ਹਿਰ ਆ ਚ ਇਹ ਹਟਾ ਕੇ NRHM ਦੇ ਬੋਰਡ ਲੱਗ ਰਹੇ ਆ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:50.554Z",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:49.645416",
+        "predicted_label": "health_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "DhanDhan Baba Bhuda Sahib",
+            "phoneNumber": "918872273339"
+        },
+        "messageContent": "https://www.instagram.com/reel/DNKf_TQtgzn/?igsh=MWh5cDIxNnl0NHdqbw==",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:50.555Z"
+    },
+    {
+        "sender": {
+            "name": "️Kaka Sidhwan️",
+            "phoneNumber": "919781181858"
+        },
+        "messageContent": "ਸਭ ਤੋ ਪਹਿਲਾ ਬੇੜਾ ਗਰਕ ਕੀਤਾ ਅਕਾਲੀ ਦਲ ਨੇ 2011 ਚ 108 ਐਂਬੂਲੈਂਸ ਤੇ ਬਾਦਲਾ ਨੇ ਅਪਣੀਆਂ ਫੋਟੋਆ ਲਾ ਕੇ ਝੂਠਾ ਗੁੰਮਰਾਹ  ਕੀਤਾ ਤੇ ਠੇਕਾ ਸਿਸਟਮ ਕੰਪਨੀ ਨੂੰ ਦੇ ਗਏ. \n\nਓਸ ਤੋ ਬਾਅਦ ਕਾਂਗਰਸ ਸਰਕਾਰ ਨੇ ਬੇੜਾ ਗਰਕ ਕੀਤਾ,\nਹੜ੍ਹ ਤੇ ਕੋਰੋਨਾ ਟਾਈਮ ਚ ਫਰੰਟ ਲਾਈਨ ਤੇ ਅੱਗੇ ਹੋ ਕੇ 108 ਐਂਬੂਲੈਂਸ ਨੇ ਕੰਮ ਕੀਤਾ,\nਤੇ ਓਸ ਟਾਈਮ ਦੀ ਕਾਂਗਰਸ ਸਰਕਾਰ ਇੱਕ ਪਰਸੈਂਟ ਵੀ ਕੋਈ ਲਾਭ ਨਹੀਂ ਦੇ ਸਕੀ ਮੁਲਾਜ਼ਮਾਂ ਨੂੰ\n\nਤੇ ਬਾਕੀ ਹੁਣ ਦੀ ਮੌਜੂਦਾ ਸਰਕਾਰ ਆਮ ਆਦਮੀ ਪਾਰਟੀ ਤੇ ਆਸਾ ਆ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:50.340862",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "️Kaka Sidhwan️",
+            "phoneNumber": "919781181858"
+        },
+        "messageContent": "ਸਭ ਤੋ ਪਹਿਲਾ ਬੇੜਾ ਗਰਕ ਕੀਤਾ ਅਕਾਲੀ ਦਲ ਨੇ 2011 ਚ 108 ਐਂਬੂਲੈਂਸ ਤੇ ਬਾਦਲਾ ਨੇ ਅਪਣੀਆਂ ਫੋਟੋਆ ਲਾ ਕੇ ਝੂਠਾ ਗੁੰਮਰਾਹ  ਕੀਤਾ ਤੇ ਠੇਕਾ ਸਿਸਟਮ ਕੰਪਨੀ ਨੂੰ ਦੇ ਗਏ. \n\nਓਸ ਤੋ ਬਾਅਦ ਕਾਂਗਰਸ ਸਰਕਾਰ ਨੇ ਬੇੜਾ ਗਰਕ ਕੀਤਾ,\nਹੜ੍ਹ ਤੇ ਕੋਰੋਨਾ ਟਾਈਮ ਚ ਫਰੰਟ ਲਾਈਨ ਤੇ ਅੱਗੇ ਹੋ ਕੇ 108 ਐਂਬੂਲੈਂਸ ਨੇ ਕੰਮ ਕੀਤਾ,\nਤੇ ਓਸ ਟਾਈਮ ਦੀ ਕਾਂਗਰਸ ਸਰਕਾਰ ਇੱਕ ਪਰਸੈਂਟ ਵੀ ਕੋਈ ਲਾਭ ਨਹੀਂ ਦੇ ਸਕੀ ਮੁਲਾਜ਼ਮਾਂ ਨੂੰ\n\nਤੇ ਬਾਕੀ ਹੁਣ ਦੀ ਮੌਜੂਦਾ ਸਰਕਾਰ ਆਮ ਆਦਮੀ ਪਾਰਟੀ ਤੇ ਆਸਾ ਆ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:51.042911",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "️Kaka Sidhwan️",
+            "phoneNumber": "919781181858"
+        },
+        "messageContent": "ਸਭ ਤੋ ਪਹਿਲਾ ਬੇੜਾ ਗਰਕ ਕੀਤਾ ਅਕਾਲੀ ਦਲ ਨੇ 2011 ਚ 108 ਐਂਬੂਲੈਂਸ ਤੇ ਬਾਦਲਾ ਨੇ ਅਪਣੀਆਂ ਫੋਟੋਆ ਲਾ ਕੇ ਝੂਠਾ ਗੁੰਮਰਾਹ  ਕੀਤਾ ਤੇ ਠੇਕਾ ਸਿਸਟਮ ਕੰਪਨੀ ਨੂੰ ਦੇ ਗਏ. \n\nਓਸ ਤੋ ਬਾਅਦ ਕਾਂਗਰਸ ਸਰਕਾਰ ਨੇ ਬੇੜਾ ਗਰਕ ਕੀਤਾ,\nਹੜ੍ਹ ਤੇ ਕੋਰੋਨਾ ਟਾਈਮ ਚ ਫਰੰਟ ਲਾਈਨ ਤੇ ਅੱਗੇ ਹੋ ਕੇ 108 ਐਂਬੂਲੈਂਸ ਨੇ ਕੰਮ ਕੀਤਾ,\nਤੇ ਓਸ ਟਾਈਮ ਦੀ ਕਾਂਗਰਸ ਸਰਕਾਰ ਇੱਕ ਪਰਸੈਂਟ ਵੀ ਕੋਈ ਲਾਭ ਨਹੀਂ ਦੇ ਸਕੀ ਮੁਲਾਜ਼ਮਾਂ ਨੂੰ\n\nਤੇ ਬਾਕੀ ਹੁਣ ਦੀ ਮੌਜੂਦਾ ਸਰਕਾਰ ਆਮ ਆਦਮੀ ਪਾਰਟੀ ਤੇ ਆਸਾ ਆ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:51.790367",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "️Kaka Sidhwan️",
+            "phoneNumber": "919781181858"
+        },
+        "messageContent": "ਸਭ ਤੋ ਪਹਿਲਾ ਬੇੜਾ ਗਰਕ ਕੀਤਾ ਅਕਾਲੀ ਦਲ ਨੇ 2011 ਚ 108 ਐਂਬੂਲੈਂਸ ਤੇ ਬਾਦਲਾ ਨੇ ਅਪਣੀਆਂ ਫੋਟੋਆ ਲਾ ਕੇ ਝੂਠਾ ਗੁੰਮਰਾਹ  ਕੀਤਾ ਤੇ ਠੇਕਾ ਸਿਸਟਮ ਕੰਪਨੀ ਨੂੰ ਦੇ ਗਏ. \n\nਓਸ ਤੋ ਬਾਅਦ ਕਾਂਗਰਸ ਸਰਕਾਰ ਨੇ ਬੇੜਾ ਗਰਕ ਕੀਤਾ,\nਹੜ੍ਹ ਤੇ ਕੋਰੋਨਾ ਟਾਈਮ ਚ ਫਰੰਟ ਲਾਈਨ ਤੇ ਅੱਗੇ ਹੋ ਕੇ 108 ਐਂਬੂਲੈਂਸ ਨੇ ਕੰਮ ਕੀਤਾ,\nਤੇ ਓਸ ਟਾਈਮ ਦੀ ਕਾਂਗਰਸ ਸਰਕਾਰ ਇੱਕ ਪਰਸੈਂਟ ਵੀ ਕੋਈ ਲਾਭ ਨਹੀਂ ਦੇ ਸਕੀ ਮੁਲਾਜ਼ਮਾਂ ਨੂੰ\n\nਤੇ ਬਾਕੀ ਹੁਣ ਦੀ ਮੌਜੂਦਾ ਸਰਕਾਰ ਆਮ ਆਦਮੀ ਪਾਰਟੀ ਤੇ ਆਸਾ ਆ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:50.560Z",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:52.644665",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:52.803481",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Rashpal Singh",
+            "phoneNumber": "916284394003"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:52.950316",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "https://www.facebook.com/share/v/1HzU3boHKH/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/718ee30c-0d13-4d94-a710-cf7a6f463500",
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "https://www.facebook.com/share/v/1HzU3boHKH/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "MALKEET SIDHU",
+            "phoneNumber": "918437473619"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1CfHStqXPq/?mibextid=wwXIfr",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1CfHStqXPq/?mibextid=wwXIfr",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1CfHStqXPq/?mibextid=wwXIfr",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1CfHStqXPq/?mibextid=wwXIfr",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:51.913Z"
+    },
+    {
+        "sender": {
+            "name": "Palwinder Sidhu",
+            "phoneNumber": "918146276713"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1CfHStqXPq/?mibextid=wwXIfr",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1CfHStqXPq/?mibextid=wwXIfr",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Palwinder Sidhu",
+            "phoneNumber": "918146276713"
+        },
+        "messageContent": "Yes",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/377a046e-de30-4595-9d1a-84f475b88f56",
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:53.079992",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Palwinder Sidhu",
+            "phoneNumber": "918146276713"
+        },
+        "messageContent": "Yes",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:53.191860",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "singhjugraj225577",
+            "phoneNumber": "918872259495"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1BCKZsX7Pq/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1BCKZsX7Pq/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:52.880Z"
+    },
+    {
+        "sender": {
+            "name": "singhjugraj225577",
+            "phoneNumber": "918872259495"
+        },
+        "messageContent": "Good",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:52.881Z",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:53.301292",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "singhjugraj225577",
+            "phoneNumber": "918872259495"
+        },
+        "messageContent": "Good",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:53.419002",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "singhjugraj225577",
+            "phoneNumber": "918872259495"
+        },
+        "messageContent": "Good",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:53.542219",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "singhjugraj225577",
+            "phoneNumber": "918872259495"
+        },
+        "messageContent": "Good",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:53.666199",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1BCKZsX7Pq/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1BCKZsX7Pq/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "MALKEET SIDHU",
+            "phoneNumber": "918437473619"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1BCKZsX7Pq/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1BCKZsX7Pq/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1BCKZsX7Pq/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:54.797Z"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Daljit Singh",
+            "phoneNumber": "917087265915"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "singhjugraj225577",
+            "phoneNumber": "918872259495"
+        },
+        "messageContent": "Ryt",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:54.802Z",
+        "group_name": "AAP_Pandori_sidhwan_2025-08-19 (2)",
+        "date": "Test",
+        "processed_time": "2025-08-19T10:16:53.800750",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:54.805Z"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:56.227Z"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:58"
+    },
+    {
+        "sender": {
+            "name": "Prabh",
+            "phoneNumber": "919815040877"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-19T04:28:56.230Z"
+    }
+]

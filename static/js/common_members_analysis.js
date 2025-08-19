@@ -5,6 +5,12 @@ let allMessages = {}; // Store all messages for search functionality
 let availableLabels = new Set(); // Store unique labels
 let currentAnalysisResults = null; // Store current analysis results
 
+// Pagination variables
+let currentPage = 1;
+let itemsPerPage = 12;
+let totalItems = 0;
+let allCommonMembers = []; // Store all common members for pagination
+
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Common Members Analysis page loaded');
@@ -26,6 +32,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (endDateInput) {
         endDateInput.addEventListener('change', clearQuickFilterSelection);
     }
+    
+    // Add event listener to close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('assemblyDropdown');
+        if (dropdown && !dropdown.contains(event.target)) {
+            const dropdownContent = document.getElementById('dropdownContent');
+            const dropdownHeader = dropdown.querySelector('.dropdown-header');
+            dropdownContent.classList.remove('show');
+            dropdownHeader.classList.remove('active');
+        }
+    });
 });
 
 // Load assemblies from API
@@ -45,9 +62,9 @@ async function loadAssemblies() {
     }
 }
 
-// Display assemblies in the grid
+// Display assemblies in the dropdown
 function displayAssemblies() {
-    const container = document.getElementById('assembliesGrid');
+    const container = document.getElementById('dropdownOptions');
     if (!container) return;
     
     if (assemblies.length === 0) {
@@ -59,21 +76,30 @@ function displayAssemblies() {
     assemblies.forEach(assembly => {
         const isSelected = selectedAssemblies.has(assembly.name);
         html += `
-            <label class="assembly-checkbox ${isSelected ? 'selected' : ''}">
+            <div class="dropdown-option ${isSelected ? 'selected' : ''}" onclick="toggleAssemblySelection('${assembly.name}')">
                 <input type="checkbox" 
                        value="${assembly.name}" 
                        ${isSelected ? 'checked' : ''} 
-                       onchange="toggleAssembly('${assembly.name}')">
+                       onclick="event.stopPropagation()">
                 <span class="assembly-name">${assembly.name}</span>
-            </label>
+            </div>
         `;
     });
     
     container.innerHTML = html;
+    
+    // Update dropdown placeholder and selected assemblies display
+    updateDropdownPlaceholder();
+    updateSelectedAssembliesDisplay();
+}
+
+// Toggle assembly selection (legacy function for compatibility)
+function toggleAssembly(assemblyName) {
+    toggleAssemblySelection(assemblyName);
 }
 
 // Toggle assembly selection
-function toggleAssembly(assemblyName) {
+function toggleAssemblySelection(assemblyName) {
     if (selectedAssemblies.has(assemblyName)) {
         selectedAssemblies.delete(assemblyName);
     } else {
@@ -87,6 +113,89 @@ function toggleAssembly(assemblyName) {
 // Get selected assemblies
 function getSelectedAssemblies() {
     return Array.from(selectedAssemblies);
+}
+
+// Custom Dropdown Functions
+function toggleDropdown() {
+    const dropdown = document.getElementById('assemblyDropdown');
+    const dropdownContent = document.getElementById('dropdownContent');
+    const dropdownHeader = dropdown.querySelector('.dropdown-header');
+    
+    if (dropdownContent.classList.contains('show')) {
+        dropdownContent.classList.remove('show');
+        dropdownHeader.classList.remove('active');
+    } else {
+        dropdownContent.classList.add('show');
+        dropdownHeader.classList.add('active');
+    }
+}
+
+function filterAssemblies() {
+    const searchInput = document.getElementById('assemblySearch');
+    const searchTerm = searchInput.value.toLowerCase();
+    const dropdownOptions = document.getElementById('dropdownOptions');
+    const options = dropdownOptions.querySelectorAll('.dropdown-option');
+    
+    options.forEach(option => {
+        const assemblyName = option.querySelector('.assembly-name').textContent.toLowerCase();
+        if (assemblyName.includes(searchTerm)) {
+            option.style.display = 'flex';
+        } else {
+            option.style.display = 'none';
+        }
+    });
+}
+
+function selectAllAssemblies() {
+    assemblies.forEach(assembly => {
+        selectedAssemblies.add(assembly.name);
+    });
+    displayAssemblies();
+}
+
+function clearAllAssemblies() {
+    selectedAssemblies.clear();
+    displayAssemblies();
+}
+
+function updateDropdownPlaceholder() {
+    const placeholder = document.querySelector('.dropdown-placeholder');
+    if (selectedAssemblies.size === 0) {
+        placeholder.textContent = 'Select assemblies...';
+    } else if (selectedAssemblies.size === 1) {
+        placeholder.textContent = Array.from(selectedAssemblies)[0];
+    } else {
+        placeholder.textContent = `${selectedAssemblies.size} assemblies selected`;
+    }
+}
+
+function updateSelectedAssembliesDisplay() {
+    const container = document.getElementById('selectedAssemblies');
+    if (!container) return;
+    
+    if (selectedAssemblies.size === 0) {
+        container.innerHTML = '';
+        return;
+    }
+    
+    let html = '';
+    selectedAssemblies.forEach(assemblyName => {
+        html += `
+            <span class="selected-assembly-tag">
+                ${assemblyName}
+                <button type="button" class="remove-btn" onclick="removeAssembly('${assemblyName}')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </span>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+function removeAssembly(assemblyName) {
+    selectedAssemblies.delete(assemblyName);
+    displayAssemblies();
 }
 
 // Set quick date range based on selection
@@ -274,84 +383,342 @@ function displayCommonMembersResults(results) {
 // Display common members table
 function displayCommonMembersTable(commonMembers) {
     try {
-        const tableBody = document.getElementById('commonMembersTableBody');
-        if (!tableBody) {
-            console.error('Common members table body not found');
-            return;
+        // Store all members for pagination
+        allCommonMembers = commonMembers || [];
+        totalItems = allCommonMembers.length;
+        
+        // Initialize pagination
+        initializePagination();
+        
+    } catch (error) {
+        console.error('Error displaying common members table:', error);
+    }
+}
+
+// Initialize pagination
+function initializePagination() {
+    currentPage = 1;
+    displayCurrentPage();
+    updateTableInfo();
+    updatePaginationControls();
+    
+    // Show pagination container if we have more than one page
+    if (totalItems > itemsPerPage) {
+        showPaginationContainer();
+    } else {
+        hidePaginationContainer();
+    }
+}
+
+// Display current page
+function displayCurrentPage() {
+    const tableBody = document.getElementById('commonMembersTableBody');
+    if (!tableBody) {
+        console.error('Common members table body not found');
+        return;
+    }
+    
+    if (!allCommonMembers || allCommonMembers.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="8" class="no-data">No common members found for selected criteria.</td></tr>';
+        return;
+    }
+    
+    // Calculate start and end indices for current page
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+    const currentPageMembers = allCommonMembers.slice(startIndex, endIndex);
+    
+    let html = '';
+    
+    currentPageMembers.forEach((member, index) => {
+        if (!member) return;
+        
+        const actualRank = startIndex + index + 1; // Global rank
+        const name = member.name || 'Unknown';
+        const phone = member.phone || 'N/A';
+        const groupsCount = member.groups_count || 0;
+        const groupNames = member.group_names || [];
+        const totalMessages = member.total_messages || 0;
+        
+        // Sentiment breakdown
+        const sentimentBreakdown = member.sentiment_breakdown || {};
+        const positiveCount = sentimentBreakdown.Positive || 0;
+        const negativeCount = sentimentBreakdown.Negative || 0;
+        const neutralCount = sentimentBreakdown.Neutral || 0;
+        
+        // Format group names for display
+        const formattedGroupNames = groupNames.map(group => {
+            const parts = group.split('/');
+            if (parts.length >= 3) {
+                return `${parts[0]} - ${parts[2]}`; // assembly - group_name
+            }
+            return group;
+        }).join(', ');
+        
+        html += `
+            <tr>
+                <td>
+                    <div class="rank-badge rank-${actualRank <= 3 ? actualRank : 'other'}">${actualRank}</div>
+                </td>
+                <td>
+                    <strong>${name}</strong>
+                </td>
+                <td>
+                    <span class="phone-number">${phone}</span>
+                </td>
+                <td>
+                    <span class="groups-count">${groupsCount}</span>
+                </td>
+                <td>
+                    <div class="group-names" title="${formattedGroupNames}">
+                        ${formattedGroupNames.length > 50 ? formattedGroupNames.substring(0, 50) + '...' : formattedGroupNames}
+                    </div>
+                </td>
+                <td>${totalMessages}</td>
+                <td>
+                    <div class="sentiment-breakdown">
+                        <span class="sentiment positive">+${positiveCount}</span>
+                        <span class="sentiment negative">-${negativeCount}</span>
+                        <span class="sentiment neutral">~${neutralCount}</span>
+                    </div>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-primary" onclick="viewMemberDetails('${phone}', '${name}')">
+                        <i class="fas fa-eye"></i> View Details
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+    
+    tableBody.innerHTML = html;
+}
+
+// Update table info
+function updateTableInfo() {
+    const tableInfo = document.getElementById('tableInfo');
+    if (tableInfo) {
+        const startIndex = (currentPage - 1) * itemsPerPage + 1;
+        const endIndex = Math.min(currentPage * itemsPerPage, totalItems);
+        tableInfo.textContent = `Showing ${startIndex}-${endIndex} of ${totalItems} members`;
+    }
+}
+
+// Update pagination controls
+function updatePaginationControls() {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const paginationInfo = document.getElementById('paginationInfo');
+    const prevPageBtn = document.getElementById('prevPageBtn');
+    const nextPageBtn = document.getElementById('nextPageBtn');
+    const pageNumbers = document.getElementById('pageNumbers');
+    
+    if (paginationInfo) {
+        paginationInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+    }
+    
+    if (prevPageBtn) {
+        prevPageBtn.disabled = currentPage <= 1;
+    }
+    
+    if (nextPageBtn) {
+        nextPageBtn.disabled = currentPage >= totalPages;
+    }
+    
+    if (pageNumbers) {
+        pageNumbers.innerHTML = generatePageNumbers(currentPage, totalPages);
+    }
+}
+
+// Generate page numbers with ellipsis
+function generatePageNumbers(currentPage, totalPages) {
+    let html = '';
+    
+    if (totalPages <= 7) {
+        // Show all page numbers if 7 or fewer pages
+        for (let i = 1; i <= totalPages; i++) {
+            html += `<span class="page-number ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</span>`;
         }
-        
-        if (!commonMembers || commonMembers.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="8" class="no-data">No common members found for selected criteria.</td></tr>';
-            return;
+    } else {
+        // Show page numbers with ellipsis for more than 7 pages
+        if (currentPage <= 4) {
+            // Show first 5 pages + ellipsis + last page
+            for (let i = 1; i <= 5; i++) {
+                html += `<span class="page-number ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</span>`;
+            }
+            html += '<span class="page-ellipsis">...</span>';
+            html += `<span class="page-number" onclick="goToPage(${totalPages})">${totalPages}</span>`;
+        } else if (currentPage >= totalPages - 3) {
+            // Show first page + ellipsis + last 5 pages
+            html += `<span class="page-number" onclick="goToPage(1)">1</span>`;
+            html += '<span class="page-ellipsis">...</span>';
+            for (let i = totalPages - 4; i <= totalPages; i++) {
+                html += `<span class="page-number ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</span>`;
+            }
+        } else {
+            // Show first page + ellipsis + current page and neighbors + ellipsis + last page
+            html += `<span class="page-number" onclick="goToPage(1)">1</span>`;
+            html += '<span class="page-ellipsis">...</span>';
+            for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                html += `<span class="page-number ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</span>`;
+            }
+            html += '<span class="page-ellipsis">...</span>';
+            html += `<span class="page-number" onclick="goToPage(${totalPages})">${totalPages}</span>`;
         }
+    }
+    
+    return html;
+}
+
+// Navigation functions
+function previousPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        displayCurrentPage();
+        updateTableInfo();
+        updatePaginationControls();
+    }
+}
+
+function nextPage() {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        displayCurrentPage();
+        updateTableInfo();
+        updatePaginationControls();
+    }
+}
+
+function goToPage(page) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    if (page >= 1 && page <= totalPages) {
+        currentPage = page;
+        displayCurrentPage();
+        updateTableInfo();
+        updatePaginationControls();
+    }
+}
+
+// Change items per page
+function changeItemsPerPage() {
+    const select = document.getElementById('itemsPerPage');
+    if (select) {
+        itemsPerPage = parseInt(select.value);
+        currentPage = 1; // Reset to first page
+        displayCurrentPage();
+        updateTableInfo();
+        updatePaginationControls();
         
-        let html = '';
+        // Show/hide pagination container
+        if (totalItems > itemsPerPage) {
+            showPaginationContainer();
+        } else {
+            hidePaginationContainer();
+        }
+    }
+}
+
+// Show pagination container
+function showPaginationContainer() {
+    const container = document.getElementById('paginationContainer');
+    if (container) {
+        container.style.display = 'flex';
+    }
+}
+
+// Hide pagination container
+function hidePaginationContainer() {
+    const container = document.getElementById('paginationContainer');
+    if (container) {
+        container.style.display = 'none';
+    }
+}
+
+// Export common members table
+function exportCommonMembers() {
+    try {
+        console.log('Starting export of common members...');
         
-        commonMembers.forEach((member, index) => {
-            if (!member) return;
-            
+        // Prepare Excel data
+        const excelData = [];
+        
+        // Add header row
+        excelData.push([
+            'Rank',
+            'Member Name',
+            'Phone Number',
+            'Groups Count',
+            'Group Names',
+            'Total Messages',
+            'Positive Messages',
+            'Negative Messages',
+            'Neutral Messages'
+        ]);
+        
+        // Add data rows for all members (not just current page)
+        allCommonMembers.forEach((member, index) => {
             const rank = index + 1;
             const name = member.name || 'Unknown';
             const phone = member.phone || 'N/A';
             const groupsCount = member.groups_count || 0;
-            const groupNames = member.group_names || [];
+            const groupNames = (member.group_names || []).join('; ');
             const totalMessages = member.total_messages || 0;
             
-            // Sentiment breakdown
-            const sentimentBreakdown = member.sentiment_breakdown || {};
-            const positiveCount = sentimentBreakdown.Positive || 0;
-            const negativeCount = sentimentBreakdown.Negative || 0;
-            const neutralCount = sentimentBreakdown.Neutral || 0;
+            // Extract sentiment breakdown
+            let positiveCount = 0;
+            let negativeCount = 0;
+            let neutralCount = 0;
             
-            // Format group names for display
-            const formattedGroupNames = groupNames.map(group => {
-                const parts = group.split('/');
-                if (parts.length >= 3) {
-                    return `${parts[0]} - ${parts[2]}`; // assembly - group_name
-                }
-                return group;
-            }).join(', ');
+            if (member.sentiment_breakdown) {
+                positiveCount = member.sentiment_breakdown.Positive || 0;
+                negativeCount = member.sentiment_breakdown.Negative || 0;
+                neutralCount = member.sentiment_breakdown.Neutral || 0;
+            }
             
-            html += `
-                <tr>
-                    <td>
-                        <div class="rank-badge rank-${rank <= 3 ? rank : 'other'}">${rank}</div>
-                    </td>
-                    <td>
-                        <strong>${name}</strong>
-                    </td>
-                    <td>
-                        <span class="phone-number">${phone}</span>
-                    </td>
-                    <td>
-                        <span class="groups-count">${groupsCount}</span>
-                    </td>
-                    <td>
-                        <div class="group-names" title="${formattedGroupNames}">
-                            ${formattedGroupNames.length > 50 ? formattedGroupNames.substring(0, 50) + '...' : formattedGroupNames}
-                        </div>
-                    </td>
-                    <td>${totalMessages}</td>
-                    <td>
-                        <div class="sentiment-breakdown">
-                            <span class="sentiment positive">+${positiveCount}</span>
-                            <span class="sentiment negative">-${negativeCount}</span>
-                            <span class="sentiment neutral">~${neutralCount}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <button class="btn btn-sm btn-primary" onclick="viewMemberDetails('${phone}', '${name}')">
-                            <i class="fas fa-eye"></i> View Details
-                        </button>
-                    </td>
-                </tr>
-            `;
+            excelData.push([
+                rank,
+                name,
+                phone,
+                groupsCount,
+                groupNames,
+                totalMessages,
+                positiveCount,
+                negativeCount,
+                neutralCount
+            ]);
         });
         
-        tableBody.innerHTML = html;
+        // Convert to CSV format
+        const csvContent = excelData.map(row => 
+            row.map(cell => `"${cell.toString().replace(/"/g, '""')}"`).join(',')
+        ).join('\n');
+        
+        // Create and download file
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        
+        // Generate filename with current date
+        const currentDate = new Date().toISOString().split('T')[0];
+        const filename = `common_members_${currentDate}.csv`;
+        
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Clean up
+        URL.revokeObjectURL(url);
+        
+        console.log('Common members exported successfully as:', filename);
+        showError(`✅ Common members exported successfully! File: ${filename}`);
         
     } catch (error) {
-        console.error('Error displaying common members table:', error);
+        console.error('Error exporting common members:', error);
+        showError('Error exporting common members: ' + error.message);
     }
 }
 

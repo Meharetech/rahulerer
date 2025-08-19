@@ -2,6 +2,12 @@
 let assemblies = [];
 let selectedAssemblies = new Set();
 
+// Pagination variables
+let currentPage = 1;
+let itemsPerPage = 15;
+let totalItems = 0;
+let allGroupData = [];
+
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Group Sender Analysis page loaded');
@@ -47,43 +53,192 @@ async function loadAssemblies() {
     }
 }
 
-// Display assemblies in the grid
+// Display assemblies in dropdown
 function displayAssemblies() {
-    const container = document.getElementById('assembliesGrid');
-    if (!container) return;
+    const container = document.getElementById('dropdownOptions');
+    if (!container) {
+        console.error('Dropdown options container not found');
+        return;
+    }
     
     if (assemblies.length === 0) {
-        container.innerHTML = '<p class="no-data">No assemblies found.</p>';
+        container.innerHTML = '<div class="no-results">No assemblies found.</div>';
         return;
     }
     
     let html = '';
+    
     assemblies.forEach(assembly => {
-        const isSelected = selectedAssemblies.has(assembly.name);
         html += `
-            <label class="assembly-checkbox ${isSelected ? 'selected' : ''}">
+            <div class="dropdown-option" data-assembly="${assembly.name}">
                 <input type="checkbox" 
+                       id="assembly_${assembly.name}" 
                        value="${assembly.name}" 
-                       ${isSelected ? 'checked' : ''} 
-                       onchange="toggleAssembly('${assembly.name}')">
-                <span class="assembly-name">${assembly.name}</span>
-            </label>
+                       onchange="toggleAssemblySelection('${assembly.name}')">
+                <label for="assembly_${assembly.name}">
+                    <i class="fas fa-building assembly-icon"></i>
+                    <span class="assembly-name">${assembly.name}</span>
+                </label>
+            </div>
         `;
     });
     
     container.innerHTML = html;
 }
 
-// Toggle assembly selection
-function toggleAssembly(assemblyName) {
-    if (selectedAssemblies.has(assemblyName)) {
-        selectedAssemblies.delete(assemblyName);
+// Toggle dropdown visibility
+function toggleDropdown() {
+    const dropdown = document.getElementById('assemblyDropdown');
+    const content = document.getElementById('dropdownContent');
+    const header = dropdown.querySelector('.dropdown-header');
+    
+    if (content.classList.contains('show')) {
+        content.classList.remove('show');
+        header.classList.remove('active');
     } else {
-        selectedAssemblies.add(assemblyName);
+        content.classList.add('show');
+        header.classList.add('active');
+        // Focus on search input when dropdown opens
+        setTimeout(() => {
+            const searchInput = document.getElementById('assemblySearch');
+            if (searchInput) {
+                searchInput.focus();
+            }
+        }, 100);
+    }
+}
+
+// Filter assemblies based on search input
+function filterAssemblies() {
+    const searchTerm = document.getElementById('assemblySearch').value.toLowerCase();
+    const options = document.querySelectorAll('.dropdown-option');
+    
+    options.forEach(option => {
+        const assemblyName = option.querySelector('.assembly-name').textContent.toLowerCase();
+        if (assemblyName.includes(searchTerm)) {
+            option.style.display = 'flex';
+        } else {
+            option.style.display = 'none';
+        }
+    });
+}
+
+// Select all assemblies
+function selectAllAssemblies() {
+    const checkboxes = document.querySelectorAll('.dropdown-option input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        if (!checkbox.checked) {
+            checkbox.checked = true;
+            toggleAssemblySelection(checkbox.value);
+        }
+    });
+}
+
+// Clear all assemblies
+function clearAllAssemblies() {
+    const checkboxes = document.querySelectorAll('.dropdown-option input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            checkbox.checked = false;
+            toggleAssemblySelection(checkbox.value);
+        }
+    });
+}
+
+// Toggle assembly selection
+function toggleAssemblySelection(assemblyName) {
+    const checkbox = document.getElementById(`assembly_${assemblyName}`);
+    if (!checkbox) {
+        console.error(`Checkbox for assembly ${assemblyName} not found`);
+        return;
     }
     
-    // Update UI
-    displayAssemblies();
+    if (checkbox.checked) {
+        selectedAssemblies.add(assemblyName);
+    } else {
+        selectedAssemblies.delete(assemblyName);
+    }
+    
+    updateSelectedAssembliesDisplay();
+    updateDropdownPlaceholder();
+}
+
+// Update dropdown placeholder text
+function updateDropdownPlaceholder() {
+    const placeholder = document.querySelector('.dropdown-placeholder');
+    if (selectedAssemblies.size === 0) {
+        placeholder.textContent = 'Select assemblies...';
+        placeholder.classList.remove('has-selection');
+    } else if (selectedAssemblies.size === 1) {
+        placeholder.textContent = Array.from(selectedAssemblies)[0];
+        placeholder.classList.add('has-selection');
+    } else {
+        placeholder.textContent = `${selectedAssemblies.size} assemblies selected`;
+        placeholder.classList.add('has-selection');
+    }
+}
+
+// Update selected assemblies display
+function updateSelectedAssembliesDisplay() {
+    const container = document.getElementById('selectedAssemblies');
+    if (!container) return;
+    
+    if (selectedAssemblies.size === 0) {
+        container.innerHTML = '';
+        return;
+    }
+    
+    let html = `
+        <div class="selected-assemblies-header">
+            <div class="selected-assemblies-title">
+                <i class="fas fa-check-circle"></i>
+                Selected Assemblies
+            </div>
+            <span class="selected-count">${selectedAssemblies.size}</span>
+        </div>
+        <div class="selected-assemblies-list">
+    `;
+    
+    selectedAssemblies.forEach(assemblyName => {
+        html += `
+            <div class="selected-assembly-tag">
+                <i class="fas fa-building"></i>
+                <span>${assemblyName}</span>
+                <button type="button" class="remove-assembly" onclick="removeAssembly('${assemblyName}')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+// Remove assembly from selection
+function removeAssembly(assemblyName) {
+    const checkbox = document.getElementById(`assembly_${assemblyName}`);
+    if (checkbox) {
+        checkbox.checked = false;
+        toggleAssemblySelection(assemblyName);
+    }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('assemblyDropdown');
+    const content = document.getElementById('dropdownContent');
+    const header = dropdown.querySelector('.dropdown-header');
+    
+    if (!dropdown.contains(event.target)) {
+        content.classList.remove('show');
+        header.classList.remove('active');
+    }
+});
+
+// Toggle assembly selection (legacy function for compatibility)
+function toggleAssembly(assemblyName) {
+    toggleAssemblySelection(assemblyName);
 }
 
 // Get selected assemblies
@@ -253,8 +408,8 @@ function displayGroupSenderResults(results) {
             totalMessagesElement.textContent = results.total_messages || 0;
         }
         
-        // Display group analysis table
-        displayGroupAnalysisTable(results.group_analysis || []);
+        // Initialize pagination and display group analysis table
+        initializePagination(results.group_analysis || []);
         
         // Automatically collapse the filter form after showing results
         setTimeout(() => {
@@ -1206,5 +1361,178 @@ function applySearchFilters(searchTerm, selectedLabel, selectedSentiment) {
         console.error('Error applying search filters:', error);
     }
 }
+
+// ============================================================================
+// PAGINATION FUNCTIONS
+// ============================================================================
+
+// Initialize pagination
+function initializePagination(data) {
+    allGroupData = data;
+    totalItems = data.length;
+    currentPage = 1;
+    
+    updateTableInfo();
+    displayCurrentPage();
+    updatePaginationControls();
+    showPaginationContainer();
+}
+
+// Display current page data
+function displayCurrentPage() {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const pageData = allGroupData.slice(startIndex, endIndex);
+    
+    displayGroupAnalysisTable(pageData);
+    updateTableInfo();
+}
+
+// Update table info display
+function updateTableInfo() {
+    const startIndex = (currentPage - 1) * itemsPerPage + 1;
+    const endIndex = Math.min(currentPage * itemsPerPage, totalItems);
+    
+    const tableInfo = document.getElementById('tableInfo');
+    if (tableInfo) {
+        tableInfo.textContent = `Showing ${startIndex} to ${endIndex} of ${totalItems} groups`;
+    }
+}
+
+// Update pagination controls
+function updatePaginationControls() {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const prevBtn = document.getElementById('prevPageBtn');
+    const nextBtn = document.getElementById('nextPageBtn');
+    const paginationInfo = document.getElementById('paginationInfo');
+    const pageNumbers = document.getElementById('pageNumbers');
+    
+    // Update info
+    if (paginationInfo) {
+        paginationInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+    }
+    
+    // Update buttons
+    if (prevBtn) {
+        prevBtn.disabled = currentPage === 1;
+    }
+    if (nextBtn) {
+        nextBtn.disabled = currentPage === totalPages;
+    }
+    
+    // Generate page numbers
+    if (pageNumbers) {
+        generatePageNumbers(currentPage, totalPages);
+    }
+}
+
+// Generate page number buttons
+function generatePageNumbers(currentPage, totalPages) {
+    const pageNumbers = document.getElementById('pageNumbers');
+    if (!pageNumbers) return;
+    
+    let html = '';
+    const maxVisiblePages = 5;
+    
+    if (totalPages <= maxVisiblePages) {
+        // Show all pages if total is small
+        for (let i = 1; i <= totalPages; i++) {
+            html += `<span class="page-number ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</span>`;
+        }
+    } else {
+        // Show limited pages with ellipsis
+        if (currentPage <= 3) {
+            // Show first 3 pages + ellipsis + last page
+            for (let i = 1; i <= 3; i++) {
+                html += `<span class="page-number ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</span>`;
+            }
+            html += '<span class="page-number disabled">...</span>';
+            html += `<span class="page-number" onclick="goToPage(${totalPages})">${totalPages}</span>`;
+        } else if (currentPage >= totalPages - 2) {
+            // Show first page + ellipsis + last 3 pages
+            html += `<span class="page-number" onclick="goToPage(1)">1</span>`;
+            html += '<span class="page-number disabled">...</span>';
+            for (let i = totalPages - 2; i <= totalPages; i++) {
+                html += `<span class="page-number ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</span>`;
+            }
+        } else {
+            // Show first page + ellipsis + current page + ellipsis + last page
+            html += `<span class="page-number" onclick="goToPage(1)">1</span>`;
+            html += '<span class="page-number disabled">...</span>';
+            for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                html += `<span class="page-number ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</span>`;
+            }
+            html += '<span class="page-number disabled">...</span>';
+            html += `<span class="page-number" onclick="goToPage(${totalPages})">${totalPages}</span>`;
+        }
+    }
+    
+    pageNumbers.innerHTML = html;
+}
+
+// Navigation functions
+function previousPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        displayCurrentPage();
+        updatePaginationControls();
+    }
+}
+
+function nextPage() {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        displayCurrentPage();
+        updatePaginationControls();
+    }
+}
+
+function goToPage(page) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    if (page >= 1 && page <= totalPages) {
+        currentPage = page;
+        displayCurrentPage();
+        updatePaginationControls();
+    }
+}
+
+// Change items per page
+function changeItemsPerPage() {
+    const select = document.getElementById('itemsPerPage');
+    if (select) {
+        itemsPerPage = parseInt(select.value);
+        currentPage = 1; // Reset to first page
+        displayCurrentPage();
+        updatePaginationControls();
+    }
+}
+
+// Show pagination container
+function showPaginationContainer() {
+    const container = document.getElementById('paginationContainer');
+    if (container && totalItems > 0) {
+        container.style.display = 'flex';
+    }
+}
+
+// Hide pagination container
+function hidePaginationContainer() {
+    const container = document.getElementById('paginationContainer');
+    if (container) {
+        container.style.display = 'none';
+    }
+}
+
+// Export group analysis table
+function exportGroupAnalysis() {
+    // Implementation for exporting table data
+    console.log('Exporting group analysis table...');
+    // Add your export logic here
+}
+
+// ============================================================================
+// EXISTING FUNCTIONS (Updated to work with pagination)
+// ============================================================================
 
 

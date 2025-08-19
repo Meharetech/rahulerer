@@ -1450,6 +1450,28 @@ def get_assembly_messages(assembly_name):
         except Exception as e:
             return jsonify({'success': False, 'message': f'Error reading assembly: {str(e)}'}), 500
         
+        # Group messages by group name for better analytics
+        groups = {}
+        for message in messages:
+            # Extract group name from file path
+            file_path = message.get('file_path', '')
+            if file_path:
+                # Extract filename from path and remove .json extension
+                filename = os.path.basename(file_path)
+                if filename.endswith('.json'):
+                    group_name = filename[:-5]  # Remove .json extension
+                else:
+                    group_name = filename
+            else:
+                group_name = message.get('group_name', 'Unknown Group')
+            
+            if group_name not in groups:
+                groups[group_name] = {
+                    'name': group_name,
+                    'count': 0
+                }
+            groups[group_name]['count'] += 1
+        
         return jsonify({
             'success': True,
             'assembly_name': assembly_name,
@@ -1457,6 +1479,8 @@ def get_assembly_messages(assembly_name):
             'end_date': end_date,
             'sentiment': sentiment,
             'total_messages': len(messages),
+            'total_groups': len(groups),
+            'groups': groups,
             'messages': messages
         })
         
