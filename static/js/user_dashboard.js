@@ -1,27 +1,47 @@
 // User Dashboard JavaScript
 let dashboardStats = null;
+const DASHBOARD_CACHE_KEY = 'dashboardStatsCache';
+const DASHBOARD_CACHE_TIME = 5 * 60 * 1000; // 5 minutes in ms
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
+    // Add refresh button handler if present
+    const refreshBtn = document.querySelector('.refresh-btn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            clearDashboardCache();
+            loadDashboardStats(true);
+        });
+    }
     loadDashboardStats();
 });
 
 // Load dashboard statistics
-async function loadDashboardStats() {
+async function loadDashboardStats(forceRefresh = false) {
     try {
+        // Try to use cache unless forceRefresh is true
+        if (!forceRefresh) {
+            const cached = sessionStorage.getItem(DASHBOARD_CACHE_KEY);
+            if (cached) {
+                const { stats, timestamp } = JSON.parse(cached);
+                if (Date.now() - timestamp < DASHBOARD_CACHE_TIME) {
+                    dashboardStats = stats;
+                    displayDashboardStats(stats);
+                    return;
+                }
+            }
+        }
         // Show loading state
         showLoading();
-        
         const response = await fetch('/api/accurate-dashboard-stats');
-        
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
-        
         const data = await response.json();
-        
         if (data.success) {
             dashboardStats = data.stats;
+            // Cache the result
+            sessionStorage.setItem(DASHBOARD_CACHE_KEY, JSON.stringify({ stats: data.stats, timestamp: Date.now() }));
             displayDashboardStats(data.stats);
         } else {
             showError('Failed to load dashboard stats: ' + (data.message || 'Unknown error'));
@@ -30,6 +50,10 @@ async function loadDashboardStats() {
         console.error('Dashboard stats error:', error);
         showError('Error loading dashboard stats: ' + error.message);
     }
+}
+
+function clearDashboardCache() {
+    sessionStorage.removeItem(DASHBOARD_CACHE_KEY);
 }
 
 // Display dashboard statistics

@@ -3,6 +3,22 @@
 {% block title %}User Dashboard - WhatsApp UI{% endblock %}
 
 {% block content %}
+<html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.dashboard-layout {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    background: #f5f7fa;
+}
+.main-content {
+    margin-top: 0;
+    padding-top: 0;
+}
 <div class="dashboard-layout">
     <!-- Include Left Sidebar from Layout File -->
     {% include 'user_slidebar.html' %}
@@ -10,10 +26,14 @@
     <!-- Main Content Area -->
     <div class="main-content">
         <div class="main-header">
-            <h1><i class="fas fa-tachometer-alt"></i> User Dashboard</h1>
+            <div class="header-content">
+                <h1><i class="fas fa-tachometer-alt"></i> User Dashboard</h1>
+                <p class="header-subtitle">Overview of your WhatsApp analytics, assemblies, and groups</p>
+            </div>
             <div class="header-actions">
-                
-                
+                <button class="refresh-btn" title="Refresh Dashboard Stats">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
             </div>
         </div>
         
@@ -358,6 +378,22 @@
     .header-actions {
         width: 100%;
         justify-content: center;
+        margin-top: 10px;
+    }
+    .refresh-btn {
+        width: 100%;
+        font-size: 18px;
+        padding: 16px 0;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+    }
+    .refresh-btn i {
+        font-size: 22px;
     }
     
     .dashboard-content {
@@ -398,6 +434,19 @@
     .section-header h3 {
         font-size: 16px;
         justify-content: center;
+    }
+}
+
+@media (min-width: 769px) {
+    .refresh-btn {
+        min-width: 120px;
+        font-size: 16px;
+        padding: 10px 24px;
+        border-radius: 8px;
+        margin-bottom: 0;
+    }
+    .refresh-btn i {
+        font-size: 18px;
     }
 }
 

@@ -77,8 +77,8 @@ function displayAssemblies() {
                        onchange="toggleAssemblySelection('${assembly.name}')">
                 <label for="assembly_${assembly.name}">
                     <i class="fas fa-building assembly-icon"></i>
-                    <span class="assembly-name">${assembly.name}</span>
-                </label>
+                <span class="assembly-name">${assembly.name}</span>
+            </label>
             </div>
         `;
     });

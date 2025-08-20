@@ -1,0 +1,107 @@
+[
+    {
+        "sender": {
+            "name": "Satnam Waheguru",
+            "phoneNumber": "919417362390"
+        },
+        "messageContent": "WhatsApp✊🏻🇸🇱✊🏻🇸🇱✊🏻🇸🇱",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/04627ab7-076c-4e45-869b-99086b9451ab",
+        "timestamp": "2025-08-20T04:18:42.932Z",
+        "group_name": "__2025-08-20 (10)",
+        "date": "G2-19-AUG",
+        "processed_time": "2025-08-20T10:19:22.547155",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Satnam Waheguru",
+            "phoneNumber": "919417362390"
+        },
+        "messageContent": "WhatsApp✊🏻🇸🇱✊🏻🇸🇱✊🏻🇸🇱",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-20T04:18:42.937Z",
+        "group_name": "__2025-08-20 (10)",
+        "date": "G2-19-AUG",
+        "processed_time": "2025-08-20T10:19:22.580096",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Satnam Waheguru",
+            "phoneNumber": "919417362390"
+        },
+        "messageContent": "ਕਿਸਾਨ  ਮਜਦੂਰ ਸੰਘਰਸ਼ ਕਮੇਟੀ ਪੰਜਾਬ ਜੋਨ ਆਗਾੜਾ ਪਿਛਾੜਾ ਇਕਾਈ ਪਿੰਡ ਮੂਸੇ ਦੀ ੧੫ ਦਿਨਾਂ ਵਾਲੀ ਮੀਟਿੰਗ ਲਾਈ ਗਈ ਜਿਸ ਵਿੱਚ ੨੦ਤਰੀਕ ਵਾਲੀ ਰੈਲੀ ਤੇ ਜਾਣ ਲਈ ਵਿਚਾਰ ਵਟਾਦਰਾ ਕੀਤਾ ਗਿਆ ੧੫::੮::੨੫:ਤਰੀਕ",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/01577cc1-72ef-441c-8e5d-454612160ff3",
+        "timestamp": "09:48",
+        "group_name": "__2025-08-20 (10)",
+        "date": "G2-19-AUG",
+        "processed_time": "2025-08-20T10:19:22.630914",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Satnam Waheguru",
+            "phoneNumber": "919417362390"
+        },
+        "messageContent": "ਕਿਸਾਨ  ਮਜਦੂਰ ਸੰਘਰਸ਼ ਕਮੇਟੀ ਪੰਜਾਬ ਜੋਨ ਆਗਾੜਾ ਪਿਛਾੜਾ ਇਕਾਈ ਪਿੰਡ ਮੂਸੇ ਦੀ ੧੫ ਦਿਨਾਂ ਵਾਲੀ ਮੀਟਿੰਗ ਲਾਈ ਗਈ ਜਿਸ ਵਿੱਚ ੨੦ਤਰੀਕ ਵਾਲੀ ਰੈਲੀ ਤੇ ਜਾਣ ਲਈ ਵਿਚਾਰ ਵਟਾਦਰਾ ਕੀਤਾ ਗਿਆ ੧੫::੮::੨੫:ਤਰੀਕ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-20T04:18:42.942Z",
+        "group_name": "__2025-08-20 (10)",
+        "date": "G2-19-AUG",
+        "processed_time": "2025-08-20T10:19:22.678547",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Dhan Dhan Guru Ramdas Ji",
+            "phoneNumber": "918264111711"
+        },
+        "messageContent": "WhatsApp✊🏻🇸🇱✊🏻🇸🇱✊🏻🇸🇱",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-20T04:18:42.944Z",
+        "group_name": "__2025-08-20 (10)",
+        "date": "G2-19-AUG",
+        "processed_time": "2025-08-20T10:19:22.694185",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Kulwinder Singh",
+            "phoneNumber": "919592551514"
+        },
+        "messageContent": "WhatsApp✊🏻🇸🇱✊🏻🇸🇱✊🏻🇸🇱",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-20T04:18:42.946Z",
+        "group_name": "__2025-08-20 (10)",
+        "date": "G2-19-AUG",
+        "processed_time": "2025-08-20T10:19:22.725699",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Satnam Waheguru",
+            "phoneNumber": "919417362390"
+        },
+        "messageContent": "WhatsApp✊🏻🇸🇱✊🏻🇸🇱✊🏻🇸🇱",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "09:48",
+        "group_name": "__2025-08-20 (10)",
+        "date": "G2-19-AUG",
+        "processed_time": "2025-08-20T10:19:22.741417",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    }
+]

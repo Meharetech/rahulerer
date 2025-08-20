@@ -17,7 +17,7 @@
         <div class="main-header">
             <div class="header-content">
                 <h1><i class="fas fa-paper-plane"></i> Post Sending Groups</h1>
-                <p>Schedule and manage posts for WhatsApp groups across assemblies</p>
+                <p class="header-subtitle">Schedule and manage posts for WhatsApp groups across assemblies</p>
             </div>
             <div class="header-actions">
                 <button class="refresh-btn" onclick="location.reload()" title="Refresh Page">
@@ -287,6 +287,28 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" onclick="closeModal('errorModal')">OK</button>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Modal -->
+<div class="modal" id="loadingModal">
+    <div class="modal-content loading-modal">
+        <div class="modal-header loading">
+            <h3><i class="fas fa-spinner fa-spin"></i> <span id="loadingModalTitle">Processing...</span></h3>
+        </div>
+        <div class="modal-body">
+            <div class="loading-content">
+                <div class="loading-spinner-large">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <p id="loadingModalMessage">Please wait while we process your request...</p>
+                <div class="loading-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

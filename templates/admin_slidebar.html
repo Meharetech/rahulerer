@@ -1,37 +1,51 @@
+<!-- Mobile Hamburger Menu Button (Outside sidebar for better visibility) -->
+<div class="mobile-menu-toggle" id="mobileMenuToggle">
+    <button class="hamburger-btn" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
+
 <!-- Admin Left Sidebar Menu Layout -->
-<div class="sidebar">
+<div class="sidebar" id="adminSidebar">
     <div class="sidebar-header">
         <h2><i class="fas fa-shield-alt"></i></h2>
-        <p>Admin Panel</p>
+        <h2>Admin Panel</h2>
+        <p>System Management</p>
     </div>
     
     <div class="sidebar-menu">
         <div class="menu-section">
-            <h4>Main Menu</h4>
-            <div class="menu-item active" data-page="dashboard">
+            <h4>MAIN MENU</h4>
+            
+            <a href="{{ url_for('admin.admin_dashboard') }}" class="menu-item {% if request.endpoint == 'admin.admin_dashboard' %}active{% endif %}">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Dashboard Statistics</span>
-            </div>
-            <div class="menu-item" data-page="upload-reports">
+            </a>
+            
+            <a href="{{ url_for('admin.upload_reports') }}" class="menu-item {% if request.endpoint == 'admin.upload_reports' %}active{% endif %}">
                 <i class="fas fa-upload"></i>
                 <span>Upload Reports</span>
-            </div>
-            <div class="menu-item" data-page="upload-groups">
+            </a>
+            
+            <a href="{{ url_for('admin.upload_groups') }}" class="menu-item {% if request.endpoint == 'admin.upload_groups' %}active{% endif %}">
                 <i class="fas fa-users-cog"></i>
                 <span>Upload Groups</span>
-            </div>
-            <div class="menu-item" data-page="message-management">
+            </a>
+            
+            <a href="{{ url_for('admin.message_management') }}" class="menu-item {% if request.endpoint == 'admin.message_management' %}active{% endif %}">
                 <i class="fas fa-comments"></i>
                 <span>Message Management</span>
-            </div>
-            <div class="menu-item" data-page="manage-topics">
+            </a>
+            
+            <a href="{{ url_for('admin.admin_manage_topics') }}" class="menu-item {% if request.endpoint == 'admin.admin_manage_topics' %}active{% endif %}">
                 <i class="fas fa-tags"></i>
                 <span>Manage Topics</span>
-            </div>
-            <div class="menu-item" data-page="assembly-list">
+            </a>
+            
+            <a href="{{ url_for('admin.assembly_list') }}" class="menu-item {% if request.endpoint == 'admin.assembly_list' %}active{% endif %}">
                 <i class="fas fa-list-ol"></i>
                 <span>Assembly List</span>
-            </div>
+            </a>
         </div>
     </div>
     
@@ -44,69 +58,386 @@
     </div>
 </div>
 
-<!-- JavaScript for Admin Menu Functionality -->
+<!-- Mobile Overlay -->
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+
+<style>
+/* Sidebar Styles - Desktop */
+.sidebar {
+    width: 280px;
+    background: #f8f9fa;
+    border-right: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+.sidebar-header h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.sidebar-header p {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.sidebar-menu {
+    flex: 1;
+    padding: 20px;
+}
+
+.menu-section {
+    margin-bottom: 25px;
+}
+
+.menu-section h4 {
+    color: #666;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.menu-item:hover {
+    background: #ffe6e6;
+    border-color: #dc3545;
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
+}
+
+.menu-item.active {
+    background: #dc3545;
+    color: white;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.menu-item i {
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.menu-item span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+    background: white;
+}
+
+.sidebar-footer .btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.sidebar-footer .btn:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+}
+
+.hamburger-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn:hover {
+    background: #c82333;
+    transform: scale(1.1);
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .mobile-overlay.show {
+        display: block;
+    }
+    
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .sidebar-header {
+        padding-top: 80px;
+    }
+
+    .menu-item {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    .menu-item i {
+        font-size: 18px;
+        width: 24px;
+    }
+
+    .menu-item span {
+        font-size: 16px;
+    }
+
+    .sidebar-footer {
+        padding: 15px;
+    }
+
+    .sidebar-footer .btn {
+        padding: 15px;
+        font-size: 16px;
+    }
+    
+    /* Ensure menu is visible when sidebar is shown */
+    .dashboard-layout {
+        position: relative;
+    }
+    
+    /* Make hamburger button always visible */
+    .mobile-menu-toggle {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1002;
+        display: block;
+    }
+    
+    /* Ensure the hamburger button is visible on top of content */
+    .hamburger-btn {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Fix for menu items in mobile view */
+    .sidebar-menu {
+        padding-bottom: 100px; /* Extra padding to ensure all items are visible */
+        overflow-y: auto;
+    }
+    
+    /* Add close button in header */
+    .sidebar-header:after {
+        content: "×";
+        position: absolute;
+        top: 85px;
+        right: 20px;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.menu-item {
+    animation: slideInLeft 0.4s ease-out;
+}
+
+.menu-item:nth-child(1) { animation-delay: 0.1s; }
+.menu-item:nth-child(2) { animation-delay: 0.2s; }
+.menu-item:nth-child(3) { animation-delay: 0.3s; }
+.menu-item:nth-child(4) { animation-delay: 0.4s; }
+.menu-item:nth-child(5) { animation-delay: 0.5s; }
+.menu-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* Accessibility */
+.menu-item:focus,
+.sidebar-footer .btn:focus {
+    outline: 2px solid #dc3545;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .menu-item {
+        animation: none;
+    }
+    
+    .menu-item:hover,
+    .sidebar-footer .btn:hover {
+        transform: none;
+    }
+}
+</style>
+
 <script>
+// Mobile menu functionality
+function toggleMobileMenu() {
+    const sidebar = document.getElementById('adminSidebar');
+    const overlay = document.getElementById('mobileOverlay');
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    
+    if (sidebar.classList.contains('show')) {
+        closeMobileMenu();
+    } else {
+        openMobileMenu();
+    }
+}
+
+function openMobileMenu() {
+    const sidebar = document.getElementById('adminSidebar');
+    const overlay = document.getElementById('mobileOverlay');
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    
+    sidebar.classList.add('show');
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    
+    // Change hamburger icon to close icon
+    const icon = menuToggle.querySelector('i');
+    if (icon) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+    }
+}
+
+function closeMobileMenu() {
+    const sidebar = document.getElementById('adminSidebar');
+    const overlay = document.getElementById('mobileOverlay');
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    
+    sidebar.classList.remove('show');
+    overlay.classList.remove('show');
+    document.body.style.overflow = 'auto';
+    
+    // Change close icon back to hamburger
+    const icon = menuToggle.querySelector('i');
+    if (icon) {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    }
+}
+
+// Close menu when clicking on a menu item (mobile)
 document.addEventListener('DOMContentLoaded', function() {
-    // Get all menu items
     const menuItems = document.querySelectorAll('.menu-item');
     
-    // Add click event to each menu item
     menuItems.forEach(item => {
         item.addEventListener('click', function() {
-            // Remove active class from all items
-            menuItems.forEach(i => i.classList.remove('active'));
-            
-            // Add active class to clicked item
-            this.classList.add('active');
-            
-            // Get the page identifier
-            const page = this.getAttribute('data-page');
-            
-            // Handle navigation (you can customize this)
-            handleAdminMenuNavigation(page);
+            if (window.innerWidth <= 768) {
+                closeMobileMenu();
+            }
         });
     });
     
-    // Function to handle admin menu navigation
-    function handleAdminMenuNavigation(page) {
-        console.log('Admin navigating to:', page);
-        
-        // Handle navigation for each menu item
-        switch(page) {
-                           case 'dashboard':
-                   window.location.href = "{{ url_for('admin.admin_dashboard') }}";
-                   break;
-               case 'upload-reports':
-                   window.location.href = "{{ url_for('admin.upload_reports') }}";
-                   break;
-               case 'upload-groups':
-                   window.location.href = "{{ url_for('admin.upload_groups') }}";
-                   break;
-               case 'message-management':
-                   window.location.href = "{{ url_for('admin.message_management') }}";
-                   break;
-               case 'manage-topics':
-                   window.location.href = "{{ url_for('admin.admin_manage_topics') }}";
-                   break;
-               case 'assembly-list':
-                   window.location.href = "{{ url_for('admin.assembly_list') }}";
-                   break;
-            default:
-                console.log('Unknown admin page:', page);
-        }
+    // Add click handler for the close button in header
+    const sidebarHeader = document.querySelector('.sidebar-header');
+    if (sidebarHeader) {
+        sidebarHeader.addEventListener('click', function(e) {
+            // Check if click is on the close button area (right side of header)
+            const rect = sidebarHeader.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            if (x > rect.width - 50) {
+                closeMobileMenu();
+            }
+        });
     }
     
-    // Set initial active state based on current page
-    function setInitialActiveState() {
-        // You can set this based on the current route or page
-        const currentPage = 'dashboard'; // Change this based on your logic
-        const activeItem = document.querySelector(`[data-page="${currentPage}"]`);
-        if (activeItem) {
-            activeItem.classList.add('active');
+    // Close menu on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Make sure hamburger is visible on page load for mobile
+    if (window.innerWidth <= 768) {
+        const menuToggle = document.getElementById('mobileMenuToggle');
+        if (menuToggle) {
+            menuToggle.style.display = 'block';
         }
     }
-    
-    // Initialize active state
-    setInitialActiveState();
 });
 </script>

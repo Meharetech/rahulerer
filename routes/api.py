@@ -647,6 +647,37 @@ def create_scheduled_post():
         
         db.session.commit()
         
+        # Send email notifications
+        try:
+            from utils.email import send_post_scheduled_notification, send_admin_post_notification
+            
+            # Prepare post data for email notifications
+            post_data = {
+                'title': title,
+                'scheduled_date': scheduled_date,
+                'scheduled_time': scheduled_time,
+                'assembly_name': assembly.name,
+                'group_count': len(selected_groups),
+                'message_preview': message_text[:100] + ('...' if len(message_text) > 100 else ''),
+                'media_files': 'None' if not any([image_file, audio_file, video_file]) else ', '.join(filter(None, [
+                    'Image' if image_file else None,
+                    'Audio' if audio_file else None,
+                    'Video' if video_file else None
+                ])),
+                'post_id': scheduled_post.id,
+                'username': current_user.username,
+                'user_email': current_user.email
+            }
+            
+            # Send notification to the user who created the post
+            send_post_scheduled_notification(current_user.email, current_user.username, post_data)
+            
+            # Send notification to admin
+            send_admin_post_notification("rahulverma9466105@gmail.com", post_data)
+            
+        except Exception as e:
+            print(f"Warning: Failed to send email notifications: {str(e)}")
+        
         return jsonify({
             'success': True,
             'message': 'Scheduled post created successfully',
@@ -768,6 +799,35 @@ def update_post_status(post_id):
         post.updated_at = datetime.utcnow()
         
         db.session.commit()
+        
+        # Send email notifications for status changes
+        try:
+            from utils.email import send_post_status_notification, send_admin_post_failed_notification
+            
+            # Get user who created the post
+            post_creator = User.query.get(post.created_by_id)
+            
+            if post_creator and new_status in ['completed', 'failed', 'cancelled']:
+                # Prepare post data for email notifications
+                post_data = {
+                    'title': post.title,
+                    'assembly_name': post.assembly.name if post.assembly else 'N/A',
+                    'completed_at': post.sent_at.strftime('%Y-%m-%d %H:%M:%S') if post.sent_at else 'N/A',
+                    'admin_notes': post.admin_notes,
+                    'username': post_creator.username,
+                    'user_email': post_creator.email,
+                    'post_id': post.id
+                }
+                
+                # Send notification to post creator
+                send_post_status_notification(post_creator.email, post_creator.username, post_data, new_status)
+                
+                # Also send notification to admin for failed posts
+                if new_status == 'failed':
+                    send_admin_post_failed_notification("rahulverma9466105@gmail.com", post_data)
+                
+        except Exception as e:
+            print(f"Warning: Failed to send status update email notifications: {str(e)}")
         
         return jsonify({
             'success': True,
@@ -2686,3 +2746,72 @@ def estimate_phone_count_from_file(file_path):
     except Exception as e:
         print(f"Debug: Error in estimate_phone_count_from_file for {file_path}: {e}")
         return 100  # Default fallback
+
+# ============================================================================
+# EMAIL TEST API
+# ============================================================================
+
+@api_bp.route('/test-email', methods=['POST'])
+@login_required
+@admin_required
+def test_email():
+    """Test email functionality"""
+    try:
+        from utils.email import send_test_email
+        
+        # Send test email to the specified address
+        success = send_test_email("rahulverma9466105@gmail.com")
+        
+        if success:
+            return jsonify({
+                'success': True,
+                'message': 'Test email sent successfully!'
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'message': 'Failed to send test email'
+            }), 500
+            
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error sending test email: {str(e)}'
+        }), 500
+
+@api_bp.route('/send-welcome-email', methods=['POST'])
+@login_required
+@admin_required
+def send_welcome_email_api():
+    """Send welcome email to a user"""
+    try:
+        data = request.get_json()
+        email = data.get('email')
+        username = data.get('username')
+        
+        if not email or not username:
+            return jsonify({
+                'success': False,
+                'message': 'Email and username are required'
+            }), 400
+        
+        from utils.email import send_welcome_email
+        
+        success = send_welcome_email(email, username)
+        
+        if success:
+            return jsonify({
+                'success': True,
+                'message': f'Welcome email sent successfully to {email}'
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'message': 'Failed to send welcome email'
+            }), 500
+            
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error sending welcome email: {str(e)}'
+        }), 500

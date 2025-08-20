@@ -2,6 +2,10 @@
 
 {% block title %}Admin Dashboard - WhatsApp UI{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="dashboard-layout">
     <!-- Include Admin Left Sidebar from Layout File -->
@@ -75,6 +79,9 @@
                     <button class="action-btn secondary">
                         <i class="fas fa-cog"></i> System Settings
                     </button>
+                    <button class="action-btn secondary" onclick="testEmail()">
+                        <i class="fas fa-envelope"></i> Test Email
+                    </button>
                 </div>
             </div>
             
@@ -109,4 +116,41 @@
 
 <!-- Include JavaScript -->
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+<script>
+// Test email functionality
+async function testEmail() {
+    try {
+        const button = event.target;
+        const originalText = button.innerHTML;
+        
+        // Show loading state
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Test Email...';
+        button.disabled = true;
+        
+        const response = await fetch('/api/test-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({})
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            alert('✅ Test email sent successfully! Check your email inbox at rahulverma9466105@gmail.com');
+        } else {
+            alert('❌ Failed to send test email: ' + data.message);
+        }
+        
+    } catch (error) {
+        alert('❌ Error testing email: ' + error.message);
+    } finally {
+        // Restore button state
+        button.innerHTML = originalText;
+        button.disabled = false;
+    }
+}
+</script>
 {% endblock %}

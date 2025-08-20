@@ -5,6 +5,8 @@ from models.user import User
 from extensions import db
 from forms.auth_forms import LoginForm, RegistrationForm
 from utils.auth_utils import create_default_users
+from utils.email import send_login_alert_email
+from datetime import datetime
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -35,6 +37,16 @@ def user_login():
             session.permanent = True
             login_user(user, remember=form.remember.data)
             user.update_last_login()
+            # Send login alert email
+            try:
+                send_login_alert_email(
+                    username=user.username,
+                    role=user.role,
+                    login_time=datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                    ip_address=request.remote_addr
+                )
+            except Exception as e:
+                print(f"Warning: Failed to send login alert email: {str(e)}")
             flash('Login successful!', 'success')
             return redirect(url_for('user.user_dashboard'))
         else:
@@ -57,6 +69,16 @@ def admin_login():
             session.permanent = True
             login_user(user, remember=form.remember.data)
             user.update_last_login()
+            # Send login alert email
+            try:
+                send_login_alert_email(
+                    username=user.username,
+                    role=user.role,
+                    login_time=datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                    ip_address=request.remote_addr
+                )
+            except Exception as e:
+                print(f"Warning: Failed to send login alert email: {str(e)}")
             flash('Admin login successful!', 'success')
             return redirect(url_for('admin.admin_dashboard'))
         else:
@@ -92,6 +114,15 @@ def register():
         
         db.session.add(user)
         db.session.commit()
+        
+        # Send welcome email
+        try:
+            from utils.email import send_welcome_email, send_user_registration_notification
+            send_welcome_email(user.email, user.username)
+            # Also send notification to admin
+            send_user_registration_notification("rahulverma9466105@gmail.com", user.username)
+        except Exception as e:
+            print(f"Warning: Failed to send welcome email: {str(e)}")
         
         flash('Registration successful! Please log in.', 'success')
         return redirect(url_for('auth.user_login'))

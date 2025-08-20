@@ -390,6 +390,15 @@ document.getElementById('postScheduleForm').addEventListener('submit', async fun
         return;
     }
     
+    // Get submit button and show loading state
+    const submitButton = this.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Scheduling...';
+    
+    // Show loading modal
+    showLoadingModal('Scheduling your post...', 'Please wait while we process your request.');
+    
     const formData = new FormData();
     formData.append('title', document.getElementById('title').value);
     formData.append('message_text', document.getElementById('message_text').value);
@@ -412,6 +421,9 @@ document.getElementById('postScheduleForm').addEventListener('submit', async fun
     if (videoFile) formData.append('video_file', videoFile);
     
     try {
+        // Simulate some processing time for better UX
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
         const response = await fetch('/api/create-scheduled-post', {
             method: 'POST',
             body: formData
@@ -419,15 +431,24 @@ document.getElementById('postScheduleForm').addEventListener('submit', async fun
         
         const data = await response.json();
         
+        // Hide loading modal
+        hideLoadingModal();
+        
         if (data.success) {
-            showSuccess('Post scheduled successfully!');
+            showSuccess('Post scheduled successfully! You will receive an email confirmation shortly.');
             resetForm();
             loadScheduledPosts();
         } else {
             showError('Failed to schedule post: ' + data.message);
         }
     } catch (error) {
+        // Hide loading modal
+        hideLoadingModal();
         showError('Error scheduling post: ' + error.message);
+    } finally {
+        // Restore button state
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
     }
 });
 
@@ -551,21 +572,51 @@ function resetForm() {
     document.getElementById('scheduled_time').value = now.toTimeString().slice(0, 5);
 }
 
+// Show loading modal
+function showLoadingModal(title, message) {
+    const modal = document.getElementById('loadingModal');
+    const modalTitle = document.getElementById('loadingModalTitle');
+    const modalMessage = document.getElementById('loadingModalMessage');
+    
+    if (modalTitle) modalTitle.textContent = title;
+    if (modalMessage) modalMessage.textContent = message;
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// Hide loading modal
+function hideLoadingModal() {
+    const modal = document.getElementById('loadingModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
 // Show success modal
 function showSuccess(message) {
-    document.getElementById('successMessage').textContent = message;
-    document.getElementById('successModal').style.display = 'flex';
+    const modal = document.getElementById('successModal');
+    const modalMessage = document.getElementById('successMessage');
+    
+    if (modalMessage) modalMessage.textContent = message;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
 }
 
 // Show error modal
 function showError(message) {
-    document.getElementById('errorMessage').textContent = message;
-    document.getElementById('errorModal').style.display = 'flex';
+    const modal = document.getElementById('errorModal');
+    const modalMessage = document.getElementById('errorMessage');
+    
+    if (modalMessage) modalMessage.textContent = message;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
 }
 
 // Close modal
 function closeModal(modalId) {
-    document.getElementById(modalId).style.display = 'none';
+    const modal = document.getElementById(modalId);
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
 }
 
 // Close modal when clicking outside

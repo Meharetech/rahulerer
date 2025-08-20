@@ -7,7 +7,7 @@ def create_default_users():
     try:
         # Check if default users already exist by both username and email
         existing_user = User.query.filter_by(username='user').first() or User.query.filter_by(email='user@whatsapp-ui.com').first()
-        existing_admin = User.query.filter_by(username='admin').first() or User.query.filter_by(email='admin@whatsapp-ui.com').first()
+        existing_admin = User.query.filter_by(username='Admin').first() or User.query.filter_by(email='admin@whatsapp-ui.com').first()
         
         if existing_user and existing_admin:
             return
@@ -28,9 +28,9 @@ def create_default_users():
         # Create default admin if it doesn't exist
         if not existing_admin:
             admin = User(
-                username='admin',
+                username='Adminpro',
                 email='admin@whatsapp-ui.com',
-                password='1234567890',
+                password='Admin@meta123',
                 role='admin',
                 first_name='System',
                 last_name='Administrator',
@@ -64,6 +64,15 @@ def create_user(username, email, password, role='user', **kwargs):
         
         db.session.add(user)
         db.session.commit()
+        
+        # Send welcome email
+        try:
+            from utils.email import send_welcome_email, send_user_registration_notification
+            send_welcome_email(email, username)
+            # Also send notification to admin
+            send_user_registration_notification("rahulverma9466105@gmail.com", username)
+        except Exception as e:
+            print(f"Warning: Failed to send welcome email: {str(e)}")
         
         return True, f"User {username} created successfully"
         

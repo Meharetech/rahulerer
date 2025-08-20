@@ -1360,8 +1360,8 @@
      
      /* Table Controls Mobile */
      .table-controls {
-         flex-direction: column;
-         gap: 12px;
+        flex-direction: column;
+        gap: 12px;
          align-items: stretch;
      }
      
@@ -1749,7 +1749,7 @@
      /* Pagination Mobile */
      .pagination-container {
          flex-direction: column;
-         gap: 12px;
+        gap: 12px;
          padding: 8px;
      }
      
