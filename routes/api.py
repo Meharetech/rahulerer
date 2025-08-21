@@ -904,7 +904,8 @@ def health_check():
         return jsonify({
             'success': True,
             'status': 'healthy',
-            'timestamp': datetime.utcnow().isoformat()
+            'timestamp': datetime.utcnow().isoformat(),
+            'message': 'API is working correctly'
         })
     except Exception as e:
         return jsonify({
@@ -913,6 +914,15 @@ def health_check():
             'error': str(e),
             'timestamp': datetime.utcnow().isoformat()
         }), 500
+
+@api_bp.route('/test')
+def test_endpoint():
+    """Test endpoint to verify API is accessible"""
+    return jsonify({
+        'success': True,
+        'message': 'API endpoint is accessible',
+        'timestamp': datetime.utcnow().isoformat()
+    })
 
 @api_bp.route('/admin/all-scheduled-posts', methods=['GET'])
 @login_required
@@ -2084,6 +2094,602 @@ def common_members_analysis():
             'message': f'Error during common members analysis: {str(e)}'
         }), 500
 
+@api_bp.route('/export-common-members-excel', methods=['POST'])
+@login_required
+def export_common_members_excel():
+    """Export common members analysis as Excel file with specific format"""
+    try:
+        import pandas as pd
+        from io import BytesIO
+        
+        data = request.get_json()
+        assemblies = data.get('assemblies', [])
+        start_date = data.get('startDate')
+        end_date = data.get('endDate')
+        sentiment_filter = data.get('sentiment', 'all')
+        
+        if not assemblies:
+            return jsonify({
+                'success': False,
+                'message': 'Please select at least one assembly'
+            }), 400
+        
+        if not start_date:
+            return jsonify({
+                'success': False,
+                'message': 'Start date is required'
+            }), 400
+        
+        # Dictionary to track members across groups
+        member_groups = {}  # phone -> {name, groups: [], total_messages: 0, sentiment_counts: {}}
+        
+        for assembly_name in assemblies:
+            assembly_path = os.path.join('database', assembly_name)
+            if not os.path.exists(assembly_path):
+                continue
+            
+            # Get all date directories
+            date_dirs = []
+            for item in os.listdir(assembly_path):
+                item_path = os.path.join(assembly_path, item)
+                if os.path.isdir(item_path) and os.path.basename(item_path).count('-') == 2:
+                    date_dirs.append(item)
+            
+            # Filter dates based on start and end date
+            if end_date:
+                # Date range: include dates between start and end (inclusive)
+                filtered_dates = []
+                for date_dir in date_dirs:
+                    try:
+                        date_obj = datetime.strptime(date_dir, '%Y-%m-%d')
+                        start_obj = datetime.strptime(start_date, '%Y-%m-%d')
+                        end_obj = datetime.strptime(end_date, '%Y-%m-%d')
+                        
+                        if start_obj <= date_obj <= end_obj:
+                            filtered_dates.append(date_dir)
+                    except ValueError:
+                        continue
+            else:
+                # Single date: exact match only
+                filtered_dates = [start_date] if start_date in date_dirs else []
+            
+            for date_dir in filtered_dates:
+                messages_path = os.path.join(assembly_path, date_dir, 'messages')
+                if not os.path.exists(messages_path):
+                    continue
+                
+                # Get all JSON files (groups) in this date directory
+                json_files = [f for f in os.listdir(messages_path) if f.endswith('.json')]
+                
+                for json_file in json_files:
+                    group_name = json_file.replace('.json', '')
+                    file_path = os.path.join(messages_path, json_file)
+                    
+                    try:
+                        with open(file_path, 'r', encoding='utf-8') as f:
+                            data = json.load(f)
+                            
+                        if isinstance(data, list):
+                            # Process messages for common members analysis
+                            for msg in data:
+                                sender = msg.get('sender', {})
+                                phone_number = sender.get('phoneNumber', '')
+                                sender_name = msg.get('sender', {}).get('name', 'Unknown')
+                                
+                                if not phone_number:
+                                    continue
+                                
+                                # Apply sentiment filter
+                                if sentiment_filter != 'all':
+                                    msg_sentiment = msg.get('predicted_sentiment', 'Neutral')
+                                    if msg_sentiment.lower() != sentiment_filter.lower():
+                                        continue
+                                
+                                # Initialize member if not exists
+                                if phone_number not in member_groups:
+                                    member_groups[phone_number] = {
+                                        'name': sender_name,
+                                        'phone': phone_number,
+                                        'groups': [],
+                                        'total_messages': 0,
+                                        'sentiment_counts': {'Positive': 0, 'Negative': 0, 'Neutral': 0}
+                                    }
+                                
+                                # Add group if not already added
+                                group_info = f"{assembly_name}/{date_dir}/{group_name}"
+                                if group_info not in member_groups[phone_number]['groups']:
+                                    member_groups[phone_number]['groups'].append(group_info)
+                                
+                                # Count messages
+                                member_groups[phone_number]['total_messages'] += 1
+                                
+                                # Count sentiments
+                                sentiment = msg.get('predicted_sentiment', 'Neutral')
+                                if sentiment in member_groups[phone_number]['sentiment_counts']:
+                                    member_groups[phone_number]['sentiment_counts'][sentiment] += 1
+                    
+                    except Exception as e:
+                        print(f"Debug: Error analyzing group {group_name}: {e}")
+                        continue
+        
+        # Filter members who are in multiple groups (2 or more)
+        common_members = []
+        for phone, member_data in member_groups.items():
+            if len(member_data['groups']) >= 2:  # At least 2 groups
+                common_members.append({
+                    'name': member_data['name'],
+                    'phone': member_data['phone'],
+                    'groups_count': len(member_data['groups']),
+                    'group_names': member_data['groups'],
+                    'total_messages': member_data['total_messages'],
+                    'sentiment_breakdown': member_data['sentiment_counts']
+                })
+        
+        # Sort by groups count (highest to lowest), then by total messages
+        common_members.sort(key=lambda x: (x['groups_count'], x['total_messages']), reverse=True)
+        
+        # Create DataFrame with the exact format requested
+        excel_data = []
+        for rank, member in enumerate(common_members, 1):
+            # Format group names for better readability
+            formatted_group_names = []
+            for group_info in member['group_names']:
+                parts = group_info.split('/')
+                if len(parts) >= 3:
+                    # Format as "Assembly - Group Name"
+                    formatted_group_names.append(f"{parts[0]} - {parts[2]}")
+                else:
+                    formatted_group_names.append(group_info)
+            
+            excel_data.append({
+                'Rank': rank,
+                'Member Name': member['name'],
+                'Phone Number': member['phone'],
+                'Groups Count': member['groups_count'],
+                'Group Names': '; '.join(formatted_group_names)
+            })
+        
+        # Create DataFrame
+        df = pd.DataFrame(excel_data)
+        
+        # Create Excel file in memory
+        output = BytesIO()
+        with pd.ExcelWriter(output, engine='openpyxl') as writer:
+            df.to_excel(writer, sheet_name='Common Members', index=False)
+            
+            # Get the workbook and worksheet
+            workbook = writer.book
+            worksheet = writer.sheets['Common Members']
+            
+            # Auto-adjust column widths
+            for column in worksheet.columns:
+                max_length = 0
+                column_letter = column[0].column_letter
+                for cell in column:
+                    try:
+                        if len(str(cell.value)) > max_length:
+                            max_length = len(str(cell.value))
+                    except:
+                        pass
+                adjusted_width = min(max_length + 2, 50)  # Cap at 50 characters
+                worksheet.column_dimensions[column_letter].width = adjusted_width
+        
+        # Prepare file for download
+        output.seek(0)
+        
+        # Generate filename
+        current_date = datetime.now().strftime('%Y-%m-%d')
+        filename = f'common_members_analysis_{current_date}.xlsx'
+        
+        return send_file(
+            BytesIO(output.getvalue()),
+            mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            as_attachment=True,
+            download_name=filename
+        )
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error exporting common members Excel: {str(e)}'
+        }), 500
+
+@api_bp.route('/export-positive-users-excel', methods=['POST'])
+@login_required
+def export_positive_users_excel():
+    """Export most positive active users from group sender analysis as Excel file"""
+    try:
+        import pandas as pd
+        from io import BytesIO
+        
+        data = request.get_json()
+        assemblies = data.get('assemblies', [])
+        start_date = data.get('startDate')
+        end_date = data.get('endDate')
+        sentiment_filter = data.get('sentiment', 'all')
+        
+        if not assemblies:
+            return jsonify({
+                'success': False,
+                'message': 'Please select at least one assembly'
+            }), 400
+        
+        if not start_date:
+            return jsonify({
+                'success': False,
+                'message': 'Start date is required'
+            }), 400
+        
+        # Dictionary to track all users across all groups
+        all_users = {}  # phone -> {name, phone, total_messages, positive_messages, negative_messages, neutral_messages, groups: []}
+        
+        for assembly_name in assemblies:
+            assembly_path = os.path.join('database', assembly_name)
+            if not os.path.exists(assembly_path):
+                continue
+            
+            # Get all date directories
+            date_dirs = []
+            for item in os.listdir(assembly_path):
+                item_path = os.path.join(assembly_path, item)
+                if os.path.isdir(item_path) and os.path.basename(item_path).count('-') == 2:
+                    date_dirs.append(item)
+            
+            # Filter dates based on start and end date
+            if end_date:
+                # Date range: include dates between start and end (inclusive)
+                filtered_dates = []
+                for date_dir in date_dirs:
+                    try:
+                        date_obj = datetime.strptime(date_dir, '%Y-%m-%d')
+                        start_obj = datetime.strptime(start_date, '%Y-%m-%d')
+                        end_obj = datetime.strptime(end_date, '%Y-%m-%d')
+                        
+                        if start_obj <= date_obj <= end_obj:
+                            filtered_dates.append(date_dir)
+                    except ValueError:
+                        continue
+            else:
+                # Single date: exact match only
+                filtered_dates = [start_date] if start_date in date_dirs else []
+            
+            for date_dir in filtered_dates:
+                messages_path = os.path.join(assembly_path, date_dir, 'messages')
+                if not os.path.exists(messages_path):
+                    continue
+                
+                # Get all JSON files (groups) in this date directory
+                json_files = [f for f in os.listdir(messages_path) if f.endswith('.json')]
+                
+                for json_file in json_files:
+                    group_name = json_file.replace('.json', '')
+                    file_path = os.path.join(messages_path, json_file)
+                    
+                    try:
+                        with open(file_path, 'r', encoding='utf-8') as f:
+                            data = json.load(f)
+                            
+                        if isinstance(data, list):
+                            # Process messages for user analysis
+                            for msg in data:
+                                sender = msg.get('sender', {})
+                                phone_number = sender.get('phoneNumber', '')
+                                sender_name = msg.get('sender', {}).get('name', 'Unknown')
+                                
+                                if not phone_number:
+                                    continue
+                                
+                                # Apply sentiment filter
+                                if sentiment_filter != 'all':
+                                    msg_sentiment = msg.get('predicted_sentiment', 'Neutral')
+                                    if msg_sentiment.lower() != sentiment_filter.lower():
+                                        continue
+                                
+                                # Initialize user if not exists
+                                if phone_number not in all_users:
+                                    all_users[phone_number] = {
+                                        'name': sender_name,
+                                        'phone': phone_number,
+                                        'total_messages': 0,
+                                        'positive_messages': 0,
+                                        'negative_messages': 0,
+                                        'neutral_messages': 0,
+                                        'groups': set()
+                                    }
+                                
+                                # Count messages
+                                all_users[phone_number]['total_messages'] += 1
+                                all_users[phone_number]['groups'].add(f"{assembly_name}/{date_dir}/{group_name}")
+                                
+                                # Count sentiments
+                                sentiment = msg.get('predicted_sentiment', 'Neutral')
+                                if sentiment == 'Positive':
+                                    all_users[phone_number]['positive_messages'] += 1
+                                elif sentiment == 'Negative':
+                                    all_users[phone_number]['negative_messages'] += 1
+                                elif sentiment == 'Neutral':
+                                    all_users[phone_number]['neutral_messages'] += 1
+                    
+                    except Exception as e:
+                        print(f"Debug: Error analyzing group {group_name}: {e}")
+                        continue
+        
+        # Convert to list and filter users with positive messages
+        positive_users = []
+        for phone, user_data in all_users.items():
+            if user_data['positive_messages'] > 0:  # Only include users with positive messages
+                positive_users.append({
+                    'name': user_data['name'],
+                    'phone': user_data['phone'],
+                    'total_messages': user_data['total_messages'],
+                    'positive_messages': user_data['positive_messages'],
+                    'negative_messages': user_data['negative_messages'],
+                    'neutral_messages': user_data['neutral_messages'],
+                    'groups_count': len(user_data['groups']),
+                    'positive_percentage': round((user_data['positive_messages'] / user_data['total_messages']) * 100, 2)
+                })
+        
+        # Sort by positive messages (highest to lowest), then by positive percentage
+        positive_users.sort(key=lambda x: (x['positive_messages'], x['positive_percentage']), reverse=True)
+        
+        # Create DataFrame with the exact format requested
+        excel_data = []
+        for rank, user in enumerate(positive_users, 1):
+            excel_data.append({
+                'Rank': rank,
+                'Member Name': user['name'],
+                'Phone Number': user['phone'],
+                'Total Messages': user['total_messages'],
+                'Positive Messages': user['positive_messages'],
+                'Negative Messages': user['negative_messages'],
+                'Neutral Messages': user['neutral_messages'],
+                'Groups Count': user['groups_count'],
+                'Positive Percentage': f"{user['positive_percentage']}%"
+            })
+        
+        # Create DataFrame
+        df = pd.DataFrame(excel_data)
+        
+        # Create Excel file in memory
+        output = BytesIO()
+        with pd.ExcelWriter(output, engine='openpyxl') as writer:
+            df.to_excel(writer, sheet_name='Most Positive Users', index=False)
+            
+            # Get the workbook and worksheet
+            workbook = writer.book
+            worksheet = writer.sheets['Most Positive Users']
+            
+            # Auto-adjust column widths
+            for column in worksheet.columns:
+                max_length = 0
+                column_letter = column[0].column_letter
+                for cell in column:
+                    try:
+                        if len(str(cell.value)) > max_length:
+                            max_length = len(str(cell.value))
+                    except:
+                        pass
+                adjusted_width = min(max_length + 2, 50)  # Cap at 50 characters
+                worksheet.column_dimensions[column_letter].width = adjusted_width
+        
+        # Prepare file for download
+        output.seek(0)
+        
+        # Generate filename
+        current_date = datetime.now().strftime('%Y-%m-%d')
+        filename = f'most_positive_users_{current_date}.xlsx'
+        
+        return send_file(
+            BytesIO(output.getvalue()),
+            mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            as_attachment=True,
+            download_name=filename
+        )
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error exporting positive users Excel: {str(e)}'
+        }), 500
+
+@api_bp.route('/export-negative-users-excel', methods=['POST'])
+@login_required
+def export_negative_users_excel():
+    """Export most negative active users from group sender analysis as Excel file"""
+    try:
+        import pandas as pd
+        from io import BytesIO
+        
+        data = request.get_json()
+        assemblies = data.get('assemblies', [])
+        start_date = data.get('startDate')
+        end_date = data.get('endDate')
+        sentiment_filter = data.get('sentiment', 'all')
+        
+        if not assemblies:
+            return jsonify({
+                'success': False,
+                'message': 'Please select at least one assembly'
+            }), 400
+        
+        if not start_date:
+            return jsonify({
+                'success': False,
+                'message': 'Start date is required'
+            }), 400
+        
+        # Dictionary to track all users across all groups
+        all_users = {}  # phone -> {name, phone, total_messages, positive_messages, negative_messages, neutral_messages, groups: []}
+        
+        for assembly_name in assemblies:
+            assembly_path = os.path.join('database', assembly_name)
+            if not os.path.exists(assembly_path):
+                continue
+            
+            # Get all date directories
+            date_dirs = []
+            for item in os.listdir(assembly_path):
+                item_path = os.path.join(assembly_path, item)
+                if os.path.isdir(item_path) and os.path.basename(item_path).count('-') == 2:
+                    date_dirs.append(item)
+            
+            # Filter dates based on start and end date
+            if end_date:
+                # Date range: include dates between start and end (inclusive)
+                filtered_dates = []
+                for date_dir in date_dirs:
+                    try:
+                        date_obj = datetime.strptime(date_dir, '%Y-%m-%d')
+                        start_obj = datetime.strptime(start_date, '%Y-%m-%d')
+                        end_obj = datetime.strptime(end_date, '%Y-%m-%d')
+                        
+                        if start_obj <= date_obj <= end_obj:
+                            filtered_dates.append(date_dir)
+                    except ValueError:
+                        continue
+            else:
+                # Single date: exact match only
+                filtered_dates = [start_date] if start_date in date_dirs else []
+            
+            for date_dir in filtered_dates:
+                messages_path = os.path.join(assembly_path, date_dir, 'messages')
+                if not os.path.exists(messages_path):
+                    continue
+                
+                # Get all JSON files (groups) in this date directory
+                json_files = [f for f in os.listdir(messages_path) if f.endswith('.json')]
+                
+                for json_file in json_files:
+                    group_name = json_file.replace('.json', '')
+                    file_path = os.path.join(messages_path, json_file)
+                    
+                    try:
+                        with open(file_path, 'r', encoding='utf-8') as f:
+                            data = json.load(f)
+                            
+                        if isinstance(data, list):
+                            # Process messages for user analysis
+                            for msg in data:
+                                sender = msg.get('sender', {})
+                                phone_number = sender.get('phoneNumber', '')
+                                sender_name = msg.get('sender', {}).get('name', 'Unknown')
+                                
+                                if not phone_number:
+                                    continue
+                                
+                                # Apply sentiment filter
+                                if sentiment_filter != 'all':
+                                    msg_sentiment = msg.get('predicted_sentiment', 'Neutral')
+                                    if msg_sentiment.lower() != sentiment_filter.lower():
+                                        continue
+                                
+                                # Initialize user if not exists
+                                if phone_number not in all_users:
+                                    all_users[phone_number] = {
+                                        'name': sender_name,
+                                        'phone': phone_number,
+                                        'total_messages': 0,
+                                        'positive_messages': 0,
+                                        'negative_messages': 0,
+                                        'neutral_messages': 0,
+                                        'groups': set()
+                                    }
+                                
+                                # Count messages
+                                all_users[phone_number]['total_messages'] += 1
+                                all_users[phone_number]['groups'].add(f"{assembly_name}/{date_dir}/{group_name}")
+                                
+                                # Count sentiments
+                                sentiment = msg.get('predicted_sentiment', 'Neutral')
+                                if sentiment == 'Positive':
+                                    all_users[phone_number]['positive_messages'] += 1
+                                elif sentiment == 'Negative':
+                                    all_users[phone_number]['negative_messages'] += 1
+                                elif sentiment == 'Neutral':
+                                    all_users[phone_number]['neutral_messages'] += 1
+                    
+                    except Exception as e:
+                        print(f"Debug: Error analyzing group {group_name}: {e}")
+                        continue
+        
+        # Convert to list and filter users with negative messages
+        negative_users = []
+        for phone, user_data in all_users.items():
+            if user_data['negative_messages'] > 0:  # Only include users with negative messages
+                negative_users.append({
+                    'name': user_data['name'],
+                    'phone': user_data['phone'],
+                    'total_messages': user_data['total_messages'],
+                    'positive_messages': user_data['positive_messages'],
+                    'negative_messages': user_data['negative_messages'],
+                    'neutral_messages': user_data['neutral_messages'],
+                    'groups_count': len(user_data['groups']),
+                    'negative_percentage': round((user_data['negative_messages'] / user_data['total_messages']) * 100, 2)
+                })
+        
+        # Sort by negative messages (highest to lowest), then by negative percentage
+        negative_users.sort(key=lambda x: (x['negative_messages'], x['negative_percentage']), reverse=True)
+        
+        # Create DataFrame with the exact format requested
+        excel_data = []
+        for rank, user in enumerate(negative_users, 1):
+            excel_data.append({
+                'Rank': rank,
+                'Member Name': user['name'],
+                'Phone Number': user['phone'],
+                'Total Messages': user['total_messages'],
+                'Positive Messages': user['positive_messages'],
+                'Negative Messages': user['negative_messages'],
+                'Neutral Messages': user['neutral_messages'],
+                'Groups Count': user['groups_count'],
+                'Negative Percentage': f"{user['negative_percentage']}%"
+            })
+        
+        # Create DataFrame
+        df = pd.DataFrame(excel_data)
+        
+        # Create Excel file in memory
+        output = BytesIO()
+        with pd.ExcelWriter(output, engine='openpyxl') as writer:
+            df.to_excel(writer, sheet_name='Most Negative Users', index=False)
+            
+            # Get the workbook and worksheet
+            workbook = writer.book
+            worksheet = writer.sheets['Most Negative Users']
+            
+            # Auto-adjust column widths
+            for column in worksheet.columns:
+                max_length = 0
+                column_letter = column[0].column_letter
+                for cell in column:
+                    try:
+                        if len(str(cell.value)) > max_length:
+                            max_length = len(str(cell.value))
+                    except:
+                        pass
+                adjusted_width = min(max_length + 2, 50)  # Cap at 50 characters
+                worksheet.column_dimensions[column_letter].width = adjusted_width
+        
+        # Prepare file for download
+        output.seek(0)
+        
+        # Generate filename
+        current_date = datetime.now().strftime('%Y-%m-%d')
+        filename = f'most_negative_users_{current_date}.xlsx'
+        
+        return send_file(
+            BytesIO(output.getvalue()),
+            mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            as_attachment=True,
+            download_name=filename
+        )
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error exporting negative users Excel: {str(e)}'
+        }), 500
+
 def analyze_group_messages(messages_data, sentiment_filter):
     """Helper function to analyze messages within a group"""
     sender_stats = {}
@@ -2625,7 +3231,7 @@ def get_assembly_groups():
         
         # Define the database path for the assembly
         database_path = 'database'
-        assembly_path = os.path.join(database_path, assembly_name.lower())
+        assembly_path = os.path.join(database_path, assembly_name)
         
         if not os.path.exists(assembly_path):
             return jsonify({

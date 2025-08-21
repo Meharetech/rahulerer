@@ -570,6 +570,87 @@ function showError(message) {
     alert('Error: ' + message);
 }
 
+// Show loading message
+function showLoadingMessage(message) {
+    // Create or update loading notification
+    let loadingDiv = document.getElementById('loadingNotification');
+    if (!loadingDiv) {
+        loadingDiv = document.createElement('div');
+        loadingDiv.id = 'loadingNotification';
+        loadingDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #17a2b8;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            font-size: 14px;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        `;
+        document.body.appendChild(loadingDiv);
+    }
+    
+    loadingDiv.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${message}`;
+    loadingDiv.style.display = 'flex';
+}
+
+// Show success message
+function showSuccessMessage(message) {
+    // Hide loading notification first
+    const loadingDiv = document.getElementById('loadingNotification');
+    if (loadingDiv) {
+        loadingDiv.style.display = 'none';
+    }
+    
+    // Create or update success notification
+    let successDiv = document.getElementById('successNotification');
+    if (!successDiv) {
+        successDiv = document.createElement('div');
+        successDiv.id = 'successNotification';
+        successDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            font-size: 14px;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        `;
+        document.body.appendChild(successDiv);
+    }
+    
+    successDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+    successDiv.style.display = 'flex';
+    
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        if (successDiv) {
+            successDiv.style.display = 'none';
+        }
+    }, 5000);
+}
+
+// Hide loading message
+function hideLoadingMessage() {
+    const loadingDiv = document.getElementById('loadingNotification');
+    if (loadingDiv) {
+        loadingDiv.style.display = 'none';
+    }
+}
+
 // Toggle filter form visibility
 function toggleFilterForm() {
     try {
@@ -1529,6 +1610,178 @@ function exportGroupAnalysis() {
     // Implementation for exporting table data
     console.log('Exporting group analysis table...');
     // Add your export logic here
+}
+
+// Export most positive users as Excel file
+async function exportPositiveUsersExcel() {
+    try {
+        console.log('Starting Excel export of most positive users...');
+        
+        // Get form data
+        const assemblies = getSelectedAssemblies();
+        const startDate = document.getElementById('startDate')?.value;
+        const endDate = document.getElementById('endDate')?.value;
+        const sentiment = document.getElementById('sentiment')?.value || 'all';
+        
+        if (assemblies.length === 0) {
+            showError('Please select at least one assembly');
+            return;
+        }
+        
+        if (!startDate) {
+            showError('Please select a start date');
+            return;
+        }
+        
+        // Show loading state
+        showLoadingMessage('⏳ Preparing Excel export for most positive users... Please wait.');
+        
+        // Prepare request data
+        const requestData = {
+            assemblies: assemblies,
+            startDate: startDate,
+            endDate: endDate,
+            sentiment: sentiment
+        };
+        
+        console.log('Sending positive users Excel export request:', requestData);
+        
+        // Make API call to export Excel
+        const response = await fetch('/api/export-positive-users-excel', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Get the blob from response
+        const blob = await response.blob();
+        
+        // Create download link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        
+        // Get filename from response headers or generate default
+        const contentDisposition = response.headers.get('content-disposition');
+        let filename = 'most_positive_users.xlsx';
+        if (contentDisposition) {
+            const filenameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+            if (filenameMatch && filenameMatch[1]) {
+                filename = filenameMatch[1].replace(/['"]/g, '');
+            }
+        }
+        
+        link.download = filename;
+        link.style.visibility = 'hidden';
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Clean up
+        window.URL.revokeObjectURL(url);
+        
+        console.log('Positive users Excel export completed successfully:', filename);
+        showSuccessMessage(`✅ Most positive users Excel export completed successfully! File: ${filename}`);
+        
+    } catch (error) {
+        hideLoadingMessage();
+        console.error('Error during positive users Excel export:', error);
+        showError('Error during positive users Excel export: ' + error.message);
+    }
+}
+
+// Export most negative users as Excel file
+async function exportNegativeUsersExcel() {
+    try {
+        console.log('Starting Excel export of most negative users...');
+        
+        // Get form data
+        const assemblies = getSelectedAssemblies();
+        const startDate = document.getElementById('startDate')?.value;
+        const endDate = document.getElementById('endDate')?.value;
+        const sentiment = document.getElementById('sentiment')?.value || 'all';
+        
+        if (assemblies.length === 0) {
+            showError('Please select at least one assembly');
+            return;
+        }
+        
+        if (!startDate) {
+            showError('Please select a start date');
+            return;
+        }
+        
+        // Show loading state
+        showLoadingMessage('⏳ Preparing Excel export for most negative users... Please wait.');
+        
+        // Prepare request data
+        const requestData = {
+            assemblies: assemblies,
+            startDate: startDate,
+            endDate: endDate,
+            sentiment: sentiment
+        };
+        
+        console.log('Sending negative users Excel export request:', requestData);
+        
+        // Make API call to export Excel
+        const response = await fetch('/api/export-negative-users-excel', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Get the blob from response
+        const blob = await response.blob();
+        
+        // Create download link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        
+        // Get filename from response headers or generate default
+        const contentDisposition = response.headers.get('content-disposition');
+        let filename = 'most_negative_users.xlsx';
+        if (contentDisposition) {
+            const filenameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+            if (filenameMatch && filenameMatch[1]) {
+                filename = filenameMatch[1].replace(/['"]/g, '');
+            }
+        }
+        
+        link.download = filename;
+        link.style.visibility = 'hidden';
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Clean up
+        window.URL.revokeObjectURL(url);
+        
+        console.log('Negative users Excel export completed successfully:', filename);
+        showSuccessMessage(`✅ Most negative users Excel export completed successfully! File: ${filename}`);
+        
+    } catch (error) {
+        hideLoadingMessage();
+        console.error('Error during negative users Excel export:', error);
+        showError('Error during negative users Excel export: ' + error.message);
+    }
 }
 
 // ============================================================================

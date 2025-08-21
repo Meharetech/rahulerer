@@ -427,7 +427,7 @@ function downloadGroupsList() {
         URL.revokeObjectURL(url);
         
         console.log('Groups list downloaded successfully as:', filename);
-        showError(`✅ Groups list downloaded successfully! File: ${filename}`);
+        showInfo(`✅ Groups list downloaded successfully! File: ${filename}`);
         
     } catch (error) {
         console.error('Error downloading groups list:', error);
@@ -443,5 +443,11 @@ function goBack() {
 // Show error message
 function showError(message) {
     // Simple error display - you can enhance this with a proper toast/alert system
+    alert('Error: ' + message);
+}
+
+// Show info message
+function showInfo(message) {
+    // Simple info display
     alert('Info: ' + message);
 }

@@ -281,13 +281,18 @@
                     <h4><i class="fas fa-search"></i> Search Across All Messages</h4>
                     <p>Search through messages from all groups and assemblies</p>
                     
-                    <!-- Permanent Download Button -->
-                    <div class="permanent-download-section">
-                        <button class="btn btn-success" onclick="downloadAllGroupMessages()">
-                            <i class="fas fa-download"></i> Download All Group Messages (Excel)
-                        </button>
-                        <p class="download-info">Download all messages from all groups and assemblies</p>
-                    </div>
+                                            <!-- Permanent Download Buttons -->
+                        <div class="permanent-download-section">
+                            <div class="download-buttons-row">
+                                <button class="btn btn-success" onclick="exportPositiveUsersExcel()">
+                                    <i class="fas fa-smile"></i> Export Most Positive Users (Excel)
+                                </button>
+                                <button class="btn btn-danger" onclick="exportNegativeUsersExcel()">
+                                    <i class="fas fa-frown"></i> Export Most Negative Users (Excel)
+                                </button>
+                            </div>
+                            <p class="download-info">Download lists of most positive and negative active users with their sentiment analysis</p>
+                        </div>
                 </div>
                 
                 <div class="search-controls">

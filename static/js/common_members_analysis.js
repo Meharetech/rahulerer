@@ -634,7 +634,7 @@ function hidePaginationContainer() {
     }
 }
 
-// Export common members table
+// Export common members table (CSV format - legacy)
 function exportCommonMembers() {
     try {
         console.log('Starting export of common members...');
@@ -719,6 +719,91 @@ function exportCommonMembers() {
     } catch (error) {
         console.error('Error exporting common members:', error);
         showError('Error exporting common members: ' + error.message);
+    }
+}
+
+// Export common members as Excel file with specific format
+async function exportCommonMembersExcel() {
+    try {
+        console.log('Starting Excel export of common members...');
+        
+        // Get form data
+        const assemblies = getSelectedAssemblies();
+        const startDate = document.getElementById('startDate')?.value;
+        const endDate = document.getElementById('endDate')?.value;
+        const sentiment = document.getElementById('sentiment')?.value || 'all';
+        
+        if (assemblies.length === 0) {
+            showError('Please select at least one assembly');
+            return;
+        }
+        
+        if (!startDate) {
+            showError('Please select a start date');
+            return;
+        }
+        
+        // Show loading state
+        showError('⏳ Preparing Excel export... Please wait.');
+        
+        // Prepare request data
+        const requestData = {
+            assemblies: assemblies,
+            startDate: startDate,
+            endDate: endDate,
+            sentiment: sentiment
+        };
+        
+        console.log('Sending Excel export request:', requestData);
+        
+        // Make API call to export Excel
+        const response = await fetch('/api/export-common-members-excel', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // Get the blob from response
+        const blob = await response.blob();
+        
+        // Create download link
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        
+        // Get filename from response headers or generate default
+        const contentDisposition = response.headers.get('content-disposition');
+        let filename = 'common_members_analysis.xlsx';
+        if (contentDisposition) {
+            const filenameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+            if (filenameMatch && filenameMatch[1]) {
+                filename = filenameMatch[1].replace(/['"]/g, '');
+            }
+        }
+        
+        link.download = filename;
+        link.style.visibility = 'hidden';
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Clean up
+        window.URL.revokeObjectURL(url);
+        
+        console.log('Excel export completed successfully:', filename);
+        showError(`✅ Excel export completed successfully! File: ${filename}`);
+        
+    } catch (error) {
+        console.error('Error during Excel export:', error);
+        showError('Error during Excel export: ' + error.message);
     }
 }
 

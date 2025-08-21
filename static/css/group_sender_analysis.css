@@ -732,6 +732,49 @@
     text-align: center;
 }
 
+.download-buttons-row {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.download-buttons-row .btn {
+    min-width: 200px;
+    padding: 12px 20px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.download-buttons-row .btn-success {
+    background: #28a745;
+    border: 1px solid #28a745;
+    color: white;
+}
+
+.download-buttons-row .btn-success:hover {
+    background: #218838;
+    border-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.download-buttons-row .btn-danger {
+    background: #dc3545;
+    border: 1px solid #dc3545;
+    color: white;
+}
+
+.download-buttons-row .btn-danger:hover {
+    background: #c82333;
+    border-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
 .permanent-download-section .btn {
     padding: 16px 32px;
     font-size: 16px;

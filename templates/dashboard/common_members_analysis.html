@@ -218,10 +218,10 @@
                         
                         <!-- Permanent Download Button -->
                         <div class="permanent-download-section">
-                            <button class="btn btn-success" onclick="downloadAllMessages()">
-                                <i class="fas fa-download"></i> Download All Messages (Excel)
+                            <button class="btn btn-success" onclick="exportCommonMembersExcel()">
+                                <i class="fas fa-file-excel"></i> Export Common Members (Excel)
                             </button>
-                            <p class="download-info">Download all messages from common members across all groups</p>
+                            <p class="download-info">Download common members analysis with Rank, Member Name, Phone Number, Groups Count, and Group Names</p>
                         </div>
                     </div>
                     
@@ -335,7 +335,10 @@
                         </div>
                         <div class="table-actions">
                             <button type="button" class="btn btn-outline btn-sm" onclick="exportCommonMembers()">
-                                <i class="fas fa-download"></i> Export Table
+                                <i class="fas fa-download"></i> Export CSV
+                            </button>
+                            <button type="button" class="btn btn-success btn-sm" onclick="exportCommonMembersExcel()">
+                                <i class="fas fa-file-excel"></i> Export Excel
                             </button>
                         </div>
                     </div>
