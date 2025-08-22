@@ -61,9 +61,12 @@
     </div>
     
     <div class="sidebar-footer">
-        <a href="{{ url_for('auth.logout') }}" class="btn">
+        <form method="POST" action="{{ url_for('auth.logout') }}" style="margin: 0;" id="logoutForm">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <button type="submit" class="btn" style="width: 100%; background: none; border: none; color: inherit; cursor: pointer; padding: 12px; font-size: 14px;" id="logoutBtn">
                 <i class="fas fa-sign-out-alt"></i> Logout
-        </a>
+            </button>
+        </form>
     </div>
 </div>
 
@@ -464,6 +467,20 @@ document.addEventListener('DOMContentLoaded', function() {
         if (menuToggle) {
             menuToggle.style.display = 'block';
         }
+    }
+    
+    // Handle logout form submission
+    const logoutForm = document.getElementById('logoutForm');
+    const logoutBtn = document.getElementById('logoutBtn');
+    
+    if (logoutForm) {
+        logoutForm.addEventListener('submit', function(e) {
+            // Show loading state
+            logoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging out...';
+            logoutBtn.disabled = true;
+            
+            // Form will submit normally with CSRF token
+        });
     }
 });
 </script>

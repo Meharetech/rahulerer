@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for
 from datetime import timedelta
 from config import Config
-from extensions import db, login_manager
+from extensions import db, login_manager, csrf
 from routes import auth_bp, dashboard_bp, admin_bp, user_bp, api_bp
 from middleware.auth_middleware import auth_middleware
 
@@ -16,6 +16,10 @@ def create_app(config_class=Config):
     # Initialize extensions
     db.init_app(app)
     login_manager.init_app(app)
+    csrf.init_app(app)
+    
+    # Exempt API routes from CSRF protection
+    csrf.exempt(api_bp)
     
     # Configure session management
     app.config['SESSION_COOKIE_SECURE'] = False  # Set to True in production with HTTPS

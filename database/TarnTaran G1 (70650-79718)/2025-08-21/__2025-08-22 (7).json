@@ -1,0 +1,62 @@
+[
+    {
+        "sender": {
+            "name": "atbarvirk762",
+            "phoneNumber": "919876362897"
+        },
+        "messageContent": "Image message",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/19e52a23-422c-4575-8836-e8c64af8f2d5",
+        "timestamp": "2025-08-22T04:07:14.351Z",
+        "group_name": "__2025-08-22 (7)",
+        "date": "G1-21-AUG",
+        "processed_time": "2025-08-22T10:06:13.916453",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "atbarvirk762",
+            "phoneNumber": "919876362897"
+        },
+        "messageContent": "Image message",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-22T04:07:14.352Z",
+        "group_name": "__2025-08-22 (7)",
+        "date": "G1-21-AUG",
+        "processed_time": "2025-08-22T10:06:13.965622",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "atbarvirk762",
+            "phoneNumber": "919876362897"
+        },
+        "messageContent": "Image message",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/7df0c75d-0372-454e-a9da-289a61fc7dd3",
+        "timestamp": "2025-08-22T04:07:14.357Z",
+        "group_name": "__2025-08-22 (7)",
+        "date": "G1-21-AUG",
+        "processed_time": "2025-08-22T10:06:13.996371",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "atbarvirk762",
+            "phoneNumber": "919876362897"
+        },
+        "messageContent": "Image message",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2025-08-22T04:07:14.359Z",
+        "group_name": "__2025-08-22 (7)",
+        "date": "G1-21-AUG",
+        "processed_time": "2025-08-22T10:06:14.028344",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    }
+]

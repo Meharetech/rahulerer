@@ -122,8 +122,8 @@ function displayAllPosts(posts) {
                     <button class="btn btn-sm btn-primary" onclick="openStatusUpdate(${post.id})">
                         <i class="fas fa-edit"></i> Status
                     </button>
-                    <button class="btn btn-sm btn-info" onclick="debugFilePaths(${post.id})">
-                        <i class="fas fa-bug"></i> Debug
+                    <button class="btn btn-sm btn-danger" onclick="confirmDeletePost(${post.id}, '${post.title}')" title="Delete Post">
+                        <i class="fas fa-trash"></i> Delete
                     </button>
                     <div class="quick-status-updates">
                         <button class="btn btn-sm btn-success" onclick="quickStatusUpdate(${post.id}, 'completed')" title="Mark as Completed">
@@ -566,6 +566,11 @@ function showError(message) {
     alert('Error: ' + message);
 }
 
+// Open modal
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = 'block';
+}
+
 // Close modal
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
@@ -731,5 +736,74 @@ function refreshPostRow(postId) {
         
         // Update row status class
         row.className = `post-row status-${post.status}`;
+    }
+}
+
+// Delete post functionality
+let postToDelete = null;
+
+function confirmDeletePost(postId, postTitle) {
+    postToDelete = postId;
+    document.getElementById('deletePostTitle').textContent = postTitle;
+    openModal('deleteConfirmModal');
+}
+
+async function deletePost() {
+    if (!postToDelete) {
+        showError('No post selected for deletion');
+        return;
+    }
+    
+    try {
+        // Show loading state
+        const deleteBtn = document.querySelector('#deleteConfirmModal .btn-danger');
+        const originalText = deleteBtn.innerHTML;
+        deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+        deleteBtn.disabled = true;
+        
+        console.log(`Attempting to delete post ID: ${postToDelete}`);
+        
+        const response = await fetch(`/api/scheduled-posts/${postToDelete}/delete`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        console.log(`Delete response status: ${response.status}`);
+        
+        const data = await response.json();
+        console.log('Delete response data:', data);
+        
+        if (data.success) {
+            showSuccess('Post deleted successfully');
+            closeModal('deleteConfirmModal');
+            
+            // Remove the post from local array
+            allPosts = allPosts.filter(p => p.id !== postToDelete);
+            
+            // Remove the row from the table
+            const row = document.querySelector(`tr[data-post-id="${postToDelete}"]`);
+            if (row) {
+                row.remove();
+            }
+            
+            // Reload statistics
+            loadStats();
+            
+            // Reset
+            postToDelete = null;
+        } else {
+            showError('Failed to delete post: ' + data.message);
+            console.error('Delete failed:', data);
+        }
+    } catch (error) {
+        showError('Error deleting post: ' + error.message);
+        console.error('Delete error:', error);
+    } finally {
+        // Reset button state
+        const deleteBtn = document.querySelector('#deleteConfirmModal .btn-danger');
+        deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Delete Post';
+        deleteBtn.disabled = false;
     }
 }

@@ -807,6 +807,50 @@
     font-size: 3rem;
     color: #667eea;
     margin-bottom: 20px;
+}
+
+/* Delete Confirmation Modal Specific Styles */
+#deleteConfirmModal .modal-content {
+    border-left: 4px solid #dc3545;
+}
+
+#deleteConfirmModal .modal-header {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+}
+
+#deleteConfirmModal .alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#deleteConfirmModal .alert-danger i {
+    font-size: 1.25rem;
+}
+
+#deleteConfirmModal ul {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+}
+
+#deleteConfirmModal ul li {
+    color: #721c24;
+    margin-bottom: 0.5rem;
+}
+
+#deleteConfirmModal ul li:last-child {
+    margin-bottom: 0;
+}
     animation: pulse 2s infinite;
 }
 

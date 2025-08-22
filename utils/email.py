@@ -232,6 +232,12 @@ def send_user_registration_notification(to_email, username):
     """Send notification when new user registers"""
     return email_sender.send_user_registration_notification(to_email, username)
 
+def send_new_post_notification_to_all_emails(post_data):
+    """Send notification to all emails in email.csv when a new post is sent"""
+    return send_new_post_notification_to_all(post_data)
+
+
+
 def send_post_scheduled_notification(user_email, username, post_data):
     """Send notification when a post is scheduled successfully"""
     subject = "Post Scheduled Successfully - WhatsApp Analytics"
@@ -381,3 +387,150 @@ def send_login_alert_email(username, role, login_time, ip_address=None):
     <p>This is an automated alert for security purposes.</p>
     """
     return email_sender.send_notification_email(to_email, subject, message, "info")
+
+def send_post_deletion_notification(to_email, username, post_data, deletion_type):
+    """Send notification when a post is deleted"""
+    if deletion_type == 'admin_deleted':
+        subject = "Post Deleted by Admin - WhatsApp Analytics"
+        color = "#dc3545"
+        title = "Post Deleted by Admin"
+        message_text = f"Hi {username}, your scheduled post has been deleted by an administrator."
+        additional_info = "If you believe this was done in error, please contact the admin team."
+    else:  # user_deleted
+        subject = "Post Deleted by User - WhatsApp Analytics"
+        color = "#ffc107"
+        title = "Post Deleted by User"
+        message_text = f"Hi {username}, a user has deleted their scheduled post."
+        additional_info = "You can review this action in the admin dashboard."
+    
+    message = f"""
+    <h3 style="color: {color}; margin-top: 0;">{title}</h3>
+    <p>{message_text}</p>
+    
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+        <h4 style="color: {color}; margin-top: 0;">Deleted Post Details</h4>
+        <p><strong>Post Title:</strong> {post_data['title']}</p>
+        <p><strong>Post ID:</strong> {post_data['post_id']}</p>
+        <p><strong>Assembly:</strong> {post_data['assembly_name']}</p>
+        <p><strong>Created By:</strong> {post_data['username']} ({post_data['user_email']})</p>
+        <p><strong>Deleted At:</strong> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+    </div>
+    
+    <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0;">
+        <h4 style="color: #856404; margin-top: 0;">Important Note</h4>
+        <p>{additional_info}</p>
+    </div>
+    
+    <p style="margin-top: 30px; color: #666; font-size: 14px;">
+        This is an automated notification from WhatsApp Analytics Dashboard.
+    </p>
+    """
+    
+    return email_sender.send_notification_email(to_email, subject, message, "warning")
+
+def get_all_emails_from_csv():
+    """Read all email addresses from email.csv file"""
+    try:
+        emails = []
+        with open('email.csv', 'r') as file:
+            for line in file:
+                email = line.strip()
+                if email and '@' in email:  # Basic email validation
+                    emails.append(email)
+        logger.info(f"Loaded {len(emails)} email addresses from email.csv")
+        return emails
+    except FileNotFoundError:
+        logger.error("email.csv file not found")
+        return []
+    except Exception as e:
+        logger.error(f"Error reading email.csv: {str(e)}")
+        return []
+
+def send_new_post_notification_to_all(post_data):
+    """Send notification to all emails in email.csv when a new post is sent"""
+    emails = get_all_emails_from_csv()
+    
+    if not emails:
+        logger.warning("No email addresses found in email.csv")
+        return False
+    
+    # Determine if this is a scheduled post or completed post
+    is_scheduled = post_data.get('delivery_time') == 'Scheduled'
+    
+    if is_scheduled:
+        subject = f"New Post Submitted: {post_data.get('title', 'Untitled Post')}"
+        status_text = "SCHEDULED"
+        status_color = "#ffc107"
+        delivery_info = "Post has been scheduled and will be sent at the specified time."
+    else:
+        subject = f"New Post Sent: {post_data.get('title', 'Untitled Post')}"
+        status_text = "SENT SUCCESSFULLY"
+        status_color = "#28a745"
+        delivery_info = "Post has been successfully sent to all target WhatsApp groups."
+    
+    # Format the post details
+    sent_datetime = f"{post_data.get('sent_date', 'N/A')} at {post_data.get('sent_time', 'N/A')}"
+    message_preview = post_data.get('message', '')[:100] + "..." if len(post_data.get('message', '')) > 100 else post_data.get('message', '')
+    
+    message = f"""
+    <h3 style="color: #25D366; margin-top: 0;">New Post {status_text.split()[0]}!</h3>
+    <p>A new post has been {'submitted and scheduled' if is_scheduled else 'sent'} to WhatsApp groups. Here are the details:</p>
+    
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+        <h4 style="color: #25D366; margin-top: 0;">Post Information</h4>
+        <p><strong>Title:</strong> {post_data.get('title', 'Untitled Post')}</p>
+        <p><strong>{'Scheduled' if is_scheduled else 'Sent'} Date & Time:</strong> {sent_datetime}</p>
+        <p><strong>Assembly:</strong> {post_data.get('assembly_name', 'N/A')}</p>
+        <p><strong>Target Groups:</strong> {post_data.get('group_count', 0)} groups</p>
+        <p><strong>Submitted By:</strong> {post_data.get('username', 'Unknown User')}</p>
+        <p><strong>Post ID:</strong> {post_data.get('post_id', 'N/A')}</p>
+    </div>
+    
+    <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 20px 0;">
+        <h4 style="color: #1976d2; margin-top: 0;">Message Preview</h4>
+        <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #25D366;">
+            <p style="margin: 0; font-style: italic;">{message_preview}</p>
+        </div>
+    </div>
+    
+    <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0;">
+        <h4 style="color: #856404; margin-top: 0;">Media Files</h4>
+        <p><strong>Attached Files:</strong> {post_data.get('media_files', 'No media files')}</p>
+    </div>
+    
+    <div style="background: #d4edda; padding: 15px; border-radius: 8px; margin: 20px 0;">
+        <h4 style="color: #155724; margin-top: 0;">Status Information</h4>
+        <p><strong>Status:</strong> <span style="color: {status_color}; font-weight: bold;">{status_text}</span></p>
+        <p><strong>Groups Target:</strong> {post_data.get('group_count', 0)} groups</p>
+        <p><strong>Delivery Info:</strong> {delivery_info}</p>
+    </div>
+    
+    <p style="margin-top: 30px; color: #666; font-size: 14px;">
+        This is an automated notification from WhatsApp Analytics Dashboard.
+        You can view detailed analytics and reports from your dashboard.
+    </p>
+    """
+    
+    # Send to all emails
+    success_count = 0
+    failed_count = 0
+    
+    for email in emails:
+        try:
+            result = email_sender.send_notification_email(email, subject, message, "success")
+            if result:
+                success_count += 1
+                logger.info(f"New post notification sent successfully to {email}")
+            else:
+                failed_count += 1
+                logger.error(f"Failed to send new post notification to {email}")
+        except Exception as e:
+            failed_count += 1
+            logger.error(f"Exception while sending new post notification to {email}: {str(e)}")
+    
+    logger.info(f"New post notification sent to {success_count} emails, failed for {failed_count} emails")
+    return success_count > 0
+
+def send_post_sent_notification_to_all(post_data):
+    """Alternative function name for sending post sent notifications to all emails"""
+    return send_new_post_notification_to_all(post_data)

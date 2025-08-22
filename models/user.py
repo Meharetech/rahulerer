@@ -166,6 +166,7 @@ class PostSchedule(db.Model):
     # Relationships
     target_groups = db.relationship('PostScheduleGroup', backref='post_schedule', lazy='dynamic', cascade='all, delete-orphan')
     assembly = db.relationship('Assembly', backref='scheduled_posts', lazy='joined')
+    created_by = db.relationship('User', backref='scheduled_posts', lazy='joined')
     
     def __repr__(self):
         return f'<PostSchedule {self.title}>'
@@ -176,6 +177,13 @@ class PostSchedule(db.Model):
             assembly_name = self.assembly.name if self.assembly else None
         except:
             assembly_name = None
+            
+        try:
+            created_by_username = self.created_by.username if self.created_by else None
+            created_by_email = self.created_by.email if self.created_by else None
+        except:
+            created_by_username = None
+            created_by_email = None
             
         return {
             'id': self.id,
@@ -192,6 +200,8 @@ class PostSchedule(db.Model):
             'admin_notes': self.admin_notes,
             'completion_file': self.completion_file,
             'created_by_id': self.created_by_id,
+            'created_by_username': created_by_username,
+            'created_by_email': created_by_email,
             'assembly_id': self.assembly_id,
             'assembly_name': assembly_name,
             'created_at': self.created_at.isoformat() if self.created_at else None,

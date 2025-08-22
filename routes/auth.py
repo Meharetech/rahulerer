@@ -181,6 +181,14 @@ def logout():
         flash('Logout completed. Please log in again.', 'info')
         return redirect(url_for('auth.user_login'))
 
+@auth_bp.route('/logout-get', methods=['GET'])
+@login_required
+def logout_get():
+    """Alternative logout route for GET requests (fallback)"""
+    return logout()
+
+
+
 @auth_bp.route('/profile')
 @login_required
 def profile():

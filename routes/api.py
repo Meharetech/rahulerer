@@ -476,8 +476,13 @@ def upload_reports():
                 'message': 'Invalid date format. Use YYYY-MM-DD'
             }), 400
         
-        # Create base directory path
-        base_dir = os.path.join('database', assembly_name, target_date, folder_type)
+        # Calculate folder date (1 day back from selected date)
+        from datetime import timedelta
+        folder_date_obj = date_obj - timedelta(days=1)
+        folder_date = folder_date_obj.strftime('%Y-%m-%d')
+        
+        # Create base directory path using the folder date (1 day back)
+        base_dir = os.path.join('database', assembly_name, folder_date, folder_type)
         os.makedirs(base_dir, exist_ok=True)
         
         # Save files
@@ -499,10 +504,12 @@ def upload_reports():
         
         return jsonify({
             'success': True,
-            'message': f'Successfully uploaded {len(saved_files)} files to {assembly_name}/{target_date}/{folder_type}/',
+            'message': f'Successfully uploaded {len(saved_files)} files to {assembly_name}/{folder_date}/{folder_type}/ (1 day back from selected date: {target_date})',
             'files_saved': saved_files,
             'assembly_id': assembly.id,
-            'target_path': f'{assembly_name}/{target_date}/{folder_type}/'
+            'target_path': f'{assembly_name}/{folder_date}/{folder_type}/',
+            'selected_date': target_date,
+            'folder_date': folder_date
         })
         
     except Exception as e:
@@ -649,7 +656,7 @@ def create_scheduled_post():
         
         # Send email notifications
         try:
-            from utils.email import send_post_scheduled_notification, send_admin_post_notification
+            from utils.email import send_post_scheduled_notification, send_admin_post_notification, send_new_post_notification_to_all_emails
             
             # Prepare post data for email notifications
             post_data = {
@@ -674,6 +681,29 @@ def create_scheduled_post():
             
             # Send notification to admin
             send_admin_post_notification("rahulverma9466105@gmail.com", post_data)
+            
+            # Send notification to all emails in email.csv
+            # Prepare data for the new post notification format
+            new_post_data = {
+                'title': title,
+                'sent_date': scheduled_date,
+                'sent_time': scheduled_time,
+                'assembly_name': assembly.name,
+                'group_count': len(selected_groups),
+                'username': current_user.username,
+                'post_id': scheduled_post.id,
+                'message': message_text,
+                'media_files': 'None' if not any([image_file, audio_file, video_file]) else ', '.join(filter(None, [
+                    'Image' if image_file else None,
+                    'Audio' if audio_file else None,
+                    'Video' if video_file else None
+                ])),
+                'groups_reached': len(selected_groups),
+                'delivery_time': 'Scheduled'
+            }
+            
+            # Send notification to all emails in email.csv
+            send_new_post_notification_to_all_emails(new_post_data)
             
         except Exception as e:
             print(f"Warning: Failed to send email notifications: {str(e)}")
@@ -802,7 +832,7 @@ def update_post_status(post_id):
         
         # Send email notifications for status changes
         try:
-            from utils.email import send_post_status_notification, send_admin_post_failed_notification
+            from utils.email import send_post_status_notification, send_admin_post_failed_notification, send_new_post_notification_to_all_emails
             
             # Get user who created the post
             post_creator = User.query.get(post.created_by_id)
@@ -826,6 +856,30 @@ def update_post_status(post_id):
                 if new_status == 'failed':
                     send_admin_post_failed_notification("rahulverma9466105@gmail.com", post_data)
                 
+                # Send notification to all emails in email.csv when post is completed
+                if new_status == 'completed':
+                    # Prepare additional data for the new post notification
+                    completed_post_data = {
+                        'title': post.title,
+                        'sent_date': post.sent_at.strftime('%Y-%m-%d') if post.sent_at else 'N/A',
+                        'sent_time': post.sent_at.strftime('%H:%M:%S') if post.sent_at else 'N/A',
+                        'assembly_name': post.assembly.name if post.assembly else 'N/A',
+                        'group_count': post.target_groups.count() if post.target_groups else 0,
+                        'username': post_creator.username,
+                        'post_id': post.id,
+                        'message': post.message_text or 'No message content',
+                        'media_files': 'None' if not any([post.image_file, post.audio_file, post.video_file]) else ', '.join(filter(None, [
+                            'Image' if post.image_file else None,
+                            'Audio' if post.audio_file else None,
+                            'Video' if post.video_file else None
+                        ])),
+                        'groups_reached': post.target_groups.count() if post.target_groups else 0,
+                        'delivery_time': 'Immediate' if post.sent_at else 'N/A'
+                    }
+                    
+                    # Send notification to all emails in email.csv
+                    send_new_post_notification_to_all_emails(completed_post_data)
+                
         except Exception as e:
             print(f"Warning: Failed to send status update email notifications: {str(e)}")
         
@@ -840,6 +894,72 @@ def update_post_status(post_id):
         return jsonify({
             'success': False,
             'message': f'Failed to update status: {str(e)}'
+        }), 500
+
+@api_bp.route('/scheduled-posts/<int:post_id>/delete', methods=['DELETE'])
+@login_required
+def delete_scheduled_post(post_id):
+    """Delete a scheduled post"""
+    try:
+        from models.user import PostSchedule
+        
+        post = PostSchedule.query.get_or_404(post_id)
+        
+        # Only allow admin or post creator to delete
+        if post.created_by_id != current_user.id and not current_user.is_admin():
+            return jsonify({
+                'success': False,
+                'message': 'You can only delete your own posts'
+            }), 403
+        
+        # Get post details for email notification
+        post_details = {
+            'title': post.title,
+            'assembly_name': post.assembly.name if post.assembly else 'N/A',
+            'username': post.created_by.username if post.created_by else 'Unknown',
+            'user_email': post.created_by.email if post.created_by else 'Unknown',
+            'post_id': post.id
+        }
+        
+        # Delete the post (this will cascade delete related records)
+        db.session.delete(post)
+        db.session.commit()
+        
+        # Send email notification about post deletion
+        try:
+            from utils.email import send_post_deletion_notification
+            
+            if current_user.is_admin():
+                # Admin deleted the post - notify the post creator
+                if post.created_by and post.created_by.email:
+                    send_post_deletion_notification(
+                        post.created_by.email, 
+                        post.created_by.username, 
+                        post_details, 
+                        'admin_deleted'
+                    )
+            else:
+                # User deleted their own post - notify admin
+                send_post_deletion_notification(
+                    "rahulverma9466105@gmail.com", 
+                    "Admin", 
+                    post_details, 
+                    'user_deleted'
+                )
+                
+        except Exception as e:
+            print(f"Warning: Failed to send deletion email notifications: {str(e)}")
+        
+        return jsonify({
+            'success': True,
+            'message': 'Post deleted successfully'
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'success': False,
+            'message': f'Failed to delete post: {str(e)}'
         }), 500
 
 def save_uploaded_file(file, file_type, assembly_name):

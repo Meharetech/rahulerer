@@ -388,12 +388,21 @@ body {
     background: white;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .posts-table {
     width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+}
+
+.posts-table-wrapper {
     overflow-x: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    background: white;
 }
 
 .posts-table table {
@@ -551,30 +560,104 @@ body {
 .actions-cell {
     text-align: center;
     white-space: nowrap;
+    min-width: 220px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 .actions-cell .btn {
-    margin: 0.25rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 2.5rem;
+}
+
+/* Main action buttons */
+.actions-cell .btn-secondary,
+.actions-cell .btn-primary,
+.actions-cell .btn-danger {
+    width: 100%;
+    margin-bottom: 0.75rem;
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Ensure all action buttons are visible and properly styled */
+.actions-cell .btn-danger {
+    background: var(--danger-color);
+    color: white;
+    border: 1px solid var(--danger-color);
+    font-weight: 500;
+}
+
+.actions-cell .btn-danger:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.actions-cell .btn-secondary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+    border: 1px solid var(--primary-color);
+    font-weight: 500;
+}
+
+.actions-cell .btn-secondary:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #312e81 100%);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.actions-cell .btn-primary {
+    background: var(--primary-color);
+    color: white;
+    border: 1px solid var(--primary-color);
+    font-weight: 500;
+}
+
+.actions-cell .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Ensure buttons are always clickable */
+.actions-cell .btn {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .quick-status-updates {
     display: flex;
-    gap: 0.25rem;
-    margin-top: 0.5rem;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .quick-status-updates .btn {
-    padding: 0.375rem;
+    padding: 0.5rem;
     min-width: auto;
     border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
 }
 
 .quick-status-updates .btn:hover {
@@ -656,15 +739,60 @@ body {
     backdrop-filter: blur(4px);
 }
 
+/* Delete Confirmation Modal Specific Styles */
+#deleteConfirmModal .modal-content {
+    border-left: 4px solid var(--danger-color);
+}
+
+#deleteConfirmModal .modal-header {
+    background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
+    color: white;
+}
+
+#deleteConfirmModal .alert-danger {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#deleteConfirmModal .alert-danger i {
+    font-size: 1.25rem;
+}
+
+#deleteConfirmModal ul {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+}
+
+#deleteConfirmModal ul li {
+    color: #dc2626;
+    margin-bottom: 0.5rem;
+}
+
+#deleteConfirmModal ul li:last-child {
+    margin-bottom: 0;
+}
+
 .modal-content {
     background-color: white;
-    margin: 5% auto;
+    margin: 2% auto;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     max-width: 90%;
-    max-height: 90vh;
+    max-height: 96vh;
     overflow-y: auto;
     animation: modalSlideIn 0.3s ease-out;
+    position: relative;
+    z-index: 1001;
 }
 
 .large-modal {
@@ -861,6 +989,8 @@ body {
 }
 
 /* Responsive Design */
+
+/* Tablet Landscape */
 @media (max-width: 1200px) {
     .main-content {
         padding: 1rem;
@@ -880,6 +1010,26 @@ body {
     }
 }
 
+/* Tablet Portrait */
+@media (max-width: 1024px) {
+    .actions-cell {
+        min-width: 200px;
+        padding: 0.75rem;
+    }
+    
+    .actions-cell .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .quick-status-updates .btn {
+        width: 2.25rem;
+        height: 2.25rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobile Landscape */
 @media (max-width: 768px) {
     .dashboard-layout {
         flex-direction: column;
@@ -957,13 +1107,38 @@ body {
     }
     
     .actions-cell {
-        min-width: 120px;
+        min-width: 180px;
+        padding: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
     }
     
     .actions-cell .btn {
-        margin: 0.125rem;
-        padding: 0.375rem 0.5rem;
-        font-size: 0.625rem;
+        margin: 0;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+        width: 100%;
+        justify-content: center;
+        border-radius: var(--radius-md);
+    }
+    
+    /* Main action buttons - always full width on mobile */
+    .actions-cell .btn-secondary,
+    .actions-cell .btn-primary,
+    .actions-cell .btn-danger {
+        display: flex;
+        width: 100%;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+    
+    /* Quick status buttons - horizontal layout */
+    .quick-status-updates {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
     }
     
     .quick-status-updates {

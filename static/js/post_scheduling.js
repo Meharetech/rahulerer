@@ -516,6 +516,10 @@ function displayScheduledPosts(posts) {
                             <i class="fas fa-download"></i> Completion File
                         </button>` : ''
                     }
+                    <br>
+                    <button class="btn btn-sm btn-outline-danger" onclick="confirmDeletePost(${post.id}, '${post.title}')" title="Delete Post">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
                 </div>
             </div>
         `;
@@ -657,5 +661,64 @@ async function downloadCompletionFile(postId) {
         }
     } catch (error) {
         showError('Error downloading completion file: ' + error.message);
+    }
+}
+
+// Delete post functionality
+let postToDelete = null;
+
+function confirmDeletePost(postId, postTitle) {
+    postToDelete = postId;
+    document.getElementById('deletePostTitle').textContent = postTitle;
+    openModal('deleteConfirmModal');
+}
+
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+async function deletePost() {
+    if (!postToDelete) {
+        showError('No post selected for deletion');
+        return;
+    }
+    
+    try {
+        // Show loading state
+        const deleteBtn = document.querySelector('#deleteConfirmModal .btn-danger');
+        const originalText = deleteBtn.innerHTML;
+        deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+        deleteBtn.disabled = true;
+        
+        const response = await fetch(`/api/scheduled-posts/${postToDelete}/delete`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            showSuccess('Post deleted successfully');
+            closeModal('deleteConfirmModal');
+            
+            // Reload the scheduled posts list
+            loadScheduledPosts();
+            
+            // Reset
+            postToDelete = null;
+        } else {
+            showError('Failed to delete post: ' + data.message);
+        }
+    } catch (error) {
+        showError('Error deleting post: ' + error.message);
+    } finally {
+        // Reset button state
+        const deleteBtn = document.querySelector('#deleteConfirmModal .btn-danger');
+        deleteBtn.innerHTML = '<i class="fas fa-trash"></i> Delete Post';
+        deleteBtn.disabled = false;
     }
 }

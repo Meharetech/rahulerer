@@ -419,6 +419,9 @@
                                     <label for="targetDate">Target Date:</label>
                                     <input type="text" id="targetDate" class="form-control" placeholder="dd/mm/yyyy" required readonly>
                                     <input type="hidden" id="targetDateHidden" name="target_date">
+                                    <small style="color: #7f8c8d; font-size: 12px; margin-top: 5px; display: block;">
+                                        <i class="fas fa-info-circle"></i> Files will be saved in a folder with date 1 day before the selected date
+                                    </small>
                                 </div>
                                 <div class="form-group">
                                     <label for="folderType">Folder Type:</label>
@@ -728,7 +731,11 @@ function uploadFiles(formData, assemblyName, targetDate, folderType) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            showStatus('Files uploaded successfully!', 'success');
+            // Show detailed success message with date information
+            const selectedDate = data.selected_date;
+            const folderDate = data.folder_date;
+            const message = `Files uploaded successfully! Selected date: ${selectedDate}, Folder created: ${folderDate} (1 day back)`;
+            showStatus(message, 'success');
             resetForm();
         } else {
             showStatus('Upload failed: ' + data.message, 'error');
