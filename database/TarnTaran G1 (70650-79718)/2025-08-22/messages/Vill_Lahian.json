@@ -1,0 +1,26 @@
+{
+    "groupInfo": {
+        "name": "Vill. Lahian",
+        "exportDate": "2025-08-23T04:12:02.205Z",
+        "totalMessages": 1,
+        "totalImages": 1,
+        "duplicatesRemoved": 0
+    },
+    "messages": [
+        {
+            "sender": {
+                "name": ".",
+                "phoneNumber": "919814778408"
+            },
+            "messageContent": "Image message",
+            "messageType": "image",
+            "imageUrl": "blob:https://web.whatsapp.com/c2eece51-6a3e-4d0e-b92d-bb1e83c2e222",
+            "timestamp": "6:34 am",
+            "group_name": "Vill_Lahian",
+            "date": "G1-22-AUG",
+            "processed_time": "2025-08-23T10:07:10.588596",
+            "predicted_label": "casual_chat",
+            "predicted_sentiment": "Neutral"
+        }
+    ]
+}

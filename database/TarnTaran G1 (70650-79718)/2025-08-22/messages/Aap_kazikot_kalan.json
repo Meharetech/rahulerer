@@ -1,0 +1,51 @@
+{
+    "groupInfo": {
+        "name": "Aap kazikot kalan",
+        "exportDate": "2025-08-23T03:57:02.612Z",
+        "totalMessages": 4,
+        "totalImages": 0,
+        "duplicatesRemoved": 0
+    },
+    "messages": [
+        {
+            "sender": {
+                "name": "Unknown",
+                "phoneNumber": "Unknown"
+            },
+            "messageContent": "",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "12:26 pm"
+        },
+        {
+            "sender": {
+                "name": "Unknown",
+                "phoneNumber": "Unknown"
+            },
+            "messageContent": "",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "12:26 pm"
+        },
+        {
+            "sender": {
+                "name": "Fateh Singh",
+                "phoneNumber": "917973159228"
+            },
+            "messageContent": "",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "12:26 pm"
+        },
+        {
+            "sender": {
+                "name": "Harpreet Kaur",
+                "phoneNumber": "917837124202"
+            },
+            "messageContent": "",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "12:26 pm"
+        }
+    ]
+}

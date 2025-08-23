@@ -1,0 +1,126 @@
+{
+    "groupInfo": {
+        "name": "AAP  ਕੋਟ ਧਰਮ ਚੰਦ ਕਲਾਂ",
+        "exportDate": "2025-08-23T04:34:35.131Z",
+        "totalMessages": 10,
+        "totalImages": 3,
+        "duplicatesRemoved": 0
+    },
+    "messages": [
+        {
+            "sender": {
+                "name": "Daljit Singh",
+                "phoneNumber": "919483695489"
+            },
+            "messageContent": "ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ",
+            "messageType": "image",
+            "imageUrl": "blob:https://web.whatsapp.com/748da7ce-fce2-4b31-93f8-86cbdb98dd65",
+            "timestamp": "8:09 am",
+            "group_name": "AAP_ (2)",
+            "date": "G2-22-AUG",
+            "processed_time": "2025-08-23T10:10:26.196221",
+            "predicted_label": "casual_chat",
+            "predicted_sentiment": "Neutral"
+        },
+        {
+            "sender": {
+                "name": "gursharan singh",
+                "phoneNumber": "919878789980"
+            },
+            "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
+            "messageType": "image",
+            "imageUrl": "blob:https://web.whatsapp.com/3c8b6a9b-5688-4d5a-a944-c0e6e0fe1224",
+            "timestamp": "8:14 am",
+            "group_name": "AAP_ (2)",
+            "date": "G2-22-AUG",
+            "processed_time": "2025-08-23T10:10:26.245380",
+            "predicted_label": "spam",
+            "predicted_sentiment": "Positive"
+        },
+        {
+            "sender": {
+                "name": "Mr Cheema",
+                "phoneNumber": "919517173341"
+            },
+            "messageContent": "https://www.facebook.com/share/v/1ArjfpcMBw/",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "8:35 am"
+        },
+        {
+            "sender": {
+                "name": "Dilbag Dhillon",
+                "phoneNumber": "917009651264"
+            },
+            "messageContent": "https://www.facebook.com/share/v/1BQRAL7MAC/",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "9:12 am"
+        },
+        {
+            "sender": {
+                "name": "Gurpreet Singh Gopi",
+                "phoneNumber": "919815036243"
+            },
+            "messageContent": "https://www.facebook.com/share/v/1BQENHzaKJ/",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "10:44 am"
+        },
+        {
+            "sender": {
+                "name": "ਸਤਿਨਾਮ ਵਹਿਗੁਰੂ ਜੀ",
+                "phoneNumber": "919779703522"
+            },
+            "messageContent": "ਅੱਜ ਦਾ ਵਿਚਾਰ\n÷÷÷÷÷÷÷÷÷÷\nਜੋ ਆਪਣੇ ਆਪ ਨੂੰ ਜਿੱਤ ਲੈਂਦਾ। ਉਹ ਸਭ ਤੋਂ ਵੱਡਾ ਜੇਤੂ ਹੈ।",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "1:06 pm",
+            "group_name": "AAP_ (2)",
+            "date": "G2-22-AUG",
+            "processed_time": "2025-08-23T10:10:26.280838",
+            "predicted_label": "casual_chat",
+            "predicted_sentiment": "Positive"
+        },
+        {
+            "sender": {
+                "name": "Prabh",
+                "phoneNumber": "919876042370"
+            },
+            "messageContent": "https://youtube.com/shorts/EJlc1yqJP1I?si=fqAxd_krFZWplm7G",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "3:52 pm"
+        },
+        {
+            "sender": {
+                "name": "pannujasbir52",
+                "phoneNumber": "919781277599"
+            },
+            "messageContent": "https://www.facebook.com/share/v/1a9KbQr9Z1/",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "4:00 pm"
+        },
+        {
+            "sender": {
+                "name": "jogasingh",
+                "phoneNumber": "918699971718"
+            },
+            "messageContent": "https://www.facebook.com/share/v/1635Vkkpmg/",
+            "messageType": "image",
+            "imageUrl": "blob:https://web.whatsapp.com/5e1f71a1-ce3e-40e2-82e1-612186ef65ab",
+            "timestamp": "5:17 am"
+        },
+        {
+            "sender": {
+                "name": "Daljit Singh",
+                "phoneNumber": "919483695489"
+            },
+            "messageContent": "https://www.facebook.com/share/p/1B7RqyDJSM/",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "8:33 am"
+        }
+    ]
+}

@@ -1,0 +1,96 @@
+{
+    "groupInfo": {
+        "name": "Gurmeet singh",
+        "exportDate": "2025-08-23T04:07:52.562Z",
+        "totalMessages": 7,
+        "totalImages": 0,
+        "duplicatesRemoved": 0
+    },
+    "messages": [
+        {
+            "sender": {
+                "name": "Unknown",
+                "phoneNumber": "916283403600"
+            },
+            "messageContent": "Hio",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "8:20 am",
+            "group_name": "Gurmeet_singh",
+            "date": "G1-22-AUG",
+            "processed_time": "2025-08-23T10:07:08.988381",
+            "predicted_label": "casual_chat",
+            "predicted_sentiment": "Neutral"
+        },
+        {
+            "sender": {
+                "name": "Unknown",
+                "phoneNumber": "916283403600"
+            },
+            "messageContent": "ਭ੍ਰਿਸ਼ਟਾਚਾਰ ਨਾਲ ਜੁੜੇ ਕਈ ਲੀਡਰਾਂ ਤੇ ਅਫ਼ਸਰਾਂ ਦੀ ਜਲਦ ਉੱਡੇਗੀ ਨੀਂਦ - ਵਧੇਰੀ ਜਾਣਕਾਰੀ ਲਈ ਵੀਡੀਓ ਪੂਰੀ ਦੇਖੋ ।",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "11:20 am",
+            "group_name": "Gurmeet_singh",
+            "date": "G1-22-AUG",
+            "processed_time": "2025-08-23T10:07:09.038542",
+            "predicted_label": "spam",
+            "predicted_sentiment": "Negative"
+        },
+        {
+            "sender": {
+                "name": "Unknown",
+                "phoneNumber": "919877952464"
+            },
+            "messageContent": "Hi",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "10:07 pm",
+            "group_name": "Gurmeet_singh",
+            "date": "G1-22-AUG",
+            "processed_time": "2025-08-23T10:07:09.055226",
+            "predicted_label": "casual_chat",
+            "predicted_sentiment": "Neutral"
+        },
+        {
+            "sender": {
+                "name": "Unknown",
+                "phoneNumber": "918544847112"
+            },
+            "messageContent": "",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "4:36 pm"
+        },
+        {
+            "sender": {
+                "name": "vishalsingh82628",
+                "phoneNumber": "916280300724"
+            },
+            "messageContent": "",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "9:30 pm"
+        },
+        {
+            "sender": {
+                "name": "vishalsingh82628",
+                "phoneNumber": "916280300724"
+            },
+            "messageContent": "https://www.instagram.com/reel/DNh_WVnIoRg/?igsh=bzQ4b2t2cGgwZXpv",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "6:27 am"
+        },
+        {
+            "sender": {
+                "name": "vishalsingh82628",
+                "phoneNumber": "916280300724"
+            },
+            "messageContent": "https://www.instagram.com/reel/DJQaFgviN2H/?igsh=MWU1NHZ1bWphYnpwMQ==",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "6:34 am"
+        }
+    ]
+}

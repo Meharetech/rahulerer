@@ -1,0 +1,86 @@
+{
+    "groupInfo": {
+        "name": "Aap  Tarn Taran  ward18",
+        "exportDate": "2025-08-23T04:30:53.926Z",
+        "totalMessages": 6,
+        "totalImages": 3,
+        "duplicatesRemoved": 0
+    },
+    "messages": [
+        {
+            "sender": {
+                "name": "Kuldeep Thakur",
+                "phoneNumber": "919803613200"
+            },
+            "messageContent": "https://youtube.com/shorts/ch3hXEcIH0E?si=AQGOxz00b91cVei4",
+            "messageType": "image",
+            "imageUrl": "blob:https://web.whatsapp.com/fa38bcbb-69db-411b-a231-5b64e45a5c42",
+            "timestamp": "12:03 pm"
+        },
+        {
+            "sender": {
+                "name": "brothertailorbittu",
+                "phoneNumber": "919041968906"
+            },
+            "messageContent": "ਫੋਨ ਨੰਬਰਾਂ ਅਤੇ OTP ਦੀ ਦੁਰਵਰਤੋਂ ਕਰਕੇ ਖਾਤਿਆਂ ਤੋਂ ਪੈਸੇ ਵੀ ਕਢਵਾਏ ਗਏ ਸਰਕਾਰ ਵੱਲੋਂ ਲੋਕਾਂ ਨੂੰ ਅਪੀਲ - ਕਿਸੇ ਨਾਲ ਵੀ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਸਾਂਝੀ ਨਾ ਕਰੋ ਕਿਸੇ ਵੀ ਗੈਰ-ਕਾਨੂੰਨੀ ਗਤੀਵਿਧੀ ਦੀ ਤੁਰੰਤ ਰਿਪੋਰਟ ਕਰਨ ਦੀ ਅਪੀਲ ਵੀ ਕੀਤੀ ਗਈ",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "3:13 pm",
+            "group_name": "Aap_Tarn_Taran_ward18",
+            "date": "G2-22-AUG",
+            "processed_time": "2025-08-23T10:10:29.533686",
+            "predicted_label": "politics_news",
+            "predicted_sentiment": "Negative"
+        },
+        {
+            "sender": {
+                "name": "dk624440",
+                "phoneNumber": "919888002219"
+            },
+            "messageContent": "🌾💐🌷🌹🥀🍁 🌺🌸🌻🌼 *दिनांक 22-08-2025 प्रात: काल* *मां* *के* *आज* *के* *भव्य* *श्रृंगार* *दर्शन* *श्री* *सिद्ध* *शक्तिपीठ* *माता* *श्री* *छिन्नमस्तिका* *धाम* *मन्दिर* *चिन्तपूर्णी देवभूमी* *हिमाचल* *प्रदेश* *से ..* 🌾💐JRM 🌷🌹🥀🍁 🌺🌸🌻🌼",
+            "messageType": "image",
+            "imageUrl": "blob:https://web.whatsapp.com/8a6125ae-c012-4138-a1d9-1d1905fa5c14",
+            "timestamp": "7:23 am",
+            "group_name": "Aap_Tarn_Taran_ward18",
+            "date": "G2-22-AUG",
+            "processed_time": "2025-08-23T10:10:29.591834",
+            "predicted_label": "spam",
+            "predicted_sentiment": "Positive"
+        },
+        {
+            "sender": {
+                "name": "brothertailorbittu",
+                "phoneNumber": "919041968906"
+            },
+            "messageContent": "https://www.facebook.com/share/r/1BDrZXRcR6/",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "4:14 pm"
+        },
+        {
+            "sender": {
+                "name": "brothertailorbittu",
+                "phoneNumber": "919041968906"
+            },
+            "messageContent": "https://www.facebook.com/share/v/1FGa3u27pe/",
+            "messageType": "text",
+            "imageUrl": null,
+            "timestamp": "4:23 pm"
+        },
+        {
+            "sender": {
+                "name": "dk624440",
+                "phoneNumber": "919888002219"
+            },
+            "messageContent": "🌾💐🌷🌹🥀🍁 🌺🌸🌻🌼 *दिनांक 23-08-2025 प्रात: काल* *मां* *के* *आज* *के* *भव्य* *श्रृंगार* *दर्शन* *श्री* *सिद्ध* *शक्तिपीठ* *माता* *श्री* *छिन्नमस्तिका* *धाम* *मन्दिर* *चिन्तपूर्णी देवभूमी* *हिमाचल* *प्रदेश* *से ..* 🌾💐JRM 🌷🌹🥀🍁 🌺🌸🌻🌼",
+            "messageType": "image",
+            "imageUrl": "blob:https://web.whatsapp.com/2dd976d2-cb58-4863-9ece-98cf3b91abae",
+            "timestamp": "7:23 am",
+            "group_name": "Aap_Tarn_Taran_ward18",
+            "date": "G2-22-AUG",
+            "processed_time": "2025-08-23T10:10:29.643726",
+            "predicted_label": "spam",
+            "predicted_sentiment": "Positive"
+        }
+    ]
+}
