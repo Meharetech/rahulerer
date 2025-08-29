@@ -1,0 +1,67 @@
+[
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਨੇੜੇ ਸਾਹਿਬ ਮੈਡੀਕਲ ਹਾਊਸ \nਜੰਡਿਆਲਾ ਬਾਈਪਾਸ \nਤਰਨਤਾਰਨ  \n                                                           C.M. Di Yogshala \nNear Sahib medical house \n jandiala bypass \nTarn taran\nClass timing:-\n5.00pm - 6.00pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "8:26 pm",
+        "group_name": "Cmdy5586_sahib_medical_near_jandiala_bypass_500pm-600pm",
+        "date": "G1-26-AUG",
+        "processed_time": "2025-08-27T15:05:15.490280",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "8:26 pm"
+    },
+    {
+        "sender": {
+            "name": "Harpreet Kaur",
+            "phoneNumber": "919464852848"
+        },
+        "messageContent": "Yoga class is off due to all members are going to Gurudwara Dera Baba Nanak",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "1:49 pm",
+        "group_name": "Cmdy5586_sahib_medical_near_jandiala_bypass_500pm-600pm",
+        "date": "G1-26-AUG",
+        "processed_time": "2025-08-27T15:05:15.526906",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Harpreet Kaur",
+            "phoneNumber": "919464852848"
+        },
+        "messageContent": "ਫਗਵਾੜਾ ਪੁਲਿਸ ਨੂੰ ਵੱਡੀ ਸਫਲਤਾ ਮਿਲੀ, ਬੱਸ ਵਿੱਚੋਂ 53 ਕਿਲੋ ਤੋਂ ਵੱਧ ਭੁੱਕੀ ਦੀ ਖੇਪ ਬਰਾਮਦ......\n\nਪੰਜਾਬ ਪੁਲਿਸ ਨਸ਼ਾ ਤਸਕਰਾਂ ਵਿਰੁੱਧ ਲਗਾਤਾਰ ਕਾਰਵਾਈ ਕਰ ਰਹੀ ਹੈ। ਇਸ ਕੜੀ ਵਿੱਚ, ਫਗਵਾੜਾ ਪੁਲਿਸ ਨੂੰ ਇੱਕ ਵੱਡੀ ਸਫਲਤਾ ਮਿਲੀ ਹੈ। ਇੱਕ ਬੱਸ ਵਿੱਚੋਂ 53 ਕਿਲੋਗ੍ਰਾਮ ਤੋਂ ਵੱਧ ਡੋਡੇ ਦੀ ਖੇਪ ਬਰਾਮਦ ਕੀਤੀ ਗਈ ਹੈ...",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "4:10 pm",
+        "group_name": "Cmdy5586_sahib_medical_near_jandiala_bypass_500pm-600pm",
+        "date": "G1-26-AUG",
+        "processed_time": "2025-08-27T15:05:15.572201",
+        "predicted_label": "crime_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/ska-eipj-vqk \n \nOr open Meet and enter this code: ska-eipj-vqk",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "5:00 pm"
+    }
+]

@@ -10,7 +10,7 @@
         "timestamp": "2025-08-22T03:51:55.948Z",
         "group_name": "Aap_tharu_2025-08-22 (2)",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:54.344703",
+        "processed_time": "2025-08-27T16:40:05.381848",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     },
@@ -25,7 +25,7 @@
         "timestamp": "2025-08-22T03:51:55.950Z",
         "group_name": "Aap_tharu_2025-08-22 (2)",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:54.423884",
+        "processed_time": "2025-08-27T16:40:05.422207",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     },
@@ -40,7 +40,7 @@
         "timestamp": "2025-08-22T03:51:55.952Z",
         "group_name": "Aap_tharu_2025-08-22 (2)",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:54.487670",
+        "processed_time": "2025-08-27T16:40:05.447875",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     },
@@ -55,7 +55,7 @@
         "timestamp": "2025-08-22T03:51:55.954Z",
         "group_name": "Aap_tharu_2025-08-22 (2)",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:54.553150",
+        "processed_time": "2025-08-27T16:40:05.494919",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     },
@@ -70,7 +70,7 @@
         "timestamp": "2025-08-22T03:51:55.957Z",
         "group_name": "Aap_tharu_2025-08-22 (2)",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:54.598451",
+        "processed_time": "2025-08-27T16:40:05.526797",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     },
@@ -85,7 +85,7 @@
         "timestamp": "09:21",
         "group_name": "Aap_tharu_2025-08-22 (2)",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:54.645990",
+        "processed_time": "2025-08-27T16:40:05.558110",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     }

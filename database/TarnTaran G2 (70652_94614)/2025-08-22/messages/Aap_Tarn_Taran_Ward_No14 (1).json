@@ -1,26 +1,17 @@
-{
-    "groupInfo": {
-        "name": "Aap Tarn Taran Ward No.14",
-        "exportDate": "2025-08-23T04:25:03.847Z",
-        "totalMessages": 1,
-        "totalImages": 1,
-        "duplicatesRemoved": 0
-    },
-    "messages": [
-        {
-            "sender": {
-                "name": "Kartar Singh dhir~",
-                "phoneNumber": "919888396332"
-            },
-            "messageContent": "Image message",
-            "messageType": "image",
-            "imageUrl": "blob:https://web.whatsapp.com/009a5487-d4f5-4156-9ba3-46781a2ceed1",
-            "timestamp": "9:47 pm",
-            "group_name": "Aap_Tarn_Taran_Ward_No14 (1)",
-            "date": "G2-22-AUG",
-            "processed_time": "2025-08-23T10:10:29.960660",
-            "predicted_label": "casual_chat",
-            "predicted_sentiment": "Neutral"
-        }
-    ]
-}
+[
+    {
+        "sender": {
+            "name": "Kartar Singh dhir~",
+            "phoneNumber": "919888396332"
+        },
+        "messageContent": "Image message",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/009a5487-d4f5-4156-9ba3-46781a2ceed1",
+        "timestamp": "9:47 pm",
+        "group_name": "Aap_Tarn_Taran_Ward_No14 (1)",
+        "date": "G2-22-AUG",
+        "processed_time": "2025-08-27T15:06:19.668552",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    }
+]

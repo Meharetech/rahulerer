@@ -1,21 +1,12 @@
-{
-    "groupInfo": {
-        "name": "Aap WARD  8",
-        "exportDate": "2025-08-23T03:51:51.905Z",
-        "totalMessages": 1,
-        "totalImages": 1,
-        "duplicatesRemoved": 0
-    },
-    "messages": [
-        {
-            "sender": {
-                "name": "Unknown",
-                "phoneNumber": "Unknown"
-            },
-            "messageContent": "https://sharechat.com/post/XjlXvDJ?d=n&ui=VwpjVkz&e1=c",
-            "messageType": "image",
-            "imageUrl": "blob:https://web.whatsapp.com/d16d42e7-c73e-41a1-a53e-37545777fd5e",
-            "timestamp": "4:56 pm"
-        }
-    ]
-}
+[
+    {
+        "sender": {
+            "name": "Unknown",
+            "phoneNumber": "Unknown"
+        },
+        "messageContent": "https://sharechat.com/post/XjlXvDJ?d=n&ui=VwpjVkz&e1=c",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/d16d42e7-c73e-41a1-a53e-37545777fd5e",
+        "timestamp": "4:56 pm"
+    }
+]

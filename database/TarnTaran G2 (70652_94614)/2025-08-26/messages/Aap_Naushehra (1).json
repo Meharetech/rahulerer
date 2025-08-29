@@ -1,0 +1,17 @@
+[
+    {
+        "sender": {
+            "name": "Gurdev Singh",
+            "phoneNumber": "917589419281"
+        },
+        "messageContent": "ਜਲਦ ਹੀ ਸੰਗਤਾਂ ਦੀ ਕਚਿਹਰੀ ਵਿਚ ਲੈ ਕਿ ਆ ਰਹੇ ਆ ਉਮੀਦ ਕਰਦੇ ਆ ਕਿ ਬਾਬਾ ਜੀ ਨੂੰ ਪਿਆਰ ਕਰਨ ਵਾਲੇ ਜਰੂਰ ਪਸੰਦ ਕਰਨਗੇ 🙏🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/c55d7e9f-8ca9-46dc-aa4f-c665f253dad4",
+        "timestamp": "7:29 am",
+        "group_name": "Aap_Naushehra (1)",
+        "date": "G2-26-AUG",
+        "processed_time": "2025-08-27T15:09:22.821153",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Positive"
+    }
+]

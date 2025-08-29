@@ -1,0 +1,32 @@
+[
+    {
+        "sender": {
+            "name": "Balwinder Singh",
+            "phoneNumber": "918427551368"
+        },
+        "messageContent": "ਸਾਰੀ ਸੰਗਤ ਨੂੰ ਸਾਹਿਬ ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ ਦੇ ਪਹਿਲੇ ਪ੍ਰਕਾਸ਼ ਪੁਰਬ ਦੀਆਂ ਲੱਖ ਲੱਖ ਵਧਾਈਆਂ ਹੋਵਣ ਜੀ 🙏🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/ab07b01d-a3d1-4957-b0c7-2a0cd74d8859",
+        "timestamp": "5:45 am",
+        "group_name": "AAP_Tarn_Taran",
+        "date": "G2-25-AUG",
+        "processed_time": "2025-08-27T15:08:38.132124",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "ਸਰਦਾਰੀ ਲਹੂ",
+            "phoneNumber": "919815096345"
+        },
+        "messageContent": "ਸਾਰੀ ਸੰਗਤ ਨੂੰ ਸਾਹਿਬ ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ ਦੇ ਪਹਿਲੇ ਪ੍ਰਕਾਸ਼ ਪੁਰਬ ਦੀਆਂ ਲੱਖ ਲੱਖ ਵਧਾਈਆਂ ਹੋਵਣ ਜੀ",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/5981c1bf-2e07-4127-9e1b-af0540990d84",
+        "timestamp": "2025-08-25T09:02:22.873Z",
+        "group_name": "AAP_Tarn_Taran",
+        "date": "G2-25-AUG",
+        "processed_time": "2025-08-27T15:08:38.177662",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Positive"
+    }
+]

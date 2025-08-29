@@ -1,0 +1,252 @@
+[
+    {
+        "sender": {
+            "name": "palwinder singh",
+            "phoneNumber": "919872183323"
+        },
+        "messageContent": "https://www.facebook.com/share/v/1ABWQvowjp/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/a8d9f21c-8341-4b8f-81b9-4ef6bdef77f1",
+        "timestamp": "10:18 am"
+    },
+    {
+        "sender": {
+            "name": "Ranjit Singh",
+            "phoneNumber": "919463170148"
+        },
+        "messageContent": "https://youtube.com/watch?v=-mOHlnODB1g&si=EEUSoiytIMhLc-SJ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "10:34 am"
+    },
+    {
+        "sender": {
+            "name": "Dhillon",
+            "phoneNumber": "919855431330"
+        },
+        "messageContent": "Chat with Meta AI on WhatsApp: https://wa.me/13135550002?s=5",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "12:05 pm"
+    },
+    {
+        "sender": {
+            "name": "Farmers",
+            "phoneNumber": "919779554067"
+        },
+        "messageContent": "https://www.instagram.com/reel/DNtXLvk0qcg/?igsh=MXg3M3l2dzlzMnZ6cg==",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "12:05 pm"
+    },
+    {
+        "sender": {
+            "name": "Pal Singh Khalsa",
+            "phoneNumber": "917986320041"
+        },
+        "messageContent": "Can you add your signature? \nhttps://chng.it/dDcvC45d2m",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2:46 pm"
+    },
+    {
+        "sender": {
+            "name": "Pal Singh Khalsa",
+            "phoneNumber": "919814719441"
+        },
+        "messageContent": "ਫਗਵਾੜਾ ਪੁਲਿਸ ਨੂੰ ਵੱਡੀ ਸਫਲਤਾ ਮਿਲੀ, ਬੱਸ ਵਿੱਚੋਂ 53 ਕਿਲੋ ਤੋਂ ਵੱਧ ਭੁੱਕੀ ਦੀ ਖੇਪ ਬਰਾਮਦ......\n\nਪੰਜਾਬ ਪੁਲਿਸ ਨਸ਼ਾ ਤਸਕਰਾਂ ਵਿਰੁੱਧ ਲਗਾਤਾਰ ਕਾਰਵਾਈ ਕਰ ਰਹੀ ਹੈ। ਇਸ ਕੜੀ ਵਿੱਚ, ਫਗਵਾੜਾ ਪੁਲਿਸ ਨੂੰ ਇੱਕ ਵੱਡੀ ਸਫਲਤਾ ਮਿਲੀ ਹੈ। ਇੱਕ ਬੱਸ ਵਿੱਚੋਂ 53 ਕਿਲੋਗ੍ਰਾਮ ਤੋਂ ਵੱਧ ਡੋਡੇ ਦੀ ਖੇਪ ਬਰਾਮਦ ਕੀਤੀ ਗਈ ਹੈ...",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "4:02 pm",
+        "group_name": "AAP_ (3)",
+        "date": "G2-26-AUG",
+        "processed_time": "2025-08-27T15:09:20.815736",
+        "predicted_label": "crime_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Gurdev Singh Sandhu",
+            "phoneNumber": "919872331842"
+        },
+        "messageContent": "https://www.facebook.com/share/v/19fQTxfKPv/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "5:29 pm"
+    },
+    {
+        "sender": {
+            "name": "Gurdev Singh Sandhu",
+            "phoneNumber": "919872331842"
+        },
+        "messageContent": "https://www.hindustantimes.com/punjab/ex-dgp-shashi-kant-names-politicians-for-drug-links/story-KIBXgYDYI2o6pe2wv82XkO.html?utm_source=chatgpt.com",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/80bffb0e-66bf-4306-bb03-cffb15c26e21",
+        "timestamp": "5:29 pm"
+    },
+    {
+        "sender": {
+            "name": "Gurdev Singh Sandhu",
+            "phoneNumber": "919872331842"
+        },
+        "messageContent": "https://starsunfolded.com/pavan-kumar/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "5:30 pm"
+    },
+    {
+        "sender": {
+            "name": "Gurdev Singh Sandhu",
+            "phoneNumber": "919872331842"
+        },
+        "messageContent": "https://www.facebook.com/share/v/1CGNWizFsP/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "5:36 pm"
+    },
+    {
+        "sender": {
+            "name": "Gurdev Singh Sandhu",
+            "phoneNumber": "919872331842"
+        },
+        "messageContent": "https://www.facebook.com/share/r/19EaLRrFtw/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "5:37 pm"
+    },
+    {
+        "sender": {
+            "name": "pannujasbir52",
+            "phoneNumber": "919781277599"
+        },
+        "messageContent": "ਬਹੁਤ ਵਧੀਆ ਮੈਸੇਜ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "7:16 pm",
+        "group_name": "AAP_ (3)",
+        "date": "G2-26-AUG",
+        "processed_time": "2025-08-27T15:09:20.832221",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "gursharan singh",
+            "phoneNumber": "919878789980"
+        },
+        "messageContent": "https://www.facebook.com/share/v/19gtJAfECZ/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "8:40 pm"
+    },
+    {
+        "sender": {
+            "name": "Electrisan",
+            "phoneNumber": "919814723286"
+        },
+        "messageContent": "https://www.facebook.com/share/r/16ncnDaVZY/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "3:29 am"
+    },
+    {
+        "sender": {
+            "name": "babamalkitsinghjikot",
+            "phoneNumber": "919815797493"
+        },
+        "messageContent": "https://www.instagram.com/reel/DIzv2P4hck2/?igsh=MWxxYmM3aTlnM2lxNQ==",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "7:01 am"
+    },
+    {
+        "sender": {
+            "name": "gursharan singh",
+            "phoneNumber": "919878789980"
+        },
+        "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/7a6f8580-ee66-454f-ba19-9a623260bfb8",
+        "timestamp": "8:08 am",
+        "group_name": "AAP_ (3)",
+        "date": "G2-26-AUG",
+        "processed_time": "2025-08-27T15:09:20.866174",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Dhan Guru Arjan Dev Ji",
+            "phoneNumber": "918728853026"
+        },
+        "messageContent": "",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "8:30 am"
+    },
+    {
+        "sender": {
+            "name": "gursharan singh",
+            "phoneNumber": "919878789980"
+        },
+        "messageContent": "ਵਾਕਿਆ ਏਹੀ ਰੋਕ ਸਕਦੇ ਸੀ ਸਕੰਦਰ ਨੂੰ,,, ਮਾਝੇ ਵਾਲੇ,,, ਜੇ ਕਦੇ ਤੁਸੀਂ ਦਰਿਆ ਨਾਲ ਖੁਰਦੇ ਕਨਾਰਿਆਂ ਨੂੰ ਮਿੱਟੀ ਲਾਉਂਦੇ ਸਿੰਘਾਂ ਦੇ ਜੈਕਾਰੇ ਸੁਣੋ ਤਾਂ ਪਤਾ ਆਪਣੇ ਆਪ ਲੱਗ ਜਾਊ,, ਵੀਡੀਓ ਦੇਖ ਡਰ ਆਉਂਦਾ ਪਾਣੀ ਤੋਂ,, ਸਾਫ ਪਤਾ ਲੱਗਦਾ ਜੇ ਟੁੱਟ ਗਿਆ,, ਬੰਨਣ ਵਾਲਿਆਂ ਦੇ ਵੀ ਪੈਰ ਨੀ ਲੱਗਣ ਦੇਣੇ,,, ਪਰ ਜਦੋਂ ਫਸਲ ਦਾ ਸਵਾਲ ਹੋਵੇ,,, ਜਦੋਂ ਕੀਤੀ ਮਹਿਨਤ ਖੇਤਾਂ ਚ ਖੜੀ ਹੋਵੇ,, ਜਦੋਂ ਕਿਸੇ ਦੀ ਛੱਤ ਰੁੜਨ ਦਾ ਖਤਰਾ ਹੋਵੇ,,, ਫੇਰ ਹਿੰਮਤੀ ਹੱਥ ਸਾਹ ਚੱਲਣ ਤੱਕ ਹਰਕਤ ਵਿੱਚ ਰਹਿੰਦੇ ਆ,,, ਵਾਕਿਆ ਦਰਿਆ ਦੇ ਨੱਕੇ ਚ ਖੜ੍ਹੇ ਸਿੰਘਾਂ ਨੂੰ ਦੇਖਕੇ ਮਹਿਸੂਸ ਹੁੰਦਾ ਏ,,, ਓਹੀ ਆ ਇਹ ਜਿੰਨਾ ਤੋਪ ਦਾ ਚੱਕਾ ਟੁੱਟਣ ਤੇ,,ਹੇਠਾਂ ਮੋਢਾ ਦੇ ਲਿਆ ਹੋਊ,,, ਇਹ ਓਹੀ ਆ ਜਿਨ੍ਹਾਂ ਨੇ ਗੁਰੂ ਸਾਹਿਬ ਨੂੰ ਕਿਹਾ ਸੀ,, \"ਮੇਰੇ ਤੇ ਪਰਖੋ ਨਿਸ਼ਾਨਾ \",,, \n   ਮਾੜੇ ਬੰਦੇ ਨੂੰ ਸੁਪਨੇ ਚ ਐਨਾ ਪਾਣੀ ਦਿਸ ਜਾਵੇ ਸਵੇਰੇ ਕਿਸੇ ਬਾਬੇ ਕੋਲ ਜਾ ਖੜਦਾ ਏ,,,\"ਮਹਾਂਰਾਜ ਮੈਨੂੰ ਰਾਤ ਪਾਣੀ ਦਿਸਿਆ,,, ਦੱਸੋ ਕੋਈ ਸੰਕਟ ਤਾਂਨੀ \"  \nਐਧਰ ਕੋਈ ਲੇਖਾ ਪੱਤਾ ਈ ਨੀ,,,ਕਿਸੇ ਦੇ ਪਸ਼ੂ ਰੁੜ੍ਹ ਗ…",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "9:23 am",
+        "group_name": "AAP_ (3)",
+        "date": "G2-26-AUG",
+        "processed_time": "2025-08-27T15:09:20.931861",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "Mr Cheema",
+            "phoneNumber": "919517173341"
+        },
+        "messageContent": "https://youtube.com/shorts/0J7jUlMP7Ys?si=mVdkYSN3f3uw5PJE",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "10:20 am"
+    },
+    {
+        "sender": {
+            "name": "Mandee singh",
+            "phoneNumber": "351920355282"
+        },
+        "messageContent": "ਪੰਜਾਬ ਦਾ ਵੱਡਾ ਹਿੱਸਾ ਹੜ੍ਹਾਂ ਦੀ ਭਿਆਨਕ ਮਾਰ ਹੇਠ ਹੈ, ਅਜਿਹੇ ਹਾਲਾਤਾਂ ਵਿੱਚ CM ਪੰਜਾਬ, ਸੂਬੇ ਪ੍ਰਤੀ ਆਪਣੀ ਜ਼ਿੰਮੇਵਾਰੀ ਅਤੇ ਕੇਂਦਰ ਸਰਕਾਰ ਤੱਕ ਪਹੁੰਚ ਕਰਨ ਦੀ ਬਜਾਏ ਤਾਮਿਲਨਾਡੂ ਵਿੱਚ ਵਿਅਸਤ ਹੈ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "11:16 am",
+        "group_name": "AAP_ (3)",
+        "date": "G2-26-AUG",
+        "processed_time": "2025-08-27T15:09:20.963313",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "Mr Cheema",
+            "phoneNumber": "919517173341"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਮੇਹਰ ਕਰੇ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "12:14 pm",
+        "group_name": "AAP_ (3)",
+        "date": "G2-26-AUG",
+        "processed_time": "2025-08-27T15:09:20.984118",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Simar Dhillon",
+            "phoneNumber": "61470207328"
+        },
+        "messageContent": "https://www.instagram.com/reel/DNzFktz5sWG/?igsh=cmhja2ZmNG1xd253",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "2:13 pm"
+    }
+]

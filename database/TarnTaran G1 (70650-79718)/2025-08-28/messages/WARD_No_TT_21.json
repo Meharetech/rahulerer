@@ -1,0 +1,47 @@
+[
+    {
+        "sender": {
+            "name": "mnjrgill",
+            "phoneNumber": "919988063035"
+        },
+        "messageContent": "https://www.facebook.com/share/v/19vGSekLd6/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/db26ab05-8ac1-4b0e-acb9-0e4f9b9b92af",
+        "timestamp": "12:04 pm"
+    },
+    {
+        "sender": {
+            "name": "Bs sahil nagpal",
+            "phoneNumber": "917355261419"
+        },
+        "messageContent": "https://www.facebook.com/share/v/1BKuxuLRYA/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "4:02 pm"
+    },
+    {
+        "sender": {
+            "name": "mnjrgill",
+            "phoneNumber": "919988063035"
+        },
+        "messageContent": "ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ  ਵਾਹਿਗੁਰੂ ਜੀ ਕਿ ਫ਼ਤਿਹ  ਸੰਗਤਾਂ ਦੇ ਚਰਨਾਂ ਵਿੱਚ ਬੇਨਤੀ ਹੈ ਕਿ ਬੁੰਗਾ ਭਾਈ  ਸਾਹਿਬ  ਸਿੰਘ  ਜੀ  ਮੁਹੱਲਾ ਜਸਵੰਤ  ਸਿੰਘ  ਵਿਖੇ  ਫ੍ੀ  ਸੁਖਮਨੀ  ਸਾਹਿਬ ਤੇ ਹੋਰ ਪੋ੍ਗਰਾਮ ਕਰਵਾਓਣ ਲਈ ਮਿਲੋ ਡਾ ਮਨਜਿੰਦਰ ਸਿੰਘ  ਮੋਬਾਇਲ ਨੰਬਰ 9988063035  ਧੰਨਵਾਦ 🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/ab2b7847-0700-4f8a-97c2-ae263b33c0d4",
+        "timestamp": "5:04 pm",
+        "group_name": "WARD_No_TT_21",
+        "date": "G1-28-AUG",
+        "processed_time": "2025-08-28T14:49:14.119963",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Bs sahil nagpal",
+            "phoneNumber": "917355261419"
+        },
+        "messageContent": "https://www.facebook.com/share/v/1BPypQLyw9/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "12:26 pm"
+    }
+]

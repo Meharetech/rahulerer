@@ -10,7 +10,7 @@
         "timestamp": "2025-08-22T04:08:48.444Z",
         "group_name": "Yudh_nashya_virudh_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:11.745698",
+        "processed_time": "2025-08-27T16:40:15.277217",
         "predicted_label": "casual_chat",
         "predicted_sentiment": "Neutral"
     },
@@ -25,7 +25,7 @@
         "timestamp": "2025-08-22T04:08:48.446Z",
         "group_name": "Yudh_nashya_virudh_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:11.777532",
+        "processed_time": "2025-08-27T16:40:15.294974",
         "predicted_label": "casual_chat",
         "predicted_sentiment": "Neutral"
     },
@@ -40,7 +40,7 @@
         "timestamp": "2025-08-22T04:08:48.449Z",
         "group_name": "Yudh_nashya_virudh_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:11.805671",
+        "processed_time": "2025-08-27T16:40:15.311612",
         "predicted_label": "casual_chat",
         "predicted_sentiment": "Neutral"
     },
@@ -55,7 +55,7 @@
         "timestamp": "2025-08-22T04:08:48.452Z",
         "group_name": "Yudh_nashya_virudh_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:11.825174",
+        "processed_time": "2025-08-27T16:40:15.337724",
         "predicted_label": "casual_chat",
         "predicted_sentiment": "Neutral"
     },
@@ -70,7 +70,7 @@
         "timestamp": "2025-08-22T04:08:48.455Z",
         "group_name": "Yudh_nashya_virudh_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:11.857126",
+        "processed_time": "2025-08-27T16:40:15.356097",
         "predicted_label": "casual_chat",
         "predicted_sentiment": "Neutral"
     },
@@ -85,7 +85,7 @@
         "timestamp": "2025-08-22T04:08:48.458Z",
         "group_name": "Yudh_nashya_virudh_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:11.889125",
+        "processed_time": "2025-08-27T16:40:15.361180",
         "predicted_label": "casual_chat",
         "predicted_sentiment": "Neutral"
     },
@@ -100,7 +100,7 @@
         "timestamp": "2025-08-22T04:08:48.460Z",
         "group_name": "Yudh_nashya_virudh_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:11.921152",
+        "processed_time": "2025-08-27T16:40:15.394375",
         "predicted_label": "casual_chat",
         "predicted_sentiment": "Neutral"
     }

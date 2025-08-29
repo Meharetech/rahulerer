@@ -1,51 +1,42 @@
-{
-    "groupInfo": {
-        "name": "Aap Kot Sivian",
-        "exportDate": "2025-08-23T04:09:23.063Z",
-        "totalMessages": 3,
-        "totalImages": 2,
-        "duplicatesRemoved": 0
+[
+    {
+        "sender": {
+            "name": "kk029011983",
+            "phoneNumber": "918283849696"
+        },
+        "messageContent": "ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/20cf07ef-562f-4ff5-a4b0-2ace659fbea2",
+        "timestamp": "4:38 am",
+        "group_name": "Aap_Kot_Sivian",
+        "date": "G1-22-AUG",
+        "processed_time": "2025-08-27T15:01:41.986118",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
     },
-    "messages": [
-        {
-            "sender": {
-                "name": "kk029011983",
-                "phoneNumber": "918283849696"
-            },
-            "messageContent": "ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ",
-            "messageType": "image",
-            "imageUrl": "blob:https://web.whatsapp.com/20cf07ef-562f-4ff5-a4b0-2ace659fbea2",
-            "timestamp": "4:38 am",
-            "group_name": "Aap_Kot_Sivian",
-            "date": "G1-22-AUG",
-            "processed_time": "2025-08-23T10:07:06.440012",
-            "predicted_label": "casual_chat",
-            "predicted_sentiment": "Neutral"
+    {
+        "sender": {
+            "name": "ਗੁਰਚਰਨ ਸਿੰਘ ਸਿੱਧੂ",
+            "phoneNumber": "918437480009"
         },
-        {
-            "sender": {
-                "name": "ਗੁਰਚਰਨ ਸਿੰਘ ਸਿੱਧੂ",
-                "phoneNumber": "918437480009"
-            },
-            "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
-            "messageType": "image",
-            "imageUrl": "blob:https://web.whatsapp.com/0b8117eb-8848-4a34-8a6d-a57965611873",
-            "timestamp": "5:50 am",
-            "group_name": "Aap_Kot_Sivian",
-            "date": "G1-22-AUG",
-            "processed_time": "2025-08-23T10:07:06.474703",
-            "predicted_label": "spam",
-            "predicted_sentiment": "Positive"
+        "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/0b8117eb-8848-4a34-8a6d-a57965611873",
+        "timestamp": "5:50 am",
+        "group_name": "Aap_Kot_Sivian",
+        "date": "G1-22-AUG",
+        "processed_time": "2025-08-27T15:01:42.019448",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Preet",
+            "phoneNumber": "919779918203"
         },
-        {
-            "sender": {
-                "name": "Preet",
-                "phoneNumber": "919779918203"
-            },
-            "messageContent": "Can you help me out by signing this petition?\nhttps://chng.it/Yy8yQtdjFc",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "7:21 am"
-        }
-    ]
-}
+        "messageContent": "Can you help me out by signing this petition?\nhttps://chng.it/Yy8yQtdjFc",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "7:21 am"
+    }
+]

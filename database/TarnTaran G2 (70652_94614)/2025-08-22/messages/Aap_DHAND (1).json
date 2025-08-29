@@ -1,26 +1,17 @@
-{
-    "groupInfo": {
-        "name": "Aap DHAND",
-        "exportDate": "2025-08-23T04:32:53.053Z",
-        "totalMessages": 1,
-        "totalImages": 1,
-        "duplicatesRemoved": 0
-    },
-    "messages": [
-        {
-            "sender": {
-                "name": "Angrej Singh",
-                "phoneNumber": "919465127561"
-            },
-            "messageContent": "Image message",
-            "messageType": "image",
-            "imageUrl": "blob:https://web.whatsapp.com/3740fcc2-0433-4363-ab38-b3f148cdf111",
-            "timestamp": "2025-08-23T04:32:48.747Z",
-            "group_name": "Aap_DHAND (1)",
-            "date": "G2-22-AUG",
-            "processed_time": "2025-08-23T10:10:27.034689",
-            "predicted_label": "casual_chat",
-            "predicted_sentiment": "Neutral"
-        }
-    ]
-}
+[
+    {
+        "sender": {
+            "name": "Angrej Singh",
+            "phoneNumber": "919465127561"
+        },
+        "messageContent": "Image message",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/3740fcc2-0433-4363-ab38-b3f148cdf111",
+        "timestamp": "2025-08-23T04:32:48.747Z",
+        "group_name": "Aap_DHAND (1)",
+        "date": "G2-22-AUG",
+        "processed_time": "2025-08-27T15:06:17.355119",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    }
+]

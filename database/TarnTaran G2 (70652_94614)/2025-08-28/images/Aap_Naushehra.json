@@ -1,0 +1,17 @@
+[
+    {
+        "sender": {
+            "name": "Japan Chhina",
+            "phoneNumber": "917340778142"
+        },
+        "messageContent": "ਜਲਦ ਹੀ ਸੰਗਤਾਂ ਦੀ ਕਚਿਹਰੀ ਵਿਚ ਲੈ ਕਿ ਆ ਰਹੇ ਆ ਉਮੀਦ ਕਰਦੇ ਆ ਕਿ ਬਾਬਾ ਜੀ ਨੂੰ ਪਿਆਰ ਕਰਨ ਵਾਲੇ ਜਰੂਰ ਪਸੰਦ ਕਰਨਗੇ 🙏🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/a92af027-46d5-4d03-9dd6-03584d5baa88",
+        "timestamp": "8:23 am",
+        "group_name": "Aap_Naushehra",
+        "date": "G2-28-AUG",
+        "processed_time": "2025-08-28T13:20:22.973823",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Positive"
+    }
+]

@@ -1,0 +1,62 @@
+[
+    {
+        "sender": {
+            "name": "Kuldeep Thakur",
+            "phoneNumber": "919803613200"
+        },
+        "messageContent": "दिनांक 27-08-2025 प्रात: काल मां के आज के भव्य श्रृंगार दर्शन श्री सिद्ध शक्तिपीठ माता श्री छिन्नमस्तिका धाम मन्दिर चिन्तपूर्णी देवभूमी हिमाचल प्रदेश से .. JRM",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/4ba1b784-a15c-4163-b411-b5f54ecf8ba9",
+        "timestamp": "12:02 pm",
+        "group_name": "Aap_Tarn_Taran_ward18",
+        "date": "G2-28-AUG",
+        "processed_time": "2025-08-28T13:20:23.371191",
+        "predicted_label": "weather_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "dk624440",
+            "phoneNumber": "919888002219"
+        },
+        "messageContent": "🌾💐🌷🌹🥀🍁 🌺🌸🌻🌼 *दिनांक 27-08-2025 प्रात: काल* *मां* *के* *आज* *के* *भव्य* *श्रृंगार* *दर्शन* *श्री* *सिद्ध* *शक्तिपीठ* *माता* *श्री* *छिन्नमस्तिका* *धाम* *मन्दिर* *चिन्तपूर्णी देवभूमी* *हिमाचल* *प्रदेश* *से ..* 🌾💐JRM🌷🌹🥀🍁 🌺🌸🌻🌼",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/934e7339-5646-4c00-818f-7cfb33f697cb",
+        "timestamp": "12:02 pm",
+        "group_name": "Aap_Tarn_Taran_ward18",
+        "date": "G2-28-AUG",
+        "processed_time": "2025-08-28T13:20:23.424710",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "brothertailorbittu",
+            "phoneNumber": "919041968906"
+        },
+        "messageContent": "https://www.facebook.com/share/r/16pjcoDZdh/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "12:34 pm"
+    },
+    {
+        "sender": {
+            "name": "brothertailorbittu",
+            "phoneNumber": "919041968906"
+        },
+        "messageContent": "https://www.facebook.com/share/r/17A8ZGBPJc/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "12:37 pm"
+    },
+    {
+        "sender": {
+            "name": "brothertailorbittu",
+            "phoneNumber": "919041968906"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1Chd2CkT4c/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "1:08 pm"
+    }
+]

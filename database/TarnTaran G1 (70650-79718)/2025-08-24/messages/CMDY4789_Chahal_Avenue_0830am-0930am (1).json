@@ -1,0 +1,27 @@
+[
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਚਹਿਲ ਅਵੇਨੂ ਜੰਡਿਆਲਾ ਬਾਈਪਾਸ \nਤਰਨਤਾਰਨ  \n                                                           C.M. Di Yogshala \n\nChahal Avenue jandiala bypass \nTarn taran\nClass timing:-\n8.30 am - 9.30am\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/96a0e418-5f0b-4772-90a0-a59f477d0a26",
+        "timestamp": "10:56 am",
+        "group_name": "CMDY4789_Chahal_Avenue_0830am-0930am (1)",
+        "date": "G1-24-AUG",
+        "processed_time": "2025-08-27T15:02:36.542063",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Sharn Sidhu",
+            "phoneNumber": "919815455598"
+        },
+        "messageContent": "https://www.instagram.com/reel/DNf_AhWteSw/?igsh=MXNlcHlpNHF1NDh3aQ==",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "5:35 pm"
+    }
+]

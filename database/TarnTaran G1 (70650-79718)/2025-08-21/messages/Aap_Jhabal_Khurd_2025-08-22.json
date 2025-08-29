@@ -60,7 +60,7 @@
         "timestamp": "2025-08-22T03:42:39.023Z",
         "group_name": "Aap_Jhabal_Khurd_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:46.688088",
+        "processed_time": "2025-08-27T16:40:00.433929",
         "predicted_label": "spam",
         "predicted_sentiment": "Positive"
     },
@@ -75,7 +75,7 @@
         "timestamp": "2025-08-22T03:42:39.025Z",
         "group_name": "Aap_Jhabal_Khurd_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:46.755377",
+        "processed_time": "2025-08-27T16:40:00.476873",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     }

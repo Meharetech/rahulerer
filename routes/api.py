@@ -401,10 +401,16 @@ def upload_groups():
 def upload_reports():
     """Upload JSON reports to specified assembly and folder"""
     try:
+        print("=== UPLOAD REPORTS DEBUG START ===")
+        
         # Get form data
         assembly_name = request.form.get('assembly_name', '').strip()
         target_date = request.form.get('target_date', '').strip()
         folder_type = request.form.get('folder_type', '').strip()
+        
+        print(f"DEBUG: assembly_name = '{assembly_name}'")
+        print(f"DEBUG: target_date = '{target_date}'")
+        print(f"DEBUG: folder_type = '{folder_type}'")
         
         if not all([assembly_name, target_date, folder_type]):
             return jsonify({
@@ -470,19 +476,21 @@ def upload_reports():
         # Parse target date
         try:
             date_obj = datetime.strptime(target_date, '%Y-%m-%d')
+            print(f"DEBUG: Parsed date_obj = {date_obj}")
         except ValueError:
+            print(f"DEBUG: Date parsing failed for '{target_date}'")
             return jsonify({
                 'success': False,
                 'message': 'Invalid date format. Use YYYY-MM-DD'
             }), 400
         
-        # Calculate folder date (1 day back from selected date)
-        from datetime import timedelta
-        folder_date_obj = date_obj - timedelta(days=1)
-        folder_date = folder_date_obj.strftime('%Y-%m-%d')
+        # Use the selected date directly (no backdate calculation)
+        folder_date = target_date
+        print(f"DEBUG: folder_date = '{folder_date}' (should be same as target_date)")
         
-        # Create base directory path using the folder date (1 day back)
+        # Create base directory path using the selected date
         base_dir = os.path.join('database', assembly_name, folder_date, folder_type)
+        print(f"DEBUG: base_dir = '{base_dir}'")
         os.makedirs(base_dir, exist_ok=True)
         
         # Save files
@@ -502,9 +510,13 @@ def upload_reports():
                 file.save(file_path)
                 saved_files.append(filename)
         
+        print(f"DEBUG: Final response - selected_date: '{target_date}', folder_date: '{folder_date}'")
+        print(f"DEBUG: Files saved in: {base_dir}")
+        print("=== UPLOAD REPORTS DEBUG END ===")
+        
         return jsonify({
             'success': True,
-            'message': f'Successfully uploaded {len(saved_files)} files to {assembly_name}/{folder_date}/{folder_type}/ (1 day back from selected date: {target_date})',
+            'message': f'Successfully uploaded {len(saved_files)} files to {assembly_name}/{folder_date}/{folder_type}/',
             'files_saved': saved_files,
             'assembly_id': assembly.id,
             'target_path': f'{assembly_name}/{folder_date}/{folder_type}/',

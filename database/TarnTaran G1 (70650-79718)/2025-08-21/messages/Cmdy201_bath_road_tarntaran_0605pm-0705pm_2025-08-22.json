@@ -10,7 +10,7 @@
         "timestamp": "2025-08-22T03:59:30.944Z",
         "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:03.387489",
+        "processed_time": "2025-08-27T16:40:09.863549",
         "predicted_label": "education_news",
         "predicted_sentiment": "Neutral"
     },
@@ -25,7 +25,7 @@
         "timestamp": "2025-08-22T03:59:30.946Z",
         "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:03.520263",
+        "processed_time": "2025-08-27T16:40:09.921591",
         "predicted_label": "education_news",
         "predicted_sentiment": "Neutral"
     },
@@ -40,7 +40,7 @@
         "timestamp": "09:29",
         "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:03.651202",
+        "processed_time": "2025-08-27T16:40:09.960936",
         "predicted_label": "education_news",
         "predicted_sentiment": "Neutral"
     },
@@ -55,7 +55,7 @@
         "timestamp": "2025-08-22T03:59:30.950Z",
         "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:03.778896",
+        "processed_time": "2025-08-27T16:40:10.024549",
         "predicted_label": "education_news",
         "predicted_sentiment": "Neutral"
     },
@@ -70,7 +70,7 @@
         "timestamp": "2025-08-22T03:59:30.952Z",
         "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:03.863508",
+        "processed_time": "2025-08-27T16:40:10.071742",
         "predicted_label": "education_news",
         "predicted_sentiment": "Neutral"
     },
@@ -85,7 +85,7 @@
         "timestamp": "2025-08-22T03:59:30.955Z",
         "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:03.960841",
+        "processed_time": "2025-08-27T16:40:10.119226",
         "predicted_label": "education_news",
         "predicted_sentiment": "Neutral"
     }

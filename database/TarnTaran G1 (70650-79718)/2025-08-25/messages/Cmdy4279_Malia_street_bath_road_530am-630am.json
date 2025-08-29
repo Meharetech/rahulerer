@@ -1,0 +1,17 @@
+[
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਮਲੀਆ ਗਲ਼ੀ, ਬਾਠ ਰੋਡ \nਤਰਨਤਾਰਨ  \n                                                     C.M.Di Yogshala \nMaliaa street, Bathh road \nTarn taran                         \nClass timing :- \n05.30am - 06.30am\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/95a9b317-a6c6-431c-9510-90876b9b01ed",
+        "timestamp": "11:57 am",
+        "group_name": "Cmdy4279_Malia_street_bath_road_530am-630am",
+        "date": "G1-25-AUG",
+        "processed_time": "2025-08-27T15:03:55.037043",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    }
+]

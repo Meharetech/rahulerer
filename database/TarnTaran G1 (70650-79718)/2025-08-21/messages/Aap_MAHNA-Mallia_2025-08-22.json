@@ -50,7 +50,7 @@
         "timestamp": "2025-08-22T03:55:25.531Z",
         "group_name": "Aap_MAHNA-Mallia_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:48.525040",
+        "processed_time": "2025-08-27T16:40:01.769405",
         "predicted_label": "spam",
         "predicted_sentiment": "Positive"
     },
@@ -65,7 +65,7 @@
         "timestamp": "2025-08-22T03:55:25.532Z",
         "group_name": "Aap_MAHNA-Mallia_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:48.604997",
+        "processed_time": "2025-08-27T16:40:01.799092",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     }

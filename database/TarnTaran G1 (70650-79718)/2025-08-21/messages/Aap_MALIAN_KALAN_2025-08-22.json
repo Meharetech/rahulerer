@@ -50,7 +50,7 @@
         "timestamp": "2025-08-22T03:55:59.664Z",
         "group_name": "Aap_MALIAN_KALAN_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:49.034357",
+        "processed_time": "2025-08-27T16:40:02.083198",
         "predicted_label": "spam",
         "predicted_sentiment": "Positive"
     },
@@ -65,7 +65,7 @@
         "timestamp": "2025-08-22T03:55:59.666Z",
         "group_name": "Aap_MALIAN_KALAN_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:49.097665",
+        "processed_time": "2025-08-27T16:40:02.133283",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     }

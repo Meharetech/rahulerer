@@ -1,186 +1,177 @@
-{
-    "groupInfo": {
-        "name": "ਆਮ ਆਦਮੀ ਪਾਰਟੀ ਸ. ਅ. ਖਾਂ",
-        "exportDate": "2025-08-23T04:06:53.079Z",
-        "totalMessages": 15,
-        "totalImages": 1,
-        "duplicatesRemoved": 0
+[
+    {
+        "sender": {
+            "name": "Aulakh",
+            "phoneNumber": "919814941130"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1GkY3R2tSo/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/ee4e0193-4618-4ee7-84dd-2066528ac363",
+        "timestamp": "10:15 pm"
     },
-    "messages": [
-        {
-            "sender": {
-                "name": "Aulakh",
-                "phoneNumber": "919814941130"
-            },
-            "messageContent": "https://www.facebook.com/share/r/1GkY3R2tSo/",
-            "messageType": "image",
-            "imageUrl": "blob:https://web.whatsapp.com/ee4e0193-4618-4ee7-84dd-2066528ac363",
-            "timestamp": "10:15 pm"
+    {
+        "sender": {
+            "name": "KARAN",
+            "phoneNumber": "919876710916"
         },
-        {
-            "sender": {
-                "name": "KARAN",
-                "phoneNumber": "919876710916"
-            },
-            "messageContent": "https://www.facebook.com/share/v/16u9EBH1oe/",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "10:46 pm"
+        "messageContent": "https://www.facebook.com/share/v/16u9EBH1oe/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "10:46 pm"
+    },
+    {
+        "sender": {
+            "name": "Bhupinder Batth",
+            "phoneNumber": "919814128162"
         },
-        {
-            "sender": {
-                "name": "Bhupinder Batth",
-                "phoneNumber": "919814128162"
-            },
-            "messageContent": "ਬੱਚਿਆਂ ਦੀ ਹੌਂਸਲਾ ਅਫਜ਼ਾਈ ਅਤੇ ਖੇਡਾਂ ਪ੍ਰਤੀ ਉਤਸ਼ਾਹਿਤ ਕਰਨ ਲਈ ਬਹੁਤ ਬਹੁਤ ਧੰਨਵਾਦ ਵੀਰ ਜੀ",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "10:48 pm",
-            "group_name": "_ (1)",
-            "date": "G1-22-AUG",
-            "processed_time": "2025-08-23T10:07:11.101899",
-            "predicted_label": "education_news",
-            "predicted_sentiment": "Positive"
+        "messageContent": "ਬੱਚਿਆਂ ਦੀ ਹੌਂਸਲਾ ਅਫਜ਼ਾਈ ਅਤੇ ਖੇਡਾਂ ਪ੍ਰਤੀ ਉਤਸ਼ਾਹਿਤ ਕਰਨ ਲਈ ਬਹੁਤ ਬਹੁਤ ਧੰਨਵਾਦ ਵੀਰ ਜੀ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "10:48 pm",
+        "group_name": "_ (1)",
+        "date": "G1-22-AUG",
+        "processed_time": "2025-08-27T15:01:46.251313",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "joginder6171",
+            "phoneNumber": "916283310955"
         },
-        {
-            "sender": {
-                "name": "joginder6171",
-                "phoneNumber": "916283310955"
-            },
-            "messageContent": "https://www.facebook.com/share/r/1CPdLiKqwo/",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "11:18 am"
+        "messageContent": "https://www.facebook.com/share/r/1CPdLiKqwo/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "11:18 am"
+    },
+    {
+        "sender": {
+            "name": "joginder6171",
+            "phoneNumber": "916283310955"
         },
-        {
-            "sender": {
-                "name": "joginder6171",
-                "phoneNumber": "916283310955"
-            },
-            "messageContent": "https://www.facebook.com/share/v/161kFvwpQL/",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "3:54 pm"
+        "messageContent": "https://www.facebook.com/share/v/161kFvwpQL/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "3:54 pm"
+    },
+    {
+        "sender": {
+            "name": "Gursewak Singh Aulakh",
+            "phoneNumber": "919872398786"
         },
-        {
-            "sender": {
-                "name": "Gursewak Singh Aulakh",
-                "phoneNumber": "919872398786"
-            },
-            "messageContent": "Can you help me out by signing this petition?\nhttps://chng.it/DMZ7LByZts",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "4:03 pm"
+        "messageContent": "Can you help me out by signing this petition?\nhttps://chng.it/DMZ7LByZts",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "4:03 pm"
+    },
+    {
+        "sender": {
+            "name": "Hira Singh",
+            "phoneNumber": "917347230437"
         },
-        {
-            "sender": {
-                "name": "Hira Singh",
-                "phoneNumber": "917347230437"
-            },
-            "messageContent": "https://www.facebook.com/share/r/16FwHM4qDy/",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "8:54 pm"
+        "messageContent": "https://www.facebook.com/share/r/16FwHM4qDy/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "8:54 pm"
+    },
+    {
+        "sender": {
+            "name": "Aulakh",
+            "phoneNumber": "916280267465"
         },
-        {
-            "sender": {
-                "name": "Aulakh",
-                "phoneNumber": "916280267465"
-            },
-            "messageContent": "ਪ੍ਰਧਾਨ ਸਤਵਿੰਦਰ ਸਿੰਘ ਬਾਠ ਵਲੋਂ ਆਪਣੇ ਭਰਾਵਾਂ ਨਾਲ ਸ਼ਾਮ ਦੇ ਟਾਇਮ ਇੰਨਜੋਏਮਿੰਟ",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "9:14 pm",
-            "group_name": "_ (1)",
-            "date": "G1-22-AUG",
-            "processed_time": "2025-08-23T10:07:11.134834",
-            "predicted_label": "politics_news",
-            "predicted_sentiment": "Neutral"
+        "messageContent": "ਪ੍ਰਧਾਨ ਸਤਵਿੰਦਰ ਸਿੰਘ ਬਾਠ ਵਲੋਂ ਆਪਣੇ ਭਰਾਵਾਂ ਨਾਲ ਸ਼ਾਮ ਦੇ ਟਾਇਮ ਇੰਨਜੋਏਮਿੰਟ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "9:14 pm",
+        "group_name": "_ (1)",
+        "date": "G1-22-AUG",
+        "processed_time": "2025-08-27T15:01:46.295747",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "tarsem singh 🇮",
+            "phoneNumber": "918872871161"
         },
-        {
-            "sender": {
-                "name": "tarsem singh 🇮",
-                "phoneNumber": "918872871161"
-            },
-            "messageContent": "Enjoy",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "9:15 pm",
-            "group_name": "_ (1)",
-            "date": "G1-22-AUG",
-            "processed_time": "2025-08-23T10:07:11.154655",
-            "predicted_label": "casual_chat",
-            "predicted_sentiment": "Positive"
+        "messageContent": "Enjoy",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "9:15 pm",
+        "group_name": "_ (1)",
+        "date": "G1-22-AUG",
+        "processed_time": "2025-08-27T15:01:46.314407",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "ranjit singh",
+            "phoneNumber": "919781435442"
         },
-        {
-            "sender": {
-                "name": "ranjit singh",
-                "phoneNumber": "919781435442"
-            },
-            "messageContent": "depth behind this",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "9:16 pm",
-            "group_name": "_ (1)",
-            "date": "G1-22-AUG",
-            "processed_time": "2025-08-23T10:07:11.175820",
-            "predicted_label": "casual_chat",
-            "predicted_sentiment": "Neutral"
+        "messageContent": "depth behind this",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "9:16 pm",
+        "group_name": "_ (1)",
+        "date": "G1-22-AUG",
+        "processed_time": "2025-08-27T15:01:46.333098",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "ranjit singh",
+            "phoneNumber": "919781435442"
         },
-        {
-            "sender": {
-                "name": "ranjit singh",
-                "phoneNumber": "919781435442"
-            },
-            "messageContent": "https://youtu.be/EH5Z_PmBKXI?si=ZXmU35P1zrUo98qw",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "9:30 pm"
+        "messageContent": "https://youtu.be/EH5Z_PmBKXI?si=ZXmU35P1zrUo98qw",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "9:30 pm"
+    },
+    {
+        "sender": {
+            "name": "ranjit singh",
+            "phoneNumber": "919781435442"
         },
-        {
-            "sender": {
-                "name": "ranjit singh",
-                "phoneNumber": "919781435442"
-            },
-            "messageContent": "ਸੁਰ ਨਾਲ ਸਾਂਝ ਪਾਓ, ਬਾਕੀ ਸਭ ਛੱਡੋ ਯਾਰ",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "9:31 pm",
-            "group_name": "_ (1)",
-            "date": "G1-22-AUG",
-            "processed_time": "2025-08-23T10:07:11.189541",
-            "predicted_label": "casual_chat",
-            "predicted_sentiment": "Negative"
+        "messageContent": "ਸੁਰ ਨਾਲ ਸਾਂਝ ਪਾਓ, ਬਾਕੀ ਸਭ ਛੱਡੋ ਯਾਰ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "9:31 pm",
+        "group_name": "_ (1)",
+        "date": "G1-22-AUG",
+        "processed_time": "2025-08-27T15:01:46.348869",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "ranjit singh",
+            "phoneNumber": "919781435442"
         },
-        {
-            "sender": {
-                "name": "ranjit singh",
-                "phoneNumber": "919781435442"
-            },
-            "messageContent": "https://youtu.be/1RjkwO-NYks?si=vlAJTtvYVS0hv624",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "10:26 pm"
+        "messageContent": "https://youtu.be/1RjkwO-NYks?si=vlAJTtvYVS0hv624",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "10:26 pm"
+    },
+    {
+        "sender": {
+            "name": "ranjit singh",
+            "phoneNumber": "919781435442"
         },
-        {
-            "sender": {
-                "name": "ranjit singh",
-                "phoneNumber": "919781435442"
-            },
-            "messageContent": "https://youtube.com/shorts/SmOKHZ-iD8k?si=dM88btXMHu1-hXpl",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "10:44 pm"
+        "messageContent": "https://youtube.com/shorts/SmOKHZ-iD8k?si=dM88btXMHu1-hXpl",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "10:44 pm"
+    },
+    {
+        "sender": {
+            "name": "KARAN",
+            "phoneNumber": "919876710916"
         },
-        {
-            "sender": {
-                "name": "KARAN",
-                "phoneNumber": "919876710916"
-            },
-            "messageContent": "https://www.facebook.com/share/v/16A63YMYuL/",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "10:46 pm"
-        }
-    ]
-}
+        "messageContent": "https://www.facebook.com/share/v/16A63YMYuL/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "10:46 pm"
+    }
+]

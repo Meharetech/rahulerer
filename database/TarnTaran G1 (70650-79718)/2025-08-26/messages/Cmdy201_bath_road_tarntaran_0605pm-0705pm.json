@@ -1,0 +1,42 @@
+[
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐੱਮ  ਦੀ ਯੋਗਸ਼ਾਲਾ- ਕੰਗਾਂ ਵਾਲੀ ਗਲੀ, ਬਾਠ ਰੋਡ ਤਰਨਤਾਰਨ, ਪੰਜਾਬ।\nC.M. Di Yogshala - Kanga wali gali Batth Road, Tarn Taran, Punjab                                               \n\nclass Time:-\n 6.05pm - 7.05 pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/d8073036-cd4e-4048-a9ca-4c20362cb3e3",
+        "timestamp": "8:38 pm",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm",
+        "date": "G1-26-AUG",
+        "processed_time": "2025-08-27T15:05:15.025034",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਫਗਵਾੜਾ ਪੁਲਿਸ ਨੂੰ ਵੱਡੀ ਸਫਲਤਾ ਮਿਲੀ, ਬੱਸ ਵਿੱਚੋਂ 53 ਕਿਲੋ ਤੋਂ ਵੱਧ ਭੁੱਕੀ ਦੀ ਖੇਪ ਬਰਾਮਦ......\n\nਪੰਜਾਬ ਪੁਲਿਸ ਨਸ਼ਾ ਤਸਕਰਾਂ ਵਿਰੁੱਧ ਲਗਾਤਾਰ ਕਾਰਵਾਈ ਕਰ ਰਹੀ ਹੈ। ਇਸ ਕੜੀ ਵਿੱਚ, ਫਗਵਾੜਾ ਪੁਲਿਸ ਨੂੰ ਇੱਕ ਵੱਡੀ ਸਫਲਤਾ ਮਿਲੀ ਹੈ। ਇੱਕ ਬੱਸ ਵਿੱਚੋਂ 53 ਕਿਲੋਗ੍ਰਾਮ ਤੋਂ ਵੱਧ ਡੋਡੇ ਦੀ ਖੇਪ ਬਰਾਮਦ ਕੀਤੀ ਗਈ ਹੈ...",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "4:12 pm",
+        "group_name": "Cmdy201_bath_road_tarntaran_0605pm-0705pm",
+        "date": "G1-26-AUG",
+        "processed_time": "2025-08-27T15:05:15.073400",
+        "predicted_label": "crime_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/uhs-dghr-pkc \n \nOr open Meet and enter this code: uhs-dghr-pkc",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/778daa7a-9393-4112-bf4d-a52e94be4993",
+        "timestamp": "6:04 pm"
+    }
+]

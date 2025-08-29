@@ -420,7 +420,7 @@
                                     <input type="text" id="targetDate" class="form-control" placeholder="dd/mm/yyyy" required readonly>
                                     <input type="hidden" id="targetDateHidden" name="target_date">
                                     <small style="color: #7f8c8d; font-size: 12px; margin-top: 5px; display: block;">
-                                        <i class="fas fa-info-circle"></i> Files will be saved in a folder with date 1 day before the selected date
+                                        <i class="fas fa-info-circle"></i> Files will be saved in a folder with the selected date
                                     </small>
                                 </div>
                                 <div class="form-group">
@@ -525,7 +525,8 @@ function initializeDatePicker() {
     const todayFormatted = `${day}/${month}/${year}`;
     
     document.getElementById('targetDate').value = todayFormatted;
-    document.getElementById('targetDateHidden').value = today.toISOString().split('T')[0];
+    // Use local date format to avoid timezone issues
+    document.getElementById('targetDateHidden').value = `${year}-${month}-${day}`;
     
     // Initialize Flatpickr date picker
     flatpickr("#targetDate", {
@@ -535,7 +536,17 @@ function initializeDatePicker() {
         onChange: function(selectedDates, dateStr, instance) {
             if (selectedDates[0]) {
                 // Update hidden input with ISO format for backend
-                const isoDate = selectedDates[0].toISOString().split('T')[0];
+                // Use local date to avoid timezone issues
+                const selectedDate = selectedDates[0];
+                const year = selectedDate.getFullYear();
+                const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+                const day = String(selectedDate.getDate()).padStart(2, '0');
+                const isoDate = `${year}-${month}-${day}`;
+                
+                console.log("DEBUG: Date picker onChange:");
+                console.log("  selectedDates[0]:", selectedDates[0]);
+                console.log("  dateStr:", dateStr);
+                console.log("  isoDate (local):", isoDate);
                 document.getElementById('targetDateHidden').value = isoDate;
             }
         },
@@ -719,6 +730,13 @@ function handleUpload() {
         formData.append('files[]', file);
     });
     
+    // Debug: Log the data being sent
+    console.log("DEBUG: Data being sent to API:");
+    console.log("  assembly_name:", assemblyName);
+    console.log("  target_date:", targetDate);
+    console.log("  folder_type:", folderType);
+    console.log("  files count:", selectedFiles.length);
+    
     // Upload files
     uploadFiles(formData, assemblyName, targetDate, folderType);
 }
@@ -729,12 +747,15 @@ function uploadFiles(formData, assemblyName, targetDate, folderType) {
         body: formData
     })
     .then(response => response.json())
-    .then(data => {
+                .then(data => {
+        console.log("DEBUG: API Response:", data);
         if (data.success) {
             // Show detailed success message with date information
             const selectedDate = data.selected_date;
             const folderDate = data.folder_date;
-            const message = `Files uploaded successfully! Selected date: ${selectedDate}, Folder created: ${folderDate} (1 day back)`;
+            console.log("DEBUG: selectedDate:", selectedDate);
+            console.log("DEBUG: folderDate:", folderDate);
+            const message = `Files uploaded successfully! Selected date: ${selectedDate}, Folder created: ${folderDate}`;
             showStatus(message, 'success');
             resetForm();
         } else {
@@ -786,7 +807,8 @@ function resetForm() {
     const todayFormatted = `${day}/${month}/${year}`;
     
     document.getElementById('targetDate').value = todayFormatted;
-    document.getElementById('targetDateHidden').value = today.toISOString().split('T')[0];
+    // Use local date format to avoid timezone issues
+    document.getElementById('targetDateHidden').value = `${year}-${month}-${day}`;
 }
 
 function showStatus(message, type) {

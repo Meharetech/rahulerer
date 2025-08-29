@@ -1,26 +1,17 @@
-{
-    "groupInfo": {
-        "name": "ਮਾਝੇ ਵਾਲੇ ਭਾਊ",
-        "exportDate": "2025-08-23T04:31:09.760Z",
-        "totalMessages": 1,
-        "totalImages": 1,
-        "duplicatesRemoved": 0
-    },
-    "messages": [
-        {
-            "sender": {
-                "name": "Surjitsingh",
-                "phoneNumber": "919815725826"
-            },
-            "messageContent": "Image message",
-            "messageType": "image",
-            "imageUrl": "blob:https://web.whatsapp.com/43d873a9-99c6-4fa8-84de-a8413dcc2fb4",
-            "timestamp": "6:34 am",
-            "group_name": "_ (13)",
-            "date": "G2-22-AUG",
-            "processed_time": "2025-08-23T10:10:31.364548",
-            "predicted_label": "casual_chat",
-            "predicted_sentiment": "Neutral"
-        }
-    ]
-}
+[
+    {
+        "sender": {
+            "name": "Surjitsingh",
+            "phoneNumber": "919815725826"
+        },
+        "messageContent": "Image message",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/43d873a9-99c6-4fa8-84de-a8413dcc2fb4",
+        "timestamp": "6:34 am",
+        "group_name": "_ (13)",
+        "date": "G2-22-AUG",
+        "processed_time": "2025-08-27T15:06:20.867715",
+        "predicted_label": "casual_chat",
+        "predicted_sentiment": "Neutral"
+    }
+]

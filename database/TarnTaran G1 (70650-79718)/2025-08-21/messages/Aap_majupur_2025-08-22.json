@@ -50,7 +50,7 @@
         "timestamp": "2025-08-22T03:44:23.171Z",
         "group_name": "Aap_majupur_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:48.701189",
+        "processed_time": "2025-08-27T16:40:01.882864",
         "predicted_label": "spam",
         "predicted_sentiment": "Positive"
     },
@@ -115,7 +115,7 @@
         "timestamp": "09:14",
         "group_name": "Aap_majupur_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:48.764306",
+        "processed_time": "2025-08-27T16:40:01.921603",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     }

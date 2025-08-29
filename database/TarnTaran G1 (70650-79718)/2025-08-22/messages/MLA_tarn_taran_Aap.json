@@ -1,31 +1,22 @@
-{
-    "groupInfo": {
-        "name": "MLA tarn taran  Aap",
-        "exportDate": "2025-08-23T04:12:59.710Z",
-        "totalMessages": 2,
-        "totalImages": 1,
-        "duplicatesRemoved": 0
-    },
-    "messages": [
-        {
-            "sender": {
-                "name": "Electrisan",
-                "phoneNumber": "919814723286"
-            },
-            "messageContent": "https://www.facebook.com/share/r/177mTCu97o/",
-            "messageType": "image",
-            "imageUrl": "blob:https://web.whatsapp.com/1154345c-3096-410b-bd7b-1001c5461e05",
-            "timestamp": "10:30 am"
+[
+    {
+        "sender": {
+            "name": "Electrisan",
+            "phoneNumber": "919814723286"
         },
-        {
-            "sender": {
-                "name": "Electrisan",
-                "phoneNumber": "917355724966"
-            },
-            "messageContent": "Follow this link to join my WhatsApp group: https://chat.whatsapp.com/EtIEcAJst4iHAtQCrTxJf8?mode=ac_t",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "8:52 am"
-        }
-    ]
-}
+        "messageContent": "https://www.facebook.com/share/r/177mTCu97o/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/1154345c-3096-410b-bd7b-1001c5461e05",
+        "timestamp": "10:30 am"
+    },
+    {
+        "sender": {
+            "name": "Electrisan",
+            "phoneNumber": "917355724966"
+        },
+        "messageContent": "Follow this link to join my WhatsApp group: https://chat.whatsapp.com/EtIEcAJst4iHAtQCrTxJf8?mode=ac_t",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "8:52 am"
+    }
+]

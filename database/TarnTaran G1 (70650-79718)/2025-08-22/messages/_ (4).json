@@ -1,31 +1,22 @@
-{
-    "groupInfo": {
-        "name": "ਦੇਗ ਤੇਗ ਫਤਹਿ",
-        "exportDate": "2025-08-23T04:08:18.760Z",
-        "totalMessages": 2,
-        "totalImages": 1,
-        "duplicatesRemoved": 0
-    },
-    "messages": [
-        {
-            "sender": {
-                "name": "S.Jaspal Singh Dhillon",
-                "phoneNumber": "919815408048"
-            },
-            "messageContent": "https://www.facebook.com/share/r/1HFJsgFoTz/",
-            "messageType": "image",
-            "imageUrl": "blob:https://web.whatsapp.com/bc2bd7c4-fc89-455f-9ab0-96257ac4999b",
-            "timestamp": "9:57 am"
+[
+    {
+        "sender": {
+            "name": "S.Jaspal Singh Dhillon",
+            "phoneNumber": "919815408048"
         },
-        {
-            "sender": {
-                "name": "S.Jaspal Singh Dhillon",
-                "phoneNumber": "919815408048"
-            },
-            "messageContent": "https://chng.it/6FkqTprjFZ",
-            "messageType": "text",
-            "imageUrl": null,
-            "timestamp": "8:06 pm"
-        }
-    ]
-}
+        "messageContent": "https://www.facebook.com/share/r/1HFJsgFoTz/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/bc2bd7c4-fc89-455f-9ab0-96257ac4999b",
+        "timestamp": "9:57 am"
+    },
+    {
+        "sender": {
+            "name": "S.Jaspal Singh Dhillon",
+            "phoneNumber": "919815408048"
+        },
+        "messageContent": "https://chng.it/6FkqTprjFZ",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "8:06 pm"
+    }
+]

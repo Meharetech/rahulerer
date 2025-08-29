@@ -90,7 +90,7 @@
         "timestamp": "2025-08-22T03:59:05.568Z",
         "group_name": "Aam_adami_party_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:42.962872",
+        "processed_time": "2025-08-27T16:39:57.808977",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     },
@@ -105,7 +105,7 @@
         "timestamp": "2025-08-22T03:59:05.571Z",
         "group_name": "Aam_adami_party_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:43.026371",
+        "processed_time": "2025-08-27T16:39:57.871756",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     }

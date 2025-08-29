@@ -10,7 +10,7 @@
         "timestamp": "2025-08-22T03:56:57.856Z",
         "group_name": "Aap_nurdi_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:50.956402",
+        "processed_time": "2025-08-27T16:40:03.415438",
         "predicted_label": "spam",
         "predicted_sentiment": "Negative"
     },
@@ -25,7 +25,7 @@
         "timestamp": "2025-08-22T03:56:57.859Z",
         "group_name": "Aap_nurdi_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:51.024587",
+        "processed_time": "2025-08-27T16:40:03.465731",
         "predicted_label": "spam",
         "predicted_sentiment": "Negative"
     },
@@ -60,7 +60,7 @@
         "timestamp": "2025-08-22T03:56:57.866Z",
         "group_name": "Aap_nurdi_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:51.109571",
+        "processed_time": "2025-08-27T16:40:03.498019",
         "predicted_label": "spam",
         "predicted_sentiment": "Negative"
     },
@@ -75,7 +75,7 @@
         "timestamp": "09:26",
         "group_name": "Aap_nurdi_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:51.196310",
+        "processed_time": "2025-08-27T16:40:03.529008",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     }

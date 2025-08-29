@@ -50,7 +50,7 @@
         "timestamp": "2025-08-22T03:40:39.944Z",
         "group_name": "Aap_mankpura_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:49.399467",
+        "processed_time": "2025-08-27T16:40:02.349311",
         "predicted_label": "spam",
         "predicted_sentiment": "Positive"
     },
@@ -65,7 +65,7 @@
         "timestamp": "09:10",
         "group_name": "Aap_mankpura_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:49.478830",
+        "processed_time": "2025-08-27T16:40:02.383046",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     }

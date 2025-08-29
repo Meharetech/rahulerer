@@ -50,7 +50,7 @@
         "timestamp": "2025-08-22T03:58:52.855Z",
         "group_name": "AAP_AIMA_KALAN_2025-08-22 (1)",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:43.233114",
+        "processed_time": "2025-08-27T16:39:57.919712",
         "predicted_label": "casual_chat",
         "predicted_sentiment": "Neutral"
     },
@@ -65,7 +65,7 @@
         "timestamp": "09:28",
         "group_name": "AAP_AIMA_KALAN_2025-08-22 (1)",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:43.313194",
+        "processed_time": "2025-08-27T16:39:57.964433",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     },

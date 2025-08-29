@@ -60,7 +60,7 @@
         "timestamp": "09:37",
         "group_name": "jagatpur_Dist_Taran_tran_App_App_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:06.494229",
+        "processed_time": "2025-08-27T16:40:11.718874",
         "predicted_label": "spam",
         "predicted_sentiment": "Positive"
     },
@@ -95,7 +95,7 @@
         "timestamp": "09:37",
         "group_name": "jagatpur_Dist_Taran_tran_App_App_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:06:06.569704",
+        "processed_time": "2025-08-27T16:40:11.745641",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     },

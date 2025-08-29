@@ -40,7 +40,7 @@
         "timestamp": "2025-08-22T03:45:42.690Z",
         "group_name": "Aap_Hawelian_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:46.022566",
+        "processed_time": "2025-08-27T16:40:00.000180",
         "predicted_label": "spam",
         "predicted_sentiment": "Positive"
     },
@@ -55,7 +55,7 @@
         "timestamp": "09:15",
         "group_name": "Aap_Hawelian_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:46.085733",
+        "processed_time": "2025-08-27T16:40:00.050075",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     }

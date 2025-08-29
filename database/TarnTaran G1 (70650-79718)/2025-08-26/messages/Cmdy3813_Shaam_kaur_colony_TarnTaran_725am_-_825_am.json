@@ -1,0 +1,62 @@
+[
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/zjh-anjd-djm \n \nOr open Meet and enter this code: zjh-anjd-djm",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/5528eb6d-9e57-47fe-b66a-bba47d0737d2",
+        "timestamp": "10:30 am"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਸ਼ਾਮ ਕੌਰ ਕਲੋਨੀ\nਤਰਨਤਾਰਨ  \n                                                  .            C.M. Di Yogshala \nSham kaur colony \nTarn taran\nClass timing:-\n07.25am - 08.25am\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/e6f8e6b6-edb9-48bf-a50e-ea7314e65a83",
+        "timestamp": "7:27 am",
+        "group_name": "Cmdy3813_Shaam_kaur_colony_TarnTaran_725am_-_825_am",
+        "date": "G1-26-AUG",
+        "processed_time": "2025-08-27T15:05:15.140352",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਫਗਵਾੜਾ ਪੁਲਿਸ ਨੂੰ ਵੱਡੀ ਸਫਲਤਾ ਮਿਲੀ, ਬੱਸ ਵਿੱਚੋਂ 53 ਕਿਲੋ ਤੋਂ ਵੱਧ ਭੁੱਕੀ ਦੀ ਖੇਪ ਬਰਾਮਦ......\n\nਪੰਜਾਬ ਪੁਲਿਸ ਨਸ਼ਾ ਤਸਕਰਾਂ ਵਿਰੁੱਧ ਲਗਾਤਾਰ ਕਾਰਵਾਈ ਕਰ ਰਹੀ ਹੈ। ਇਸ ਕੜੀ ਵਿੱਚ, ਫਗਵਾੜਾ ਪੁਲਿਸ ਨੂੰ ਇੱਕ ਵੱਡੀ ਸਫਲਤਾ ਮਿਲੀ ਹੈ। ਇੱਕ ਬੱਸ ਵਿੱਚੋਂ 53 ਕਿਲੋਗ੍ਰਾਮ ਤੋਂ ਵੱਧ ਡੋਡੇ ਦੀ ਖੇਪ ਬਰਾਮਦ ਕੀਤੀ ਗਈ ਹੈ...",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "4:17 pm",
+        "group_name": "Cmdy3813_Shaam_kaur_colony_TarnTaran_725am_-_825_am",
+        "date": "G1-26-AUG",
+        "processed_time": "2025-08-27T15:05:15.189652",
+        "predicted_label": "crime_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "C.M Di Yogshala",
+            "phoneNumber": "917888840200"
+        },
+        "messageContent": "https://youtu.be/VlV2JejRT5c\n\nLike Share Subscribe",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "4:18 pm"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/ybq-hfxi-oyg \n \nOr open Meet and enter this code: ybq-hfxi-oyg",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/f70d6aab-2154-4837-821d-2e0aba0b6e1e",
+        "timestamp": "7:28 am"
+    }
+]

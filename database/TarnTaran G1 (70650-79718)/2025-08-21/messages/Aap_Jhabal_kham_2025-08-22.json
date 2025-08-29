@@ -30,7 +30,7 @@
         "timestamp": "2025-08-22T03:57:17.894Z",
         "group_name": "Aap_Jhabal_kham_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:46.497989",
+        "processed_time": "2025-08-27T16:40:00.333191",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     },
@@ -215,7 +215,7 @@
         "timestamp": "2025-08-22T03:57:17.975Z",
         "group_name": "Aap_Jhabal_kham_2025-08-22",
         "date": "G1-21-AUG",
-        "processed_time": "2025-08-22T10:05:46.598959",
+        "processed_time": "2025-08-27T16:40:00.374903",
         "predicted_label": "politics_news",
         "predicted_sentiment": "Negative"
     }
