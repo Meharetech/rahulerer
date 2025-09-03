@@ -538,7 +538,7 @@ def upload_reports():
 @api_bp.route('/assemblies-with-groups', methods=['GET'])
 @login_required
 def get_assemblies_with_groups():
-    """Get all assemblies with their available Excel files in groups folder"""
+    """Get all assemblies with their available CSV files in groups folder"""
     try:
         import os
         
@@ -551,25 +551,25 @@ def get_assemblies_with_groups():
             assembly_path = os.path.join('database', assembly.name, 'groups')
             
             if os.path.exists(assembly_path):
-                excel_files = []
+                csv_files = []
                 
-                # Get all Excel files in the groups folder
+                # Get all CSV files in the groups folder
                 for filename in os.listdir(assembly_path):
-                    if filename.lower().endswith(('.xlsx', '.xls')):
-                        excel_files.append(filename)
+                    if filename.lower().endswith('.csv'):
+                        csv_files.append(filename)
                 
                 assemblies_data.append({
                     'id': assembly.id,
                     'name': assembly.name,
-                    'excel_files': excel_files,
-                    'total_files': len(excel_files)
+                    'csv_files': csv_files,
+                    'total_files': len(csv_files)
                 })
             else:
                 # Assembly exists but no groups folder
                 assemblies_data.append({
                     'id': assembly.id,
                     'name': assembly.name,
-                    'excel_files': [],
+                    'csv_files': [],
                     'total_files': 0
                 })
         
@@ -1386,42 +1386,31 @@ def get_dashboard_stats():
             
             # Check if groups directory exists
             if os.path.exists(groups_path):
-                # Get all Excel files in groups directory
-                excel_files = [f for f in os.listdir(groups_path) 
-                             if f.lower().endswith(('.xlsx', '.xls', '.csv'))]
+                # Get all CSV files in groups directory
+                csv_files = [f for f in os.listdir(groups_path) 
+                             if f.lower().endswith('.csv')]
                 
-                assembly_stats['groups_count'] = len(excel_files)
-                stats['total_groups'] += len(excel_files)
+                assembly_stats['groups_count'] = len(csv_files)
+                stats['total_groups'] += len(csv_files)
                 
-                # Process each Excel file to count phone numbers
-                for excel_file in excel_files:
-                    file_path = os.path.join(groups_path, excel_file)
+                # Process each CSV file to count phone numbers
+                for csv_file in csv_files:
+                    file_path = os.path.join(groups_path, csv_file)
                     file_stats = {
-                        'name': excel_file,
+                        'name': csv_file,
                         'phones_count': 0
                     }
                     
                     try:
-                        # Read Excel file to count phone numbers with better error handling
-                        if excel_file.lower().endswith('.csv'):
-                            # For CSV files, try different encodings
+                        # Read CSV file to count phone numbers with better error handling
+                        # For CSV files, try different encodings
+                        try:
+                            df = pd.read_csv(file_path, encoding='utf-8')
+                        except UnicodeDecodeError:
                             try:
-                                df = pd.read_csv(file_path, encoding='utf-8')
-                            except UnicodeDecodeError:
-                                try:
-                                    df = pd.read_csv(file_path, encoding='latin-1')
-                                except:
-                                    df = pd.read_csv(file_path, encoding='cp1252')
-                        else:
-                            # For Excel files, use specific engine and suppress warnings
-                            try:
-                                if excel_file.lower().endswith('.xlsx'):
-                                    df = pd.read_excel(file_path, engine='openpyxl')
-                                else:  # .xls files
-                                    df = pd.read_excel(file_path, engine='xlrd')
-                            except Exception as excel_error:
-                                # Fallback to openpyxl for all Excel files
-                                df = pd.read_excel(file_path, engine='openpyxl')
+                                df = pd.read_csv(file_path, encoding='latin-1')
+                            except:
+                                df = pd.read_csv(file_path, encoding='cp1252')
                         
                         # Look for phone number columns (common names)
                         phone_columns = []
@@ -1436,7 +1425,7 @@ def get_dashboard_stats():
                             # Remove empty rows and rows with all NaN values
                             df_clean = df.dropna(subset=[phone_col])
                             phone_count = df_clean[phone_col].nunique()
-                            print(f"Debug: Found {phone_count} unique phone numbers in column '{phone_col}' for {excel_file}")
+                            print(f"Debug: Found {phone_count} unique phone numbers in column '{phone_col}' for {csv_file}")
                         else:
                             # If no phone columns found, count rows (excluding header)
                             df_clean = df.dropna(how='all')
@@ -1445,7 +1434,7 @@ def get_dashboard_stats():
                             # If we have very few rows, it might be a header-only file
                             if phone_count <= 1:
                                 phone_count = 0
-                            print(f"Debug: No phone columns found, counted {phone_count} rows for {excel_file}")
+                            print(f"Debug: No phone columns found, counted {phone_count} rows for {csv_file}")
                         
                         file_stats['phones_count'] = phone_count
                         assembly_stats['phones_count'] += phone_count
@@ -1520,18 +1509,18 @@ def get_accurate_dashboard_stats():
             
             # Check if groups directory exists
             if os.path.exists(groups_path):
-                # Get all Excel files in groups directory
-                excel_files = [f for f in os.listdir(groups_path) 
-                             if f.lower().endswith(('.xlsx', '.xls', '.csv'))]
+                # Get all CSV files in groups directory
+                csv_files = [f for f in os.listdir(groups_path) 
+                             if f.lower().endswith('.csv')]
                 
-                assembly_stats['groups_count'] = len(excel_files)
-                stats['total_groups'] += len(excel_files)
+                assembly_stats['groups_count'] = len(csv_files)
+                stats['total_groups'] += len(csv_files)
                 
-                # Process each Excel file to count phone numbers
-                for excel_file in excel_files:
-                    file_path = os.path.join(groups_path, excel_file)
+                # Process each CSV file to count phone numbers
+                for csv_file in csv_files:
+                    file_path = os.path.join(groups_path, csv_file)
                     file_stats = {
-                        'name': excel_file,
+                        'name': csv_file,
                         'phones_count': 0
                     }
                     
@@ -3353,7 +3342,16 @@ def get_assembly_groups():
     """Get WhatsApp groups for a specific assembly with phone number counts"""
     try:
         data = request.get_json()
-        assembly_name = data.get('assembly', '').strip()
+        print(f"Debug: Received data: {data}")
+        
+        if not data:
+            return jsonify({
+                'success': False,
+                'message': 'No JSON data received'
+            }), 400
+        
+        assembly_name = data.get('assembly_name', '').strip()
+        print(f"Debug: Assembly name: '{assembly_name}'")
         
         if not assembly_name:
             return jsonify({
@@ -3378,22 +3376,22 @@ def get_assembly_groups():
         # Look for groups in the groups subdirectory
         groups_path = os.path.join(assembly_path, 'groups')
         if os.path.exists(groups_path):
-            # Get all Excel files in the groups directory
-            excel_files = [f for f in os.listdir(groups_path) if f.endswith('.xlsx')]
+            # Get all CSV files in the groups directory
+            csv_files = [f for f in os.listdir(groups_path) if f.endswith('.csv')]
             
-            for excel_file in excel_files:
+            for csv_file in csv_files:
                 try:
-                    # Extract group name from filename (remove _all_timestamp.xlsx)
-                    group_name = excel_file.replace('_all_', '_').split('_')[0]
+                    # Extract group name from filename (remove _all_timestamp.csv)
+                    group_name = csv_file.replace('_all_', '_').split('_')[0]
                     
                     # Get file info
-                    file_path = os.path.join(groups_path, excel_file)
+                    file_path = os.path.join(groups_path, csv_file)
                     file_stat = os.stat(file_path)
                     file_size = file_stat.st_size
                     last_modified = datetime.fromtimestamp(file_stat.st_mtime)
                     
                     # For now, we'll estimate phone numbers based on file size
-                    # In a real implementation, you'd read the Excel file to count actual phone numbers
+                    # In a real implementation, you'd read the CSV file to count actual phone numbers
                     estimated_phones = estimate_phone_count_from_file(file_path)
                     
                     groups.append({
@@ -3403,14 +3401,14 @@ def get_assembly_groups():
                         'member_count': estimated_phones,  # Assuming 1 phone = 1 member for now
                         'file_size': file_size,
                         'last_updated': last_modified.isoformat(),
-                        'filename': excel_file
+                        'filename': csv_file
                     })
                     
                     total_phones += estimated_phones
                     total_members += estimated_phones
                     
                 except Exception as e:
-                    print(f"Debug: Error processing group file {excel_file}: {e}")
+                    print(f"Debug: Error processing group file {csv_file}: {e}")
                     continue
         
         # Sort groups by phone count (highest to lowest)
@@ -3434,15 +3432,292 @@ def get_assembly_groups():
             'message': f'Error getting assembly groups: {str(e)}'
         }), 500
 
-def estimate_phone_count_from_file(file_path):
-    """Estimate phone number count based on file size and structure"""
+@api_bp.route('/download-group-excel', methods=['GET'])
+@login_required
+def download_group_excel():
+    """Download Excel file with phone numbers for a specific group"""
     try:
-        # Try to read the Excel file to get actual phone number count
+        group_name = request.args.get('group', '').strip()
+        assembly_name = request.args.get('assembly', '').strip()
+        filename = request.args.get('filename', '').strip()
+        
+        print(f"Debug: Download request - Group: {group_name}, Assembly: {assembly_name}, Filename: {filename}")
+        
+        if not group_name or not assembly_name:
+            return jsonify({
+                'success': False,
+                'message': 'Group name and assembly are required'
+            }), 400
+        
+        # Define the database path for the assembly
+        database_path = 'database'
+        assembly_path = os.path.join(database_path, assembly_name)
+        
+        if not os.path.exists(assembly_path):
+            return jsonify({
+                'success': False,
+                'message': f'Assembly "{assembly_name}" not found'
+            }), 404
+        
+        # Look for the CSV file in the groups subdirectory
+        groups_path = os.path.join(assembly_path, 'groups')
+        if not os.path.exists(groups_path):
+            return jsonify({
+                'success': False,
+                'message': f'Groups directory not found for assembly "{assembly_name}"'
+            }), 404
+        
+        # Find the CSV file
+        csv_file_path = None
+        if filename and filename.endswith('.csv'):
+            # Use the provided filename
+            csv_file_path = os.path.join(groups_path, filename)
+        else:
+            # Search for CSV files that match the group name
+            csv_files = [f for f in os.listdir(groups_path) if f.endswith('.csv')]
+            for csv_file in csv_files:
+                if group_name.lower() in csv_file.lower():
+                    csv_file_path = os.path.join(groups_path, csv_file)
+                    break
+        
+        if not csv_file_path or not os.path.exists(csv_file_path):
+            return jsonify({
+                'success': False,
+                'message': f'CSV file not found for group "{group_name}"'
+            }), 404
+        
+        print(f"Debug: Found CSV file: {csv_file_path}")
+        
+        # Read the CSV file and convert to Excel
         try:
             import pandas as pd
             
-            # Read the Excel file
-            df = pd.read_excel(file_path)
+            # Read CSV file with different encodings
+            try:
+                df = pd.read_csv(csv_file_path, encoding='utf-8')
+            except UnicodeDecodeError:
+                try:
+                    df = pd.read_csv(csv_file_path, encoding='latin-1')
+                except:
+                    df = pd.read_csv(csv_file_path, encoding='cp1252')
+            
+            # Create Excel file in memory
+            from io import BytesIO
+            excel_buffer = BytesIO()
+            
+            # Write to Excel with phone numbers sheet
+            with pd.ExcelWriter(excel_buffer, engine='openpyxl') as writer:
+                df.to_excel(writer, sheet_name='Phone Numbers', index=False)
+            
+            excel_buffer.seek(0)
+            
+            # Generate filename
+            safe_group_name = "".join(c for c in group_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+            excel_filename = f"{safe_group_name}_phone_numbers.xlsx"
+            
+            print(f"Debug: Generated Excel file: {excel_filename}")
+            
+            # Return Excel file
+            return send_file(
+                excel_buffer,
+                as_attachment=True,
+                download_name=excel_filename,
+                mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            )
+            
+        except Exception as e:
+            print(f"Debug: Error processing CSV file: {e}")
+            return jsonify({
+                'success': False,
+                'message': f'Error processing CSV file: {str(e)}'
+            }), 500
+        
+    except Exception as e:
+        print(f"Debug: Error in download_group_excel: {e}")
+        return jsonify({
+            'success': False,
+            'message': f'Error downloading group Excel: {str(e)}'
+        }), 500
+
+@api_bp.route('/download-all-phone-numbers', methods=['GET'])
+@login_required
+def download_all_phone_numbers():
+    """Download Excel file with all phone numbers from all groups in an assembly"""
+    try:
+        assembly_name = request.args.get('assembly', '').strip()
+        
+        print(f"Debug: Download all phone numbers request - Assembly: {assembly_name}")
+        
+        if not assembly_name:
+            return jsonify({
+                'success': False,
+                'message': 'Assembly name is required'
+            }), 400
+        
+        # Define the database path for the assembly
+        database_path = 'database'
+        assembly_path = os.path.join(database_path, assembly_name)
+        
+        if not os.path.exists(assembly_path):
+            return jsonify({
+                'success': False,
+                'message': f'Assembly "{assembly_name}" not found'
+            }), 404
+        
+        # Look for CSV files in the groups subdirectory
+        groups_path = os.path.join(assembly_path, 'groups')
+        if not os.path.exists(groups_path):
+            return jsonify({
+                'success': False,
+                'message': f'Groups directory not found for assembly "{assembly_name}"'
+            }), 404
+        
+        # Get all CSV files
+        csv_files = [f for f in os.listdir(groups_path) if f.endswith('.csv')]
+        
+        if not csv_files:
+            return jsonify({
+                'success': False,
+                'message': f'No CSV files found in assembly "{assembly_name}"'
+            }), 404
+        
+        print(f"Debug: Found {len(csv_files)} CSV files")
+        
+        try:
+            import pandas as pd
+            from io import BytesIO
+            
+            # Create Excel file in memory
+            excel_buffer = BytesIO()
+            
+            with pd.ExcelWriter(excel_buffer, engine='openpyxl') as writer:
+                all_phone_numbers = []
+                group_summary = []
+                
+                for csv_file in csv_files:
+                    try:
+                        csv_file_path = os.path.join(groups_path, csv_file)
+                        
+                        # Extract group name from filename
+                        group_name = csv_file.replace('_all_', '_').split('_')[0]
+                        
+                        # Read CSV file with different encodings
+                        try:
+                            df = pd.read_csv(csv_file_path, encoding='utf-8')
+                        except UnicodeDecodeError:
+                            try:
+                                df = pd.read_csv(csv_file_path, encoding='latin-1')
+                            except:
+                                df = pd.read_csv(csv_file_path, encoding='cp1252')
+                        
+                        # Look for phone number columns
+                        phone_columns = []
+                        for col in df.columns:
+                            col_lower = str(col).lower()
+                            if any(keyword in col_lower for keyword in ['phone', 'number', 'mobile', 'contact', 'whatsapp']):
+                                phone_columns.append(col)
+                        
+                        if phone_columns:
+                            # Get phone numbers from the first phone column
+                            phone_col = phone_columns[0]
+                            phone_numbers = df[phone_col].dropna().unique()
+                            
+                            # Add to all phone numbers list
+                            for phone in phone_numbers:
+                                all_phone_numbers.append({
+                                    'Group Name': group_name,
+                                    'Phone Number': phone,
+                                    'Assembly': assembly_name
+                                })
+                            
+                            # Add to group summary
+                            group_summary.append({
+                                'Group Name': group_name,
+                                'Phone Count': len(phone_numbers),
+                                'Assembly': assembly_name
+                            })
+                            
+                            print(f"Debug: Processed {group_name} - {len(phone_numbers)} phone numbers")
+                        
+                    except Exception as e:
+                        print(f"Debug: Error processing {csv_file}: {e}")
+                        continue
+                
+                # Create summary sheet
+                if group_summary:
+                    summary_df = pd.DataFrame(group_summary)
+                    summary_df.to_excel(writer, sheet_name='Group Summary', index=False)
+                
+                # Create all phone numbers sheet
+                if all_phone_numbers:
+                    all_phones_df = pd.DataFrame(all_phone_numbers)
+                    all_phones_df.to_excel(writer, sheet_name='All Phone Numbers', index=False)
+                
+                # Create unique phone numbers sheet (deduplicated)
+                if all_phone_numbers:
+                    unique_phones = []
+                    seen_phones = set()
+                    
+                    for phone_data in all_phone_numbers:
+                        phone = phone_data['Phone Number']
+                        if phone not in seen_phones:
+                            seen_phones.add(phone)
+                            unique_phones.append({
+                                'Phone Number': phone,
+                                'Assembly': assembly_name
+                            })
+                    
+                    if unique_phones:
+                        unique_df = pd.DataFrame(unique_phones)
+                        unique_df.to_excel(writer, sheet_name='Unique Phone Numbers', index=False)
+            
+            excel_buffer.seek(0)
+            
+            # Generate filename
+            safe_assembly_name = "".join(c for c in assembly_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+            excel_filename = f"{safe_assembly_name}_all_phone_numbers.xlsx"
+            
+            print(f"Debug: Generated Excel file: {excel_filename}")
+            print(f"Debug: Total phone numbers: {len(all_phone_numbers)}")
+            print(f"Debug: Unique phone numbers: {len(unique_phones) if 'unique_phones' in locals() else 0}")
+            
+            # Return Excel file
+            return send_file(
+                excel_buffer,
+                as_attachment=True,
+                download_name=excel_filename,
+                mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            )
+            
+        except Exception as e:
+            print(f"Debug: Error processing CSV files: {e}")
+            return jsonify({
+                'success': False,
+                'message': f'Error processing CSV files: {str(e)}'
+            }), 500
+        
+    except Exception as e:
+        print(f"Debug: Error in download_all_phone_numbers: {e}")
+        return jsonify({
+            'success': False,
+            'message': f'Error downloading all phone numbers: {str(e)}'
+        }), 500
+
+def estimate_phone_count_from_file(file_path):
+    """Estimate phone number count from CSV file based on file size and structure"""
+    try:
+        # Try to read the CSV file to get actual phone number count
+        try:
+            import pandas as pd
+            
+            # Read CSV file with different encodings
+            try:
+                df = pd.read_csv(file_path, encoding='utf-8')
+            except UnicodeDecodeError:
+                try:
+                    df = pd.read_csv(file_path, encoding='latin-1')
+                except:
+                    df = pd.read_csv(file_path, encoding='cp1252')
             
             # Look for phone number columns (common names)
             phone_columns = []
@@ -3474,8 +3749,8 @@ def estimate_phone_count_from_file(file_path):
             return estimated_phones
             
         except Exception as e:
-            # Error reading Excel file, fall back to file size estimation
-            print(f"Debug: Error reading Excel file {file_path}: {e}")
+            # Error reading CSV file, fall back to file size estimation
+            print(f"Debug: Error reading CSV file {file_path}: {e}")
             file_size = os.path.getsize(file_path)
             estimated_phones = max(1, file_size // 200)
             estimated_phones = min(estimated_phones, 5000)
@@ -3484,6 +3759,170 @@ def estimate_phone_count_from_file(file_path):
     except Exception as e:
         print(f"Debug: Error in estimate_phone_count_from_file for {file_path}: {e}")
         return 100  # Default fallback
+
+# ============================================================================
+# LABEL MANAGEMENT API
+# ============================================================================
+
+@api_bp.route('/get-labels', methods=['GET'])
+@login_required
+def get_labels():
+    """Get available labels from CSV file"""
+    try:
+        import csv
+        import os
+        
+        labels = []
+        csv_file = 'label.csv'
+        
+        if os.path.exists(csv_file):
+            with open(csv_file, 'r', encoding='utf-8') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    labels.append({
+                        'name': row['label_name'],
+                        'color': row['label_color'],
+                        'description': row['label_description']
+                    })
+        
+        return jsonify({
+            'success': True,
+            'labels': labels
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error loading labels: {str(e)}'
+        }), 500
+
+@api_bp.route('/save-labels', methods=['POST'])
+@login_required
+def save_labels():
+    """Save labels to CSV file"""
+    try:
+        import csv
+        import os
+        
+        data = request.get_json()
+        labels = data.get('labels', [])
+        
+        csv_file = 'label.csv'
+        
+        with open(csv_file, 'w', newline='', encoding='utf-8') as file:
+            fieldnames = ['label_name', 'label_color', 'label_description']
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            
+            writer.writeheader()
+            for label in labels:
+                writer.writerow({
+                    'label_name': label['name'],
+                    'label_color': label['color'],
+                    'label_description': label['description']
+                })
+        
+        return jsonify({
+            'success': True,
+            'message': 'Labels saved successfully'
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error saving labels: {str(e)}'
+        }), 500
+
+@api_bp.route('/get-group-labels', methods=['POST'])
+@login_required
+def get_group_labels():
+    """Get labels for a specific group"""
+    try:
+        data = request.get_json()
+        assembly_name = data.get('assembly_name')
+        group_name = data.get('group_name')
+        
+        if not assembly_name or not group_name:
+            return jsonify({
+                'success': False,
+                'message': 'Assembly name and group name are required'
+            }), 400
+        
+        # Load group labels from JSON file
+        labels_file = os.path.join('database', assembly_name, 'group_labels.json')
+        group_labels = {}
+        
+        if os.path.exists(labels_file):
+            try:
+                with open(labels_file, 'r', encoding='utf-8') as file:
+                    group_labels = json.load(file)
+            except json.JSONDecodeError as e:
+                print(f"Debug: JSON decode error in {labels_file}: {e}")
+                # If JSON is corrupted, return empty list
+                group_labels = {}
+        
+        labels = group_labels.get(group_name, [])
+        
+        return jsonify({
+            'success': True,
+            'labels': labels
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error getting group labels: {str(e)}'
+        }), 500
+
+@api_bp.route('/save-group-labels', methods=['POST'])
+@login_required
+def save_group_labels():
+    """Save labels for a specific group"""
+    try:
+        data = request.get_json()
+        assembly_name = data.get('assembly_name')
+        group_name = data.get('group_name')
+        labels = data.get('labels', [])
+        
+        if not assembly_name or not group_name:
+            return jsonify({
+                'success': False,
+                'message': 'Assembly name and group name are required'
+            }), 400
+        
+        # Ensure directory exists
+        assembly_dir = os.path.join('database', assembly_name)
+        os.makedirs(assembly_dir, exist_ok=True)
+        
+        # Load existing labels
+        labels_file = os.path.join(assembly_dir, 'group_labels.json')
+        group_labels = {}
+        
+        if os.path.exists(labels_file):
+            try:
+                with open(labels_file, 'r', encoding='utf-8') as file:
+                    group_labels = json.load(file)
+            except json.JSONDecodeError as e:
+                print(f"Debug: JSON decode error in {labels_file}: {e}")
+                # If JSON is corrupted, start with empty dict
+                group_labels = {}
+        
+        # Update labels for this group
+        group_labels[group_name] = labels
+        
+        # Save back to file
+        with open(labels_file, 'w', encoding='utf-8') as file:
+            json.dump(group_labels, file, indent=2, ensure_ascii=False)
+        
+        return jsonify({
+            'success': True,
+            'message': 'Group labels saved successfully'
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error saving group labels: {str(e)}'
+        }), 500
 
 # ============================================================================
 # EMAIL TEST API
@@ -3553,3 +3992,80 @@ def send_welcome_email_api():
             'success': False,
             'message': f'Error sending welcome email: {str(e)}'
         }), 500
+
+# ============================================================================
+# SEARCH RESULTS EXPORT API
+# ============================================================================
+
+@api_bp.route('/export-search-results', methods=['POST'])
+@login_required
+def export_search_results():
+    """Export search results to Excel file"""
+    try:
+        import pandas as pd
+        import io
+        from datetime import datetime
+        
+        data = request.get_json()
+        results = data.get('results', [])
+        format_type = data.get('format', 'excel')
+        
+        if not results:
+            return jsonify({
+                'success': False,
+                'message': 'No results to export'
+            }), 400
+        
+        # Convert results to DataFrame
+        df = pd.DataFrame(results)
+        
+        # Create Excel file in memory
+        output = io.BytesIO()
+        
+        with pd.ExcelWriter(output, engine='openpyxl') as writer:
+            # Write main results sheet
+            df.to_excel(writer, sheet_name='Search Results', index=False)
+            
+            # Add summary sheet
+            summary_data = {
+                'Metric': ['Total Messages', 'Total Groups', 'Total Assemblies', 'Export Date'],
+                'Value': [
+                    len(results),
+                    len(df['group_name'].unique()) if 'group_name' in df.columns else 0,
+                    len(df['assembly'].unique()) if 'assembly' in df.columns else 0,
+                    datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                ]
+            }
+            summary_df = pd.DataFrame(summary_data)
+            summary_df.to_excel(writer, sheet_name='Summary', index=False)
+            
+            # Add unique senders sheet if data exists
+            if 'sender_name' in df.columns and 'sender_phone' in df.columns:
+                unique_senders = df[['sender_name', 'sender_phone', 'assembly', 'group_name']].drop_duplicates()
+                unique_senders.to_excel(writer, sheet_name='Unique Senders', index=False)
+        
+        output.seek(0)
+        
+        # Generate filename
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        filename = f'search_results_{timestamp}.xlsx'
+        
+        return send_file(
+            output,
+            as_attachment=True,
+            download_name=filename,
+            mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        
+    except ImportError:
+        return jsonify({
+            'success': False,
+            'message': 'Excel export requires pandas and openpyxl libraries'
+        }), 500
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error exporting search results: {str(e)}'
+        }), 500
+
+

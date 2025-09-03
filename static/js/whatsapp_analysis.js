@@ -676,21 +676,34 @@ function displayAssemblyGroupStatistics(assemblyStats) {
         const sortedGroups = Object.values(groups).sort((a, b) => b.count - a.count);
         
         html += `
-            <div class="assembly-group-stats">
-                <div class="assembly-header clickable" onclick="openAssemblyAnalytics('${assemblyName}', '${encodeURIComponent(JSON.stringify(assemblyData))}')">
-                    <h4><i class="fas fa-building"></i> ${assemblyData.name}</h4>
-                    <div class="assembly-summary">
-                        <span class="summary-item">
-                            <i class="fas fa-users"></i> ${assemblyData.totalGroups} groups
-                        </span>
-                        <span class="summary-item">
-                            <i class="fas fa-comments"></i> ${assemblyData.totalMessages} messages
-                        </span>
+            <div class="group-stat-item">
+                <div class="group-info">
+                    <div class="group-header">
+                        <div class="group-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="group-name">${assemblyData.name}</div>
                     </div>
-                    <div class="assembly-action">
+                    <div class="group-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users stat-icon"></i>
+                            <span class="stat-text">${assemblyData.totalGroups} groups</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-comments stat-icon"></i>
+                            <span class="stat-text">${assemblyData.totalMessages} messages</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="group-actions">
+                    <div class="message-count" onclick="openAssemblyAnalytics('${assemblyName}', '${encodeURIComponent(JSON.stringify(assemblyData))}')">
+                        <i class="fas fa-chart-line"></i>
+                        <span>View Analytics</span>
+                    </div>
+                    <button class="view-analytics-btn" onclick="openAssemblyAnalytics('${assemblyName}', '${encodeURIComponent(JSON.stringify(assemblyData))}')">
+                        <span>Detailed Analysis</span>
                         <i class="fas fa-arrow-right"></i>
-                        <span>Click to view detailed analytics</span>
-                    </div>
+                    </button>
                 </div>
             </div>
         `;

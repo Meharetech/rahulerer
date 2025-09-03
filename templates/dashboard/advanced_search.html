@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Advanced Search - WhatsApp UI{% endblock %}
+{% block title %}Advanced Search - WhatsApp Analytics{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/advanced_search.css') }}">
+{% endblock %}
 
 {% block content %}
 <div class="dashboard-layout">
@@ -9,32 +13,378 @@
     
     <!-- Main Content Area -->
     <div class="main-content">
-        <div class="main-header">
+        <!-- Modern Header -->
+        <div class="modern-header">
             <div class="header-content">
+                <div class="header-title">
                 <h1><i class="fas fa-search"></i> Advanced Search</h1>
-                <p class="header-subtitle">Powerful search tools for WhatsApp data and messages</p>
+                    <p class="header-subtitle">Search through WhatsApp messages, find users, groups, and analyze message content with powerful filters</p>
+                </div>
             </div>
             <div class="header-actions">
-                <button class="refresh-btn" onclick="location.reload()">
+                <button class="action-btn refresh-btn" onclick="location.reload()" title="Refresh Search">
                     <i class="fas fa-sync-alt"></i>
+                    <span>Refresh</span>
                 </button>
             </div>
         </div>
         
+        <!-- Dashboard Content -->
         <div class="dashboard-content">
-            <!-- Advanced Search Content -->
-            <div class="section-header">
-                <h3><i class="fas fa-search-plus"></i> Advanced Search Tools</h3>
+            <!-- Search Form Section -->
+            <div class="section-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3><i class="fas fa-search-plus"></i> Advanced Message Search</h3>
+                        <p>Select assemblies, date range, and search criteria to find specific messages and users</p>
+                    </div>
+                </div>
+                
+                <div class="card-content">
+                    <!-- Search Criteria - Moved to Top -->
+                    <div class="form-section search-section">
+                        <div class="search-header">
+                            <h3><i class="fas fa-search"></i> Search Messages</h3>
+                            <p>Enter your search term and select where to search</p>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group search-term-group">
+                                <label for="searchTerm">
+                                    <i class="fas fa-search"></i> Search Term <span class="required">*</span>
+                                </label>
+                                <input type="text" id="searchTerm" name="searchTerm" class="form-control search-input" placeholder="Enter search term..." required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="searchField">
+                                    <i class="fas fa-filter"></i> Search Field
+                                </label>
+                                <select id="searchField" class="form-control">
+                                    <option value="all">All Fields</option>
+                                    <option value="message_content" selected>Message Content</option>
+                                    <option value="sender_name">Sender Name</option>
+                                    <option value="phone_number">Phone Number</option>
+                                    <option value="group_name">Group Name</option>
+                                    <option value="assembly_name">Assembly Name</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Assembly Selection -->
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="assemblyDropdown">
+                                <i class="fas fa-building"></i> Select Assemblies
+                            </label>
+                            <div class="custom-dropdown-container">
+                                <div class="custom-dropdown" id="assemblyDropdown">
+                                    <div class="dropdown-header" onclick="toggleDropdown()">
+                                        <span class="dropdown-placeholder">Select assemblies...</span>
+                                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                                    </div>
+                                    <div class="dropdown-content" id="dropdownContent">
+                                        <div class="dropdown-search">
+                                            <input type="text" id="assemblySearch" placeholder="Search assemblies..." onkeyup="filterAssemblies()">
+                                            <i class="fas fa-search search-icon"></i>
+                                        </div>
+                                        <div class="dropdown-options" id="dropdownOptions">
+                                            <div class="loading-spinner">
+                                                <i class="fas fa-spinner fa-spin"></i> Loading assemblies...
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-actions">
+                                            <button type="button" class="btn-select-all" onclick="selectAllAssemblies()">
+                                                <i class="fas fa-check-double"></i> Select All
+                                            </button>
+                                            <button type="button" class="btn-clear-all" onclick="clearAllAssemblies()">
+                                                <i class="fas fa-times"></i> Clear All
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="selected-assemblies" id="selectedAssemblies">
+                                    <!-- Selected assemblies will be displayed here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Date Range Selection -->
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label>
+                                <i class="fas fa-clock"></i> Quick Date Filters
+                            </label>
+                            <div class="quick-date-filters">
+                                <label class="quick-filter-checkbox">
+                                    <input type="radio" name="quickFilter" value="1week" onchange="setQuickDateRange('1week')">
+                                    <span class="filter-label">1 Week</span>
+                                </label>
+                                <label class="quick-filter-checkbox">
+                                    <input type="radio" name="quickFilter" value="1month" onchange="setQuickDateRange('1month')">
+                                    <span class="filter-label">1 Month</span>
+                                </label>
+                                <label class="quick-filter-checkbox">
+                                    <input type="radio" name="quickFilter" value="3months" onchange="setQuickDateRange('3months')">
+                                    <span class="filter-label">3 Months</span>
+                                </label>
+                                <label class="quick-filter-checkbox">
+                                    <input type="radio" name="quickFilter" value="6months" onchange="setQuickDateRange('6months')">
+                                    <span class="filter-label">6 Months</span>
+                                </label>
+                                <label class="quick-filter-checkbox">
+                                    <input type="radio" name="quickFilter" value="1year" onchange="setQuickDateRange('1year')">
+                                    <span class="filter-label">1 Year</span>
+                                </label>
+                                <label class="quick-filter-checkbox">
+                                    <input type="radio" name="quickFilter" value="custom" onchange="setQuickDateRange('custom')" checked>
+                                    <span class="filter-label">Custom Range</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Date Inputs -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">
+                                <i class="fas fa-calendar"></i> Start Date <span class="required">*</span>
+                            </label>
+                            <input type="date" id="startDate" name="startDate" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="endDate">
+                                <i class="fas fa-calendar"></i> End Date <span class="optional">(Optional)</span>
+                            </label>
+                            <input type="date" id="endDate" name="endDate" class="form-control">
+                        </div>
+                    </div>
+                    
+
+                    
+                    <!-- Additional Filters -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sentiment">
+                                <i class="fas fa-heart"></i> Sentiment Filter
+                            </label>
+                            <select id="sentiment" class="form-control">
+                                <option value="all">All Sentiments</option>
+                                <option value="positive">Positive</option>
+                                <option value="negative">Negative</option>
+                                <option value="neutral">Neutral</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="label">
+                                <i class="fas fa-tag"></i> Label Filter
+                            </label>
+                            <select id="label" class="form-control">
+                                <option value="all">All Labels</option>
+                                <option value="spam">Spam</option>
+                                <option value="health_news">Health News</option>
+                                <option value="casual_chat">Casual Chat</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" onclick="performSearch()">
+                            <i class="fas fa-search"></i> Search Messages
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearSearch()">
+                            <i class="fas fa-times"></i> Clear Search
+                        </button>
+                    </div>
+                </div>
             </div>
             
-            <div class="content-placeholder">
-                <p>Advanced Search features will be implemented here.</p>
-                <p>This page will contain powerful search tools for WhatsApp data.</p>
+            <!-- Search Results -->
+            <div class="search-results" id="searchResults" style="display: none;">
+                <div class="section-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3><i class="fas fa-list"></i> Search Results</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <!-- Results Summary -->
+                        <div class="results-summary">
+                            <div class="summary-card total-messages">
+                                <div class="summary-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <div class="summary-content">
+                                    <h4>Total Messages</h4>
+                                    <span class="summary-value" id="totalMessages">0</span>
+                                </div>
+                            </div>
+                            
+                            <div class="summary-card total-members">
+                                <div class="summary-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="summary-content">
+                                    <h4>Unique Members</h4>
+                                    <span class="summary-value" id="totalMembers">0</span>
+                                </div>
+                            </div>
+                            
+                            <div class="summary-card total-groups">
+                                <div class="summary-icon">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <div class="summary-content">
+                                    <h4>Groups Found</h4>
+                                    <span class="summary-value" id="totalGroups">0</span>
+                                </div>
+                            </div>
+                            
+                            <div class="summary-card search-term">
+                                <div class="summary-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div class="summary-content">
+                                    <h4>Search Term</h4>
+                                    <span class="summary-value" id="searchTermDisplay">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Search Results Table -->
+                        <div class="results-table-section">
+                            <div class="table-header">
+                                <h4><i class="fas fa-table"></i> Message Details</h4>
+                                <div class="table-actions">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="exportResults('csv')">
+                                        <i class="fas fa-download"></i> Export CSV
+                                    </button>
+                                    <button class="btn btn-sm btn-primary" onclick="exportResults('excel')">
+                                        <i class="fas fa-file-excel"></i> Export Excel
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="table-container">
+                                <table class="results-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Message Content</th>
+                                            <th>Sender</th>
+                                            <th>Phone Number</th>
+                                            <th>Group</th>
+                                            <th>Assembly</th>
+                                            <th>Date</th>
+                                            <th>Sentiment</th>
+                                            <th>Label</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="searchResultsTableBody">
+                                        <!-- Search results will be populated here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <div class="section-card">
+                    <div class="card-content">
+                        <div class="no-results-content">
+                            <i class="fas fa-search"></i>
+                            <h4>No Messages Found</h4>
+                            <p>No messages match your search criteria. Try adjusting your search terms or filters.</p>
+                            <button class="btn btn-primary" onclick="clearSearch()">
+                                <i class="fas fa-arrow-left"></i> Try Different Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Loading State -->
+            <div class="loading-state" id="loadingState" style="display: none;">
+                <div class="section-card">
+                    <div class="card-content">
+                        <div class="loading-content">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <h4>Searching Messages...</h4>
+                            <p>Please wait while we search through the selected assemblies and date range.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+    <div class="modal-content">
+        <div class="modal-header success">
+            <h3><i class="fas fa-check-circle"></i> Success!</h3>
+        </div>
+        <div class="modal-body">
+            <p id="successMessage"></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="closeModal('successModal')">OK</button>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal" id="errorModal">
+    <div class="modal-content">
+        <div class="modal-header error">
+            <h3><i class="fas fa-exclamation-circle"></i> Error</h3>
+        </div>
+        <div class="modal-body">
+            <p id="errorMessage"></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="closeModal('errorModal')">OK</button>
+        </div>
+    </div>
+</div>
+
 <!-- Include JavaScript -->
-<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='js/advanced_search.js') }}"></script>
+
+<script>
+// Close modal function
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+            }
+        });
+    }
+});
+</script>
 {% endblock %}

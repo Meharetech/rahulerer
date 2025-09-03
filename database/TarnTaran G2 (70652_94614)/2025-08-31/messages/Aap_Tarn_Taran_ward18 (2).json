@@ -1,0 +1,27 @@
+[
+    {
+        "sender": {
+            "name": "brothertailorbittu",
+            "phoneNumber": "919041968906"
+        },
+        "messageContent": "🌾💐🌷🌹🥀🍁 🌺🌸🌻🌼 *दिनांक 31-08-2025 प्रात: काल* *मां* *के* *आज* *के* *भव्य* *श्रृंगार* *दर्शन* *श्री* *सिद्ध* *शक्तिपीठ* *माता* *श्री* *छिन्नमस्तिका* *धाम* *मन्दिर* *चिन्तपूर्णी देवभूमी* *हिमाचल* *प्रदेश* *से ..* 🌾💐JRM 🌷🌹🥀🍁 🌺🌸🌻🌼",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/94654681-1303-45d3-b779-22419af181b4",
+        "timestamp": "12:36 pm",
+        "group_name": "Aap_Tarn_Taran_ward18 (2)",
+        "date": "G2-31-AUG",
+        "processed_time": "2025-08-31T22:50:40.287711",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Kuldeep Thakur",
+            "phoneNumber": "919803613200"
+        },
+        "messageContent": "https://www.facebook.com/share/r/19iqTH9t5B/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/8bce7aad-6fc5-4c3a-a23e-1ae0462120ae",
+        "timestamp": "2025-08-31T10:40:52.545Z"
+    }
+]

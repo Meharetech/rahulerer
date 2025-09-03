@@ -1,0 +1,32 @@
+[
+    {
+        "sender": {
+            "name": "Manak Singh Happy",
+            "phoneNumber": "919781008244"
+        },
+        "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/fd578b80-bb44-4006-94e1-19817582cd5b",
+        "timestamp": "9:40 pm",
+        "group_name": "Aap_Kot_Sivian (1)",
+        "date": "G2-02-SEPT",
+        "processed_time": "2025-09-02T16:03:02.350223",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "ਗੁਰਚਰਨ ਸਿੰਘ ਸਿੱਧੂ",
+            "phoneNumber": "918437480009"
+        },
+        "messageContent": "🙏🌹ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🙏🌹",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/7a2dc710-8277-4e80-89e4-646aa1d74334",
+        "timestamp": "5:56 am",
+        "group_name": "Aap_Kot_Sivian (1)",
+        "date": "G2-02-SEPT",
+        "processed_time": "2025-09-02T16:03:02.384045",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    }
+]

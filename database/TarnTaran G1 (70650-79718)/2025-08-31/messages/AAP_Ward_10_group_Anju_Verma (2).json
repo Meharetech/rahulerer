@@ -1,0 +1,142 @@
+[
+    {
+        "sender": {
+            "name": "Unknown",
+            "phoneNumber": "Unknown"
+        },
+        "messageContent": "https://www.facebook.com/share/v/19zGdA7HKu/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/e0165e95-74f4-425d-90d6-4e49774de3e7",
+        "timestamp": "11:02 am"
+    },
+    {
+        "sender": {
+            "name": "shamathukral4",
+            "phoneNumber": "917814790121"
+        },
+        "messageContent": "https://www.facebook.com/share/r/16WJZ4Qnvz/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "5:50 pm"
+    },
+    {
+        "sender": {
+            "name": "Barinder Jit Singh",
+            "phoneNumber": "34624902970"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1KKNnDVKM9/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "6:07 pm"
+    },
+    {
+        "sender": {
+            "name": "shamathukral4",
+            "phoneNumber": "917814790121"
+        },
+        "messageContent": "https://www.facebook.com/share/v/1BDE7vZ6sp/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "6:24 pm"
+    },
+    {
+        "sender": {
+            "name": "Barinder Jit Singh",
+            "phoneNumber": "34624902970"
+        },
+        "messageContent": "ਪ੍ਰਧਾਨ ਮੰਤਰੀ ਨਰਿੰਦਰ ਮੋਦੀ ਚੀਨ ਦੇ ਤਿਆਨਜਿਨ ਪਹੁੰਚੇ। ਉਹ ਐਸਸੀਓ ਸੰਮੇਲਨ ਵਿੱਚ ਹਿੱਸਾ ਲੈਣਗੇ ਅਤੇ ਕਈ ਵਿਸ਼ਵ ਨੇਤਾਵਾਂ ਨਾਲ ਮੁਲਾਕਾਤ ਕਰਨਗੇ।",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/69f6b398-4308-497b-9330-9c14d4dc69a8",
+        "timestamp": "8:31 pm",
+        "group_name": "AAP_Ward_10_group_Anju_Verma (2)",
+        "date": "G1-31-AUG",
+        "processed_time": "2025-08-31T22:49:46.189840",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "shamathukral4",
+            "phoneNumber": "917814790121"
+        },
+        "messageContent": "https://www.facebook.com/share/v/19thQHK48z/",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/7497cd7d-9b6d-4d7e-9f8a-641c412e4d7d",
+        "timestamp": "10:09 pm"
+    },
+    {
+        "sender": {
+            "name": "shamathukral4",
+            "phoneNumber": "917814790121"
+        },
+        "messageContent": "https://www.facebook.com/share/r/15vyWqg3yQ/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "10:14 pm"
+    },
+    {
+        "sender": {
+            "name": "Barinder Jit Singh",
+            "phoneNumber": "34624902970"
+        },
+        "messageContent": "ਭੰਡ ਦੀਆਂ ਭੇਡਾ ਨੂੰ ਬੇਨਤੀ ਕਿ ਹੜਾ ਦਾ ਪਾਣੀ ਪੀ ਕੇ ਖਤਮ ਕਰਦੋ ਫਿਰ ਭੰਡ ਜੀ ਪੰਜਾਬ ਵਿੱਚ ਆਉਂਣ ਗੇ ਤੇ ਭੇਡਾ ਮੁਨ ਕੇ ਕੰਬਲ ਵੰਡਣ ਗੇ",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/7f58a3f0-8b89-4d0e-a91a-3bb1dfd2df64",
+        "timestamp": "3:06 am",
+        "group_name": "AAP_Ward_10_group_Anju_Verma (2)",
+        "date": "G1-31-AUG",
+        "processed_time": "2025-08-31T22:49:46.226715",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "Nirmal Singh",
+            "phoneNumber": "919888977151"
+        },
+        "messageContent": "ਸ਼ੇਅਰ ਕਰੋ ਜੀ ਮਾਨ ਸਾਹਿਬ ਜ਼ਿੰਦਾ ਬਾਦ \n\nhttps://www.facebook.com/share/v/1GCAc2pLBT/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "12:46 pm"
+    },
+    {
+        "sender": {
+            "name": "Barinder Jit Singh",
+            "phoneNumber": "34624902970"
+        },
+        "messageContent": "ਇਸ ਦੁੱਖ ਦੀ ਘੜੀ ਵਿੱਚ Sukhbir Singh Badal ਸਾਬ੍ਹ ਦਾ ਵੀ ਵੱਡਾ ਯੋਗਦਾਨ ਆ, ਹਜ਼ਾਰਾਂ ਲੀਟਰ ਡੀਜ਼ਲ, ਪਾਈਪਾਂ ਜਰਨੇਟਰ ਤੇ ਹੋਰ ਬਹੁਤ ਸਮਾਨ ਭੇਜਿਆ, ਆਹੀ ਮੌਕੇ ਹੁੰਦੇ ਆਪਣਿਆਂ ਨਾਲ ਖੜਨ ਦੇ, ਕੋਈ ਇਹਨੂੰ ਰਾਜਨੀਤੀ ਕਹੇ ਜਾਂ ਜੋ ਮਰਜੀ ਪਰ ਜਿਵੇਂ ਵੀ ਤੁਸੀਂ ਖੜਦੇ ਹੋ ਚੰਗੀ ਗੱਲ ਆ, ਇਹੋ ਜਹੀਆਂ ਸੇਵਾਵਾਂ ਵੱਡੇ ਵੱਡੇ ਦਾਗ ਧੋ ਦਿੰਦੀਆਂ ਹੁੰਦੀਆਂ, ਮੈਂ ਦਿਲੋਂ ਧੰਨਵਾਦ ਕਰਦਾ ਸਰਦਾਰ ਸੁਖਬੀਰ ਸਿੰਘ ਬਾਦਲ ਸਾਬ੍ਹ ਦਾ 🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/ab136be2-59f0-4b7f-8d38-ec1f4f0c4806",
+        "timestamp": "2:44 pm",
+        "group_name": "AAP_Ward_10_group_Anju_Verma (2)",
+        "date": "G1-31-AUG",
+        "processed_time": "2025-08-31T22:49:46.271390",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Barinder Jit Singh",
+            "phoneNumber": "34624902970"
+        },
+        "messageContent": "ਇਸ ਦੁੱਖ ਦੀ ਘੜੀ ਵਿੱਚ Sukhbir Singh Badal ਸਾਬ੍ਹ ਦਾ ਵੀ ਵੱਡਾ ਯੋਗਦਾਨ ਆ, ਹਜ਼ਾਰਾਂ ਲੀਟਰ ਡੀਜ਼ਲ, ਪਾਈਪਾਂ ਜਰਨੇਟਰ ਤੇ ਹੋਰ ਬਹੁਤ ਸਮਾਨ ਭੇਜਿਆ, ਆਹੀ ਮੌਕੇ ਹੁੰਦੇ ਆਪਣਿਆਂ ਨਾਲ ਖੜਨ ਦੇ, ਕੋਈ ਇਹਨੂੰ ਰਾਜਨੀਤੀ ਕਹੇ ਜਾਂ ਜੋ ਮਰਜੀ ਪਰ ਜਿਵੇਂ ਵੀ ਤੁਸੀਂ ਖੜਦੇ ਹੋ ਚੰਗੀ ਗੱਲ ਆ, ਇਹੋ ਜਹੀਆਂ ਸੇਵਾਵਾਂ ਵੱਡੇ ਵੱਡੇ ਦਾਗ ਧੋ ਦਿੰਦੀਆਂ ਹੁੰਦੀਆਂ, ਮੈਂ ਦਿਲੋਂ ਧੰਨਵਾਦ ਕਰਦਾ ਸਰਦਾਰ ਸੁਖਬੀਰ ਸਿੰਘ ਬਾਦਲ ਸਾਬ੍ਹ ਦਾ",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/d630a316-4ea8-4e04-b16d-268b13bb6e45",
+        "timestamp": "2:53 pm",
+        "group_name": "AAP_Ward_10_group_Anju_Verma (2)",
+        "date": "G1-31-AUG",
+        "processed_time": "2025-08-31T22:49:46.333387",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "shamathukral4",
+            "phoneNumber": "917814790121"
+        },
+        "messageContent": "https://www.instagram.com/reel/DN8Q0JWEkOM/?igsh=ZnkyYm16djc4YXFo",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "4:23 pm"
+    }
+]

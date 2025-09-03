@@ -1,0 +1,52 @@
+[
+    {
+        "sender": {
+            "name": "Unknown",
+            "phoneNumber": "Unknown"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1CFfotsRp3/?mibextid=wwXIfr",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/4e4f153e-9704-4d41-ac3f-5c6c27fbb832",
+        "timestamp": "1:35 pm"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐੱਮ  ਦੀ ਯੋਗਸ਼ਾਲਾ- ਗਲੀ ਗੁਰਮੇਜ ਸਿੰਘ ਤਹਿਸੀਲਦਾਰ ਵਾਲ਼ੀ, ਜੰਡਿਆਲਾ ਰੋਡ ਤਰਨਤਾਰਨ, ਪੰਜਾਬ।\nC.M. Di Yogshala -  Gali tehsildar gurmej singh wali,j andiala Road, Tarn Taran, Punjab                                               \n\nclass Time:-\n 03.50pm - 04.50pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "7:08 pm",
+        "group_name": "Cmdy5178_gurmej_singh_tehsildar_wali_gali_350pm-450pm (1)",
+        "date": "G1-30-AUG",
+        "processed_time": "2025-08-30T18:22:40.135291",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/yqp-vhgn-wqw \n \nOr open Meet and enter this code: yqp-vhgn-wqw",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "3:53 pm"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "National Herald  ਮਾਮਲੇ ਵਿੱਚ ਅੱਜ ਤੱਕ ਗਾਂਧੀ ਪਰਿਵਾਰ ਦਾ ਕੋਈ ਵੀ ਵਿਅਕਤੀ ਜੇਲ੍ਹ ਨਹੀਂ ਗਿਆ। 2014 ਦੀ ਵਿਧਾਨ ਸਭਾ ਚੋਣ ਜੀਜਾ ਜੀ ਦੇ ਨਾਂ 'ਤੇ ਲੜੀ ਅਤੇ ਜਿੱਤੀ। ਪਰ ਉਸ 'ਤੇ ਵੀ ਕੁਝ ਨਹੀਂ ਕੀਤਾ ਗਿਆ।\n\nਅੱਜਕੱਲ੍ਹ ਤਾਂ ਲੋਕ ਕਹਿ ਰਹੇ ਹਨ ਕਿ ਕਾਂਗਰਸ ਨੇ Compromise ਕਰ ਰੱਖਿਆ ਹੈ। ਆਮ ਆਦਮੀ ਪਾਰਟੀ Compromise ਦੀ ਰਾਜਨੀਤੀ ਨਹੀਂ ਕਰਦੀ ਹੈ।",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "6:01 pm",
+        "group_name": "Cmdy5178_gurmej_singh_tehsildar_wali_gali_350pm-450pm (1)",
+        "date": "G1-30-AUG",
+        "processed_time": "2025-08-30T18:22:40.183997",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Negative"
+    }
+]

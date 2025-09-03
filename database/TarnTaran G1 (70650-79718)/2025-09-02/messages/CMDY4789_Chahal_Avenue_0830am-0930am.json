@@ -1,0 +1,27 @@
+[
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਚਹਿਲ ਅਵੇਨੂ ਜੰਡਿਆਲਾ ਬਾਈਪਾਸ \nਤਰਨਤਾਰਨ  \n                                                           C.M. Di Yogshala \n\nChahal Avenue jandiala bypass \nTarn taran\nClass timing:-\n8.30 am - 9.30am\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/b8d2145b-2494-406d-a0dc-aa7ce01786c0",
+        "timestamp": "10:16 am",
+        "group_name": "CMDY4789_Chahal_Avenue_0830am-0930am",
+        "date": "G1-02-SEPT",
+        "processed_time": "2025-09-02T16:02:14.072724",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/xmr-yinh-hxa \n \nOr open Meet and enter this code: xmr-yinh-hxa",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/1aff7ec3-d918-4231-909e-82fcd53fc986",
+        "timestamp": "11:15 am"
+    }
+]

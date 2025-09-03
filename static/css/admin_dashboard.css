@@ -36,7 +36,7 @@
 
 .main-content {
     flex: 1;
-    margin-left: 280px;
+    margin-left: 240px;
     padding: 20px;
     transition: margin-left 0.3s ease;
 }

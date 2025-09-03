@@ -1,0 +1,13 @@
+label_name,label_color,label_description
+Politics,#FF6B6B,Political discussions and content
+News,#4ECDC4,News and current events
+Education,#45B7D1,Educational content and discussions
+Health,#96CEB4,Health and medical information
+Sports,#FFEAA7,Sports and fitness related content
+Entertainment,#DDA0DD,Entertainment and leisure
+Technology,#98D8C8,Technology and digital content
+Business,#F7DC6F,Business and commerce
+Religion,#BB8FCE,Religious and spiritual content
+Community,#85C1E9,Community and local events
+Emergency,#E74C3C,Emergency and urgent information
+Social,#F8C471,Social and casual conversations

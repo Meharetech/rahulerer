@@ -1,0 +1,47 @@
+[
+    {
+        "sender": {
+            "name": "Surjit",
+            "phoneNumber": "918264859080"
+        },
+        "messageContent": "ਇਸ ਮਾਰ ‘ਚ ਕੋਈ ਇਕੱਲਾ ਨਹੀਂ,\nਅਸੀਂ ਆਪਣੇ ਪਰਿਵਾਰ ਦੇ ਨਾਲ ਹਾਂ - ਵੀਡੀਓ ਜ਼ਰੂਰ ਦੇਖੋ ।",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/c6e3442d-52b8-426e-8cb9-27cf3b6d7666",
+        "timestamp": "2025-08-31T11:11:06.183Z",
+        "group_name": "Aap_Kot_Sivian (5)",
+        "date": "G1-31-AUG",
+        "processed_time": "2025-08-31T22:49:44.222717",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "ਗੁਰਚਰਨ ਸਿੰਘ ਸਿੱਧੂ",
+            "phoneNumber": "918437480009"
+        },
+        "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/8577353e-2801-45f8-a051-c7d8ea733faf",
+        "timestamp": "6:05 am",
+        "group_name": "Aap_Kot_Sivian (5)",
+        "date": "G1-31-AUG",
+        "processed_time": "2025-08-31T22:49:44.261138",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "love Punjab",
+            "phoneNumber": "917065294614"
+        },
+        "messageContent": "ਮਾਨ ਸਰਕਾਰ ਦੁਆਰਾ ਹੜ੍ਹ ਨਾਲ ਜੂਝ ਰਹੇ ਲੋਕਾਂ ਵਾਸਤੇ ਸਹਾਇਤਾ ਵਿੱਚ ਲਾਇਆ ਆਪਣਾ ਹੈਲੀਕਾਪਟਰ - ਪੂਰੀ ਜਾਣਕਾਰੀ ਲਈ ਵੀਡੀਓ ਦੇਖੋ ।",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "12:42 pm",
+        "group_name": "Aap_Kot_Sivian (5)",
+        "date": "G1-31-AUG",
+        "processed_time": "2025-08-31T22:49:44.298434",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    }
+]

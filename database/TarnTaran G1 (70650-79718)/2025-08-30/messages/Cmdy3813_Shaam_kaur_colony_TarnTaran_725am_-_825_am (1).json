@@ -1,0 +1,17 @@
+[
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਸ਼ਾਮ ਕੌਰ ਕਲੋਨੀ\nਤਰਨਤਾਰਨ  \n                                                  .            C.M. Di Yogshala \nSham kaur colony \nTarn taran\nClass timing:-\n07.25am - 08.25am\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/720546e1-c80d-4fee-b0f4-66814c3d2b28",
+        "timestamp": "11:08 am",
+        "group_name": "Cmdy3813_Shaam_kaur_colony_TarnTaran_725am_-_825_am (1)",
+        "date": "G1-30-AUG",
+        "processed_time": "2025-08-30T18:22:39.872416",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Positive"
+    }
+]

@@ -1,0 +1,62 @@
+[
+    {
+        "sender": {
+            "name": "Unknown",
+            "phoneNumber": "Unknown"
+        },
+        "messageContent": "ਇਸ ਮਾਰ ‘ਚ ਕੋਈ ਇਕੱਲਾ ਨਹੀਂ,\nਅਸੀਂ ਆਪਣੇ ਪਰਿਵਾਰ ਦੇ ਨਾਲ ਹਾਂ - ਵੀਡੀਓ ਜ਼ਰੂਰ ਦੇਖੋ ।",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/ee70e1b9-191d-4c74-b52b-8685dd71d9be",
+        "timestamp": "3:17 pm",
+        "group_name": "_ (2)",
+        "date": "G1-01-SEPT",
+        "processed_time": "2025-09-01T21:26:32.383525",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "KING",
+            "phoneNumber": "919781926397"
+        },
+        "messageContent": "ਮਾਨ ਸਰਕਾਰ ਦੁਆਰਾ ਹੜ੍ਹ ਨਾਲ ਜੂਝ ਰਹੇ ਲੋਕਾਂ ਵਾਸਤੇ ਸਹਾਇਤਾ ਵਿੱਚ ਲਾਇਆ ਆਪਣਾ ਹੈਲੀਕਾਪਟਰ - ਪੂਰੀ ਜਾਣਕਾਰੀ ਲਈ ਵੀਡੀਓ ਦੇਖੋ ।",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "1:00 pm",
+        "group_name": "_ (2)",
+        "date": "G1-01-SEPT",
+        "processed_time": "2025-09-01T21:26:32.431536",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "tarsem singh 🇮",
+            "phoneNumber": "918872871161"
+        },
+        "messageContent": "https://www.instagram.com/reel/DN-5xLIgaru/?igsh=MXJmNjZkMW9ncWIybA==",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/fa0caddb-e8a9-4392-84c7-9b1d60336105",
+        "timestamp": "3:10 pm"
+    },
+    {
+        "sender": {
+            "name": "Gurdev Singh Sandhu",
+            "phoneNumber": "919872331842"
+        },
+        "messageContent": "https://www.facebook.com/share/v/171GeD43An/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "9:24 pm"
+    },
+    {
+        "sender": {
+            "name": "Pawan Sharma Sharma",
+            "phoneNumber": "918427997184"
+        },
+        "messageContent": "https://www.facebook.com/share/r/1CMHFMXFWH/",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "8:51 am"
+    }
+]

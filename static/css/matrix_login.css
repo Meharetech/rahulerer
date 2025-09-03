@@ -1,825 +1,761 @@
-/* Matrix Hacker Theme CSS - Complete Redesign */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono:wght@400;700&display=swap');
+/* Matrix Style Login CSS - Completely New Design */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Chakra+Petch:wght@300;400;500;600;700&display=swap');
 
 :root {
+    /* Matrix Colors */
     --matrix-green: #00ff41;
-    --matrix-dark-green: #00cc33;
-    --matrix-bg: #000000;
-    --matrix-card-bg: rgba(0, 0, 0, 0.95);
-    --matrix-border: #00ff41;
-    --matrix-shadow: 0 0 30px rgba(0, 255, 65, 0.6);
-    --matrix-text: #00ff41;
-    --matrix-error: #ff0040;
-    --matrix-success: #00ff41;
-    --matrix-warning: #ffa500;
-    --matrix-info: #00ccff;
-    --matrix-purple: #8a2be2;
-    --matrix-red: #ff0040;
-    --matrix-blue: #0066ff;
     --matrix-cyan: #00ffff;
-    --matrix-yellow: #ffff00;
-    --matrix-orange: #ff6600;
-    --matrix-pink: #ff0066;
-    --matrix-white: #ffffff;
-    --matrix-gray: #666666;
-    --matrix-dark-gray: #333333;
-    --matrix-light-gray: #cccccc;
-    --matrix-transparent: rgba(0, 0, 0, 0.8);
-    --matrix-glow: 0 0 20px rgba(0, 255, 65, 0.8);
-    --matrix-pulse: 0 0 30px rgba(0, 255, 65, 0.4);
-    --matrix-scan: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.3), transparent);
-    --matrix-rain: linear-gradient(180deg, #000 0%, #001a00 30%, #003300 70%, #000 100%);
-    --matrix-fog: rgba(0, 255, 65, 0.1);
-    --matrix-haze: rgba(0, 0, 0, 0.9);
-    --matrix-clear: rgba(0, 255, 65, 0.2);
-    --matrix-focus: rgba(0, 255, 65, 0.3);
-    --matrix-active: rgba(0, 255, 65, 0.4);
-    --matrix-hover: rgba(0, 255, 65, 0.5);
-    --matrix-press: rgba(0, 255, 65, 0.6);
-    --matrix-select: rgba(0, 255, 65, 0.7);
-    --matrix-highlight: rgba(0, 255, 65, 0.8);
-    --matrix-bright: rgba(0, 255, 65, 0.9);
-    --matrix-full: rgba(0, 255, 65, 1);
+    --matrix-blue: #0066ff;
+    --matrix-dark: #0a0a0a;
+    --matrix-darker: #050505;
+    --matrix-black: #000000;
+    
+    /* Text Colors */
+    --text-white: #ffffff;
+    --text-green: #00ff41;
+    --text-cyan: #00ffff;
+    --text-muted: #888888;
+    
+    /* Background Colors */
+    --bg-transparent: rgba(0, 0, 0, 0.8);
+    --bg-form: rgba(10, 10, 10, 0.95);
+    
+    /* Border Colors */
+    --border-green: #00ff41;
+    --border-cyan: #00ffff;
+    
+    /* Shadow Colors */
+    --shadow-green: rgba(0, 255, 65, 0.3);
+    --shadow-cyan: rgba(0, 255, 255, 0.3);
+    
+    /* Admin Colors */
+    --admin-red: #ff0040;
+    --admin-pink: #ff0066;
+    --admin-magenta: #ff0080;
+    --admin-shadow: rgba(255, 0, 64, 0.3);
 }
 
+/* Reset and Base Styles */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background: var(--matrix-bg);
-    font-family: 'Share Tech Mono', 'Orbitron', monospace;
+    font-family: 'Chakra Petch', monospace;
+    background: var(--matrix-black);
+    color: var(--text-white);
     overflow: hidden;
+    height: 100vh;
+    width: 100vw;
     position: relative;
-    color: var(--matrix-text);
-    line-height: 1.6;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Enhanced Matrix Rain Background */
+/* Matrix Background */
 .matrix-bg {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2;
-    background: var(--matrix-rain);
+    z-index: -1;
+    background: var(--matrix-black);
 }
 
-.matrix-rain {
+.matrix-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+}
+
+.matrix-streams {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 65, 0.05) 2px,
+        rgba(0, 255, 65, 0.05) 4px
+    );
+    animation: streamMove 15s linear infinite;
+}
+
+@keyframes streamMove {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.matrix-particles {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: -1;
 }
 
-.matrix-column {
+.matrix-particles::before {
+    content: '';
     position: absolute;
-    top: -100%;
-    color: var(--matrix-green);
-    font-size: 1.4em;
-    font-weight: bold;
-    text-shadow: 0 0 8px var(--matrix-green);
-    animation: matrix-fall linear infinite;
-    opacity: 0.8;
-    font-family: 'Share Tech Mono', monospace;
-}
-
-.matrix-column:nth-child(odd) {
-    color: var(--matrix-cyan);
-    text-shadow: 0 0 8px var(--matrix-cyan);
-}
-
-.matrix-column:nth-child(3n) {
-    color: var(--matrix-blue);
-    text-shadow: 0 0 8px var(--matrix-blue);
-}
-
-.matrix-column:nth-child(5n) {
-    color: var(--matrix-purple);
-    text-shadow: 0 0 8px var(--matrix-purple);
-}
-
-@keyframes matrix-fall {
-    0% {
-        transform: translateY(-100vh) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* Floating Particles */
-.particles {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
-    pointer-events: none;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, var(--matrix-green), transparent),
+        radial-gradient(2px 2px at 40px 70px, var(--matrix-cyan), transparent),
+        radial-gradient(1px 1px at 90px 40px, var(--matrix-green), transparent),
+        radial-gradient(2px 2px at 130px 80px, var(--matrix-cyan), transparent),
+        radial-gradient(1px 1px at 160px 30px, var(--matrix-green), transparent),
+        radial-gradient(2px 2px at 200px 60px, var(--matrix-cyan), transparent),
+        radial-gradient(1px 1px at 240px 90px, var(--matrix-green), transparent),
+        radial-gradient(2px 2px at 280px 20px, var(--matrix-cyan), transparent),
+        radial-gradient(2px 2px at 320px 70px, var(--matrix-green), transparent),
+        radial-gradient(1px 1px at 360px 40px, var(--matrix-cyan), transparent);
+    background-repeat: repeat;
+    background-size: 400px 100px;
+    animation: particleFloat 25s linear infinite;
 }
 
-.particle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: var(--matrix-green);
-    border-radius: 50%;
-    animation: float 6s ease-in-out infinite;
-    opacity: 0.6;
+@keyframes particleFloat {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-100px); }
 }
 
-.particle:nth-child(even) {
-    background: var(--matrix-cyan);
-    animation-duration: 8s;
-}
-
-.particle:nth-child(3n) {
-    background: var(--matrix-blue);
-    animation-duration: 10s;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0px) translateX(0px);
-        opacity: 0;
-    }
-    25% {
-        opacity: 0.8;
-    }
-    50% {
-        opacity: 0.6;
-    }
-    75% {
-        opacity: 0.8;
-    }
-}
-
-/* Login Container */
+/* Main Container */
 .login-container {
-    min-height: 100vh;
+    position: relative;
+    width: 100%;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    position: relative;
     z-index: 1;
-    background: radial-gradient(circle at center, rgba(0, 255, 65, 0.05) 0%, transparent 70%);
 }
 
-.login-card {
-    background: var(--matrix-card-bg);
-    border: 3px solid var(--matrix-border);
-    border-radius: 20px;
-    padding: 50px 40px;
+/* Login Form */
+.login-form {
+    background: var(--bg-form);
+    border: 2px solid var(--border-green);
+    border-radius: 15px;
+    padding: 40px;
+    min-width: 350px;
+    max-width: 450px;
     width: 100%;
-    max-width: 500px;
-    box-shadow: var(--matrix-shadow);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 0 30px var(--shadow-green),
+        inset 0 0 30px rgba(0, 255, 65, 0.1);
     position: relative;
     overflow: hidden;
-    animation: cardAppear 1s ease-out;
 }
 
-@keyframes cardAppear {
-    0% {
-        opacity: 0;
-        transform: translateY(50px) scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-.login-card::before {
+.login-form::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: var(--matrix-scan);
-    animation: matrix-scan 4s ease-in-out infinite;
-    z-index: 1;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+    animation: formScan 3s ease-in-out infinite;
 }
 
-.login-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(0, 255, 65, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
-}
-
-@keyframes matrix-scan {
+@keyframes formScan {
     0% { left: -100%; }
     50% { left: 100%; }
     100% { left: 100%; }
 }
 
-/* Header */
-.login-header {
+/* Form Header */
+.form-header {
     text-align: center;
-    margin-bottom: 40px;
-    position: relative;
-    z-index: 2;
-}
-
-.login-header h1 {
-    color: var(--matrix-text);
-    font-size: 2.8em;
-    font-weight: 900;
-    margin: 0 0 15px 0;
-    text-shadow: var(--matrix-glow);
-    letter-spacing: 4px;
-    font-family: 'Orbitron', monospace;
-    animation: titleGlow 3s ease-in-out infinite alternate;
-}
-
-@keyframes titleGlow {
-    0% {
-        text-shadow: 0 0 20px var(--matrix-green);
-    }
-    100% {
-        text-shadow: 0 0 30px var(--matrix-green), 0 0 40px var(--matrix-green);
-    }
-}
-
-.login-header p {
-    color: var(--matrix-dark-green);
-    font-size: 1.2em;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 700;
-    animation: subtitlePulse 2s ease-in-out infinite;
-}
-
-@keyframes subtitlePulse {
-    0%, 100% {
-        opacity: 0.8;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
-/* Form Elements */
-.form-group {
     margin-bottom: 30px;
+}
+
+.form-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-green);
+    text-shadow: 0 0 20px var(--matrix-green);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.form-subtitle {
+    font-size: 16px;
+    color: var(--text-cyan);
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* Security Indicator (Admin Only) */
+.security-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.security-bar {
+    width: 150px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--admin-red);
+}
+
+.security-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--admin-red), var(--admin-pink));
+    width: 0%;
+    transition: width 2s ease-in-out;
+    animation: securityFill 3s ease-in-out infinite;
+}
+
+@keyframes securityFill {
+    0%, 100% { width: 0%; }
+    50% { width: 100%; }
+}
+
+.security-text {
+    font-size: 12px;
+    color: var(--admin-red);
+    font-weight: 600;
+    text-shadow: 0 0 10px var(--admin-red);
+}
+
+/* Flash Messages */
+.flash-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.flash-message {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    border-left: 4px solid;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.flash-message.error {
+    border-color: #ff0040;
+    color: #ff6b6b;
+    background: rgba(255, 0, 64, 0.1);
+}
+
+.flash-message.success {
+    border-color: var(--matrix-green);
+    color: #6bff6b;
+    background: rgba(0, 255, 65, 0.1);
+}
+
+.flash-message.warning {
+    border-color: #ff6600;
+    color: #ffb366;
+    background: rgba(255, 102, 0, 0.1);
+}
+
+.flash-message.info {
+    border-color: var(--matrix-cyan);
+    color: #6bffff;
+    background: rgba(0, 255, 255, 0.1);
+}
+
+.message-icon i {
+    font-size: 16px;
+}
+
+/* Form Fields */
+.form-field {
+    margin-bottom: 20px;
+}
+
+.input-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.matrix-input {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--border-green);
+    border-radius: 10px;
+    color: var(--text-white);
+    font-family: 'Chakra Petch', monospace;
+    font-size: 16px;
+    transition: all 0.3s ease;
     position: relative;
     z-index: 2;
 }
 
-.form-group label {
-    display: block;
-    color: var(--matrix-text);
-    font-size: 1em;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 700;
-    text-shadow: 0 0 10px var(--matrix-green);
-    animation: labelGlow 2s ease-in-out infinite alternate;
-}
-
-@keyframes labelGlow {
-    0% {
-        text-shadow: 0 0 10px var(--matrix-green);
-    }
-    100% {
-        text-shadow: 0 0 15px var(--matrix-green), 0 0 20px var(--matrix-green);
-    }
-}
-
-.form-group input[type="text"],
-.form-group input[type="password"],
-.form-group input[type="email"] {
-    width: 100%;
-    padding: 18px 20px;
-    background: var(--matrix-transparent);
-    border: 2px solid var(--matrix-border);
-    border-radius: 12px;
-    color: var(--matrix-text);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 1.1em;
-    transition: all 0.4s ease;
-    box-sizing: border-box;
-    position: relative;
-    backdrop-filter: blur(5px);
-    text-shadow: 0 0 5px var(--matrix-green);
-}
-
-.form-group input:focus {
+.matrix-input:focus {
     outline: none;
-    border-color: var(--matrix-green);
-    box-shadow: var(--matrix-glow);
-    background: var(--matrix-focus);
-    transform: translateY(-2px);
-}
-
-.form-group input:hover {
     border-color: var(--matrix-cyan);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    box-shadow: 0 0 25px var(--shadow-cyan);
+    background: rgba(0, 255, 255, 0.1);
 }
 
-.form-group input::placeholder {
-    color: rgba(0, 255, 65, 0.6);
+.matrix-input::placeholder {
+    color: var(--text-muted);
     font-style: italic;
 }
 
-/* Enhanced Password Field */
-.password-field {
-    position: relative;
+.input-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: linear-gradient(45deg, var(--matrix-green), var(--matrix-cyan));
+    background-size: 200% 200%;
+    animation: borderGlow 3s ease-in-out infinite;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1;
 }
 
+@keyframes borderGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.input-glow {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 12px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 30px var(--shadow-green);
+    z-index: 0;
+}
+
+.matrix-input:focus + .input-border {
+    opacity: 0.3;
+}
+
+.matrix-input:focus + .input-border + .input-glow {
+    opacity: 1;
+}
+
+/* Password Toggle */
 .password-toggle {
     position: absolute;
-    right: 20px;
+    right: 15px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
-    color: var(--matrix-green);
+    color: var(--text-muted);
     cursor: pointer;
-    font-size: 1.4em;
-    z-index: 10;
+    font-size: 18px;
     transition: all 0.3s ease;
-    padding: 5px;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    z-index: 3;
 }
 
 .password-toggle:hover {
     color: var(--matrix-cyan);
-    text-shadow: 0 0 15px var(--matrix-cyan);
-    background: rgba(0, 255, 255, 0.1);
-    transform: translateY(-50%) scale(1.1);
+    transform: translateY(-50%) scale(1.2);
 }
 
-.password-toggle:active {
-    transform: translateY(-50%) scale(0.95);
-}
-
-.password-field input[type="password"],
-.password-field input[type="text"] {
-    padding-right: 70px;
-}
-
-/* Password Strength Indicator */
-.password-strength {
-    margin-top: 8px;
-    height: 4px;
-    background: var(--matrix-dark-gray);
-    border-radius: 2px;
-    overflow: hidden;
-    position: relative;
-}
-
-.password-strength-bar {
-    height: 100%;
-    transition: all 0.3s ease;
-    border-radius: 2px;
-}
-
-.password-strength-weak {
-    background: var(--matrix-error);
-    width: 25%;
-}
-
-.password-strength-medium {
-    background: var(--matrix-warning);
-    width: 50%;
-}
-
-.password-strength-strong {
-    background: var(--matrix-success);
-    width: 75%;
-}
-
-.password-strength-very-strong {
-    background: var(--matrix-green);
-    width: 100%;
-    box-shadow: 0 0 10px var(--matrix-green);
-}
-
-/* Checkbox */
-.form-group input[type="checkbox"] {
-    accent-color: var(--matrix-green);
-    transform: scale(1.3);
-    margin-right: 15px;
-    cursor: pointer;
+/* Checkbox Field */
+.checkbox-field {
+    margin-bottom: 25px;
 }
 
 .checkbox-label {
     display: flex;
     align-items: center;
+    gap: 12px;
     cursor: pointer;
-    font-size: 0.95em;
-    color: var(--matrix-dark-green);
+    font-size: 14px;
+    color: var(--text-cyan);
     transition: all 0.3s ease;
 }
 
 .checkbox-label:hover {
-    color: var(--matrix-green);
-    text-shadow: 0 0 10px var(--matrix-green);
+    color: var(--text-green);
 }
 
-.checkbox-label span {
-    margin-left: 5px;
+.matrix-checkbox {
+    display: none;
 }
 
-/* Enhanced Submit Button */
-.btn {
-    background: linear-gradient(45deg, var(--matrix-green), var(--matrix-dark-green));
-    color: var(--matrix-bg);
-    border: none;
-    padding: 18px 35px;
-    font-family: 'Orbitron', monospace;
-    font-size: 1.2em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.4s ease;
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-green);
+    border-radius: 5px;
+    position: relative;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.matrix-checkbox:checked + .checkmark {
+    background: var(--matrix-green);
+    border-color: var(--matrix-green);
+    box-shadow: 0 0 15px var(--shadow-green);
+}
+
+.matrix-checkbox:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--matrix-black);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.checkbox-text {
+    font-weight: 500;
+}
+
+/* Matrix Button */
+.matrix-button {
     width: 100%;
+    padding: 18px;
+    background: linear-gradient(45deg, var(--matrix-green), var(--matrix-cyan));
+    border: none;
+    border-radius: 10px;
+    color: var(--matrix-black);
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: var(--matrix-shadow);
-    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.btn::before {
+.matrix-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px var(--shadow-green);
+}
+
+.matrix-button:active {
+    transform: translateY(-1px);
+}
+
+.matrix-button::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.6s ease;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
 }
 
-.btn:hover::before {
+.matrix-button:hover::before {
     left: 100%;
 }
 
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--matrix-pulse);
-    background: linear-gradient(45deg, var(--matrix-cyan), var(--matrix-green));
-}
-
-.btn:active {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 15px rgba(0, 255, 65, 0.6);
-}
-
-.btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.btn-text, .btn-loading {
-    position: relative;
-    z-index: 2;
-    font-weight: 900;
-}
-
-/* Flash Messages */
-.flash-messages {
-    margin-bottom: 30px;
+.button-text, .button-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     position: relative;
     z-index: 2;
 }
 
-.flash-message {
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    border-radius: 12px;
-    font-size: 1em;
-    font-weight: 600;
-    text-align: center;
-    border: 2px solid;
-    backdrop-filter: blur(10px);
-    animation: messageSlide 0.5s ease-out;
-    position: relative;
-    overflow: hidden;
+.button-loading {
+    display: none;
 }
 
-@keyframes messageSlide {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Form Footer */
+.form-footer {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.flash-message::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    animation: messageScan 2s ease-in-out infinite;
-}
-
-@keyframes messageScan {
-    0% { left: -100%; }
-    50% { left: 100%; }
-    100% { left: 100%; }
-}
-
-.flash-message.error {
-    background: rgba(255, 0, 64, 0.15);
-    border-color: var(--matrix-error);
-    color: var(--matrix-error);
-    box-shadow: 0 0 20px rgba(255, 0, 64, 0.3);
-}
-
-.flash-message.success {
-    background: rgba(0, 255, 65, 0.15);
-    border-color: var(--matrix-success);
-    color: var(--matrix-success);
-    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-}
-
-.flash-message.warning {
-    background: rgba(255, 165, 0, 0.15);
-    border-color: var(--matrix-warning);
-    color: var(--matrix-warning);
-    box-shadow: 0 0 20px rgba(255, 165, 0, 0.3);
-}
-
-.flash-message.info {
-    background: rgba(0, 204, 255, 0.15);
-    border-color: var(--matrix-info);
-    color: var(--matrix-info);
-    box-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
-}
-
-/* Footer */
-.login-footer {
-    text-align: center;
-    margin-top: 40px;
-    position: relative;
-    z-index: 2;
-}
-
-.login-footer p {
-    color: var(--matrix-dark-green);
-    font-size: 1em;
-    margin: 12px 0;
-    font-weight: 600;
-}
-
-.login-footer a {
-    color: var(--matrix-text);
+.footer-link {
+    color: var(--text-cyan);
     text-decoration: none;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 500;
     transition: all 0.3s ease;
-    text-shadow: 0 0 8px var(--matrix-green);
-    position: relative;
-    padding: 5px 10px;
-    border-radius: 5px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid transparent;
 }
 
-.login-footer a::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--matrix-green);
-    transition: width 0.3s ease;
-}
-
-.login-footer a:hover {
-    color: var(--matrix-cyan);
-    text-shadow: 0 0 15px var(--matrix-cyan);
+.footer-link:hover {
+    color: var(--text-green);
+    border-color: var(--text-green);
+    background: rgba(0, 255, 65, 0.1);
     transform: translateY(-2px);
-}
-
-.login-footer a:hover::before {
-    width: 100%;
 }
 
 /* Error Messages */
 .error-message {
-    color: var(--matrix-error);
-    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ff0040;
+    font-size: 12px;
     margin-top: 8px;
-    text-shadow: 0 0 8px var(--matrix-error);
-    animation: errorShake 0.5s ease-in-out;
+    padding: 8px 12px;
+    background: rgba(255, 0, 64, 0.1);
+    border-radius: 6px;
+    border-left: 3px solid #ff0040;
 }
 
-@keyframes errorShake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+.error-message i {
+    font-size: 14px;
+}
+
+/* Admin Mode Styles */
+.admin-mode .matrix-bg {
+    background: linear-gradient(135deg, #000000 0%, #1a0000 100%);
+}
+
+.admin-mode .matrix-grid {
+    background-image: 
+        linear-gradient(rgba(255, 0, 64, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 64, 0.1) 1px, transparent 1px);
+}
+
+.admin-mode .matrix-streams {
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 0, 64, 0.05) 2px,
+        rgba(255, 0, 64, 0.05) 4px
+    );
+}
+
+.admin-mode .matrix-particles::before {
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, var(--admin-red), transparent),
+        radial-gradient(2px 2px at 40px 70px, var(--admin-pink), transparent),
+        radial-gradient(1px 1px at 90px 40px, var(--admin-magenta), transparent),
+        radial-gradient(2px 2px at 130px 80px, var(--admin-red), transparent),
+        radial-gradient(1px 1px at 160px 30px, var(--admin-pink), transparent),
+        radial-gradient(2px 2px at 200px 60px, var(--admin-magenta), transparent),
+        radial-gradient(1px 1px at 240px 90px, var(--admin-red), transparent),
+        radial-gradient(2px 2px at 280px 20px, var(--admin-pink), transparent),
+        radial-gradient(2px 2px at 320px 70px, var(--admin-magenta), transparent),
+        radial-gradient(1px 1px at 360px 40px, var(--admin-red), transparent);
+}
+
+.admin-mode .login-form {
+    border-color: var(--admin-red);
+    box-shadow: 
+        0 0 30px var(--admin-shadow),
+        inset 0 0 30px rgba(255, 0, 64, 0.1);
+}
+
+.admin-mode .login-form::before {
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 64, 0.1), transparent);
+}
+
+.admin-mode .form-title {
+    color: var(--admin-red);
+    text-shadow: 0 0 20px var(--admin-red);
+}
+
+.admin-mode .form-subtitle {
+    color: var(--admin-pink);
+}
+
+.admin-mode .matrix-input {
+    border-color: var(--admin-red);
+}
+
+.admin-mode .matrix-input:focus {
+    border-color: var(--admin-pink);
+    box-shadow: 0 0 25px var(--admin-shadow);
+    background: rgba(255, 0, 64, 0.1);
+}
+
+.admin-mode .input-border {
+    background: linear-gradient(45deg, var(--admin-red), var(--admin-pink));
+}
+
+.admin-mode .input-glow {
+    box-shadow: 0 0 30px var(--admin-shadow);
+}
+
+.admin-mode .password-toggle:hover {
+    color: var(--admin-pink);
+}
+
+.admin-mode .checkmark {
+    border-color: var(--admin-red);
+}
+
+.admin-mode .matrix-checkbox:checked + .checkmark {
+    background: var(--admin-red);
+    border-color: var(--admin-red);
+    box-shadow: 0 0 15px var(--admin-shadow);
+}
+
+.admin-mode .matrix-button {
+    background: linear-gradient(45deg, var(--admin-red), var(--admin-pink));
+}
+
+.admin-mode .matrix-button:hover {
+    box-shadow: 0 15px 35px var(--admin-shadow);
+}
+
+.admin-mode .footer-link:hover {
+    color: var(--admin-red);
+    border-color: var(--admin-red);
+    background: rgba(255, 0, 64, 0.1);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .login-card {
-        padding: 40px 25px;
-        margin: 20px;
-        border-radius: 15px;
+    .login-container {
+        padding: 15px;
     }
     
-    .login-header h1 {
-        font-size: 2.2em;
-        letter-spacing: 3px;
+    .login-form {
+        padding: 30px 25px;
+        min-width: 100%;
+        max-width: 100%;
     }
     
-    .login-header p {
-        font-size: 1.1em;
-        letter-spacing: 2px;
+    .form-title {
+        font-size: 24px;
     }
     
-    .form-group input[type="text"],
-    .form-group input[type="password"],
-    .form-group input[type="email"] {
-        padding: 16px 18px;
-        font-size: 1em;
+    .form-subtitle {
+        font-size: 14px;
     }
     
-    .btn {
-        padding: 16px 30px;
-        font-size: 1.1em;
-        letter-spacing: 2px;
+    .matrix-input {
+        padding: 12px 16px;
+        font-size: 14px;
     }
     
-    .password-toggle {
-        right: 18px;
-        font-size: 1.3em;
-        width: 35px;
-        height: 35px;
+    .matrix-button {
+        padding: 16px;
+        font-size: 14px;
+    }
+    
+    .form-footer {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .footer-link {
+        text-align: center;
+        width: 100%;
+        justify-content: center;
     }
 }
 
 @media (max-width: 480px) {
     .login-container {
-        padding: 15px;
+        padding: 10px;
     }
     
-    .login-card {
-        padding: 30px 20px;
-        border-radius: 12px;
+    .login-form {
+        padding: 25px 20px;
     }
     
-    .login-header h1 {
-        font-size: 1.8em;
-        letter-spacing: 2px;
+    .form-title {
+        font-size: 20px;
     }
     
-    .login-header p {
-        font-size: 1em;
-        letter-spacing: 1px;
+    .form-subtitle {
+        font-size: 12px;
     }
     
-    .form-group {
-        margin-bottom: 25px;
+    .matrix-input {
+        padding: 10px 14px;
+        font-size: 13px;
     }
     
-    .form-group label {
-        font-size: 0.9em;
-        margin-bottom: 10px;
+    .matrix-button {
+        padding: 14px;
+        font-size: 13px;
     }
     
-    .form-group input[type="text"],
-    .form-group input[type="password"],
-    .form-group input[type="email"] {
-        padding: 14px 16px;
-        font-size: 0.95em;
+    .security-bar {
+        width: 120px;
+        height: 6px;
     }
     
-    .btn {
-        padding: 14px 25px;
-        font-size: 1em;
-        letter-spacing: 1px;
+    .security-text {
+        font-size: 10px;
     }
-    
-    .password-toggle {
-        right: 16px;
-        font-size: 1.2em;
-        width: 30px;
-        height: 30px;
-    }
-    
-    .flash-message {
-        padding: 12px 16px;
-        font-size: 0.9em;
-    }
-}
-
-/* Special Effects */
-.glitch {
-    animation: glitch 3s infinite;
-    position: relative;
-}
-
-@keyframes glitch {
-    0%, 100% { 
-        transform: translate(0);
-        text-shadow: 0 0 20px var(--matrix-green);
-    }
-    20% { 
-        transform: translate(-3px, 3px);
-        text-shadow: 0 0 20px var(--matrix-red);
-    }
-    40% { 
-        transform: translate(-3px, -3px);
-        text-shadow: 0 0 20px var(--matrix-blue);
-    }
-    60% { 
-        transform: translate(3px, 3px);
-        text-shadow: 0 0 20px var(--matrix-cyan);
-    }
-    80% { 
-        transform: translate(3px, -3px);
-        text-shadow: 0 0 20px var(--matrix-purple);
-    }
-}
-
-.terminal-cursor {
-    animation: blink 1.2s infinite;
-}
-
-@keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
 }
 
 /* Loading Animation */
-.loading-dots {
-    display: inline-block;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-.loading-dots::after {
-    content: '';
-    animation: dots 1.5s infinite;
+.fa-spinner {
+    animation: spin 1s linear infinite;
 }
 
-@keyframes dots {
-    0%, 20% { content: ''; }
-    40% { content: '.'; }
-    60% { content: '..'; }
-    80%, 100% { content: '...'; }
+/* Focus States */
+.matrix-input:focus {
+    transform: translateY(-2px);
 }
 
-/* Holographic Effect */
-.holographic {
-    background: linear-gradient(45deg, 
-        var(--matrix-green) 0%, 
-        var(--matrix-cyan) 25%, 
-        var(--matrix-blue) 50%, 
-        var(--matrix-purple) 75%, 
-        var(--matrix-green) 100%);
-    background-size: 400% 400%;
-    animation: holographic 3s ease-in-out infinite;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+/* Hover Effects */
+.matrix-input:hover {
+    border-color: var(--matrix-cyan);
+    box-shadow: 0 0 15px var(--shadow-cyan);
 }
 
-@keyframes holographic {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+/* Animation Classes */
+.focused .input-border {
+    opacity: 0.5;
+}
+
+.has-value .matrix-input {
+    border-color: var(--matrix-green);
+}
+
+.submitting .matrix-button {
+    transform: scale(0.98);
+    opacity: 0.8;
 }

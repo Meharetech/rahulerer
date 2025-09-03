@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Manage Topics - WhatsApp UI{% endblock %}
+{% block title %}Manage Topics - WhatsApp Analytics{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/manage_topics.css') }}">
+{% endblock %}
 
 {% block content %}
 <div class="dashboard-layout">
@@ -9,32 +13,282 @@
     
     <!-- Main Content Area -->
     <div class="main-content">
-        <div class="main-header">
+        <!-- Modern Header -->
+        <div class="modern-header">
             <div class="header-content">
-                <h1><i class="fas fa-tags"></i> Manage Topics</h1>
-                <p class="header-subtitle">Create, edit, and manage WhatsApp topics for your groups</p>
+                <div class="header-title">
+                    <h1><i class="fas fa-tags"></i> Manage Topics</h1>
+                    <p class="header-subtitle">Label and categorize your WhatsApp groups with modern topic management</p>
+                </div>
             </div>
             <div class="header-actions">
-                <button class="refresh-btn" onclick="location.reload()">
-                    <i class="fas fa-sync-alt"></i>
+                <button class="action-btn back-btn" onclick="goBack()" title="Back to Dashboard">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back</span>
                 </button>
             </div>
         </div>
         
+        <!-- Dashboard Content -->
         <div class="dashboard-content">
-            <!-- Manage Topics Content -->
-            <div class="section-header">
-                <h3><i class="fas fa-tag"></i> Topic Management System</h3>
+            <!-- Assembly Selection Section -->
+            <div class="section-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3><i class="fas fa-building"></i> Assembly Selection</h3>
+                        <p>Choose an assembly to manage group labels and topics</p>
+                    </div>
+                </div>
+                
+                <div class="card-content">
+                    <div class="assembly-selection-form">
+                        <div class="form-group">
+                            <label for="assemblySelect">
+                                <i class="fas fa-building"></i> Select Assembly
+                            </label>
+                            <select id="assemblySelect" class="form-control" onchange="loadGroupsForAssembly()">
+                                <option value="">Choose an Assembly</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="content-placeholder">
-                <p>Manage Topics features will be implemented here.</p>
-                <p>This page will allow you to create, edit, and manage WhatsApp topics.</p>
+            <!-- Groups and Labels Section -->
+            <div class="groups-labels-section" id="groupsLabelsSection" style="display: none;">
+                <!-- Available Labels Card -->
+                <div class="section-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3><i class="fas fa-tags"></i> Available Labels</h3>
+                            <p>Manage and organize your topic labels</p>
+                        </div>
+                        <div class="card-actions">
+                            <div class="labels-count">
+                                <span id="totalLabelsCount">0 labels</span>
+                            </div>
+                            <button class="btn btn-primary" onclick="showAddLabelModal()">
+                                <i class="fas fa-plus"></i> Add Label
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <div class="labels-container" id="availableLabels">
+                            <!-- Labels will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Groups List Card -->
+                <div class="section-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3><i class="fas fa-layer-group"></i> Groups Management</h3>
+                            <p>Assign labels to groups and manage their categorization</p>
+                        </div>
+                        <div class="card-actions">
+                            <div class="search-box">
+                                <input type="text" id="groupSearch" placeholder="Search groups..." onkeyup="filterGroups()">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <!-- Groups Statistics -->
+                        <div class="groups-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="groupsCount">0</span>
+                                    <span class="stat-label">Groups</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <span class="stat-value" id="totalPhones">0</span>
+                                    <span class="stat-label">Phone Numbers</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Groups Container -->
+                        <div class="groups-container" id="groupsContainer">
+                            <!-- Groups will be loaded here -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Add Label Modal -->
+<div class="modal" id="addLabelModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-plus"></i> Add New Label</h3>
+            <button class="close-btn" onclick="closeAddLabelModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="newLabelName">Label Name</label>
+                <input type="text" id="newLabelName" class="form-control" placeholder="e.g., Technology, Politics, Education">
+            </div>
+            <div class="form-group">
+                <label for="newLabelColor">Label Color</label>
+                <div class="color-picker-container">
+                    <input type="color" id="newLabelColor" class="color-picker" value="#667eea">
+                    <div class="color-presets">
+                        <div class="color-preset" data-color="#667eea" style="background: #667eea"></div>
+                        <div class="color-preset" data-color="#f093fb" style="background: #f093fb"></div>
+                        <div class="color-preset" data-color="#4facfe" style="background: #4facfe"></div>
+                        <div class="color-preset" data-color="#43e97b" style="background: #43e97b"></div>
+                        <div class="color-preset" data-color="#fa709a" style="background: #fa709a"></div>
+                        <div class="color-preset" data-color="#ffecd2" style="background: #ffecd2"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="newLabelDescription">Description</label>
+                <textarea id="newLabelDescription" class="form-control" placeholder="Brief description of this label (optional)"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeAddLabelModal()">Cancel</button>
+            <button class="btn btn-primary" onclick="addNewLabel()">Add Label</button>
+        </div>
+    </div>
+</div>
+
+<!-- Label Groups Modal -->
+<div class="modal" id="labelGroupsModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-tags"></i> Groups Using Label: <span id="modalLabelName"></span></h3>
+            <button class="close-btn" onclick="closeLabelGroupsModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="label-groups-stats">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-value" id="labelGroupsCount">0</span>
+                        <span class="stat-label">Groups</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-value" id="labelTotalPhones">0</span>
+                        <span class="stat-label">Phone Numbers</span>
+                    </div>
+                </div>
+            </div>
+            <div class="label-groups-list" id="labelGroupsList">
+                <!-- Groups using this label will be loaded here -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeLabelGroupsModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+    <div class="modal-content">
+        <div class="modal-header success">
+            <h3><i class="fas fa-check-circle"></i> Success!</h3>
+        </div>
+        <div class="modal-body">
+            <p id="successMessage"></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="closeModal('successModal')">OK</button>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal" id="errorModal">
+    <div class="modal-content">
+        <div class="modal-header error">
+            <h3><i class="fas fa-exclamation-circle"></i> Error</h3>
+        </div>
+        <div class="modal-body">
+            <p id="errorMessage"></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="closeModal('errorModal')">OK</button>
+        </div>
+    </div>
+</div>
+
 <!-- Include JavaScript -->
-<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='js/manage_topics.js') }}"></script>
+
+<script>
+function goBack() {
+    window.location.href = '/user/dashboard';
+}
+
+// Close modal function
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+            }
+        });
+    }
+});
+
+// Color preset selection
+document.addEventListener('DOMContentLoaded', function() {
+    const colorPresets = document.querySelectorAll('.color-preset');
+    const colorPicker = document.getElementById('newLabelColor');
+    
+    colorPresets.forEach(preset => {
+        preset.addEventListener('click', function() {
+            const color = this.getAttribute('data-color');
+            colorPicker.value = color;
+            
+            // Update active state
+            colorPresets.forEach(p => p.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
+</script>
 {% endblock %}

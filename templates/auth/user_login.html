@@ -5,50 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhatsApp Analysis Server - User Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/matrix_login.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Chakra+Petch:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Matrix Rain Background -->
-    <div class="matrix-bg"></div>
-    <div class="matrix-rain" id="matrixRain"></div>
-    
-    <!-- Floating Particles -->
-    <div class="particles" id="particles"></div>
-    
+    <!-- Matrix Background -->
+    <div class="matrix-bg">
+        <div class="matrix-grid"></div>
+        <div class="matrix-streams"></div>
+        <div class="matrix-particles"></div>
+    </div>
+
+    <!-- Main Container -->
     <div class="login-container">
-        <div class="login-card">
-            <div class="login-header">
-                <h4 class="matrix-title holographic">WHATSAPP ANALYSIS SERVER</h4>
-                <p class="matrix-subtitle">USER AUTHENTICATION PORTAL</p>
-                <div class="security-status">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>SECURE CONNECTION ESTABLISHED</span>
-                </div>
+        <!-- Login Form -->
+        <div class="login-form">
+            <div class="form-header">
+                <h1 class="form-title"> LOGIN</h1>
+                <div class="form-subtitle">WhatsApp Analysis Server</div>
             </div>
             
+            <!-- Flash Messages -->
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     <div class="flash-messages">
                         {% for category, message in messages %}
                             <div class="flash-message {{ category }}">
+                                <div class="message-icon">
+                                    {% if category == 'error' %}
                                 <i class="fas fa-exclamation-triangle"></i>
-                                <strong>SYSTEM ALERT:</strong> {{ message }}
+                                    {% elif category == 'success' %}
+                                        <i class="fas fa-check-circle"></i>
+                                    {% elif category == 'warning' %}
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    {% else %}
+                                        <i class="fas fa-info-circle"></i>
+                                    {% endif %}
+                                </div>
+                                <div class="message-content">{{ message }}</div>
                             </div>
                         {% endfor %}
                     </div>
                 {% endif %}
             {% endwith %}
             
-            <form method="POST" action="{{ url_for('auth.user_login') }}" class="matrix-form" id="loginForm">
+            <!-- Login Form -->
+            <form method="POST" action="{{ url_for('auth.user_login') }}" class="auth-form" id="loginForm">
                 {{ form.hidden_tag() }}
                 
-                <div class="form-group">
-                    <label for="{{ form.username.id }}">
-                        <i class="fas fa-user"></i>
-                        USERNAME
-                    </label>
-                    {{ form.username(placeholder="ENTER CREDENTIALS", class="matrix-input") }}
+                <!-- Username Field -->
+                <div class="form-field">
+                    <div class="input-wrapper">
+                        {{ form.username(placeholder="Username", class="matrix-input", id="username") }}
+                        <div class="input-border"></div>
+                        <div class="input-glow"></div>
+                    </div>
                     {% if form.username.errors %}
                         <div class="error-message">
                             <i class="fas fa-times-circle"></i>
@@ -59,15 +70,16 @@
                     {% endif %}
                 </div>
                 
-                <div class="form-group password-field">
-                    <label for="{{ form.password.id }}">
-                        <i class="fas fa-lock"></i>
-                        PASSWORD
-                    </label>
-                    {{ form.password(placeholder="ENTER SECURITY CODE", id="password-field", class="matrix-input") }}
-                    <button type="button" class="password-toggle" onclick="togglePassword('password-field')" title="Toggle Password Visibility">
+                <!-- Password Field -->
+                <div class="form-field">
+                    <div class="input-wrapper">
+                        {{ form.password(placeholder="Password", class="matrix-input", id="password") }}
+                        <div class="input-border"></div>
+                        <div class="input-glow"></div>
+                        <button type="button" class="password-toggle" onclick="togglePassword()">
                         <i class="fas fa-eye"></i>
                     </button>
+                    </div>
                     {% if form.password.errors %}
                         <div class="error-message">
                             <i class="fas fa-times-circle"></i>
@@ -78,286 +90,38 @@
                     {% endif %}
                 </div>
                 
-                <div class="form-group">
+                <!-- Remember Me -->
+                <div class="form-field checkbox-field">
                     <label class="checkbox-label">
                         {{ form.remember(class="matrix-checkbox") }}
-                        <span><i class="fas fa-check-circle"></i> MAINTAIN SESSION</span>
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">Remember me</span>
                     </label>
                 </div>
                 
-                <button type="submit" class="btn matrix-btn" id="loginBtn">
-                    <span class="btn-text">
-                        <i class="fas fa-sign-in-alt"></i>
-                        INITIATE LOGIN
-                    </span>
-                    <span class="btn-loading" style="display: none;">
+                <!-- Submit Button -->
+                <button type="submit" class="matrix-button" id="loginBtn">
+                    <span class="button-text">Login</span>
+                    <span class="button-loading" style="display: none;">
                         <i class="fas fa-spinner fa-spin"></i>
-                        ACCESSING SYSTEM<span class="loading-dots"></span>
+                        Authenticating...
                     </span>
                 </button>
             </form>
             
-            <div class="login-footer">
-                <div class="footer-links">
-                    <p>
-                        <i class="fas fa-user-plus"></i>
-                        <!-- NEW USER? <a href="{{ url_for('auth.register') }}">REQUEST ACCESS</a> -->
-                    </p>
-                    <p>
-                        <i class="fas fa-user-shield"></i>
-                        ADMIN? <a href="{{ url_for('auth.admin_login') }}">ADMIN PORTAL</a>
-                    </p>
-                </div>
-                <div class="system-info">
-                    <p><i class="fas fa-server"></i> SERVER STATUS: <span class="status-online">ONLINE</span></p>
-                    <p><i class="fas fa-clock"></i> LAST UPDATE: <span id="currentTime"></span></p>
-                </div>
+            <!-- Footer Links -->
+            <div class="form-footer">
+                <a href="{{ url_for('auth.admin_login') }}" class="footer-link">
+                    <span>Admin Portal</span>
+                </a>
+                <a href="#" class="footer-link">
+                    <span>Help</span>
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Matrix Effects Script -->
-    <script src="{{ url_for('static', filename='js/matrix_rain.js') }}"></script>
-    
-    <!-- Enhanced Form Script -->
-    <script>
-        // Password toggle functionality with enhanced effects
-        function togglePassword(fieldId) {
-            const passwordField = document.getElementById(fieldId);
-            const toggleBtn = passwordField.nextElementSibling;
-            const icon = toggleBtn.querySelector('i');
-            
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-                toggleBtn.style.color = '#00ffff';
-                toggleBtn.style.textShadow = '0 0 15px #00ffff';
-                passwordField.style.borderColor = '#00ffff';
-                passwordField.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.5)';
-                
-                // Add reveal animation
-                passwordField.style.animation = 'passwordReveal 0.3s ease-out';
-            } else {
-                passwordField.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-                toggleBtn.style.color = '#00ff41';
-                toggleBtn.style.textShadow = '0 0 15px #00ff41';
-                passwordField.style.borderColor = '#00ff41';
-                passwordField.style.boxShadow = '0 0 20px rgba(0, 255, 65, 0.5)';
-                
-                // Add hide animation
-                passwordField.style.animation = 'passwordHide 0.3s ease-out';
-            }
-            
-            // Remove animation after completion
-            setTimeout(() => {
-                passwordField.style.animation = '';
-            }, 300);
-        }
-        
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        // Update current time
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-US', {
-                hour12: false,
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-            document.getElementById('currentTime').textContent = timeString;
-        }
-        
-        // Enhanced form submission
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('loginForm');
-            const submitBtn = document.getElementById('loginBtn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const btnLoading = submitBtn.querySelector('.btn-loading');
-            
-            // Create particles
-            createParticles();
-            
-            // Update time every second
-            updateTime();
-            setInterval(updateTime, 1000);
-            
-            // Enhanced form submission
-            form.addEventListener('submit', function(e) {
-                btnText.style.display = 'none';
-                btnLoading.style.display = 'inline';
-                submitBtn.style.background = 'linear-gradient(45deg, #00ffff, #00ff41)';
-                submitBtn.style.boxShadow = '0 0 30px rgba(0, 255, 255, 0.8)';
-                submitBtn.disabled = true;
-                
-                // Add matrix scan effect
-                submitBtn.style.position = 'relative';
-                submitBtn.style.overflow = 'hidden';
-                
-                const scanLine = document.createElement('div');
-                scanLine.style.cssText = `
-                    position: absolute;
-                    top: 0;
-                    left: -100%;
-                    width: 100%;
-                    height: 100%;
-                    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-                    animation: matrix-scan 0.5s ease-in-out;
-                `;
-                submitBtn.appendChild(scanLine);
-                
-                setTimeout(() => {
-                    scanLine.remove();
-                }, 500);
-            });
-            
-            // Enhanced input effects
-            const inputs = form.querySelectorAll('.matrix-input');
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.style.boxShadow = '0 0 25px rgba(0, 255, 65, 0.8)';
-                    this.style.borderColor = '#00ff41';
-                    this.style.background = 'rgba(0, 255, 65, 0.15)';
-                    this.style.transform = 'translateY(-2px)';
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.style.boxShadow = '0 0 15px rgba(0, 255, 65, 0.5)';
-                    this.style.borderColor = '#00ff41';
-                    this.style.background = 'rgba(0, 0, 0, 0.8)';
-                    this.style.transform = 'translateY(0)';
-                });
-                
-                input.addEventListener('input', function() {
-                    if (this.value.length > 0) {
-                        this.style.borderColor = '#00ffff';
-                        this.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.6)';
-                    } else {
-                        this.style.borderColor = '#00ff41';
-                        this.style.boxShadow = '0 0 15px rgba(0, 255, 65, 0.5)';
-                    }
-                });
-            });
-            
-            // Add keyboard shortcuts
-            document.addEventListener('keydown', function(e) {
-                // Ctrl + Enter to submit
-                if (e.ctrlKey && e.key === 'Enter') {
-                    form.submit();
-                }
-                
-                // Ctrl + U to toggle password
-                if (e.ctrlKey && e.key === 'u') {
-                    e.preventDefault();
-                    togglePassword('password-field');
-                }
-                
-                // Ctrl + L to focus username
-                if (e.ctrlKey && e.key === 'l') {
-                    e.preventDefault();
-                    document.getElementById('{{ form.username.id }}').focus();
-                }
-            });
-            
-            // Add glitch effect to title on hover
-            const title = document.querySelector('.matrix-title');
-            title.addEventListener('mouseenter', function() {
-                this.classList.add('glitch');
-            });
-            
-            title.addEventListener('mouseleave', function() {
-                this.classList.remove('glitch');
-            });
-        });
-        
-        // Add CSS animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes passwordReveal {
-                0% { filter: blur(2px); opacity: 0.7; }
-                100% { filter: blur(0); opacity: 1; }
-            }
-            
-            @keyframes passwordHide {
-                0% { filter: blur(0); opacity: 1; }
-                100% { filter: blur(2px); opacity: 0.7; }
-            }
-            
-            .security-status {
-                margin-top: 15px;
-                padding: 10px;
-                background: rgba(0, 255, 65, 0.1);
-                border: 1px solid #00ff41;
-                border-radius: 8px;
-                font-size: 0.9em;
-                color: #00ff41;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-            }
-            
-            .security-status i {
-                animation: pulse 2s infinite;
-            }
-            
-            @keyframes pulse {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0.5; }
-            }
-            
-            .footer-links {
-                margin-bottom: 20px;
-            }
-            
-            .system-info {
-                font-size: 0.8em;
-                color: #666;
-                border-top: 1px solid rgba(0, 255, 65, 0.3);
-                padding-top: 15px;
-            }
-            
-            .system-info p {
-                margin: 5px 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-            }
-            
-            .status-online {
-                color: #00ff41;
-                font-weight: bold;
-                text-shadow: 0 0 10px #00ff41;
-            }
-            
-            .matrix-input {
-                font-family: 'Share Tech Mono', monospace;
-                letter-spacing: 1px;
-            }
-            
-            .matrix-checkbox {
-                accent-color: #00ff41;
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/matrix_login.js') }}"></script>
 </body>
 </html>

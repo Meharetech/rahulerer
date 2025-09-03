@@ -1,59 +1,86 @@
-<!-- Mobile Hamburger Menu Button (Outside sidebar for better visibility) -->
+<!-- Mobile Menu Toggle Button -->
 <div class="mobile-menu-toggle" id="mobileMenuToggle">
     <button class="hamburger-btn" onclick="toggleMobileMenu()">
         <i class="fas fa-bars"></i>
     </button>
 </div>
 
-<!-- Admin Left Sidebar Menu Layout -->
-<div class="sidebar" id="adminSidebar">
+<!-- Modern Admin Sidebar -->
+<div class="modern-sidebar" id="adminSidebar">
     <div class="sidebar-header">
-        <h2><i class="fas fa-shield-alt"></i></h2>
-        <h2>Admin Panel</h2>
-        <p>System Management</p>
-    </div>
-    
-    <div class="sidebar-menu">
-        <div class="menu-section">
-            <h4>MAIN MENU</h4>
-            
-            <a href="{{ url_for('admin.admin_dashboard') }}" class="menu-item {% if request.endpoint == 'admin.admin_dashboard' %}active{% endif %}">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Dashboard Statistics</span>
-            </a>
-            
-            <a href="{{ url_for('admin.upload_reports') }}" class="menu-item {% if request.endpoint == 'admin.upload_reports' %}active{% endif %}">
-                <i class="fas fa-upload"></i>
-                <span>Upload Reports</span>
-            </a>
-            
-            <a href="{{ url_for('admin.upload_groups') }}" class="menu-item {% if request.endpoint == 'admin.upload_groups' %}active{% endif %}">
-                <i class="fas fa-users-cog"></i>
-                <span>Upload Groups</span>
-            </a>
-            
-            <a href="{{ url_for('admin.message_management') }}" class="menu-item {% if request.endpoint == 'admin.message_management' %}active{% endif %}">
-                <i class="fas fa-comments"></i>
-                <span>Message Management</span>
-            </a>
-            
-            <a href="{{ url_for('admin.admin_manage_topics') }}" class="menu-item {% if request.endpoint == 'admin.admin_manage_topics' %}active{% endif %}">
-                <i class="fas fa-tags"></i>
-                <span>Manage Topics</span>
-            </a>
-            
-            <a href="{{ url_for('admin.assembly_list') }}" class="menu-item {% if request.endpoint == 'admin.assembly_list' %}active{% endif %}">
-                <i class="fas fa-list-ol"></i>
-                <span>Assembly List</span>
-            </a>
+        <div class="header-content">
+            <div class="admin-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="header-text">
+                <h2>Admin Panel</h2>
+                <p>System Management</p>
+            </div>
         </div>
     </div>
+    
+    <nav class="sidebar-nav">
+        <div class="nav-section">
+            <h4 class="section-title">MAIN MENU</h4>
+            
+            <a href="{{ url_for('admin.admin_dashboard') }}" class="nav-link {% if request.endpoint == 'admin.admin_dashboard' %}active{% endif %}">
+                <div class="nav-icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <span class="nav-text">Dashboard Statistics</span>
+                <div class="nav-indicator"></div>
+            </a>
+            
+            <a href="{{ url_for('admin.upload_reports') }}" class="nav-link {% if request.endpoint == 'admin.upload_reports' %}active{% endif %}">
+                <div class="nav-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <span class="nav-text">Upload Reports</span>
+                <div class="nav-indicator"></div>
+            </a>
+            
+            <a href="{{ url_for('admin.upload_groups') }}" class="nav-link {% if request.endpoint == 'admin.upload_groups' %}active{% endif %}">
+                <div class="nav-icon">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+                <span class="nav-text">Upload Groups</span>
+                <div class="nav-indicator"></div>
+            </a>
+            
+            <a href="{{ url_for('admin.message_management') }}" class="nav-link {% if request.endpoint == 'admin.message_management' %}active{% endif %}">
+                <div class="nav-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <span class="nav-text">Message Management</span>
+                <div class="nav-indicator"></div>
+            </a>
+            
+            <a href="{{ url_for('admin.admin_manage_topics') }}" class="nav-link {% if request.endpoint == 'admin.admin_manage_topics' %}active{% endif %}">
+                <div class="nav-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <span class="nav-text">Manage Topics</span>
+                <div class="nav-indicator"></div>
+            </a>
+            
+            <a href="{{ url_for('admin.assembly_list') }}" class="nav-link {% if request.endpoint == 'admin.assembly_list' %}active{% endif %}">
+                <div class="nav-icon">
+                    <i class="fas fa-list-ol"></i>
+                </div>
+                <span class="nav-text">Assembly List</span>
+                <div class="nav-indicator"></div>
+            </a>
+        </div>
+    </nav>
     
     <div class="sidebar-footer">
         <form method="POST" action="{{ url_for('auth.logout') }}" style="margin: 0;" id="logoutForm">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button type="submit" class="btn btn-secondary" style="width: 100%;" id="logoutBtn">
-                <i class="fas fa-sign-out-alt"></i> Logout
+            <button type="submit" class="logout-btn" id="logoutBtn">
+                <div class="logout-icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                <span>Logout</span>
             </button>
         </form>
     </div>
@@ -63,151 +90,314 @@
 <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
 
 <style>
-/* Sidebar Styles - Desktop */
-.sidebar {
-    width: 280px;
-    background: #f8f9fa;
-    border-right: 1px solid #e9ecef;
+/* Modern Admin Sidebar Styles */
+.modern-sidebar {
+    width: 240px;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     display: flex;
     flex-direction: column;
-    position: fixed;
-    height: 100vh;
-    overflow-y: auto;
-    z-index: 1000;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
 }
 
+/* Sidebar Header */
 .sidebar-header {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-    color: white;
-    padding: 25px;
-    text-align: center;
+    padding: 25px 20px;
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.9) 0%, rgba(192, 35, 51, 0.9) 100%);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
-.sidebar-header h2 {
+.sidebar-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.admin-icon {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.admin-icon i {
     font-size: 20px;
-    margin-bottom: 5px;
-    font-weight: 600;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.sidebar-header p {
-    font-size: 12px;
-    opacity: 0.9;
-}
-
-.sidebar-menu {
-    flex: 1;
-    padding: 20px;
-}
-
-.menu-section {
-    margin-bottom: 25px;
-}
-
-.menu-section h4 {
-    color: #666;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    text-transform: uppercase;
+.header-text h2 {
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     letter-spacing: 0.5px;
 }
 
-.menu-item {
+.header-text p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    margin: 2px 0 0 0;
+    font-weight: 400;
+}
+
+/* Navigation */
+.sidebar-nav {
+    flex: 1;
+    padding: 20px 15px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+}
+
+.section-title {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 20px 0;
+    padding: 0 10px;
+}
+
+.nav-link {
     display: flex;
     align-items: center;
     padding: 12px 15px;
     margin-bottom: 8px;
-    background: white;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
+    border-radius: 12px;
     text-decoration: none;
-    color: #333;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.menu-item:hover {
-    background: #ffe6e6;
-    border-color: #dc3545;
-    transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
 }
 
-.menu-item.active {
-    background: #dc3545;
+.nav-link:hover::before {
+    left: 100%;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
-.menu-item i {
-    margin-right: 12px;
+.nav-link.active {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.8) 0%, rgba(192, 35, 51, 0.8) 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(220, 53, 69, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-link.active .nav-indicator {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.nav-icon {
     width: 20px;
-    text-align: center;
-    font-size: 16px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    position: relative;
+    z-index: 1;
 }
 
-.menu-item span {
+.nav-icon i {
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover .nav-icon i {
+    transform: scale(1.1);
+}
+
+.nav-text {
     font-size: 14px;
     font-weight: 500;
-}
-
-.sidebar-footer {
-    padding: 20px;
-    border-top: 1px solid #e9ecef;
-    text-align: center;
-    background: white;
-}
-
-.sidebar-footer .btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 14px;
-    background: #6c757d;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    position: relative;
+    z-index: 1;
     transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
 }
 
-.sidebar-footer .btn:hover {
-    background: #5a6268;
+.nav-indicator {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 4px;
+    height: 20px;
+    background: white;
+    border-radius: 2px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    padding: 20px 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 12px 15px;
+    background: linear-gradient(135deg, rgba(108, 117, 125, 0.8) 0%, rgba(90, 98, 104, 0.8) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.logout-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.logout-btn:hover::before {
+    left: 100%;
+}
+
+.logout-btn:hover {
+    background: linear-gradient(135deg, rgba(108, 117, 125, 1) 0%, rgba(90, 98, 104, 1) 100%);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.logout-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.logout-icon i {
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover .logout-icon i {
+    transform: scale(1.1);
 }
 
 /* Mobile Menu Toggle */
 .mobile-menu-toggle {
     display: none;
     position: fixed;
-    top: 15px;
-    left: 15px;
+    top: 20px;
+    left: 20px;
     z-index: 1001;
 }
 
 .hamburger-btn {
-    background: #dc3545;
-    color: white;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     border: none;
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
+    border-radius: 12px;
+    color: white;
+    font-size: 18px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3), 0 0 0 3px rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .hamburger-btn:hover {
-    background: #c82333;
-    transform: scale(1.1);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.6);
 }
 
 /* Mobile Overlay */
@@ -219,7 +409,19 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
     z-index: 999;
+    transition: all 0.3s ease;
+}
+
+.mobile-overlay.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* Mobile Styles */
@@ -228,86 +430,47 @@
         display: block;
     }
     
-    .mobile-overlay.show {
-        display: block;
-    }
-    
-    .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
+    .modern-sidebar {
         width: 100%;
-        height: 100vh;
-        z-index: 1000;
         transform: translateX(-100%);
-        transition: transform 0.3s ease;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    .sidebar.show {
+    .modern-sidebar.show {
         transform: translateX(0);
     }
     
     .sidebar-header {
         padding-top: 80px;
     }
-
-    .menu-item {
-        padding: 15px;
+    
+    .nav-link {
+        padding: 15px 20px;
         margin-bottom: 10px;
     }
-
-    .menu-item i {
+    
+    .nav-text {
+        font-size: 16px;
+    }
+    
+    .nav-icon i {
         font-size: 18px;
-        width: 24px;
     }
-
-    .menu-item span {
-        font-size: 16px;
-    }
-
+    
     .sidebar-footer {
-        padding: 15px;
+        padding: 20px;
     }
-
-    .sidebar-footer .btn {
-        padding: 15px;
+    
+    .logout-btn {
+        padding: 15px 20px;
         font-size: 16px;
     }
-    
-    /* Ensure menu is visible when sidebar is shown */
-    .dashboard-layout {
-        position: relative;
-    }
-    
-    /* Make hamburger button always visible */
-    .mobile-menu-toggle {
-        position: fixed;
-        top: 15px;
-        left: 15px;
-        z-index: 1002;
-        display: block;
-    }
-    
-    /* Ensure the hamburger button is visible on top of content */
-    .hamburger-btn {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(255, 255, 255, 0.5);
-    }
-    
-    /* Fix for menu items in mobile view */
-    .sidebar-menu {
-        padding-bottom: 100px; /* Extra padding to ensure all items are visible */
-        overflow-y: auto;
-    }
-    
-    /* Add close button in header */
-    .sidebar-header:after {
-        content: "×";
-        position: absolute;
-        top: 85px;
-        right: 20px;
-        font-size: 30px;
-        color: white;
-        cursor: pointer;
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .modern-sidebar {
+        width: 220px;
     }
 }
 
@@ -323,32 +486,40 @@
     }
 }
 
-.menu-item {
+.nav-link {
     animation: slideInLeft 0.4s ease-out;
 }
 
-.menu-item:nth-child(1) { animation-delay: 0.1s; }
-.menu-item:nth-child(2) { animation-delay: 0.2s; }
-.menu-item:nth-child(3) { animation-delay: 0.3s; }
-.menu-item:nth-child(4) { animation-delay: 0.4s; }
-.menu-item:nth-child(5) { animation-delay: 0.5s; }
-.menu-item:nth-child(6) { animation-delay: 0.6s; }
+.nav-link:nth-child(1) { animation-delay: 0.1s; }
+.nav-link:nth-child(2) { animation-delay: 0.2s; }
+.nav-link:nth-child(3) { animation-delay: 0.3s; }
+.nav-link:nth-child(4) { animation-delay: 0.4s; }
+.nav-link:nth-child(5) { animation-delay: 0.5s; }
+.nav-link:nth-child(6) { animation-delay: 0.6s; }
 
 /* Accessibility */
-.menu-item:focus,
-.sidebar-footer .btn:focus {
-    outline: 2px solid #dc3545;
+.nav-link:focus,
+.logout-btn:focus {
+    outline: 2px solid rgba(220, 53, 69, 0.8);
     outline-offset: 2px;
 }
 
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-    .menu-item {
+    .nav-link,
+    .logout-btn,
+    .hamburger-btn {
         animation: none;
+        transition: none;
     }
     
-    .menu-item:hover,
-    .sidebar-footer .btn:hover {
+    .nav-link:hover,
+    .logout-btn:hover {
         transform: none;
+    }
+    
+    .sidebar-header::before {
+        animation: none;
     }
 }
 </style>
@@ -401,30 +572,20 @@ function closeMobileMenu() {
     }
 }
 
-// Close menu when clicking on a menu item (mobile)
+// Initialize sidebar functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const menuItems = document.querySelectorAll('.menu-item');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const logoutForm = document.getElementById('logoutForm');
+    const logoutBtn = document.getElementById('logoutBtn');
     
-    menuItems.forEach(item => {
-        item.addEventListener('click', function() {
+    // Close menu when clicking on a nav link (mobile)
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
             if (window.innerWidth <= 768) {
                 closeMobileMenu();
             }
         });
     });
-    
-    // Add click handler for the close button in header
-    const sidebarHeader = document.querySelector('.sidebar-header');
-    if (sidebarHeader) {
-        sidebarHeader.addEventListener('click', function(e) {
-            // Check if click is on the close button area (right side of header)
-            const rect = sidebarHeader.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            if (x > rect.width - 50) {
-                closeMobileMenu();
-            }
-        });
-    }
     
     // Close menu on window resize
     window.addEventListener('resize', function() {
@@ -442,17 +603,75 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Handle logout form submission
-    const logoutForm = document.getElementById('logoutForm');
-    const logoutBtn = document.getElementById('logoutBtn');
-    
-    if (logoutForm) {
+    if (logoutForm && logoutBtn) {
         logoutForm.addEventListener('submit', function(e) {
             // Show loading state
-            logoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging out...';
+            const logoutIcon = logoutBtn.querySelector('.logout-icon i');
+            const logoutText = logoutBtn.querySelector('span');
+            
+            if (logoutIcon) {
+                logoutIcon.classList.remove('fa-sign-out-alt');
+                logoutIcon.classList.add('fa-spinner', 'fa-spin');
+            }
+            
+            if (logoutText) {
+                logoutText.textContent = 'Logging out...';
+            }
+            
             logoutBtn.disabled = true;
             
             // Form will submit normally with CSRF token
         });
     }
+    
+    // Add touch gesture support for mobile
+    let startX = 0;
+    let startY = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    });
+    
+    document.addEventListener('touchend', function(e) {
+        if (!startX || !startY) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const endY = e.changedTouches[0].clientY;
+        
+        const diffX = startX - endX;
+        const diffY = startY - endY;
+        
+        // Swipe left to close menu (if menu is open)
+        if (Math.abs(diffX) > Math.abs(diffY) && diffX > 50 && window.innerWidth <= 768) {
+            const sidebar = document.getElementById('adminSidebar');
+            if (sidebar && sidebar.classList.contains('show')) {
+                closeMobileMenu();
+            }
+        }
+        
+        startX = 0;
+        startY = 0;
+    });
+    
+    // Add intersection observer for nav link animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateX(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Observe nav links for animation
+    navLinks.forEach(link => {
+        observer.observe(link);
+    });
 });
 </script>

@@ -1,4 +1,4 @@
-// User Dashboard JavaScript
+// Modern User Dashboard JavaScript
 let dashboardStats = null;
 const DASHBOARD_CACHE_KEY = 'dashboardStatsCache';
 const DASHBOARD_CACHE_TIME = 5 * 60 * 1000; // 5 minutes in ms
@@ -13,6 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
             loadDashboardStats(true);
         });
     }
+    
+    // Add export button handler
+    const exportBtn = document.querySelector('.export-btn');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', function() {
+            exportDashboardData();
+        });
+    }
+    
     loadDashboardStats();
 });
 
@@ -62,6 +71,17 @@ function displayDashboardStats(stats) {
     document.getElementById('totalAssemblies').textContent = stats.total_assemblies;
     document.getElementById('totalGroups').textContent = stats.total_groups;
     document.getElementById('totalPhones').textContent = stats.total_phones;
+    
+    // Update quick stats in header
+    document.getElementById('quickTotalAssemblies').textContent = stats.total_assemblies;
+    document.getElementById('quickTotalGroups').textContent = stats.total_groups;
+    document.getElementById('quickTotalPhones').textContent = stats.total_phones;
+    
+    // Update total messages if available
+    const totalMessages = document.getElementById('totalMessages');
+    if (totalMessages) {
+        totalMessages.textContent = stats.total_messages || '0';
+    }
     
     // Display assembly breakdown
     displayAssemblyBreakdown(stats.assemblies);
@@ -198,5 +218,139 @@ function cleanGroupName(fileName) {
     
     return cleanName;
 }
+
+// Refresh dashboard function
+function refreshDashboard() {
+    const refreshBtn = document.querySelector('.refresh-btn');
+    if (refreshBtn) {
+        const icon = refreshBtn.querySelector('i');
+        const text = refreshBtn.querySelector('span');
+        
+        // Show loading state
+        icon.classList.add('fa-spin');
+        text.textContent = 'Refreshing...';
+        refreshBtn.disabled = true;
+        
+        // Clear cache and reload
+        clearDashboardCache();
+        loadDashboardStats(true).finally(() => {
+            // Reset button state
+            icon.classList.remove('fa-spin');
+            text.textContent = 'Refresh';
+            refreshBtn.disabled = false;
+        });
+    }
+}
+
+// Export dashboard data function
+function exportDashboardData() {
+    if (!dashboardStats) {
+        showNotification('No data available to export', 'error');
+        return;
+    }
+    
+    try {
+        // Create CSV content
+        let csvContent = 'Assembly,Groups,Phone Numbers\n';
+        
+        dashboardStats.assemblies.forEach(assembly => {
+            csvContent += `"${assembly.name}",${assembly.groups_count},${assembly.phones_count}\n`;
+        });
+        
+        // Add summary row
+        csvContent += `\nTOTAL,${dashboardStats.total_groups},${dashboardStats.total_phones}`;
+        
+        // Create and download file
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', `dashboard_export_${new Date().toISOString().split('T')[0]}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        showNotification('Dashboard data exported successfully!', 'success');
+    } catch (error) {
+        console.error('Export error:', error);
+        showNotification('Failed to export data', 'error');
+    }
+}
+
+// Show notification function
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    // Add styles
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        animation: slideInRight 0.3s ease-out;
+        max-width: 300px;
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+
+// Add CSS animations for notifications
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
+    .notification-content {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+    }
+`;
+document.head.appendChild(style);
 
 

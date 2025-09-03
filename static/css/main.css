@@ -311,7 +311,7 @@ body {
 /* Main Content Area */
 .main-content {
     flex: 1;
-    margin-left: 280px;
+    margin-left: 240px;
     background: white;
     min-height: 100vh;
 }
@@ -3590,7 +3590,7 @@ body {
 /* Responsive Design */
 @media (max-width: 1200px) {
     .main-content {
-        margin-left: 280px;
+        margin-left: 240px;
         padding: 15px;
     }
     
@@ -3658,7 +3658,7 @@ body {
 
 .main-content {
     flex: 1;
-    margin-left: 280px; /* Increased from 250px to give more space */
+    margin-left: 240px; /* Increased from 250px to give more space */
     background: #f5f7fa;
     min-height: 100vh;
     padding: 20px;

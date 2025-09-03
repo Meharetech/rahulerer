@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}WhatsApp Groups List - WhatsApp UI{% endblock %}
+{% block title %}WhatsApp Groups List - WhatsApp Analytics{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/whatsapp_groups_list.css') }}">
+{% endblock %}
 
 {% block content %}
 <div class="dashboard-layout">
@@ -9,42 +13,54 @@
     
     <!-- Main Content Area -->
     <div class="main-content">
-        <div class="main-header">
+        <!-- Modern Header -->
+        <div class="modern-header">
             <div class="header-content">
-                <h1><i class="fas fa-list"></i> WhatsApp Groups List</h1>
-                <p class="header-subtitle">Browse all WhatsApp groups and their member counts</p>
+                <div class="header-title">
+                    <h1><i class="fas fa-list"></i> WhatsApp Groups List</h1>
+                    <p class="header-subtitle">Browse all WhatsApp groups and their member counts across assemblies</p>
+                </div>
+
             </div>
             <div class="header-actions">
-                <button class="btn btn-secondary" onclick="goBack()">
-                    <i class="fas fa-arrow-left"></i> Back to Analysis
+                <button class="action-btn back-btn" onclick="goBack()" title="Back to Analysis">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back</span>
                 </button>
-                <button class="refresh-btn" onclick="location.reload()">
+                <button class="action-btn refresh-btn" onclick="location.reload()" title="Refresh Page">
                     <i class="fas fa-sync-alt"></i>
+                    <span>Refresh</span>
                 </button>
             </div>
         </div>
         
+        <!-- Dashboard Content -->
         <div class="dashboard-content">
             <!-- Assembly Selection Section -->
-            <div class="section-header">
-                <h3><i class="fas fa-building"></i> Select Assembly</h3>
-                <p>Choose an assembly to view its WhatsApp groups and member counts</p>
-            </div>
-            
-            <!-- Assembly Selection Form -->
-            <div class="assembly-selection-form">
-                <div class="form-group">
-                    <label for="assemblySelect">
-                        <i class="fas fa-building"></i> Assembly
-                    </label>
-                    <select id="assemblySelect" onchange="loadGroupsForAssembly()">
-                        <option value="">Select an Assembly</option>
-                        <!-- Assemblies will be populated dynamically -->
-                    </select>
+            <div class="section-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3><i class="fas fa-building"></i> Assembly Selection</h3>
+                        <p>Choose an assembly to view its WhatsApp groups and member counts</p>
+                    </div>
+                </div>
+                
+                <div class="card-content">
+                    <div class="assembly-selection-form">
+                        <div class="form-group">
+                            <label for="assemblySelect">
+                                <i class="fas fa-building"></i> Select Assembly
+                            </label>
+                            <select id="assemblySelect" onchange="loadGroupsForAssembly()">
+                                <option value="">Choose an Assembly</option>
+                                <!-- Assemblies will be populated dynamically -->
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <!-- Groups Summary -->
+            <!-- Groups Summary Cards -->
             <div class="groups-summary" id="groupsSummary" style="display: none;">
                 <div class="summary-card total-groups">
                     <div class="summary-icon">
@@ -53,6 +69,7 @@
                     <div class="summary-content">
                         <h4>Total Groups</h4>
                         <span class="summary-value" id="totalGroupsCount">0</span>
+                        <p class="summary-description">Groups in selected assembly</p>
                     </div>
                 </div>
                 
@@ -63,6 +80,7 @@
                     <div class="summary-content">
                         <h4>Total Members</h4>
                         <span class="summary-value" id="totalMembersCount">0</span>
+                        <p class="summary-description">Unique members across groups</p>
                     </div>
                 </div>
                 
@@ -71,70 +89,136 @@
                         <i class="fas fa-phone"></i>
                     </div>
                     <div class="summary-content">
-                        <h4>Total Phone Numbers</h4>
+                        <h4>Phone Numbers</h4>
                         <span class="summary-value" id="totalPhonesCount">0</span>
+                        <p class="summary-description">Phone numbers collected</p>
                     </div>
                 </div>
             </div>
             
             <!-- Groups List Section -->
             <div class="groups-list-section" id="groupsListSection" style="display: none;">
-                <div class="section-header">
-                    <h3><i class="fas fa-list"></i> Groups List</h3>
-                    <p>Groups sorted by phone number count (highest to lowest)</p>
-                    
-                    <!-- Download Button -->
-                    <div class="download-section">
-                        <button id="downloadGroupsListBtn" class="btn btn-success" onclick="downloadGroupsList()">
-                            <i class="fas fa-download"></i> Download Groups List (Excel)
-                        </button>
+                <div class="section-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3><i class="fas fa-list"></i> Groups List</h3>
+                            <p>Groups sorted by phone number count (highest to lowest)</p>
+                        </div>
+                        <div class="card-actions">
+                            <button id="downloadAllPhonesBtn" class="btn btn-primary" onclick="downloadAllPhoneNumbers()">
+                                <i class="fas fa-download"></i>  All Numbers Excel
+                            </button>
+                            <button id="downloadGroupsListBtn" class="btn btn-success" onclick="downloadGroupsList()">
+                                <i class="fas fa-download"></i> Groups List csv
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Groups Table -->
-                <div class="groups-table-container">
-                    <table class="groups-table">
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Group Name</th>
-                                <th>Phone Numbers</th>
-                                <th>Members</th>
-                                <th>File Size</th>
-                                <th>Last Updated</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="groupsTableBody">
-                            <!-- Groups will be populated here -->
-                        </tbody>
-                    </table>
+                    
+                    <div class="card-content">
+                        <!-- Search Controls -->
+                        <div class="table-controls">
+                            <div class="search-box">
+                                <input type="text" id="groupSearch" placeholder="Search groups..." onkeyup="filterGroups()">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Groups Table -->
+                        <div class="groups-table-container">
+                            <table class="groups-table">
+                                <thead>
+                                    <tr>
+                                        <th class="rank-col">Rank</th>
+                                        <th class="name-col">Group Name</th>
+                                        <th class="phone-col">Phone Numbers</th>
+                                        <th class="member-col">Members</th>
+                                        <th class="size-col">File Size</th>
+                                        <th class="updated-col">Last Updated</th>
+                                        <th class="actions-col">Download</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="groupsTableBody">
+                                    <!-- Groups will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Table Footer -->
+                        <div class="table-footer">
+                            <div class="table-info">
+                                <span id="tableInfo">Showing 0 groups</span>
+                            </div>
+                            <div class="table-pagination">
+                                <button class="btn btn-outline" onclick="previousPage()" id="prevBtn" disabled>
+                                    <i class="fas fa-chevron-left"></i> Previous
+                                </button>
+                                <span class="page-info" id="pageInfo">Page 1 of 1</span>
+                                <button class="btn btn-outline" onclick="nextPage()" id="nextBtn" disabled>
+                                    Next <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <!-- Loading State -->
             <div class="loading-state" id="loadingState" style="display: none;">
                 <div class="loading-content">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <h3>Loading Groups...</h3>
-                    <p>Please wait while we process the data</p>
+                    <div class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <div class="loading-text">
+                        <h3>Loading Groups</h3>
+                        <p>Please wait while we process the data...</p>
+                    </div>
                 </div>
             </div>
             
             <!-- No Data State -->
             <div class="no-data-state" id="noDataState" style="display: none;">
                 <div class="no-data-content">
-                    <i class="fas fa-info-circle"></i>
-                    <h3>No Groups Found</h3>
-                    <p>Please select an assembly to view its WhatsApp groups</p>
+                    <div class="no-data-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="no-data-text">
+                        <h3>No Groups Found</h3>
+                        <p>Please select an assembly to view its WhatsApp groups</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Include CSS -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/whatsapp_groups_list.css') }}">
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+    <div class="modal-content">
+        <div class="modal-header success">
+            <h3><i class="fas fa-check-circle"></i> Success!</h3>
+        </div>
+        <div class="modal-body">
+            <p id="successMessage"></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="closeModal('successModal')">OK</button>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal" id="errorModal">
+    <div class="modal-content">
+        <div class="modal-header error">
+            <h3><i class="fas fa-exclamation-circle"></i> Error</h3>
+        </div>
+        <div class="modal-body">
+            <p id="errorMessage"></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="closeModal('errorModal')">OK</button>
+        </div>
+    </div>
+</div>
 
 <!-- Include JavaScript -->
 <script src="{{ url_for('static', filename='js/whatsapp_groups_list.js') }}"></script>

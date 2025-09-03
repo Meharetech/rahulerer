@@ -1,14 +1,17 @@
-// Post Scheduling JavaScript - Modern UI
+// Modern Post Scheduling JavaScript - Enhanced UI
 let selectedAssemblies = [];
-let availableExcelFiles = {};
-let selectedExcelFiles = [];
+let availableCsvFiles = {};
+let selectedCsvFiles = [];
 let currentStep = 1;
+let filteredGroups = [];
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
     loadAssemblies();
     loadScheduledPosts();
     setupEventListeners();
+    setupFormSubmission();
+    updateQuickStats();
     
     // Set default date to tomorrow
     const tomorrow = new Date();
@@ -31,6 +34,215 @@ function setupEventListeners() {
             document.getElementById('charCount').textContent = charCount;
         });
     }
+    
+    // Group search functionality
+    const groupSearch = document.getElementById('groupSearch');
+    if (groupSearch) {
+        groupSearch.addEventListener('input', function() {
+            filterGroups();
+        });
+    }
+}
+
+// Update quick stats in header
+function updateQuickStats() {
+    document.getElementById('quickSelectedAssemblies').textContent = selectedAssemblies.length;
+    document.getElementById('quickSelectedGroups').textContent = selectedCsvFiles.length;
+    
+    // Update scheduled posts count (this would need to be fetched from API)
+    // For now, we'll set it to 0 and update it when we load scheduled posts
+    document.getElementById('quickScheduledPosts').textContent = '0';
+}
+
+// Filter groups based on search input
+function filterGroups() {
+    const searchTerm = document.getElementById('groupSearch').value.toLowerCase();
+    const groupCards = document.querySelectorAll('.group-card');
+    
+    groupCards.forEach(card => {
+        const groupName = card.querySelector('.group-name').textContent.toLowerCase();
+        // Search in the display name (without .csv extension)
+        if (groupName.includes(searchTerm)) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// Preview post functionality
+function previewPost() {
+    if (selectedCsvFiles.length === 0) {
+        showError('Please select at least one group to preview the post.');
+        return;
+    }
+    
+    const title = document.getElementById('title').value;
+    const message = document.getElementById('message_text').value;
+    const scheduledDate = document.getElementById('scheduled_date').value;
+    const scheduledTime = document.getElementById('scheduled_time').value;
+    
+    if (!title) {
+        showError('Please enter a post title to preview.');
+        return;
+    }
+    
+    // Create preview content
+    let previewContent = `
+        <div class="preview-content">
+            <h3>Post Preview</h3>
+            <div class="preview-section">
+                <h4>Title:</h4>
+                <p>${title}</p>
+            </div>
+            <div class="preview-section">
+                <h4>Message:</h4>
+                <p>${message || 'No message text'}</p>
+            </div>
+            <div class="preview-section">
+                <h4>Schedule:</h4>
+                <p>${scheduledDate} at ${scheduledTime}</p>
+            </div>
+            <div class="preview-section">
+                <h4>Target Groups:</h4>
+                <p>${selectedCsvFiles.length} groups selected</p>
+                <ul>
+                    ${selectedCsvFiles.map(fileName => {
+                        const displayName = fileName.replace(/\.csv$/i, '');
+                        return `<li>${displayName}</li>`;
+                    }).join('')}
+                </ul>
+            </div>
+        </div>
+    `;
+    
+    // Show preview in a modal (you can create a preview modal)
+    showSuccess('Post preview generated successfully!');
+}
+
+// Test function to manually submit form (for debugging)
+function testFormSubmission() {
+    console.log('Testing form submission...');
+    const form = document.getElementById('postScheduleForm');
+    if (form) {
+        console.log('Form found, triggering submit event');
+        form.dispatchEvent(new Event('submit'));
+    } else {
+        console.log('Form not found!');
+    }
+}
+
+// Make test function available globally for debugging
+window.testFormSubmission = testFormSubmission;
+
+// Function to check if form is ready for submission
+function checkFormReady() {
+    console.log('=== FORM READINESS CHECK ===');
+    console.log('Selected assemblies:', selectedAssemblies);
+    console.log('Selected CSV files:', selectedCsvFiles);
+    console.log('Current step:', currentStep);
+    
+    const title = document.getElementById('title')?.value?.trim();
+    const scheduledDate = document.getElementById('scheduled_date')?.value;
+    const scheduledTime = document.getElementById('scheduled_time')?.value;
+    
+    console.log('Title:', title);
+    console.log('Scheduled date:', scheduledDate);
+    console.log('Scheduled time:', scheduledTime);
+    
+    const isReady = title && scheduledDate && scheduledTime && selectedAssemblies.length > 0 && selectedCsvFiles.length > 0;
+    console.log('Form ready for submission:', isReady);
+    console.log('========================');
+    
+    return isReady;
+}
+
+// Make check function available globally for debugging
+window.checkFormReady = checkFormReady;
+
+// Test function to show success modal
+function testSuccessModal() {
+    console.log('Testing success modal...');
+    showSuccess('Test success message - Post scheduled successfully!');
+}
+
+// Test function to show error modal
+function testErrorModal() {
+    console.log('Testing error modal...');
+    showError('Test error message - Something went wrong!');
+}
+
+// Make test functions available globally for debugging
+window.testSuccessModal = testSuccessModal;
+window.testErrorModal = testErrorModal;
+
+// Enhanced display functions with better UI
+function displayAssemblies(assemblies) {
+    const container = document.getElementById('assemblySelection');
+    
+    if (assemblies.length === 0) {
+        container.innerHTML = '<p class="no-data">No assemblies found. Please contact an administrator.</p>';
+        return;
+    }
+    
+    let html = '<div class="assemblies-grid">';
+    assemblies.forEach(assembly => {
+        const fileCount = assembly.total_files;
+        html += `
+            <div class="assembly-card" onclick="toggleAssemblyCard(${assembly.id})">
+                <label class="assembly-checkbox">
+                    <input type="checkbox" value="${assembly.id}" onchange="toggleAssembly(${assembly.id})">
+                    <div class="assembly-info">
+                        <h5>${assembly.name}</h5>
+                        <span class="group-count">${fileCount} Total Groups available</span>
+                    </div>
+                </label>
+            </div>
+        `;
+    });
+    html += '</div>';
+    
+    container.innerHTML = html;
+}
+
+// Enhanced display functions for groups
+function displayCsvFiles(files) {
+    const container = document.getElementById('groupsContainer');
+    const totalCount = document.getElementById('totalGroupsCount');
+    const selectedCount = document.getElementById('selectedGroupsCount');
+    
+    if (files.length === 0) {
+        container.innerHTML = '<p class="no-data">No CSV files found in selected assemblies.</p>';
+        totalCount.textContent = '0';
+        selectedCount.textContent = '0';
+        return;
+    }
+    
+    let html = '<div class="groups-grid">';
+    files.forEach(fileName => {
+        // Remove .csv extension from display name
+        const displayName = fileName.replace(/\.csv$/i, '');
+        html += `
+            <div class="group-card" onclick="toggleGroupCard('${fileName}')">
+                <label class="group-checkbox">
+                    <input type="checkbox" value="${fileName}" checked onchange="toggleCsvFile('${fileName}')">
+                    <span class="group-name">${displayName}</span>
+                </label>
+            </div>
+        `;
+    });
+    html += '</div>';
+    
+    container.innerHTML = html;
+    
+    // Initialize selected CSV files
+    selectedCsvFiles = [...files];
+    filteredGroups = [...files];
+    totalCount.textContent = files.length;
+    selectedCount.textContent = files.length;
+    
+    updateNextButtonStates();
+    updateQuickStats();
 }
 
 // Media Preview Functions
@@ -110,8 +322,8 @@ function nextStep() {
             showError('Please select at least one assembly to continue.');
             return;
         }
-        if (currentStep === 2 && selectedExcelFiles.length === 0) {
-            showError('Please select at least one Excel file to continue.');
+        if (currentStep === 2 && selectedCsvFiles.length === 0) {
+            showError('Please select at least one CSV file to continue.');
             return;
         }
         
@@ -170,11 +382,11 @@ function updateNextButtonStates() {
         nextStep1.disabled = selectedAssemblies.length === 0;
     }
     if (nextStep2) {
-        nextStep2.disabled = selectedExcelFiles.length === 0;
+        nextStep2.disabled = selectedCsvFiles.length === 0;
     }
 }
 
-// Load assemblies with their Excel files
+// Load assemblies with their CSV files
 async function loadAssemblies() {
     try {
         const response = await fetch('/api/assemblies-with-groups');
@@ -182,8 +394,8 @@ async function loadAssemblies() {
         
         if (data.success) {
             displayAssemblies(data.assemblies);
-            availableExcelFiles = data.assemblies.reduce((acc, assembly) => {
-                acc[assembly.id] = assembly.excel_files;
+            availableCsvFiles = data.assemblies.reduce((acc, assembly) => {
+                acc[assembly.id] = assembly.csv_files || assembly.excel_files; // Support both for backward compatibility
                 return acc;
             }, {});
         } else {
@@ -248,7 +460,8 @@ function toggleAssembly(assemblyId) {
     }
     
     updateNextButtonStates();
-    updateExcelFileSelection();
+    updateCsvFileSelection();
+    updateQuickStats();
 }
 
 // Select all assemblies
@@ -273,25 +486,25 @@ function clearAllAssemblies() {
     });
 }
 
-// Update Excel file selection based on selected assemblies
-function updateExcelFileSelection() {
+// Update CSV file selection based on selected assemblies
+function updateCsvFileSelection() {
     if (selectedAssemblies.length === 0) {
         return;
     }
     
-    // Get all Excel files from selected assemblies
-    const allExcelFiles = [];
+    // Get all CSV files from selected assemblies
+    const allCsvFiles = [];
     selectedAssemblies.forEach(assemblyId => {
-        const files = availableExcelFiles[assemblyId] || [];
+        const files = availableCsvFiles[assemblyId] || [];
         files.forEach(fileName => {
-            if (!allExcelFiles.includes(fileName)) {
-                allExcelFiles.push(fileName);
+            if (!allCsvFiles.includes(fileName)) {
+                allCsvFiles.push(fileName);
             }
         });
     });
     
-    // Display Excel files
-    displayExcelFiles(allExcelFiles);
+    // Display CSV files
+    displayCsvFiles(allCsvFiles);
 }
 
 // Display Excel files with checkboxes
@@ -312,7 +525,7 @@ function displayExcelFiles(files) {
         html += `
             <div class="group-card" onclick="toggleGroupCard('${fileName}')">
                 <label class="group-checkbox">
-                    <input type="checkbox" value="${fileName}" checked onchange="toggleExcelFile('${fileName}')">
+                    <input type="checkbox" value="${fileName}" checked onchange="toggleCsvFile('${fileName}')">
                     <span class="group-name">${fileName}</span>
                 </label>
             </div>
@@ -322,8 +535,8 @@ function displayExcelFiles(files) {
     
     container.innerHTML = html;
     
-    // Initialize selected Excel files
-    selectedExcelFiles = [...files];
+    // Initialize selected CSV files
+    selectedCsvFiles = [...files];
     totalCount.textContent = files.length;
     selectedCount.textContent = files.length;
     
@@ -335,63 +548,127 @@ function toggleGroupCard(fileName) {
     const checkbox = document.querySelector(`input[value="${fileName}"]`);
     if (checkbox) {
         checkbox.checked = !checkbox.checked;
-        toggleExcelFile(fileName);
+        toggleCsvFile(fileName);
     }
 }
 
-// Toggle Excel file selection
-function toggleExcelFile(fileName) {
+// Toggle CSV file selection
+function toggleCsvFile(fileName) {
     const checkbox = document.querySelector(`input[value="${fileName}"]`);
     const card = checkbox.closest('.group-card');
     
     if (checkbox.checked) {
-        if (!selectedExcelFiles.includes(fileName)) {
-            selectedExcelFiles.push(fileName);
+        if (!selectedCsvFiles.includes(fileName)) {
+            selectedCsvFiles.push(fileName);
         }
         card.classList.add('selected');
     } else {
-        selectedExcelFiles = selectedExcelFiles.filter(name => name !== fileName);
+        selectedCsvFiles = selectedCsvFiles.filter(name => name !== fileName);
         card.classList.remove('selected');
     }
     
     // Update counters
-    document.getElementById('selectedGroupsCount').textContent = selectedExcelFiles.length;
+    document.getElementById('selectedGroupsCount').textContent = selectedCsvFiles.length;
     updateNextButtonStates();
+    updateQuickStats();
 }
 
-// Select all Excel files
+// Select all CSV files
 function selectAllGroups() {
     const checkboxes = document.querySelectorAll('#groupsContainer input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         if (!checkbox.checked) {
             checkbox.checked = true;
-            toggleExcelFile(checkbox.value);
+            toggleCsvFile(checkbox.value);
         }
     });
 }
 
-// Deselect all Excel files
+// Deselect all CSV files
 function deselectAllGroups() {
     const checkboxes = document.querySelectorAll('#groupsContainer input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
             checkbox.checked = false;
-            toggleExcelFile(checkbox.value);
+            toggleCsvFile(checkbox.value);
         }
     });
 }
 
-// Form submission
-document.getElementById('postScheduleForm').addEventListener('submit', async function(e) {
+// Setup form submission with retry mechanism
+function setupFormSubmission() {
+    const form = document.getElementById('postScheduleForm');
+    if (form) {
+        console.log('Form found, setting up submission listener');
+        form.addEventListener('submit', handleFormSubmission);
+        
+        // Also add click event to submit button as backup
+        const submitButton = document.querySelector('button[type="submit"]');
+        if (submitButton) {
+            submitButton.addEventListener('click', function(e) {
+                console.log('Submit button clicked');
+                // Let the form submission handle it
+            });
+        }
+    } else {
+        console.log('Form not found, retrying in 1 second...');
+        setTimeout(setupFormSubmission, 1000);
+    }
+}
+
+// Form submission handler
+async function handleFormSubmission(e) {
     e.preventDefault();
+    console.log('Form submission started');
     
-    if (selectedExcelFiles.length === 0) {
-        showError('Please select at least one Excel file.');
+    if (selectedCsvFiles.length === 0) {
+        showError('Please select at least one CSV file.');
+        return;
+    }
+    
+    console.log('Selected CSV files:', selectedCsvFiles);
+    console.log('Selected assemblies:', selectedAssemblies);
+    
+    // Validate required fields
+    const title = document.getElementById('title').value.trim();
+    const scheduledDate = document.getElementById('scheduled_date').value;
+    const scheduledTime = document.getElementById('scheduled_time').value;
+    
+    if (!title) {
+        showError('Please enter a post title.');
+        return;
+    }
+    
+    if (!scheduledDate) {
+        showError('Please select a scheduled date.');
+        return;
+    }
+    
+    if (!scheduledTime) {
+        showError('Please select a scheduled time.');
+        return;
+    }
+    
+    if (selectedAssemblies.length === 0) {
+        showError('Please select at least one assembly.');
+        return;
+    }
+    
+    console.log('All validations passed');
+    
+    // Check if we're on the right step
+    if (currentStep !== 3) {
+        showError('Please complete all steps before submitting.');
         return;
     }
     
     // Get submit button and show loading state
-    const submitButton = this.querySelector('button[type="submit"]');
+    const submitButton = document.querySelector('button[type="submit"]');
+    if (!submitButton) {
+        showError('Submit button not found. Please try again.');
+        return;
+    }
+    
     const originalButtonText = submitButton.innerHTML;
     submitButton.disabled = true;
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Scheduling...';
@@ -406,8 +683,8 @@ document.getElementById('postScheduleForm').addEventListener('submit', async fun
     formData.append('scheduled_time', document.getElementById('scheduled_time').value);
     formData.append('assembly_id', selectedAssemblies[0]); // Use first selected assembly
     
-    // Add selected Excel files
-    selectedExcelFiles.forEach(fileName => {
+    // Add selected CSV files
+    selectedCsvFiles.forEach(fileName => {
         formData.append('selected_groups[]', fileName);
     });
     
@@ -424,33 +701,51 @@ document.getElementById('postScheduleForm').addEventListener('submit', async fun
         // Simulate some processing time for better UX
         await new Promise(resolve => setTimeout(resolve, 1500));
         
+        console.log('Sending request to /api/create-scheduled-post');
+        console.log('Form data contents:');
+        for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
+        
         const response = await fetch('/api/create-scheduled-post', {
             method: 'POST',
             body: formData
         });
         
+        console.log('Response status:', response.status);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
+        console.log('Response data:', data);
         
         // Hide loading modal
         hideLoadingModal();
         
         if (data.success) {
+            console.log('Post scheduled successfully, showing success message');
             showSuccess('Post scheduled successfully! You will receive an email confirmation shortly.');
             resetForm();
             loadScheduledPosts();
         } else {
-            showError('Failed to schedule post: ' + data.message);
+            console.log('Post scheduling failed:', data.message);
+            showError('Failed to schedule post: ' + (data.message || 'Unknown error'));
         }
     } catch (error) {
+        console.error('Form submission error:', error);
         // Hide loading modal
         hideLoadingModal();
         showError('Error scheduling post: ' + error.message);
     } finally {
         // Restore button state
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalButtonText;
+        if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonText;
+        }
     }
-});
+}
 
 // Load scheduled posts
 async function loadScheduledPosts() {
@@ -460,6 +755,8 @@ async function loadScheduledPosts() {
         
         if (data.success) {
             displayScheduledPosts(data.posts);
+            // Update quick stats with scheduled posts count
+            document.getElementById('quickScheduledPosts').textContent = data.posts.length;
         } else {
             showError('Failed to load scheduled posts: ' + data.message);
         }
@@ -516,10 +813,11 @@ function displayScheduledPosts(posts) {
                             <i class="fas fa-download"></i> Completion File
                         </button>` : ''
                     }
-                    <br>
-                    <button class="btn btn-sm btn-outline-danger" onclick="confirmDeletePost(${post.id}, '${post.title}')" title="Delete Post">
-                        <i class="fas fa-trash"></i> Delete
-                    </button>
+                    ${post.status.toLowerCase() === 'pending' ? 
+                        `<br><button class="btn btn-sm btn-outline-danger" onclick="confirmDeletePost(${post.id}, '${post.title}')" title="Delete Post">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>` : ''
+                    }
                 </div>
             </div>
         `;
@@ -540,7 +838,7 @@ function resetForm() {
     
     // Reset selections
     selectedAssemblies = [];
-    selectedExcelFiles = [];
+    selectedCsvFiles = [];
     currentStep = 1;
     
     // Uncheck all assembly checkboxes
@@ -598,22 +896,46 @@ function hideLoadingModal() {
 
 // Show success modal
 function showSuccess(message) {
+    console.log('Showing success modal with message:', message);
     const modal = document.getElementById('successModal');
     const modalMessage = document.getElementById('successMessage');
     
-    if (modalMessage) modalMessage.textContent = message;
+    if (!modal) {
+        console.error('Success modal not found!');
+        return;
+    }
+    
+    if (!modalMessage) {
+        console.error('Success modal message element not found!');
+        return;
+    }
+    
+    modalMessage.textContent = message;
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    console.log('Success modal displayed');
 }
 
 // Show error modal
 function showError(message) {
+    console.log('Showing error modal with message:', message);
     const modal = document.getElementById('errorModal');
     const modalMessage = document.getElementById('errorMessage');
     
-    if (modalMessage) modalMessage.textContent = message;
+    if (!modal) {
+        console.error('Error modal not found!');
+        return;
+    }
+    
+    if (!modalMessage) {
+        console.error('Error modal message element not found!');
+        return;
+    }
+    
+    modalMessage.textContent = message;
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    console.log('Error modal displayed');
 }
 
 // Close modal

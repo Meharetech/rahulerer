@@ -1,0 +1,57 @@
+[
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਇਸ ਮਾਰ ‘ਚ ਕੋਈ ਇਕੱਲਾ ਨਹੀਂ,\nਅਸੀਂ ਆਪਣੇ ਪਰਿਵਾਰ ਦੇ ਨਾਲ ਹਾਂ - ਵੀਡੀਓ ਜ਼ਰੂਰ ਦੇਖੋ ।",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/cad42bdf-0aff-4d89-93e8-98f1607a49ff",
+        "timestamp": "10:51 am",
+        "group_name": "Cmdy3813_Shaam_kaur_colony_TarnTaran_725am_-_825_am",
+        "date": "G1-01-SEPT",
+        "processed_time": "2025-09-01T21:26:24.457116",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਮਾਨ ਸਰਕਾਰ ਦੁਆਰਾ ਹੜ੍ਹ ਨਾਲ ਜੂਝ ਰਹੇ ਲੋਕਾਂ ਵਾਸਤੇ ਸਹਾਇਤਾ ਵਿੱਚ ਲਾਇਆ ਆਪਣਾ ਹੈਲੀਕਾਪਟਰ - ਪੂਰੀ ਜਾਣਕਾਰੀ ਲਈ ਵੀਡੀਓ ਦੇਖੋ ।",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "12:58 pm",
+        "group_name": "Cmdy3813_Shaam_kaur_colony_TarnTaran_725am_-_825_am",
+        "date": "G1-01-SEPT",
+        "processed_time": "2025-09-01T21:26:24.508246",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐਮ.ਦੀ ਯੋਗਸ਼ਾਲਾ \nਸ਼ਾਮ ਕੌਰ ਕਲੋਨੀ\nਤਰਨਤਾਰਨ  \n                                                  .            C.M. Di Yogshala \nSham kaur colony \nTarn taran\nClass timing:-\n07.25am - 08.25am\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/2f9f5ba7-fe49-4fb9-9c8d-b9a002c9dfa6",
+        "timestamp": "7:26 am",
+        "group_name": "Cmdy3813_Shaam_kaur_colony_TarnTaran_725am_-_825_am",
+        "date": "G1-01-SEPT",
+        "processed_time": "2025-09-01T21:26:24.596620",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/mhe-sxsn-kgp \n \nOr open Meet and enter this code: mhe-sxsn-kgp",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/c9fa417b-064d-4c35-a5fa-3b64f5d5f2ba",
+        "timestamp": "10:16 am"
+    }
+]

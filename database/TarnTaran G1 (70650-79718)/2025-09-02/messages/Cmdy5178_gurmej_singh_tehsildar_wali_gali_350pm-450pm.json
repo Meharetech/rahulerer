@@ -1,0 +1,72 @@
+[
+    {
+        "sender": {
+            "name": "Unknown",
+            "phoneNumber": "Unknown"
+        },
+        "messageContent": "ਇਸ ਮਾਰ ‘ਚ ਕੋਈ ਇਕੱਲਾ ਨਹੀਂ,\nਅਸੀਂ ਆਪਣੇ ਪਰਿਵਾਰ ਦੇ ਨਾਲ ਹਾਂ - ਵੀਡੀਓ ਜ਼ਰੂਰ ਦੇਖੋ ।",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/8d311325-736c-4650-a834-bbd23dcdaf07",
+        "timestamp": "3:15 pm",
+        "group_name": "Cmdy5178_gurmej_singh_tehsildar_wali_gali_350pm-450pm",
+        "date": "G1-02-SEPT",
+        "processed_time": "2025-09-02T16:02:14.122415",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Negative"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "To join the meeting on Google Meet, click this link: \nhttps://meet.google.com/gvg-ffaa-djp \n \nOr open Meet and enter this code: gvg-ffaa-djp",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "3:52 pm"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਮਾਨ ਸਰਕਾਰ ਦੁਆਰਾ ਹੜ੍ਹ ਨਾਲ ਜੂਝ ਰਹੇ ਲੋਕਾਂ ਵਾਸਤੇ ਸਹਾਇਤਾ ਵਿੱਚ ਲਾਇਆ ਆਪਣਾ ਹੈਲੀਕਾਪਟਰ - ਪੂਰੀ ਜਾਣਕਾਰੀ ਲਈ ਵੀਡੀਓ ਦੇਖੋ ।",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "12:59 pm",
+        "group_name": "Cmdy5178_gurmej_singh_tehsildar_wali_gali_350pm-450pm",
+        "date": "G1-02-SEPT",
+        "processed_time": "2025-09-02T16:02:14.156098",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਉੜਮੁੜ ਤੋਂ ਆਮ ਆਦਮੀ ਪਾਰਟੀ ਦੇ MLA ਨੇ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ ਨੂੰ ਸੁਰੱਖਿਅਤ ਜਗ੍ਹਾ ‘ਤੇ ਸਤਿਕਾਰ ਸਹਿਤ ਪਹੁੰਚਾਇਆ..",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "3:39 pm",
+        "group_name": "Cmdy5178_gurmej_singh_tehsildar_wali_gali_350pm-450pm",
+        "date": "G1-02-SEPT",
+        "processed_time": "2025-09-02T16:02:14.188692",
+        "predicted_label": "politics_news",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "Amandeep Singh",
+            "phoneNumber": "919876664968"
+        },
+        "messageContent": "ਸੀ.ਐੱਮ  ਦੀ ਯੋਗਸ਼ਾਲਾ- ਗਲੀ ਗੁਰਮੇਜ ਸਿੰਘ ਤਹਿਸੀਲਦਾਰ ਵਾਲ਼ੀ, ਜੰਡਿਆਲਾ ਰੋਡ ਤਰਨਤਾਰਨ, ਪੰਜਾਬ।\nC.M. Di Yogshala -  Gali tehsildar gurmej singh wali,j andiala Road, Tarn Taran, Punjab                                               \n\nclass Time:-\n 03.50pm - 04.50pm\n\n@𝐁𝐡𝐚𝐠𝐰𝐚𝐧𝐭𝐌𝐚𝐧𝐧 \n@𝐀𝐀𝐏𝐛𝐚𝐥𝐛𝐢𝐫 \n@𝐫𝐚𝐠𝐡𝐚𝐯_𝐜𝐡𝐚𝐝𝐡𝐚\n@𝐏𝐮𝐧𝐣𝐚𝐛𝐆𝐨𝐯𝐭𝐈𝐧𝐝𝐢𝐚\n@𝐃𝐂Tarntaran𝐏𝐛\n@𝐃𝐩𝐫𝐨Tarnraran \n#𝐂𝐌𝐃𝐢𝐘𝐨𝐠𝐬𝐡𝐚𝐥𝐚\n#𝐘𝐨𝐠𝐚\n#𝐲𝐨𝐠𝐚𝐢𝐧𝐬𝐩𝐢𝐫𝐚𝐭𝐢𝐨\n@CMDiYogshala\n#CMDiYogshala",
+        "messageType": "text",
+        "imageUrl": null,
+        "timestamp": "7:52 pm",
+        "group_name": "Cmdy5178_gurmej_singh_tehsildar_wali_gali_350pm-450pm",
+        "date": "G1-02-SEPT",
+        "processed_time": "2025-09-02T16:02:14.235847",
+        "predicted_label": "education_news",
+        "predicted_sentiment": "Neutral"
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "sender": {
+            "name": "love Punjab",
+            "phoneNumber": "917065294614"
+        },
+        "messageContent": "🌹🙏ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🌹🙏",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/e48c6879-6c44-44df-a8c4-47ac09cb5263",
+        "timestamp": "12:42 pm",
+        "group_name": "Aap_Kot_Sivian",
+        "date": "G1-02-SEPT",
+        "processed_time": "2025-09-02T16:02:10.948145",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    },
+    {
+        "sender": {
+            "name": "ਗੁਰਚਰਨ ਸਿੰਘ ਸਿੱਧੂ",
+            "phoneNumber": "918437480009"
+        },
+        "messageContent": "🙏🌹ਬੀੜ ਬਾਬਾ ਬੁੱਢਾ ਸਾਹਿਬ ਜੀ ਵਿਖੇ ਅੱਜ ਦਾ ਫੁਰਮਾਣ 🙏🌹",
+        "messageType": "image",
+        "imageUrl": "blob:https://web.whatsapp.com/e1419e2e-47b4-4cf5-a20d-b9aab13bf37f",
+        "timestamp": "5:56 am",
+        "group_name": "Aap_Kot_Sivian",
+        "date": "G1-02-SEPT",
+        "processed_time": "2025-09-02T16:02:10.979959",
+        "predicted_label": "spam",
+        "predicted_sentiment": "Positive"
+    }
+]
