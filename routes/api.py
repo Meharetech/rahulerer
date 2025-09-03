@@ -3902,6 +3902,52 @@ def get_group_labels():
             'message': f'Error getting group labels: {str(e)}'
         }), 500
 
+@api_bp.route('/get-all-group-labels', methods=['POST'])
+@login_required
+def get_all_group_labels():
+    """Get labels for all groups in an assembly at once"""
+    try:
+        data = request.get_json()
+        print(f"Debug: get-all-group-labels received data: {data}")
+        
+        if not data:
+            return jsonify({
+                'success': False,
+                'message': 'No JSON data received'
+            }), 400
+        
+        assembly_name = data.get('assembly_name')
+        
+        if not assembly_name:
+            return jsonify({
+                'success': False,
+                'message': 'Assembly name is required'
+            }), 400
+        
+        # Load group labels from JSON file
+        labels_file = os.path.join('database', assembly_name, 'group_labels.json')
+        group_labels = {}
+        
+        if os.path.exists(labels_file):
+            try:
+                with open(labels_file, 'r', encoding='utf-8') as file:
+                    group_labels = json.load(file)
+            except json.JSONDecodeError as e:
+                print(f"Debug: JSON decode error in {labels_file}: {e}")
+                # If JSON is corrupted, return empty dict
+                group_labels = {}
+        
+        return jsonify({
+            'success': True,
+            'group_labels': group_labels
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Error getting all group labels: {str(e)}'
+        }), 500
+
 @api_bp.route('/save-group-labels', methods=['POST'])
 @login_required
 def save_group_labels():

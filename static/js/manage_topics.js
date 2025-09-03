@@ -3,6 +3,12 @@ let availableLabels = [];
 let currentAssembly = null;
 let assemblyGroups = [];
 let filteredGroups = [];
+let groupLabelsCache = {}; // Cache for group labels
+
+// Pagination variables
+let currentPage = 1;
+let groupsPerPage = 20;
+let totalPages = 1;
 
 // Check if user session is valid
 async function checkSession() {
@@ -169,10 +175,16 @@ async function loadGroupsForAssembly() {
     
     currentAssembly = selectedAssembly;
     
+    // Clear cache when switching assemblies
+    groupLabelsCache = {};
+    
+    // Reset pagination when switching assemblies
+    currentPage = 1;
+    
     try {
         // Show loading
         document.getElementById('groupsLabelsSection').style.display = 'block';
-        document.getElementById('groupsContainer').innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i>Loading groups...</div>';
+        document.getElementById('groupsContainer').innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i>Loading groups and labels...</div>';
         
         // Load groups from CSV files
         const response = await fetch(`/api/assembly-groups`, {
@@ -201,6 +213,10 @@ async function loadGroupsForAssembly() {
         if (data.success) {
             assemblyGroups = data.groups || [];
             filteredGroups = [...assemblyGroups]; // Copy for filtering
+            
+            // Load all group labels at once for better performance
+            await loadAllGroupLabels();
+            
             displayGroups();
             updateGroupsStats();
         } else {
@@ -232,23 +248,31 @@ async function displayGroups() {
                 <p>No groups found matching your search criteria.</p>
             </div>
         `;
+        // Clear pagination when no groups
+        updatePaginationControls();
         return;
     }
+    
+    // Calculate pagination
+    calculatePagination();
+    
+    // Get current page groups
+    const currentPageGroups = getCurrentPageGroups();
     
     // Show loading
     container.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i>Loading group labels...</div>';
     
     let html = '';
     
-    // Load labels for each group
-    for (const group of filteredGroups) {
+    // Process groups using cached labels (no API calls needed)
+    for (const group of currentPageGroups) {
         // Skip groups without valid group_name
         if (!group.group_name || group.group_name.trim() === '') {
             console.warn('Skipping group with invalid name:', group);
             continue;
         }
         
-        const groupLabels = await getGroupLabels(group.group_name);
+        const groupLabels = getGroupLabels(group.group_name);
         
         html += `
             <div class="group-item" data-group-name="${group.group_name.toLowerCase()}">
@@ -288,10 +312,62 @@ async function displayGroups() {
     
     container.innerHTML = html;
     updateGroupsStats();
+    updateLabelsStats();
+    updatePaginationControls();
 }
 
-// Get labels for a specific group
-async function getGroupLabels(groupName) {
+// Load all group labels for the current assembly at once
+async function loadAllGroupLabels() {
+    try {
+        if (!currentAssembly) {
+            console.error('No assembly selected');
+            return {};
+        }
+        
+        console.log('Loading all group labels for assembly:', currentAssembly);
+        
+        const response = await fetch('/api/get-all-group-labels', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                assembly_name: currentAssembly
+            })
+        });
+        
+        console.log('Load all labels response status:', response.status);
+        
+        // Check if response is HTML (login page) instead of JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            console.error('Received non-JSON response, likely login page. Status:', response.status);
+            showError('Session expired. Please refresh the page and login again.');
+            return {};
+        }
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            groupLabelsCache = data.group_labels || {};
+            console.log('Loaded group labels cache:', groupLabelsCache);
+            return groupLabelsCache;
+        } else {
+            console.error('Error loading all group labels:', data.message);
+            return {};
+        }
+    } catch (error) {
+        console.error('Error loading all group labels:', error);
+        if (error.message.includes('Unexpected token')) {
+            showError('Session expired. Please refresh the page and login again.');
+        }
+        return {};
+    }
+}
+
+// Get labels for a specific group (from cache)
+function getGroupLabels(groupName) {
     try {
         // Check if currentAssembly is set
         if (!currentAssembly) {
@@ -305,48 +381,64 @@ async function getGroupLabels(groupName) {
             return [];
         }
         
-        console.log('Getting labels for group:', groupName, 'in assembly:', currentAssembly);
-        
-        const requestData = {
-            assembly_name: currentAssembly,
-            group_name: groupName
-        };
-        console.log('Sending request data:', requestData);
-        
-        const response = await fetch('/api/get-group-labels', {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(requestData)
-        });
-        
-        console.log('Response status:', response.status);
-        
-        // Check if response is HTML (login page) instead of JSON
-        const contentType = response.headers.get('content-type');
-        if (!contentType || !contentType.includes('application/json')) {
-            console.error('Received non-JSON response, likely login page. Status:', response.status);
-            showError('Session expired. Please refresh the page and login again.');
-            return [];
-        }
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            const labelNames = data.labels;
-            return availableLabels.filter(label => labelNames.includes(label.name));
-        } else {
-            console.error('Error getting group labels:', data.message);
-            return [];
-        }
+        // Get labels from cache
+        const labelNames = groupLabelsCache[groupName] || [];
+        return availableLabels.filter(label => labelNames.includes(label.name));
     } catch (error) {
-        console.error('Error getting group labels:', error);
-        if (error.message.includes('Unexpected token')) {
-            showError('Session expired. Please refresh the page and login again.');
-        }
+        console.error('Error getting group labels from cache:', error);
         return [];
+    }
+}
+
+// Update only a specific group's display (much faster than reloading all)
+function updateGroupDisplay(groupName) {
+    try {
+        const groupElement = document.querySelector(`[data-group-name="${groupName.toLowerCase()}"]`);
+        if (!groupElement) {
+            console.warn('Group element not found for:', groupName);
+            return;
+        }
+        
+        const group = assemblyGroups.find(g => g.group_name === groupName);
+        if (!group) {
+            console.warn('Group data not found for:', groupName);
+            return;
+        }
+        
+        const groupLabels = getGroupLabels(groupName);
+        
+        // Update the labels section
+        const labelsContainer = groupElement.querySelector('.group-labels');
+        if (labelsContainer) {
+            if (groupLabels.length === 0) {
+                labelsContainer.innerHTML = '<span class="no-labels">No labels assigned</span>';
+            } else {
+                labelsContainer.innerHTML = groupLabels.map(label => `
+                    <span class="label-tag">
+                        ${label.name}
+                        <button class="remove-label-btn" onclick="removeLabelFromGroup('${groupName}', '${label.name}')" title="Remove label">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </span>
+                `).join('');
+            }
+        }
+        
+        // Update the add label dropdown
+        const addLabelSelect = groupElement.querySelector(`#addLabel-${groupName}`);
+        if (addLabelSelect) {
+            const currentLabelNames = groupLabels.map(label => label.name);
+            const availableOptions = availableLabels.filter(label => !currentLabelNames.includes(label.name));
+            
+            addLabelSelect.innerHTML = '<option value="">Select a label...</option>' +
+                availableOptions.map(label => `<option value="${label.name}">${label.name}</option>`).join('');
+        }
+        
+        // Update labels statistics
+        updateLabelsStats();
+        
+    } catch (error) {
+        console.error('Error updating group display:', error);
     }
 }
 
@@ -358,6 +450,15 @@ async function addLabelToGroup(groupName) {
     if (!selectedLabel) {
         showError('Please select a label to add');
         return;
+    }
+    
+    // Show loading state
+    const groupElement = document.querySelector(`[data-group-name="${groupName.toLowerCase()}"]`);
+    if (groupElement) {
+        const labelsContainer = groupElement.querySelector('.group-labels');
+        if (labelsContainer) {
+            labelsContainer.innerHTML = '<span class="loading-label"><i class="fas fa-spinner fa-spin"></i> Adding label...</span>';
+        }
     }
     
     try {
@@ -405,8 +506,16 @@ async function addLabelToGroup(groupName) {
             const data = await response.json();
             
             if (data.success) {
-                // Refresh the display
-                displayGroups();
+                // Update cache
+                if (!groupLabelsCache[groupName]) {
+                    groupLabelsCache[groupName] = [];
+                }
+                if (!groupLabelsCache[groupName].includes(selectedLabel)) {
+                    groupLabelsCache[groupName].push(selectedLabel);
+                }
+                
+                // Update only this group's display (much faster)
+                updateGroupDisplay(groupName);
                 showSuccess(`Label "${selectedLabel}" added to group "${groupName}"`);
             } else {
                 throw new Error(data.message || 'Failed to save label');
@@ -417,6 +526,9 @@ async function addLabelToGroup(groupName) {
     } catch (error) {
         console.error('Error adding label to group:', error);
         showError('Error adding label to group: ' + error.message);
+        
+        // Restore the display on error
+        updateGroupDisplay(groupName);
     }
 }
 
@@ -427,6 +539,15 @@ async function removeLabelFromGroup(groupName, labelName) {
         if (!groupName || groupName.trim() === '') {
             showError('Invalid group name');
             return;
+        }
+        
+        // Show loading state
+        const groupElement = document.querySelector(`[data-group-name="${groupName.toLowerCase()}"]`);
+        if (groupElement) {
+            const labelsContainer = groupElement.querySelector('.group-labels');
+            if (labelsContainer) {
+                labelsContainer.innerHTML = '<span class="loading-label"><i class="fas fa-spinner fa-spin"></i> Removing label...</span>';
+            }
         }
         
         // Get current labels
@@ -466,8 +587,13 @@ async function removeLabelFromGroup(groupName, labelName) {
         const data = await response.json();
         
         if (data.success) {
-            // Refresh the display
-            displayGroups();
+            // Update cache
+            if (groupLabelsCache[groupName]) {
+                groupLabelsCache[groupName] = groupLabelsCache[groupName].filter(name => name !== labelName);
+            }
+            
+            // Update only this group's display (much faster)
+            updateGroupDisplay(groupName);
             showSuccess(`Label "${labelName}" removed from group "${groupName}"`);
         } else {
             throw new Error(data.message);
@@ -475,6 +601,9 @@ async function removeLabelFromGroup(groupName, labelName) {
     } catch (error) {
         console.error('Error removing label from group:', error);
         showError('Error removing label from group: ' + error.message);
+        
+        // Restore the display on error
+        updateGroupDisplay(groupName);
     }
 }
 
@@ -570,7 +699,7 @@ async function removeLabel(labelName) {
                             continue;
                         }
                         
-                        const currentLabels = await getGroupLabels(group.group_name);
+                        const currentLabels = getGroupLabels(group.group_name);
                         let labelNames = currentLabels.map(label => label.name);
                         labelNames = labelNames.filter(name => name !== labelName);
                         
@@ -657,6 +786,8 @@ function filterGroups() {
         );
     }
     
+    // Reset to first page when filtering
+    currentPage = 1;
     displayGroups();
 }
 
@@ -667,6 +798,124 @@ function updateGroupsStats() {
     
     document.getElementById('groupsCount').textContent = `${groupsCount} group${groupsCount !== 1 ? 's' : ''} found`;
     document.getElementById('totalPhones').textContent = `${totalPhones.toLocaleString()} total phones`;
+}
+
+// Update available labels statistics
+function updateLabelsStats() {
+    const totalLabels = availableLabels.length;
+    const usedLabels = new Set();
+    
+    // Count how many labels are actually being used
+    Object.values(groupLabelsCache).forEach(labelNames => {
+        labelNames.forEach(labelName => usedLabels.add(labelName));
+    });
+    
+    const labelsCountElement = document.getElementById('labelsCount');
+    if (labelsCountElement) {
+        labelsCountElement.textContent = `${totalLabels} available labels`;
+    }
+    
+    const usedLabelsElement = document.getElementById('usedLabels');
+    if (usedLabelsElement) {
+        usedLabelsElement.textContent = `${usedLabels.size} labels in use`;
+    }
+}
+
+// Pagination functions
+function calculatePagination() {
+    totalPages = Math.ceil(filteredGroups.length / groupsPerPage);
+    if (currentPage > totalPages) {
+        currentPage = Math.max(1, totalPages);
+    }
+}
+
+function getCurrentPageGroups() {
+    const startIndex = (currentPage - 1) * groupsPerPage;
+    const endIndex = startIndex + groupsPerPage;
+    return filteredGroups.slice(startIndex, endIndex);
+}
+
+function updatePaginationControls() {
+    const paginationContainer = document.getElementById('paginationContainer');
+    if (!paginationContainer) return;
+    
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+    }
+    
+    let paginationHTML = '<div class="pagination">';
+    
+    // Previous button
+    if (currentPage > 1) {
+        paginationHTML += `<button class="pagination-btn" onclick="goToPage(${currentPage - 1})" title="Previous page">
+            <i class="fas fa-chevron-left"></i>
+        </button>`;
+    } else {
+        paginationHTML += `<button class="pagination-btn disabled" disabled title="Previous page">
+            <i class="fas fa-chevron-left"></i>
+        </button>`;
+    }
+    
+    // Page numbers
+    const startPage = Math.max(1, currentPage - 2);
+    const endPage = Math.min(totalPages, currentPage + 2);
+    
+    if (startPage > 1) {
+        paginationHTML += `<button class="pagination-btn" onclick="goToPage(1)">1</button>`;
+        if (startPage > 2) {
+            paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+        }
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
+        if (i === currentPage) {
+            paginationHTML += `<button class="pagination-btn active">${i}</button>`;
+        } else {
+            paginationHTML += `<button class="pagination-btn" onclick="goToPage(${i})">${i}</button>`;
+        }
+    }
+    
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+            paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+        }
+        paginationHTML += `<button class="pagination-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+    }
+    
+    // Next button
+    if (currentPage < totalPages) {
+        paginationHTML += `<button class="pagination-btn" onclick="goToPage(${currentPage + 1})" title="Next page">
+            <i class="fas fa-chevron-right"></i>
+        </button>`;
+    } else {
+        paginationHTML += `<button class="pagination-btn disabled" disabled title="Next page">
+            <i class="fas fa-chevron-right"></i>
+        </button>`;
+    }
+    
+    paginationHTML += '</div>';
+    
+    // Add page info
+    const startIndex = (currentPage - 1) * groupsPerPage + 1;
+    const endIndex = Math.min(currentPage * groupsPerPage, filteredGroups.length);
+    paginationHTML += `<div class="pagination-info">Showing ${startIndex}-${endIndex} of ${filteredGroups.length} groups</div>`;
+    
+    paginationContainer.innerHTML = paginationHTML;
+}
+
+function goToPage(page) {
+    if (page >= 1 && page <= totalPages && page !== currentPage) {
+        currentPage = page;
+        displayGroups();
+        updatePaginationControls();
+        
+        // Scroll to top of groups section
+        const groupsSection = document.getElementById('groupsContainer');
+        if (groupsSection) {
+            groupsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
 }
 
 // Show groups using a specific label
@@ -687,7 +936,7 @@ async function showLabelGroups(labelName) {
                 continue;
             }
             
-            const groupLabels = await getGroupLabels(group.group_name);
+            const groupLabels = getGroupLabels(group.group_name);
             const labelNames = groupLabels.map(label => label.name);
             
             if (labelNames.includes(labelName)) {
