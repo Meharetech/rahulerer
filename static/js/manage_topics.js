@@ -4,9 +4,36 @@ let currentAssembly = null;
 let assemblyGroups = [];
 let filteredGroups = [];
 
+// Check if user session is valid
+async function checkSession() {
+    try {
+        const response = await fetch('/api/check-session', {
+            method: 'GET',
+            credentials: 'same-origin'
+        });
+        
+        if (!response.ok || response.status === 401) {
+            console.log('Session invalid, redirecting to login');
+            window.location.href = '/auth/user/login';
+            return false;
+        }
+        return true;
+    } catch (error) {
+        console.error('Error checking session:', error);
+        return false;
+    }
+}
+
 // Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     console.log('Manage Topics page loaded');
+    
+    // Check session first
+    const sessionValid = await checkSession();
+    if (!sessionValid) {
+        return;
+    }
+    
     loadAssemblies();
     loadAvailableLabels();
 });
@@ -159,6 +186,16 @@ async function loadGroupsForAssembly() {
             })
         });
         
+        console.log('Assembly groups response status:', response.status);
+        
+        // Check if response is HTML (login page) instead of JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            console.error('Received non-JSON response, likely login page. Status:', response.status);
+            showError('Session expired. Please refresh the page and login again.');
+            return;
+        }
+        
         const data = await response.json();
         
         if (data.success) {
@@ -205,6 +242,12 @@ async function displayGroups() {
     
     // Load labels for each group
     for (const group of filteredGroups) {
+        // Skip groups without valid group_name
+        if (!group.group_name || group.group_name.trim() === '') {
+            console.warn('Skipping group with invalid name:', group);
+            continue;
+        }
+        
         const groupLabels = await getGroupLabels(group.group_name);
         
         html += `
@@ -250,28 +293,61 @@ async function displayGroups() {
 // Get labels for a specific group
 async function getGroupLabels(groupName) {
     try {
+        // Check if currentAssembly is set
+        if (!currentAssembly) {
+            console.error('No assembly selected');
+            return [];
+        }
+        
+        // Check if groupName is valid
+        if (!groupName || groupName.trim() === '') {
+            console.error('Invalid group name:', groupName);
+            return [];
+        }
+        
+        console.log('Getting labels for group:', groupName, 'in assembly:', currentAssembly);
+        
+        const requestData = {
+            assembly_name: currentAssembly,
+            group_name: groupName
+        };
+        console.log('Sending request data:', requestData);
+        
         const response = await fetch('/api/get-group-labels', {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                assembly_name: currentAssembly,
-                group_name: groupName
-            })
+            body: JSON.stringify(requestData)
         });
+        
+        console.log('Response status:', response.status);
+        
+        // Check if response is HTML (login page) instead of JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            console.error('Received non-JSON response, likely login page. Status:', response.status);
+            showError('Session expired. Please refresh the page and login again.');
+            return [];
+        }
         
         const data = await response.json();
         
         if (data.success) {
             const labelNames = data.labels;
             return availableLabels.filter(label => labelNames.includes(label.name));
+        } else {
+            console.error('Error getting group labels:', data.message);
+            return [];
         }
     } catch (error) {
         console.error('Error getting group labels:', error);
+        if (error.message.includes('Unexpected token')) {
+            showError('Session expired. Please refresh the page and login again.');
+        }
+        return [];
     }
-    return [];
 }
 
 // Add label to group
@@ -285,6 +361,12 @@ async function addLabelToGroup(groupName) {
     }
     
     try {
+        // Validate group name
+        if (!groupName || groupName.trim() === '') {
+            showError('Invalid group name');
+            return;
+        }
+        
         // Get current labels
         const currentLabels = await getGroupLabels(groupName);
         const labelNames = currentLabels.map(label => label.name);
@@ -305,6 +387,16 @@ async function addLabelToGroup(groupName) {
                     labels: labelNames
                 })
             });
+            
+            console.log('Save labels response status:', response.status);
+            
+            // Check if response is HTML (login page) instead of JSON
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                console.error('Received non-JSON response, likely login page. Status:', response.status);
+                showError('Session expired. Please refresh the page and login again.');
+                return;
+            }
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -331,6 +423,12 @@ async function addLabelToGroup(groupName) {
 // Remove label from group
 async function removeLabelFromGroup(groupName, labelName) {
     try {
+        // Validate group name
+        if (!groupName || groupName.trim() === '') {
+            showError('Invalid group name');
+            return;
+        }
+        
         // Get current labels
         const currentLabels = await getGroupLabels(groupName);
         let labelNames = currentLabels.map(label => label.name);
@@ -350,6 +448,16 @@ async function removeLabelFromGroup(groupName, labelName) {
                 labels: labelNames
             })
         });
+        
+        console.log('Remove labels response status:', response.status);
+        
+        // Check if response is HTML (login page) instead of JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            console.error('Received non-JSON response, likely login page. Status:', response.status);
+            showError('Session expired. Please refresh the page and login again.');
+            return;
+        }
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -456,6 +564,12 @@ async function removeLabel(labelName) {
             if (currentAssembly) {
                 for (const group of assemblyGroups) {
                     try {
+                        // Skip groups without valid group_name
+                        if (!group.group_name || group.group_name.trim() === '') {
+                            console.warn('Skipping group with invalid name in removeLabelFromAllGroups:', group);
+                            continue;
+                        }
+                        
                         const currentLabels = await getGroupLabels(group.group_name);
                         let labelNames = currentLabels.map(label => label.name);
                         labelNames = labelNames.filter(name => name !== labelName);
@@ -567,6 +681,12 @@ async function showLabelGroups(labelName) {
         const groupsUsingLabel = [];
         
         for (const group of assemblyGroups) {
+            // Skip groups without valid group_name
+            if (!group.group_name || group.group_name.trim() === '') {
+                console.warn('Skipping group with invalid name in showLabelGroups:', group);
+                continue;
+            }
+            
             const groupLabels = await getGroupLabels(group.group_name);
             const labelNames = groupLabels.map(label => label.name);
             

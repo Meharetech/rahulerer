@@ -34,6 +34,17 @@ def api_stats():
     stats = get_dashboard_stats(current_user.id, current_user.role)
     return jsonify(stats)
 
+@api_bp.route('/check-session', methods=['GET'])
+@login_required
+def check_session():
+    """Check if user session is valid"""
+    return jsonify({
+        'success': True,
+        'user_id': current_user.id,
+        'username': current_user.username,
+        'role': current_user.role
+    })
+
 # ============================================================================
 # ASSEMBLY MANAGEMENT API
 # ============================================================================
@@ -3383,6 +3394,12 @@ def get_assembly_groups():
                 try:
                     # Extract group name from filename (remove _all_timestamp.csv)
                     group_name = csv_file.replace('_all_', '_').split('_')[0]
+                    print(f"Debug: Processing CSV file '{csv_file}' -> group_name: '{group_name}'")
+                    
+                    # Skip files that result in empty group names
+                    if not group_name or group_name.strip() == '':
+                        print(f"Debug: Skipping file '{csv_file}' - empty group name")
+                        continue
                     
                     # Get file info
                     file_path = os.path.join(groups_path, csv_file)
@@ -3838,10 +3855,22 @@ def get_group_labels():
     """Get labels for a specific group"""
     try:
         data = request.get_json()
+        print(f"Debug: get-group-labels received data: {data}")
+        
+        if not data:
+            print("Debug: No JSON data received")
+            return jsonify({
+                'success': False,
+                'message': 'No JSON data received'
+            }), 400
+        
         assembly_name = data.get('assembly_name')
         group_name = data.get('group_name')
         
+        print(f"Debug: assembly_name='{assembly_name}', group_name='{group_name}'")
+        
         if not assembly_name or not group_name:
+            print(f"Debug: Missing required fields - assembly_name: {bool(assembly_name)}, group_name: {bool(group_name)}")
             return jsonify({
                 'success': False,
                 'message': 'Assembly name and group name are required'
